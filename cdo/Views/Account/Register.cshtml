@@ -1,0 +1,118 @@
+﻿@model Attest.Models.RegisterModel
+<style>
+    input[type=password]:invalid {
+        border: solid 2px red;
+    }
+
+    input[type="checkbox"]:checked + label:before {
+    }
+</style>
+<h2>Регистрация</h2>
+
+<form id="formId" asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+    <div>
+        <div>
+            <label asp-for="Email">Введите Email</label>
+            <input type="email" asp-for="Email" required title="Введите email" />
+            <span asp-validation-for="Email" />
+            <br />
+        </div>
+        <div>
+            <label asp-for="Password">Введите пароль</label>
+            <input asp-for="Password" required pattern="[A-Za-zА-Яа-яЁё0-9]{3,}" title="Введите пароль не менее трех символов" />
+            <span asp-validation-for="Password" />
+            <br />
+        </div>
+        <div>
+            <label asp-for="ConfirmPassword">Повторите пароль</label>
+            <input asp-for="ConfirmPassword" required pattern="[A-Za-zА-Яа-яЁё0-9]{3,}" title="Введите пароль не менее трех символов" />
+            <span asp-validation-for="ConfirmPassword" />
+            <br />
+        </div>
+        <div>
+            <label asp-for="Snils">Снилс</label>
+            <input asp-for="Snils" pattern="[0-9]{11}" title="Введит снилс 11 символов без пробелов и других знаков" />
+            <span asp-validation-for="Snils" />
+            <br />
+        </div>
+
+        <div>
+            <select id="dolg" asp-for="mo_s" required>
+
+                <option value="" selected="selected">Выберите МО</option>
+                <option value='1'>Абинский</option>
+                <option value='2'>Анапский</option>
+                <option value='3'>Апшеронский</option>
+                <option value='4'>Армавир</option>
+                <option value='5'>Белоглинский</option>
+                <option value='6'>Белореченский</option>
+                <option value='7'>Брюховецкий</option>
+                <option value='8'>Выселковский</option>
+                <option value='9'>Геленджик</option>
+                <option value='10'>Горячий Ключ</option>
+                <option value='11'>Гулькевичский</option>
+                <option value='12'>Динской</option>
+                <option value='13'>Ейский</option>
+                <option value='14'>Кавказский</option>
+                <option value='15'>Калининский</option>
+                <option value='16'>Каневской</option>
+                <option value='17'>Кореновский</option>
+                <option value='18'>Красноармейский</option>
+                <option value='19'>Краснодар</option>
+                <option value='20'>Крыловский</option>
+                <option value='21'>Крымский</option>
+                <option value='22'>Курганинский</option>
+                <option value='23'>Кущевский</option>
+                <option value='24'>Лабинский</option>
+                <option value='25'>Ленинградский</option>
+                <option value='26'>Мостовский</option>
+                <option value='27'>Новокубанский</option>
+                <option value='28'>Новопокровский</option>
+                <option value='29'>Новороссийск</option>
+                <option value='30'>Отрадненский</option>
+                <option value='31'>Павловский</option>
+                <option value='32'>Приморско-Ахтарский</option>
+                <option value='33'>Северский</option>
+                <option value='34'>Славянский</option>
+                <option value='35'>Сочи</option>
+                <option value='36'>Староминский</option>
+                <option value='37'>Тбилисский</option>
+                <option value='38'>Темрюкский</option>
+                <option value='39'>Тимашевский</option>
+                <option value='40'>Тихорецкий</option>
+                <option value='41'>Туапсинский</option>
+                <option value='42'>Успенский</option>
+                <option value='43'>Усть-Лабинский</option>
+                <option value='44'>Щербиновский</option>
+
+            </select>
+        </div>
+        <br />
+        <div>
+            <input type="checkbox" asp-for="Sogl" required /><label for="Sogl">Согласие на обработку персональных данных</label>
+            @*<label asp-for="Sogl" class="checkboxFour">
+                    Согласие на обработку персональных данных
+                    <input id="sogl" type="checkbox" class="checkboxFour" required />
+                </label>*@
+            <span asp-validation-for="Sogl" />
+            <br />
+        </div>
+
+        <div>
+            <input type="submit" value="Регистрация" />
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var pass1 = document.querySelector('#Password'),
+                pass2 = document.querySelector('#ConfirmPassword')
+            pass1.addEventListener('input', function () {
+                this.value != pass2.value ? pass2.setCustomValidity('Пароли не совподают') : pass2.setCustomValidity('')
+            })
+            pass2.addEventListener('input', function (e) {
+                this.value != pass1.value ? this.setCustomValidity('Пароли не совподают') : this.setCustomValidity('')
+            })
+        })
+    </script>
+</form>

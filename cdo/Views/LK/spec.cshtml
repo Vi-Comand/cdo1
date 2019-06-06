@@ -1,0 +1,49 @@
+﻿@model Attest.Models.ListOtv
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <title>Lk-user</title>
+</head>
+<body>
+    <form method="post" id="formid" asp-controller="User" asp-action="OpenZayavProsmExp">
+
+        <table>
+            <tr>
+                <th>№ заявления</th>
+                <th>ФИО</th>
+                <th>Дата подачи</th>
+                <th>Место работы</th>
+                <th>Должность</th>
+                <th>Категория</th>
+                <th>Балл</th>
+                <th>Статус</th>
+
+            </tr>
+
+
+
+            @for (int i = 0; i < Model.ListOtvetstven.Count; i++)
+            {
+
+
+                <tr>
+
+                    <td> @Model.ListOtvetstven[i].Id</td>
+                    <td>  @Html.ActionLink(Model.ListOtvetstven[i].name, "OpenZayavProsmExp", "User", new { id = Model.ListOtvetstven[i].Id })</td>
+                    <td> @Model.ListOtvetstven[i].data_podachi</td>
+                    <td> @Model.ListOtvetstven[i].oo</td>
+                    <td> @Model.ListOtvetstven[i].dolgnost</td>
+                    <td> @Model.ListOtvetstven[i].kategor</td>
+                    <td> @Model.ListOtvetstven[i].ball</td>
+                    <td> @Model.ListOtvetstven[i].status</td>
+                </tr>
+            }
+        </table>
+
+    </form>
+
+</body>
+</html>

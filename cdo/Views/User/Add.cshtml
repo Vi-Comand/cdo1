@@ -1,0 +1,59 @@
+﻿@model Attest.Models.Zayavlen
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h2>Add</h2>
+<form asp-action="Creat" asp-controller="User" method="post">
+    <select asp-for="dolgnost_att">
+      <option value="ВОСПИТАТЕЛЬ" selected="selected">ВОСПИТАТЕЛЬ</option>
+        <option value="СТАРШИЙ ВОСПИТАТЕЛЬ">СТАРШИЙ ВОСПИТАТЕЛЬ</option>
+        <option value="МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ">МУЗЫКАЛЬНЫЙ РУКОВОДИТЕЛЬ</option>
+        <option value="ИНСТРУКТОР ПО ТРУДУ">ИНСТРУКТОР ПО ТРУДУ</option>
+        <option value="КОНЦЕРТМЕЙСТЕР">КОНЦЕРТМЕЙСТЕР</option>
+        <option value="МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ">МАСТЕР ПРОИЗВОДСТВЕННОГО ОБУЧЕНИЯ</option>
+        <option value="МЕТОДИСТ">МЕТОДИСТ</option>
+        <option value="ПЕДАГОГ-БИБЛИОТЕКАРЬ">ПЕДАГОГ-БИБЛИОТЕКАРЬ</option>
+        <option value="ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ">ПЕДАГОГ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ</option>
+        <option value="ПЕДАГОГ-ОРГАНИЗАТОР">ПЕДАГОГ-ОРГАНИЗАТОР</option>
+        <option value="ПЕДАГОГ-ПСИХОЛОГ">ПЕДАГОГ-ПСИХОЛОГ</option>
+        <option value="ПРЕПОДАВАТЕЛЬ">ПРЕПОДАВАТЕЛЬ</option>
+        <option value="ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ">ПРЕПОДАВАТЕЛЬ-ОРГАНИЗАТОР ОБЖ</option>
+        <option value="РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ">РУКОВОДИТЕЛЬ ФИЗИЧЕСКОГО ВОСПИТАНИЯ</option>
+        <option value="СОЦИАЛЬНЫЙ ПЕДАГОГ">СОЦИАЛЬНЫЙ ПЕДАГОГ</option>
+        <option value="СТАРШИЙ ВОЖАТЫЙ">СТАРШИЙ ВОЖАТЫЙ</option>
+        <option value="ТРЕНЕР-ПРЕПОДАВАТЕЛЬ">ТРЕНЕР-ПРЕПОДАВАТЕЛЬ</option>
+        <option value="УЧИТЕЛЬ">УЧИТЕЛЬ</option>
+        <option value="УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)">УЧИТЕЛЬ-ЛОГОПЕД (УЧИТЕЛЬ-ДЕФЕКТОЛОГ)</option>
+        <option value="ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ">ИНСТРУКТОР ПО ФИЗИЧЕСКОЙ КУЛЬТУРЕ</option>
+        <option value="ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства">ПРЕПОДАВАТЕЛЬ образовательной организации культуры и искусства</option>
+        <option value="КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства">КОНЦЕРТМЕЙСТЕР образовательной организации культуры и искусства</option>
+        <option value="ИНСТРУКТОР-МЕТОДИСТ (включая старшего)">ИНСТРУКТОР-МЕТОДИСТ (включая старшего)</option>
+    </select>
+
+    <select asp-for="uch_stepen">
+        <option value="NuULL" selected="selected">выберите напрвления</option>
+        <option value="Русский язык и литература">Русский язык и литература</option>
+        <option value="Математика">Математика</option>
+        <option value="Начальные классы">Начальные классы</option>
+        <option value="История">История</option>
+        <option value="Обществознание">Обществознание</option>
+        <option value="Кубановедение">Кубановедение</option>
+        <option value="Физика">Физика</option>
+        <option value="Химия">Химия</option>
+        <option value="Биология">Биология</option>
+        <option value="География">География</option>
+        <option value="Иностранный язык">Иностранный язык</option>
+        <option value="ИЗО, черчение">ИЗО, черчение</option>
+        <option value="Музыка">Музыка</option>
+        <option value="МХК">МХК</option>
+        <option value="Технология">Технология</option>
+        <option value="Информатика, ИКТ">Информатика, ИКТ</option>
+        <option value="Физическая культура">Физическая культура</option>
+        <option value="ОПК">ОПК</option>
+        <option value="ОБЖ">ОБЖ</option>
+    </select>
+
+
+    <input type="submit" asp-controller="User" asp-action="Creat" value="Создать" />
+</form>

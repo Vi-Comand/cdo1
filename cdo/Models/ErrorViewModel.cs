@@ -1,6 +1,6 @@
 using System;
 
-namespace cdo.Models
+namespace Attest.Models
 {
     public class ErrorViewModel
     {

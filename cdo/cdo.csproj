@@ -7,6 +7,16 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\18\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="SGO.csproj" />
+    <None Include="SGO.csproj.user" />
   </ItemGroup>
 
 </Project>

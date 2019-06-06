@@ -1,74 +1,149 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authentication.Cookies;
+<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - cdo</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+
+    <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap31.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+
+    <link rel="stylesheet" href="~/assets/css/main.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <link rel="stylesheet" href="~/assets/css/daterangepicker.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <link rel="stylesheet" href="~/assets/fonts/ionicons.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <link rel="stylesheet" href="~/assets/css/Footer-Dark.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <!-- <link rel="stylesheet" href="~/assets/css/font-awesome.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script src="~/assets/js/moment.min.js" charset="utf-8"></script>
+    <script src="~/assets/js/daterangepicker.js" charset="utf-8"></script>
+    <script src="~/assets/bootstrap/js/bootstrap.js"></script>
+    @* <script src="~/assets/js/jquery-1.9.1.min.js" charset="utf-8"></script>*@
+    <title>@ViewData["Title"] ЦДО ИРО</title>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="padding-top: 11px;padding-right: 7px;padding-bottom: 10px;padding-left: 3px;">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">cdo</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
+            <table style=" border: solid 0px #dbdbdb; margin: 0;">
+                <tr style=" border: solid 0px #dbdbdb; margin: 0;">
+                    <td style=" border: solid 0px"><span class="navbar-expand-sm"><img class="rounded-circle" asp-controller="Home" asp-action="Index" src="~/assets/img/logo60.png" width="60" style="margin-right:40px; margin-left:10px"></span><a class="navbar-brand logo" asp-controller="Home" asp-action="Index">ИРО ЦДО</a></td>
+                </tr>
+                <tr style=" border: solid 0px #dbdbdb; margin: 0;">
+                    <td style=" border: solid 0px">
+                        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only sr-only-focusable"><img class="rounded-circle" src="~/assets/img/logo60.png" width="60"></span><span class="navbar-toggler-icon"></span></button>
+
+                        <div class="collapse navbar-collapse text-left " id="navbarNav">
+
+                            <form method="post" class="navbar" style="margin:initial; display:contents">
+                                <button type="submit" class="button_nav" style="margin:5px;" asp-controller="Home" asp-action="Index">Главная</button>
+                                <br />
+                                <button type="submit" class="button_nav" style="margin:5px;" asp-controller="lk" asp-action="lk">Личный кабинет</button>
+                                <br />
+                                <button type="submit" class="button_nav" style="margin:5px;" asp-controller="Home" asp-action="Info">Информация</button>
+                                <br />
+
+                                @*<ul class="nav navbar-nav ml  align-items-xl-center">
+
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="index">Главная</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Lk" asp-action="lk">Личный кабинет</a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link d-xl-flex justify-content-xl-center align-items-xl-center" asp-area="" asp-controller="Home" asp-action="info">Информация</a></li>
+                                    </ul>*@
+
+                                @if (User.Identity.IsAuthenticated == false)
+                                {
+                                    <button type="submit" class="button_nav" style="margin-left:auto;" asp-controller="Account" asp-action="login">Войти</button>
+                                    <br />
+                                    <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Account" asp-action="Register"> Зарегистрироваться</button>
+                                }
+                                else
+                                {
+
+
+                                    @*<button type="submit" class="button" style="margin-left:auto;" asp-controller="User" asp-action="view">Моя учетная запись</button>*@
+                                    <br />
+                                    <button type="submit" class="button_nav" style="margin:5px; " asp-controller="Account" asp-action="Logout"> Выйти</button>
+
+                                }
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </nav>
 
-    <partial name="_CookieConsentPartial" />
-
     <div class="container body-content">
+        <br /><br /><br /><br /><br /><br /><br />
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2019 - cdo</p>
+    </div>
+    <div class="d-print-none">
+        <footer style="padding: 2em 0;">
+            <div class="container">
+                <div class="row">
+                    @*<div class="card border-success mb-4 mx-auto" style="max-width: 300px; padding:0;">
+                            <!-- Шапка -->
+                            <div class="card-header bg-success text-white">
+                                Главная
+                            </div>
+                            <!-- Текстовый контент -->
+                            <div class="card-body">
+
+                                <ul>
+                                    <li><a href="#">Личный кабинет</a></li>
+                                    <li><a href="#">Ответственным МО</a></li>
+                                    <li><a href="#">Аттестационная комиссия</a></li>
+                                </ul>
+                            </div>
+                        </div><!-- Конец карточки -->*@
+                    @*<div class="col-sm-6 col-md-3 item" style="width: 196px;">
+                            <h3>Главная</h3>
+                            <ul>
+                                <li><a href="#">Личный кабинет</a></li>
+                                <li><a href="#">Ответственным МО</a></li>
+                                <li><a href="#">Аттестационная комиссия</a></li>
+                            </ul>
+                        </div>*@
+                    @*<div class="col-sm-6 col-md-4 item" style="width: 331px;">
+                            <h3>КОНТАКТЫ<br></h3>
+                            <p style="font-size: 14px;">
+                                Отдел&nbsp;сопровождения процедуры аттестации&nbsp;педагогических работников ГБОУ ИРО КК <br /> Телефон:&nbsp;<b>8(861) 232-17-09 &nbsp;</b> <br />
+                                Электронная&nbsp;почта:&nbsp;<a href="mailto:oa@iro23.ru"><b>oa@iro23.ru</b></a><br />
+                                Для справок педагогических работников организаций <b>Министерства культуры <br /> </b>Тел:&nbsp;<b>8(861) 224-20-38, 224-88- 60 &nbsp;</b><br />
+                                Email:&nbsp;<a href="mailto:att_kumc@mail.ru"><b>att_kumc@mail.ru</b></a><br><br>
+                            </p>
+                        </div>
+                        <div class="col-sm-6 col-md-4 item" style="width: 196px;">
+                            <h3>Техническая поддержка</h3>
+                            <p style="font-size: 14px;">
+                                Информационно-аналитический центр ГБОУ ИРО КК <br />
+                                Телефоны: <br /> <b>8(861) 232-39-71</b><br><b> 8(861) 260-27-54</b><br><br>
+                            </p>
+                        </div>
+                        <div class="col-sm-6 col-md-4 item" style="width: 196px;">
+                            <h3>Полезные ссылки</h3>
+                            <ul>
+                                <li><a class="a" href="https://www.pdf2go.com/ru/compress-pdf">Сжатие PDF</a></li>
+                                <li><a class="a" href="http://attest.iro23.ru/sites/default/files/PDF.pdf">Инструкция сжатия PDF</a></li>
+
+                            </ul>
+                        </div>*@
+
+                </div>
+                <p class="copyright">© Информационно-аналитический центр ГБОУ ИРО Краснодарского края 2019</p>
+            </div>
         </footer>
     </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
