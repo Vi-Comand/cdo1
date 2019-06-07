@@ -743,12 +743,12 @@
                                 <tr>
                                     <td>Дата установки оборудования</td>
                                     <td>
-                                        <input type="text" asp-for="Zayavlen.data_last_att" id="date" required>
+                                        <input type="text" asp-for="Zayavlen.data_last_att" id="duo" required>
                                         <script>
                                             dataN = new Date();
                                             //alert(dataN);
                                             $(function () {
-                                                $('#date').daterangepicker({
+                                                $('#duo').daterangepicker({
                                                     singleDatePicker: true,
                                                     showDropdowns: true,
                                                     "minDate": "01/01/1970",
@@ -768,59 +768,36 @@
 
 
                                 <tr>
-                                    <td>Адрес проживания</td>
+                                    <td>Номер действующего или действовавшего договора БВП</td>
                                     <td>
                                         <input type="text" asp-for="Zayavlen.Id" readonly />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Адрес регистрации</td>
+                                    <td>Срок действия договора БВП</td>
                                     <td>
                                         <input type="text" asp-for="Zayavlen.Id" readonly />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Телефон </td>
+                                    <td>Акт возврата оборудования </td>
                                     <td>
                                         <input type="text" asp-for="Zayavlen.Id" readonly />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>ФИО родителя</td>
+                                    <td>Доп. соглашение к договору БВП</td>
                                     <td>
                                         <input type="text" asp-for="Zayavlen.Id" readonly />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>ФИО родителя – законного представителя</td>
+                                    <td>Учет движения договора БВП</td>
                                     <td>
                                         <input type="text" asp-for="Zayavlen.Id" readonly />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Диагноз</td>
-                                    <td>
-                                        <input type="text" asp-for="Zayavlen.Id" readonly />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Срок действия справки МСЭ</td>
-                                    <td>
-                                        <input type="text" asp-for="Zayavlen.Id" readonly />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Приказ о зачислении</td>
-                                    <td>
-                                        <input type="text" asp-for="Zayavlen.Id" readonly />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Тип комплекта</td>
-                                    <td>
-                                        <input type="text" asp-for="Zayavlen.Id" readonly />
-                                    </td>
-                                </tr>
+
                             </table>
                         </div>
                     </div>
