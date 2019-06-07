@@ -1,8 +1,7 @@
 ﻿
 @using System.Linq
-@using Attest.Models
-@using Microsoft.EntityFrameworkCore.Internal
-@model Attest.Models.CompositeModel
+
+@model cdo.Models.CompositeModel
 
 <!DOCTYPE html>
 
@@ -35,7 +34,7 @@
                             <tr class="od">
                                 <td style="width: 30%;">№ ребенка</td>
                                 <td style="width: 70%;">
-                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    <input type="text" asp-for=".Id" readonly />
                                 </td>
                             </tr>
                             <tr class="od">
@@ -196,16 +195,7 @@
             </div>
         </div>
         @*      <script>
-            var select = document.getElementById("dolg");
-                var val = select.value;
-                if (val == "УЧИТЕЛЬ") {
-                    $('#naprtr').show(); // показать
-                }
-                else {
-                    $('#naprtr').hide(); // показать
-                }
-                $('#dolg').change(function () {
-                    var select = document.getElementById("dolg");
+                var select = document.getElementById("dolg");
                     var val = select.value;
                     if (val == "УЧИТЕЛЬ") {
                         $('#naprtr').show(); // показать
@@ -213,11 +203,20 @@
                     else {
                         $('#naprtr').hide(); // показать
                     }
-                })
+                    $('#dolg').change(function () {
+                        var select = document.getElementById("dolg");
+                        var val = select.value;
+                        if (val == "УЧИТЕЛЬ") {
+                            $('#naprtr').show(); // показать
+                        }
+                        else {
+                            $('#naprtr').hide(); // показать
+                        }
+                    })
 
-            </script>*@
-        @*@if (Model.Zayavlen.status == "Заявление подлинное" && Model.Users.role == "3")
-            {*@
+                </script>
+            @*@if (Model.Zayavlen.status == "Заявление подлинное" && Model.Users.role == "3")
+        {*@
 
         @*  }*@
 
@@ -1633,7 +1632,7 @@
     </div>
 
 
-
+    *@
 
 
 </body>
