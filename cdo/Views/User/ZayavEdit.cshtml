@@ -61,41 +61,41 @@
                                 <td>
                                     <select id="napr" class="req" asp-for="Zayavlen.mo" required>
                                         <option value="">Выберите МО</option>
-                                        <option value='1'>Абинский</option>
-                                        <option value='2'>Анапский</option>
-                                        <option value='3'>Апшеронский</option>
-                                        <option value='4'>Армавир</option>
-                                        <option value='5'>Белоглинский</option>
-                                        <option value='6'>Белореченский</option>
-                                        <option value='7'>Брюховецкий</option>
-                                        <option value='8'>Выселковский</option>
-                                        <option value='9'>Геленджик</option>
-                                        <option value='10'>Горячий Ключ</option>
-                                        <option value='11'>Гулькевичский</option>
-                                        <option value='12'>Динской</option>
-                                        <option value='13'>Ейский</option>
-                                        <option value='14'>Кавказский</option>
-                                        <option value='15'>Калининский</option>
-                                        <option value='16'>Каневской</option>
-                                        <option value='17'>Кореновский</option>
-                                        <option value='18'>Красноармейский</option>
-                                        <option value='19'>Краснодар</option>
-                                        <option value='20'>Крыловский</option>
-                                        <option value='21'>Крымский</option>
-                                        <option value='22'>Курганинский</option>
-                                        <option value='23'>Кущевский</option>
-                                        <option value='24'>Лабинский</option>
-                                        <option value='25'>Ленинградский</option>
-                                        <option value='26'>Мостовский</option>
-                                        <option value='27'>Новокубанский</option>
-                                        <option value='28'>Новопокровский</option>
-                                        <option value='29'>Новороссийск</option>
-                                        <option value='30'>Отрадненский</option>
-                                        <option value='31'>Павловский</option>
-                                        <option value='32'>Приморско-Ахтарский</option>
-                                        <option value='33'>Северский</option>
-                                        <option value='34'>Славянский</option>
-                                        <option value='35'>Сочи</option>
+                                        <option value='1'>Анапа</option>
+                                        <option value='2'>Армавир</option>
+                                        <option value='3'>Геленджик</option>
+                                        <option value='4'>Горячий Ключ</option>
+                                        <option value='5'>Ейск</option>
+                                        <option value='6'>Краснодар</option>
+                                        <option value='7'>Новороссийск</option>
+                                        <option value='8'>Сочи</option>
+                                        <option value='9'>Абинский</option>
+                                        <option value='10'>Апшеронский</option>
+                                        <option value='11'>Белоглинский</option>
+                                        <option value='12'>Белореченский</option>
+                                        <option value='13'>Брюховецкий</option>
+                                        <option value='14'>Выселковский</option>
+                                        <option value='15'>Гулькевичский</option>
+                                        <option value='16'>Динской</option>
+                                        <option value='17'>Кавказский</option>
+                                        <option value='18'>Калининский</option>
+                                        <option value='19'>Каневской</option>
+                                        <option value='20'>Кореновский</option>
+                                        <option value='21'>Красноармейский</option>
+                                        <option value='22'>Крыловский</option>
+                                        <option value='23'>Крымский</option>
+                                        <option value='24'>Курганинский</option>
+                                        <option value='25'>Кущевский</option>
+                                        <option value='26'>Лабинский</option>
+                                        <option value='27'>Ленинградский</option>
+                                        <option value='28'>Мостовский</option>
+                                        <option value='29'>Новокубанский</option>
+                                        <option value='30'>Новопокровский</option>
+                                        <option value='31'>Отрадненский</option>
+                                        <option value='32'>Павловский</option>
+                                        <option value='33'>Приморско-Ахтарский</option>
+                                        <option value='34'>Северский</option>
+                                        <option value='35'>Славянский</option>
                                         <option value='36'>Староминский</option>
                                         <option value='37'>Тбилисский</option>
                                         <option value='38'>Темрюкский</option>
@@ -105,7 +105,6 @@
                                         <option value='42'>Успенский</option>
                                         <option value='43'>Усть-Лабинский</option>
                                         <option value='44'>Щербиновский</option>
-
                                     </select>
 
                                 </td>
@@ -136,7 +135,7 @@
                                 </td>
                             </tr>
 
-                            12423rewr324325345643532
+
                             <tr>
                                 <td>Адрес проживания</td>
                                 <td>
@@ -169,6 +168,12 @@
                             </tr>
                             <tr>
                                 <td>Диагноз</td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Срок действия справки МСЭ</td>
                                 <td>
                                     <input type="text" asp-for="Zayavlen.Id" readonly />
                                 </td>
@@ -241,97 +246,10 @@
                             <td>Базовая школа</td>
                             <td>
                                 <input type="text" class="req" asp-for="Zayavlen.oo" required />
-
                             </td>
                         </tr>
-                        qwrwqeresfdsfewr
                         <tr>
                             <td>Курсы дополнительного образования</td>
-                            <td>
-                                <input type="text" class="req" asp-for="Zayavlen.oo" required />
-
-                            </td>
-                        </tr>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                <h4 class="panel-title" style="position: relative; padding:10px">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        Отдел технического сопровождения (ТО)
-                    </a>
-
-
-                </h4>
-
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <table>
-                        <tr>
-                            <td>Дата установки  оборудования</td>
-                            <td>
-                                <input type="text" id="d_v_o" />
-                                <script>
-                                    $(function () {
-                                        $('#d_v_o').daterangepicker({
-                                            singleDatePicker: true,
-                                            showDropdowns: true,
-                                            "minDate": "01/01/1970",
-                                            "maxDate": dataN,
-                                            "autoApply": true,
-                                            "applyLabel": "Выбрать",
-                                            "cancelLabel": "Отменить",
-                                            locale: {
-                                                format: 'DD.MM.YYYY',
-                                                "firstDay": 1
-                                            }
-                                        });
-                                    });
-                                </script>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Комплектование </td>
-                            <td>
-                                <input type="text" asp-for="Zayavlen.Id" readonly />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Подключения  Интернета</td>
-                            <td>
-                                <input type="text" asp-for="Zayavlen.Id" readonly />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Скайп ребенка логин
-                            </td>
-                            <td>
-                                <input type="text" asp-for="Zayavlen.Id" readonly />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Скайп ребенка пароль
-                            </td>
-                            <td>
-                                <input type="text" asp-for="Zayavlen.Id" readonly />
-                            </td>
-                        </tr>
-
-
-                    </table>
-                    <table>
-                        <tr>
-                            <td>
-                                Ремонт оборудования
-                            </td>
                             <td>
                                 <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#obr" form="0"></button>
                             </td>
@@ -342,9 +260,8 @@
                         {
                             @if (row.tip_obr == 1)
                             {
-
                                 <li>
-                                    <a href="#Obor_@row.Id" style="float: left;" data-toggle="tab">@row.oo</a>
+                                    <a href="#Kurs_@row.Id" style="float: left;" data-toggle="tab">@row.oo</a>
                                     <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
                                 </li>
                             }
@@ -358,13 +275,173 @@
                                 <input type="hidden" asp-for="listObrazovan[i].Id" />
                                 <input type="hidden" asp-for="listObrazovan[i].id_zayavl" />
                                 <input type="hidden" asp-for="listObrazovan[i].tip_obr" />
-                                <div class="tab-pane fade " id="Obor_@Model.listObrazovan[i].Id">
+                                <div class="tab-pane fade " id="Kurs_@Model.listObrazovan[i].Id">
                                     <table>
                                         <tr>
-                                            <td>Дата заявки на ремонт оборудования</td>
                                             <td>
-                                                <input type="text" id="d_z_o_@i" asp-for="listObrazovan[i].data_doc" />
-                                                <script>
+                                                <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            Отдел технического сопровождения (ТО)
+                        </a>
+
+
+                    </h4>
+
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table>
+                            <tr>
+                                <td>Наименование комплекта </td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Старый инвентарный номер </td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Новый инвентарный номер </td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Балансовая стоимость</td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата установки комплекта</td>
+                                <td>
+                                    <input type="text" id="d_v_o" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_v_o').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Комплектование </td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Подключения  Интернета</td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Скайп ребенка логин
+                                </td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Скайп ребенка пароль
+                                </td>
+                                <td>
+                                    <input type="text" asp-for="Zayavlen.Id" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата возврата комплекта</td>
+                                <td>
+                                    <input type="text" id="d_v_k" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_v_k').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1980",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td>
+                                    Ремонт оборудования
+                                </td>
+                                <td>
+                                    <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#obr" form="0"></button>
+                                </td>
+                            </tr>
+                        </table>
+                        <ul class="nav nav-tabs">
+                            @foreach (var row in Model.listObrazovan)
+                            {
+                                @if (row.tip_obr == 1)
+                                {
+
+                                    <li>
+                                        <a href="#Obor_@row.Id" style="float: left;" data-toggle="tab">@row.oo</a>
+                                        <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        <div class="tab-content">
+                            @for (int i = 0; i < Model.listObrazovan.Count; i++)
+                            {
+                                @if (Model.listObrazovan[i].tip_obr == 1)
+                                {
+                                    <input type="hidden" asp-for="listObrazovan[i].Id" />
+                                    <input type="hidden" asp-for="listObrazovan[i].id_zayavl" />
+                                    <input type="hidden" asp-for="listObrazovan[i].tip_obr" />
+                                    <div class="tab-pane fade " id="Obor_@Model.listObrazovan[i].Id">
+                                        <table>
+                                            <tr>
+                                                <td>Дата заявки на ремонт оборудования</td>
+                                                <td>
+                                                    <input type="text" id="d_z_o_@i" asp-for="listObrazovan[i].data_doc" />
+                                                    <script>
 
 
                                                      $(function() {
@@ -382,26 +459,26 @@
                                                              }
                                                          });
                                                      });
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Причина неисправности</td>
-                                            <td>
-                                                <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>ФИО специалиста принявшего заявку</td>
-                                            <td>
-                                                <input type="text" asp-for="listObrazovan[i].mo" value="@Model.listObrazovan[i].mo" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Дата выполнения заявки</td>
-                                            <td>
-                                                <input type="text" id="d_z_v_@i" asp-for="listObrazovan[i].data_doc" />
-                                                <script>
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Причина неисправности</td>
+                                                <td>
+                                                    <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" pattern="[0-9]{4} - [0-9]{4}" title="Формат даты: (2014 - 2016)" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ФИО специалиста принявшего заявку</td>
+                                                <td>
+                                                    <input type="text" asp-for="listObrazovan[i].mo" value="@Model.listObrazovan[i].mo" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Дата выполнения заявки</td>
+                                                <td>
+                                                    <input type="text" id="d_z_v_@i" asp-for="listObrazovan[i].data_doc" />
+                                                    <script>
                                                      $(function() {
                                                          $('#d_z_v_@i').daterangepicker({
                                                              singleDatePicker: true,
@@ -417,63 +494,63 @@
                                                              }
                                                          });
                                                      });
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>ФИО специалиста выполнившего заявку</td>
-                                            <td>
-                                                <input type="text" asp-for="listObrazovan[i].kvalif" value="@Model.listObrazovan[i].kvalif" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ФИО специалиста выполнившего заявку</td>
+                                                <td>
+                                                    <input type="text" asp-for="listObrazovan[i].kvalif" value="@Model.listObrazovan[i].kvalif" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                }
                             }
-                        }
 
 
 
 
-                    </div>
+                        </div>
 
-                    <table>
-                        <tr>
-                            <td>
-                                Проблемы с интернет соединением
-                            </td>
-                            <td>
-                                <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#obr" form="0"></button>
-                            </td>
-                        </tr>
-                    </table>
-                    <ul class="nav nav-tabs">
-                        @foreach (var row in Model.listObrazovan)
-                        {
-                            @if (row.tip_obr == 1)
+                        <table>
+                            <tr>
+                                <td>
+                                    Проблемы с интернет соединением
+                                </td>
+                                <td>
+                                    <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#obr" form="0"></button>
+                                </td>
+                            </tr>
+                        </table>
+                        <ul class="nav nav-tabs">
+                            @foreach (var row in Model.listObrazovan)
                             {
+                                @if (row.tip_obr == 1)
+                                {
 
-                                <li>
-                                    <a href="#Int_@row.Id" style="float: left;" data-toggle="tab">@row.oo</a>
-                                    <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
-                                </li>
+                                    <li>
+                                        <a href="#Int_@row.Id" style="float: left;" data-toggle="tab">@row.oo</a>
+                                        <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                    </li>
+                                }
                             }
-                        }
-                    </ul>
-                    <div class="tab-content">
-                        @for (int i = 0; i < Model.listObrazovan.Count; i++)
-                        {
-                            @if (Model.listObrazovan[i].tip_obr == 1)
+                        </ul>
+                        <div class="tab-content">
+                            @for (int i = 0; i < Model.listObrazovan.Count; i++)
                             {
-                                <input type="hidden" asp-for="listObrazovan[i].Id" />
-                                <input type="hidden" asp-for="listObrazovan[i].id_zayavl" />
-                                <input type="hidden" asp-for="listObrazovan[i].tip_obr" />
-                                <div class="tab-pane fade " id="Int_@Model.listObrazovan[i].Id">
-                                    <table>
-                                        <tr>
-                                            <td>Дата заявки на проблемы с интернет соединением</td>
-                                            <td>
-                                                <input type="text" id="d_z_i_@i" asp-for="listObrazovan[i].data_doc" />
-                                                <script>
+                                @if (Model.listObrazovan[i].tip_obr == 1)
+                                {
+                                    <input type="hidden" asp-for="listObrazovan[i].Id" />
+                                    <input type="hidden" asp-for="listObrazovan[i].id_zayavl" />
+                                    <input type="hidden" asp-for="listObrazovan[i].tip_obr" />
+                                    <div class="tab-pane fade " id="Int_@Model.listObrazovan[i].Id">
+                                        <table>
+                                            <tr>
+                                                <td>Дата заявки на проблемы с интернет соединением</td>
+                                                <td>
+                                                    <input type="text" id="d_z_i_@i" asp-for="listObrazovan[i].data_doc" />
+                                                    <script>
 
 
                                                     $(function() {
@@ -491,21 +568,21 @@
                                                             }
                                                         });
                                                     });
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>ФИО специалиста принявшего заявку</td>
-                                            <td>
-                                                <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" />
-                                            </td>
-                                        </tr>
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ФИО специалиста принявшего заявку</td>
+                                                <td>
+                                                    <input type="text" asp-for="listObrazovan[i].period" value="@Model.listObrazovan[i].period" />
+                                                </td>
+                                            </tr>
 
-                                        <tr>
-                                            <td>Дата выполнения заявки</td>
-                                            <td>
-                                                <input type="text" id="d_z_vi_@i" asp-for="listObrazovan[i].data_doc" />
-                                                <script>
+                                            <tr>
+                                                <td>Дата выполнения заявки</td>
+                                                <td>
+                                                    <input type="text" id="d_z_vi_@i" asp-for="listObrazovan[i].data_doc" />
+                                                    <script>
                                                     $(function() {
                                                         $('#d_z_vi_@i').daterangepicker({
                                                             singleDatePicker: true,
@@ -521,91 +598,296 @@
                                                             }
                                                         });
                                                     });
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>ФИО специалиста выполнившего заявку</td>
-                                            <td>
-                                                <input type="text" asp-for="listObrazovan[i].kvalif" value="@Model.listObrazovan[i].kvalif" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ФИО специалиста выполнившего заявку</td>
+                                                <td>
+                                                    <input type="text" asp-for="listObrazovan[i].kvalif" value="@Model.listObrazovan[i].kvalif" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                }
                             }
-                        }
 
 
 
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="panel-group" id="accordion">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                        <h4 class="panel-title" style="position: relative; padding:10px">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                                Юридический отдел
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse0" class="collapse in show">
+                        <div class="panel-body">
+
+                            <table>
+                                <tr>
+                                    <td>Информация о статусе обучающегося</td>
+                                    <td>
+                                        <select id="napr" class="req" asp-for="Zayavlen.mo" required>
+                                            <option value="">Выберите статус</option>
+                                            <option value='учащийся'>учащийся</option>
+                                            <option value='студент'>студент</option>
+                                            <option value='выбывший'>выбывший</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Паспортные данные законного представителя</td>
+                                </tr>
+                                <tr>
+                                    <td>Номер</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Серия</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Код подразделения</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Дата выдачи</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.data_last_att" id="d_v_p" required>
+                                        <script>
+                                            dataN = new Date();
+                                            //alert(dataN);
+                                            $(function () {
+                                                $('#d_v_p').daterangepicker({
+                                                    singleDatePicker: true,
+                                                    showDropdowns: true,
+                                                    "minDate": "01/01/1950",
+                                                    "maxDate": dataN,
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    locale: {
+                                                        format: 'DD.MM.YYYY',
+                                                        "firstDay": 1
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Паспорт выдан</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Дата рождения</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.data_last_att" id="d_r_p" required>
+                                        <script>
+                                            dataN = new Date();
+                                            //alert(dataN);
+                                            $(function () {
+                                                $('#d_r_p').daterangepicker({
+                                                    singleDatePicker: true,
+                                                    showDropdowns: true,
+                                                    "minDate": "01/01/1950",
+                                                    "maxDate": dataN,
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    locale: {
+                                                        format: 'DD.MM.YYYY',
+                                                        "firstDay": 1
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Место рождения</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Инвентарный номер оборудования</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Приказ о даче согласия о предоставлении оборудования </td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Дата установки оборудования</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.data_last_att" id="date" required>
+                                        <script>
+                                            dataN = new Date();
+                                            //alert(dataN);
+                                            $(function () {
+                                                $('#date').daterangepicker({
+                                                    singleDatePicker: true,
+                                                    showDropdowns: true,
+                                                    "minDate": "01/01/1970",
+                                                    "maxDate": dataN,
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    locale: {
+                                                        format: 'DD.MM.YYYY',
+                                                        "firstDay": 1
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>Адрес проживания</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Адрес регистрации</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Телефон </td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ФИО родителя</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ФИО родителя – законного представителя</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Диагноз</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Срок действия справки МСЭ</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Приказ о зачислении</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Тип комплекта</td>
+                                    <td>
+                                        <input type="text" asp-for="Zayavlen.Id" readonly />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <input type="hidden" asp-for="Zayavlen.Id" />
+
+            <input type="hidden" asp-for="Zayavlen.id_user" />
+
+
+            <input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены"
+                   style=" background: url(/assets/icon/icons8-update.png) no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
+
+
+            <input type="submit" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
 
 
 
 
-        <input type="hidden" asp-for="Zayavlen.Id" />
+            <script>
 
-        <input type="hidden" asp-for="Zayavlen.id_user" />
+                $('#formId [type="submit"]').click(function () {
+                    // выбираем все невидимые обязательные поля
+
+                    $('input, textarea, select').filter('[required]:hidden').each(function () {
+                        // проверяем их заполненность
+                        if (!$(this)[0].checkValidity()) {
+                            //id collapse
+                            var collId = $(this).closest('.collapse').attr('id');
+                            //id taba
+                            var tabId = $(this).closest('.tab-pane').attr('id');
+                            // переключаем collapse
+                            $('#' + collId).removeClass('in collapse');
+                            $('#' + collId).addClass('collapsed');
+                            // переключаем таб
+                            $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
+
+                            // прерываем обработку остальных обязательных полей
+                            return false;
+                        }
+                    });
 
 
-        <input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены"
-               style=" background: url(/assets/icon/icons8-update.png) no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
 
+                    $('input, textarea, select').filter('[pattern]').each(function () {
+                        // проверяем их заполненность
+                        if (!$(this)[0].checkValidity()) {
+                            //id collapse
+                            var collId = $(this).closest('.collapse').attr('id');
+                            //id taba
+                            var tabId = $(this).closest('.tab-pane').attr('id');
 
-        <input type="submit" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
+                            // переключаем таб
+                            $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
+                            // переключаем collapse
+                            $('#' + collId).removeClass('in collapse');
+                            $('#' + collId).addClass('collapsed');
 
-
-
-
-        <script>
-
-            $('#formId [type="submit"]').click(function () {
-                // выбираем все невидимые обязательные поля
-
-                $('input, textarea, select').filter('[required]:hidden').each(function () {
-                    // проверяем их заполненность
-                    if (!$(this)[0].checkValidity()) {
-                        //id collapse
-                        var collId = $(this).closest('.collapse').attr('id');
-                        //id taba
-                        var tabId = $(this).closest('.tab-pane').attr('id');
-                        // переключаем collapse
-                        $('#' + collId).removeClass('in collapse');
-                        $('#' + collId).addClass('collapsed');
-                        // переключаем таб
-                        $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
-
-                        // прерываем обработку остальных обязательных полей
-                        return false;
-                    }
+                            // прерываем обработку остальных обязательных полей
+                            return false;
+                        }
+                    });
                 });
 
-
-
-                $('input, textarea, select').filter('[pattern]').each(function () {
-                    // проверяем их заполненность
-                    if (!$(this)[0].checkValidity()) {
-                        //id collapse
-                        var collId = $(this).closest('.collapse').attr('id');
-                        //id taba
-                        var tabId = $(this).closest('.tab-pane').attr('id');
-
-                        // переключаем таб
-                        $('.nav-tabs a[href="#' + tabId + '"]').tab('show');
-                        // переключаем collapse
-                        $('#' + collId).removeClass('in collapse');
-                        $('#' + collId).addClass('collapsed');
-
-                        // прерываем обработку остальных обязательных полей
-                        return false;
-                    }
-                });
-            });
-
-        </script>
+            </script>
     </form>
 
 
