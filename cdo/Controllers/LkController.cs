@@ -30,7 +30,7 @@ namespace Attest.Controllers
                     ViewBag.LK = db.Zayavlen.Where(p => p.id_user == user.Id).OrderByDescending(p => p.data_podachi)
                         .ToList();
 
-                    return View("user");
+                    return View("obch");
                 }
 
                 if (user.role == "2")
@@ -142,5 +142,25 @@ namespace Attest.Controllers
             }
             //return View(await zayavlen.AsNoTracking().ToListAsync());
             */
+
+        [Route("edit/{id}")]
+        public IActionResult Edit(int id, DataContext db)
+        {
+            var compositeModel = new CompositeModel(db);
+            compositeModel.Zayavlen = new Zayavlen();
+            compositeModel.FileModel = new FileModel();
+            compositeModel.Obrazovan = new Obrazovan();
+            compositeModel.Nauch_Deyat = new Nauch_deyat();
+            compositeModel.Users = new Users();
+            compositeModel.ProfRazv = new ProfRazv();
+
+            compositeModel.listFile = db.File.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listObrazovan = db.Obrazovan.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listNauch_deyat = db.Naucn_deyat.Where(p => p.id_zayavl == id).ToList();
+            compositeModel.listProfRazv = db.ProfRazv.Where(p => p.id_zayav == id).ToList();
+            compositeModel.Zayavlen = db.Zayavlen.Find(id);
+            ViewBag.compositeModel = compositeModel;
+            return View("ZayavEdit", compositeModel);
+        }
     }
 }

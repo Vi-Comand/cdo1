@@ -19,4 +19,11 @@
     <None Include="SGO.csproj.user" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\LK\ZayavEdit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
