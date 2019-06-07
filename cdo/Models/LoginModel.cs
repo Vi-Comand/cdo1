@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Attest.Models
+namespace cdo.Models
 {
     public class LoginModel
     {

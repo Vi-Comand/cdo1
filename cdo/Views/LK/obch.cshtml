@@ -1,4 +1,4 @@
-﻿@model Attest.Models.CompositeModel
+﻿@model cdo.Models.ListLK
 
 <!DOCTYPE html>
 
@@ -26,20 +26,27 @@
                 <th colspan="2">Кнопки управления</th>
 
             </tr>
-            @foreach (var row in ViewBag.LK)
+
+            @for (int i = 0; i < Model.Listlk.Count; i++)
             {
 
                 <tr>
-                    <td>@row.Id</td>
-                    <td><a asp-controller="Lk" asp-action="edit" asp-route-id="@row.Id">@row.data_podachi</a> </td>
-                    <td>@row.dolgnost_att</td>
+                    <td>@Model.Listlk[i].id</td>
+                    <td>@Model.Listlk[i].MO</td>
+                    <td>@Model.Listlk[i].fam</td>
 
-                    <td>@row.data_obnovl</td>
-                    <td>@row.status</td>
-                    <td>@row.ball</td>
+                    <td>@Model.Listlk[i].ima</td>
+                    <td>@Model.Listlk[i].otch</td>
+                    <td>@Model.Listlk[i].data_roj</td>
+
+                    <td>@Model.Listlk[i].address_proj</td>
+                    <td>@Model.Listlk[i].Fio_rod_zp</td>
+                    <td>@Model.Listlk[i].inventr</td>
+
+                    <td>@Model.Listlk[i].prikaz</td>
+                    <td>@Model.Listlk[i].status</td>
 
 
-                    <td> <a asp-controller="User" asp-action="edit" asp-route-id="@row.Id">Открыть</a> </td>
                 </tr>
             }
         </table>

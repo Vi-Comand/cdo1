@@ -1,4 +1,4 @@
-﻿using Attest.Models;
+﻿using cdo.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Attest.Controllers
+namespace cdo.Controllers
 {
 
     public class HomeController : Controller
@@ -34,7 +34,7 @@ namespace Attest.Controllers
 
         public IActionResult Login()
         {
-            ViewBag.User = db.Users.ToList();
+            ViewBag.User = db.User.ToList();
             return View("Login");
         }
 
@@ -54,7 +54,7 @@ namespace Attest.Controllers
 
 
 
-            Users user = await db.Users.FirstOrDefaultAsync(p => p.Email == Email);
+            user user = await db.User.FirstOrDefaultAsync(p => p.login == Email);
 
             string a = "Соль";
 
@@ -74,7 +74,7 @@ namespace Attest.Controllers
                 numBytesRequested: 256 / 8));
 
             if (user != null && user.pass == hashed)
-                return Redirect(Url.Action("Lk", "Lk", new { id = user.Id}));
+                return Redirect(Url.Action("Lk", "Lk", new { id = user.id }));
 
             return View("ненорм");
         }

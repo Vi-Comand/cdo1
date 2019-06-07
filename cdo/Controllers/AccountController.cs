@@ -1,4 +1,4 @@
-﻿using Attest.Models;
+﻿using cdo.Models;
 //using Attest.Views; // пространство имен моделей RegisterModel и LoginModel
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Attest.Controllers
+namespace cdo.Controllers
 {
     public class AccountController : Controller
     {
@@ -54,12 +54,12 @@ namespace Attest.Controllers
                     numBytesRequested: 256 / 8));
 
 
-                Users user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.pass == hashed);
+                user user = await db.User.FirstOrDefaultAsync(u => u.login == model.Email && u.pass == hashed);
                 if (user != null)
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return RedirectToAction("Lk", "Lk", new { id = user.Id });
+                    return RedirectToAction("Lk", "Lk", new { id = user.id });
                 }
 
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -80,7 +80,7 @@ namespace Attest.Controllers
         {
             if (ModelState.IsValid)
             {
-                Users user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+                user user = await db.User.FirstOrDefaultAsync(u => u.login == model.Email);
                 if (user == null)
                 {
                     string password = model.Password;
@@ -105,14 +105,14 @@ namespace Attest.Controllers
                         numBytesRequested: 256 / 8));
 
                     // добавляем пользователя в бд
-                    db.Users.Add(new Users { Email = model.Email, pass = hashed, Snils = snils, mo = Mo, role = "1" });
+                    db.User.Add(new user { login = model.Email, pass = hashed });
                     await db.SaveChangesAsync();
 
                     await Authenticate(model.Email); // аутентификация
 
-                    await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-                    user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-                    return RedirectToAction("Lk", "Lk", new { id = user.Id });
+                    await db.User.FirstOrDefaultAsync(u => u.login == model.Email);
+                    user = await db.User.FirstOrDefaultAsync(u => u.login == model.Email);
+                    return RedirectToAction("Lk", "Lk", new { id = user.id });
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
