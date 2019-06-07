@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Attest.Models
+namespace cdo.Models
 {
     public class DataContext : DbContext
     {
@@ -29,16 +29,16 @@ namespace Attest.Models
 
         }
 
-        public DbSet<Users> Users { get; set; }
+        public DbSet<user> User { get; set; }
         public DbSet<Mo> Mo { get; set; }
-        public DbSet<FileModel> File { get; set; }
-        //  public DbSet<FileModel> File1 { get; set; }
-        public DbSet<Nauch_deyat> Naucn_deyat { get; set; }
-        public DbSet<Zayavlen> Zayavlen { get; set; }
-        public DbSet<Obrazovan> Obrazovan { get; set; }
-        public DbSet<ProfRazv> ProfRazv { get; set; }
+        public DbSet<uo> Uo { get; set; }
+        public DbSet<main> Main { get; set; }
+        public DbSet<ist> Ist { get; set; }
+        public DbSet<to> To { get; set; }
+        public DbSet<rem> Rem { get; set; }
+        public DbSet<inter> Inter { get; set; }
+        public DbSet<kurs> Kurs { get; set; }
         public CompositeModel Composite { get; set; }
-      
-        public object Files { get; internal set; }
+
     }
 }

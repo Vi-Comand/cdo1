@@ -1,4 +1,4 @@
-﻿using Attest.Models;
+﻿using cdo.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace Attest
+namespace cdo
 {
     public class Startup
     {

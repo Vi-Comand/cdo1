@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\User\" />
     <Folder Include="wwwroot\Files\18\" />
   </ItemGroup>
 

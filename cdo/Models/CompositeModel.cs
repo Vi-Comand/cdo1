@@ -5,24 +5,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 
-namespace Attest.Models
+namespace cdo.Models
 
 {
     public class CompositeModel : PageModel
     {
         private readonly DataContext _context;
-        public List<FileModel> listFile { get; set; }
-        public FileModel FileModel { get; set; }
-        public List<Obrazovan> listObrazovan { get; set; }
-        public Obrazovan Obrazovan { get; set; }
-        public Zayavlen Zayavlen { get; set; }
-        public List<Zayavlen> ListZayavlen { get; set; }
-        public List<Nauch_deyat> listNauch_deyat { get; set; }
-        public Nauch_deyat Nauch_Deyat { get; set; }
-        public Users Users { get; set; }
-        public List<Users> ListUsers { get; set; }
-        public ProfRazv ProfRazv { get; set; }
-        public List<ProfRazv> listProfRazv { get; set; }
+
 
         public CompositeModel()
         {
@@ -86,7 +75,7 @@ namespace Attest.Models
         public int role { get; set; }
         public string login { get; set; }
         public string pass { get; set; }
-        public DateTime last_date_autor { get; set; }
+        //  public string last_date_autor { get; set; }
     }
     public class uo
     {
@@ -108,6 +97,18 @@ namespace Attest.Models
         public DateTime dop_sogl_bvp_d { get; set; }
         public int id_dvij_dog_bvp { get; set; }
         public DateTime data_roj { get; set; }
+    }
+    public class ist
+    {
+        public int id { get; set; }
+        public string kluch { get; set; }
+        public string znach { get; set; }
+        public DateTime data_izm { get; set; }
+        public int id_user { get; set; }
+        public int role { get; set; }
+        public int id_main { get; set; }
+        public int id_uo { get; set; }
+
     }
     public class to
     {
