@@ -25,6 +25,8 @@ namespace cdo.Models
         public string Fio_rod_zp { get; set; }
         public string diag { get; set; }
         public string status { get; set; }
+        public string inter { get; set; }
+        public DateTime data_ust_oborud { get; set; }
         public DateTime data_sprav { get; set; }
         public string prikaz { get; set; }
         public int klass { get; set; }
@@ -84,6 +86,7 @@ namespace cdo.Models
         public string diagn { get; set; }
         public string prik_o_zach_n { get; set; }
         public DateTime prik_o_zach_d { get; set; }
+
         public int id_tel { get; set; }
         public string tip_kompl { get; set; }
         public string status { get; set; }
