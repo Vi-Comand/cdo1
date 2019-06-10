@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
 
 namespace cdo.Models
 
@@ -24,6 +24,7 @@ namespace cdo.Models
         public string Fio_rod { get; set; }
         public string Fio_rod_zp { get; set; }
         public string diag { get; set; }
+        public string status { get; set; }
         public DateTime data_sprav { get; set; }
         public string prikaz { get; set; }
         public int klass { get; set; }
