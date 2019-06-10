@@ -727,6 +727,168 @@
                             </tr>
 
                         </table>
+                        @if (Model.bvps != null)
+                        {
+                            <ul class="nav nav-tabs">
+                                @foreach (var row in Model.bvps)
+                                {
+
+
+                                    <li>
+                                        <a href="#bvp_@row.id" style="float: left;" data-toggle="tab">@row.data_ust_oborud</a>
+                                        <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.id" form="0"><strong>Х</strong></button>
+                                    </li>
+
+                                }
+                            </ul>
+                            <div class="tab-content">
+                                @for (int i = 0; i < Model.bvps.Count; i++)
+                                {
+
+
+                                    <div class="tab-pane fade " id="Int_@Model.bvps[i].id">
+                                        <table>
+                                            <tr>
+                                                <td>Дата установки оборудования</td>
+                                                <td>
+                                                    <input type="text" id="ud_u_o_@i" asp-for="bvps[i].data_ust_oborud" />
+                                                    <script>
+
+
+                                                                    $(function() {
+                                                                        $('#ud_u_o_@i').daterangepicker({
+                                                                            singleDatePicker: true,
+                                                                            showDropdowns: true,
+                                                                            "minDate": "01/01/1970",
+                                                                            "maxDate": dataN,
+                                                                            "autoApply": true,
+                                                                            "applyLabel": "Выбрать",
+                                                                            "cancelLabel": "Отменить",
+                                                                            locale: {
+                                                                                format: 'DD.MM.YYYY',
+                                                                                "firstDay": 1
+                                                                            }
+                                                                        });
+                                                                    });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>№ договора БВП</td>
+                                                <td>
+                                                    <input type="text" asp-for="bvps[i].nom_dog_bvp" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Дата договора БВП</td>
+                                                <td>
+                                                    <input type="text" id="ud_d_b_@i" asp-for="bvps[i].nom_dog_bvp_d" />
+                                                    <script>
+
+
+                                                                    $(function() {
+                                                                        $('#ud_d_b_@i').daterangepicker({
+                                                                            singleDatePicker: true,
+                                                                            showDropdowns: true,
+                                                                            "minDate": "01/01/1970",
+                                                                            "maxDate": dataN,
+                                                                            "autoApply": true,
+                                                                            "applyLabel": "Выбрать",
+                                                                            "cancelLabel": "Отменить",
+                                                                            locale: {
+                                                                                format: 'DD.MM.YYYY',
+                                                                                "firstDay": 1
+                                                                            }
+                                                                        });
+                                                                    });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Срок действия  договора БВП</td>
+                                                <td>
+                                                    <input type="text" id="u_s_b_@i" asp-for="bvps[i].srok_dog_bvp" />
+                                                    <script>
+                                                                    $(function() {
+                                                                        $('#u_s_b_@i').daterangepicker({
+                                                                            singleDatePicker: true,
+                                                                            showDropdowns: true,
+                                                                            "minDate": "01/01/1970",
+                                                                            "maxDate": dataN,
+                                                                            "autoApply": true,
+                                                                            "applyLabel": "Выбрать",
+                                                                            "cancelLabel": "Отменить",
+                                                                            locale: {
+                                                                                format: 'DD.MM.YYYY',
+                                                                                "firstDay": 1
+                                                                            }
+                                                                        });
+                                                                    });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Акт о расторжении</td>
+                                                <td>
+                                                    <input type="text" id="a_v_b_@i" asp-for="bvps[i].akt_vozvr_oborud" />
+                                                    <script>
+                                                                    $(function() {
+                                                                        $('#a_v_b_@i').daterangepicker({
+                                                                            singleDatePicker: true,
+                                                                            showDropdowns: true,
+                                                                            "minDate": "01/01/1970",
+                                                                            "maxDate": dataN,
+                                                                            "autoApply": true,
+                                                                            "applyLabel": "Выбрать",
+                                                                            "cancelLabel": "Отменить",
+                                                                            locale: {
+                                                                                format: 'DD.MM.YYYY',
+                                                                                "firstDay": 1
+                                                                            }
+                                                                        });
+                                                                    });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Документ-основание договора бвп</td>
+                                                <td>
+                                                    <input type="text" asp-for="bvps[i].prik_o_oborud" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Дата документ-основание договора бвп</td>
+                                                <td>
+                                                    <input type="text" id="p_o_b_@i" asp-for="bvps[i].prik_o_oborud_d" />
+                                                    <script>
+                                                                    $(function() {
+                                                                        $('#p_o_b_@i').daterangepicker({
+                                                                            singleDatePicker: true,
+                                                                            showDropdowns: true,
+                                                                            "minDate": "01/01/1970",
+                                                                            "maxDate": dataN,
+                                                                            "autoApply": true,
+                                                                            "applyLabel": "Выбрать",
+                                                                            "cancelLabel": "Отменить",
+                                                                            locale: {
+                                                                                format: 'DD.MM.YYYY',
+                                                                                "firstDay": 1
+                                                                            }
+                                                                        });
+                                                                    });
+                                                    </script>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                }
+
+
+
+
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
