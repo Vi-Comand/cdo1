@@ -85,7 +85,7 @@ namespace cdo.Controllers
 
             if (role == 1)
             {
-                try { model.nom_dogov_bvp = db.Ist.Find(model.urot.id_nom_dog_bvp).znach; } catch { }
+
                 try { model.dvig_dogov_bvp = db.Ist.Find(model.urot.id_dvij_dog_bvp).znach; } catch { }
                 try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
                 try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
