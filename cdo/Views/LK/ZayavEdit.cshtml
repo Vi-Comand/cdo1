@@ -253,6 +253,7 @@
                         </tr>
 
                     </table>
+
                     <table>
                         <tr>
                             <td>Курсы дополнительного образования</td>
@@ -267,19 +268,22 @@
                                 <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#obr" form="0"></button>
                             </td>
                         </tr>
-                        @for (int i = 0; i < Model.kursi.Count; i++)
+                        @if (Model.kursi != null)
                         {
+                            for (int i = 0; i < Model.kursi.Count; i++)
+                            {
 
-                            <tr>
-                                <td>
-                                    <input type="hidden" asp-for="kursi[i].id" value="@Model.kursi[i].id" />
-                                    <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
-                                </td>
-                                <td>
-                                    <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@Model.kursi[i].id" form="0"><strong>Х</strong></button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <input type="hidden" asp-for="kursi[i].id" value="@Model.kursi[i].id" />
+                                        <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
+                                    </td>
+                                    <td>
+                                        <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@Model.kursi[i].id" form="0"><strong>Х</strong></button>
+                                    </td>
+                                </tr>
 
+                            }
                         }
                     </table>
 
@@ -411,32 +415,34 @@
                             </td>
                         </tr>
                     </table>
-                    <ul class="nav nav-tabs">
-                        @foreach (var row in Model.remonti)
-                        {
+                    @if (Model.remonti != null)
+                    {
+                        <ul class="nav nav-tabs">
+                            @foreach (var row in Model.remonti)
+                            {
 
 
-                            <li>
-                                <a href="#rem_@row.Id" style="float: left;" data-toggle="tab">@row.data_v_r</a>
-                                <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
-                            </li>
+                                <li>
+                                    <a href="#rem_@row.Id" style="float: left;" data-toggle="tab">@row.data_v_r</a>
+                                    <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                </li>
 
-                        }
-                    </ul>
-                    <div class="tab-content">
-                        @for (int i = 0; i < Model.remonti.Count; i++)
-                        {
+                            }
+                        </ul>
+                        <div class="tab-content">
+                            @for (int i = 0; i < Model.remonti.Count; i++)
+                            {
 
-                            <input type="hidden" asp-for="remonti[i].Id" />
-                            <input type="hidden" asp-for="remonti[i].fio_prin_r" />
-                            <input type="hidden" asp-for="remonti[i].fio_vipol_r" />
-                            <div class="tab-pane fade " id="rem_@Model.remonti[i].Id">
-                                <table>
-                                    <tr>
-                                        <td>Дата заявки на ремонт оборудования</td>
-                                        <td>
-                                            <input type="text" id="d_z_o_@i" asp-for="remonti[i].data_z_r" />
-                                            <script>
+                                <input type="hidden" asp-for="remonti[i].Id" />
+                                <input type="hidden" asp-for="remonti[i].fio_prin_r" />
+                                <input type="hidden" asp-for="remonti[i].fio_vipol_r" />
+                                <div class="tab-pane fade " id="rem_@Model.remonti[i].Id">
+                                    <table>
+                                        <tr>
+                                            <td>Дата заявки на ремонт оборудования</td>
+                                            <td>
+                                                <input type="text" id="d_z_o_@i" asp-for="remonti[i].data_z_r" />
+                                                <script>
 
 
                                                                      $(function() {
@@ -454,26 +460,26 @@
                                                                              }
                                                                          });
                                                                      });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Причина неисправности</td>
-                                        <td>
-                                            <input type="text" asp-for="remonti[i].prich_r" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ФИО специалиста принявшего заявку</td>
-                                        <td>
-                                            <input type="text" asp-for="remonti[i].fio_prin_r" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Дата выполнения заявки</td>
-                                        <td>
-                                            <input type="text" id="d_z_v_@i" asp-for="remonti[i].data_v_r" />
-                                            <script>
+                                                </script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Причина неисправности</td>
+                                            <td>
+                                                <input type="text" asp-for="remonti[i].prich_r" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ФИО специалиста принявшего заявку</td>
+                                            <td>
+                                                <input type="text" asp-for="remonti[i].fio_prin_r" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Дата выполнения заявки</td>
+                                            <td>
+                                                <input type="text" id="d_z_v_@i" asp-for="remonti[i].data_v_r" />
+                                                <script>
                                                                      $(function() {
                                                                          $('#d_z_v_@i').daterangepicker({
                                                                              singleDatePicker: true,
@@ -489,25 +495,25 @@
                                                                              }
                                                                          });
                                                                      });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ФИО специалиста выполнившего заявку</td>
-                                        <td>
-                                            <input type="text" asp-for="remonti[i].fio_vipol_r" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                                                </script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ФИО специалиста выполнившего заявку</td>
+                                            <td>
+                                                <input type="text" asp-for="remonti[i].fio_vipol_r" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
 
-                        }
-
-
+                            }
 
 
-                    </div>
 
+
+                        </div>
+                    }
                     <table>
                         <tr>
                             <td>
@@ -518,32 +524,34 @@
                             </td>
                         </tr>
                     </table>
-                    <ul class="nav nav-tabs">
-                        @foreach (var row in Model.internet)
-                        {
+                    @if (Model.internet != null)
+                    {
+                        <ul class="nav nav-tabs">
+                            @foreach (var row in Model.internet)
+                            {
 
 
-                            <li>
-                                <a href="#Int_@row.Id" style="float: left;" data-toggle="tab">@row.fio_prin_i</a>
-                                <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
-                            </li>
+                                <li>
+                                    <a href="#Int_@row.Id" style="float: left;" data-toggle="tab">@row.fio_prin_i</a>
+                                    <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                </li>
 
-                        }
-                    </ul>
-                    <div class="tab-content">
-                        @for (int i = 0; i < Model.internet.Count; i++)
-                        {
+                            }
+                        </ul>
+                        <div class="tab-content">
+                            @for (int i = 0; i < Model.internet.Count; i++)
+                            {
 
-                            <input type="hidden" asp-for="internet[i].Id" />
-                            <input type="hidden" asp-for="internet[i].fio_prin_i" />
-                            <input type="hidden" asp-for="internet[i].fio_vipol_i" />
-                            <div class="tab-pane fade " id="Int_@Model.internet[i].Id">
-                                <table>
-                                    <tr>
-                                        <td>Дата заявки на проблемы с интернет соединением</td>
-                                        <td>
-                                            <input type="text" id="d_z_i_@i" asp-for="internet[i].data_z_i" />
-                                            <script>
+                                <input type="hidden" asp-for="internet[i].Id" />
+                                <input type="hidden" asp-for="internet[i].fio_prin_i" />
+                                <input type="hidden" asp-for="internet[i].fio_vipol_i" />
+                                <div class="tab-pane fade " id="Int_@Model.internet[i].Id">
+                                    <table>
+                                        <tr>
+                                            <td>Дата заявки на проблемы с интернет соединением</td>
+                                            <td>
+                                                <input type="text" id="d_z_i_@i" asp-for="internet[i].data_z_i" />
+                                                <script>
 
 
                                                                     $(function() {
@@ -561,21 +569,21 @@
                                                                             }
                                                                         });
                                                                     });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ФИО специалиста принявшего заявку</td>
-                                        <td>
-                                            <input type="text" asp-for="internet[i].fio_prin_i" />
-                                        </td>
-                                    </tr>
+                                                </script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ФИО специалиста принявшего заявку</td>
+                                            <td>
+                                                <input type="text" asp-for="internet[i].fio_prin_i" />
+                                            </td>
+                                        </tr>
 
-                                    <tr>
-                                        <td>Дата выполнения заявки</td>
-                                        <td>
-                                            <input type="text" id="d_z_vi_@i" asp-for="internet[i].data_v_i" />
-                                            <script>
+                                        <tr>
+                                            <td>Дата выполнения заявки</td>
+                                            <td>
+                                                <input type="text" id="d_z_vi_@i" asp-for="internet[i].data_v_i" />
+                                                <script>
                                                                     $(function() {
                                                                         $('#d_z_vi_@i').daterangepicker({
                                                                             singleDatePicker: true,
@@ -591,24 +599,25 @@
                                                                             }
                                                                         });
                                                                     });
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ФИО специалиста выполнившего заявку</td>
-                                        <td>
-                                            <input type="text" asp-for="internet[i].fio_vipol_i" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                                                </script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ФИО специалиста выполнившего заявку</td>
+                                            <td>
+                                                <input type="text" asp-for="internet[i].fio_vipol_i" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
 
-                        }
-
-
+                            }
 
 
-                    </div>
+
+
+                        </div>
+                    }
                 </div>
             </div>
         </div>
