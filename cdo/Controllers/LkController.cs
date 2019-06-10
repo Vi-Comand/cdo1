@@ -79,9 +79,7 @@ namespace cdo.Controllers
             try { model.klass = str.klass; } catch { }
             try { model.status = str.status; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
-
-            try { model.prik_o_obrud = db.Ist.Find(model.urot.id_prik_o_oborud).znach; } catch { }
-
+            try { model.bvps = db.Bvp.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
             try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
 
             if (role == 2)
@@ -92,6 +90,7 @@ namespace cdo.Controllers
                 try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
                 try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
                 try { model.tehot.inter = db.To.Where(p => p.id == str.id_to).First().inter; } catch { }
+                //Достать паспортные только
                 try { model.urot = db.Uo.Find(str.id_uo); } catch { }
             }
             if (role == 3)
@@ -112,13 +111,15 @@ namespace cdo.Controllers
             }
             if (role == 5)
             {
-
+                //4 поля для юр
                 try { model.tehot = db.To.Find(str.id_to); } catch { }
+
                 try { model.urot = db.Uo.Find(str.id_uo); } catch { }
+
             }
             if (role == 6)
             {
-
+                //4 поля для бух
                 try { model.tehot = db.To.Find(str.id_to); } catch { }
 
             }

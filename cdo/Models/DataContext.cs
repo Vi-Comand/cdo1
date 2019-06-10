@@ -38,6 +38,7 @@ namespace cdo.Models
         public DbSet<rem> Rem { get; set; }
         public DbSet<inter> Inter { get; set; }
         public DbSet<kurs> Kurs { get; set; }
+        public DbSet<bvp> Bvp { get; set; }
         public CompositeModel Composite { get; set; }
 
     }
