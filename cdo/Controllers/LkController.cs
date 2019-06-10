@@ -82,6 +82,26 @@ namespace cdo.Controllers
             try { model.bvps = db.Bvp.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
             try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
 
+
+            if (role == 1)
+            {
+
+                try { model.dvig_dogov_bvp = db.Ist.Find(model.urot.id_dvij_dog_bvp).znach; } catch { }
+                try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
+                try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+                try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+
+
+                try { model.tip_kompl = str.tip_kompl; } catch { }
+
+
+                try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
+                try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
+                try { model.tehot = db.To.Find(str.id_to); } catch { }
+                try { model.urot = db.Uo.Find(str.id_uo); } catch { }
+
+            }
+
             if (role == 2)
             {
                 try { model.diag = str.diagn; } catch { }
