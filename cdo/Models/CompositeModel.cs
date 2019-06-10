@@ -12,6 +12,38 @@ namespace cdo.Models
     {
         private readonly DataContext _context;
 
+        public int id { get; set; }
+        public int MO { get; set; }
+        public string fam { get; set; }
+        public string ima { get; set; }
+        public string otch { get; set; }
+        public DateTime data_roj { get; set; }
+        public string address_proj { get; set; }
+        public string address_reg { get; set; }
+        public string tel { get; set; }
+        public string Fio_rod { get; set; }
+        public string Fio_rod_zp { get; set; }
+        public string diag { get; set; }
+        public DateTime data_sprav { get; set; }
+        public string prikaz { get; set; }
+        public int klass { get; set; }
+        public string soh_jit { get; set; }
+        public string soh_baz { get; set; }
+        public string tip_kompl { get; set; }
+        public string prik_o_obrud { get; set; }
+        public string nom_dogov_bvp { get; set; }
+        public string dvig_dogov_bvp { get; set; }
+        public to tehot { get; set; }
+        public uo urot { get; set; }
+        public List<kurs> kursi { get; set; }
+        public List<inter> internet { get; set; }
+        public List<rem> remonti { get; set; }
+        //public string status { get; set; }
+
+
+
+
+
 
         public CompositeModel()
         {
@@ -121,14 +153,14 @@ namespace cdo.Models
         public string skype_p { get; set; }
         public string star_inv { get; set; }
         public string nov_inv { get; set; }
-        public int stoim { get; set; }
+        public string stoim { get; set; }
         public DateTime data_vozvr_kompl { get; set; }
 
     }
 
     public class rem
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int id_to { get; set; }
         public DateTime data_z_r { get; set; }
         public string prich_r { get; set; }
@@ -139,7 +171,7 @@ namespace cdo.Models
 
     public class inter
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int id_to { get; set; }
         public DateTime data_z_i { get; set; }
         public string fio_prin_i { get; set; }

@@ -31,7 +31,10 @@
             {
 
                 <tr>
-                    <td>@Model.Listlk[i].id</td>
+
+
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">@Model.Listlk[i].id</a> </td>
+
                     <td>@Model.Listlk[i].MO</td>
                     <td>@Model.Listlk[i].fam</td>
 
