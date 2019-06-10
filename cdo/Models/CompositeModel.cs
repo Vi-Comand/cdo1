@@ -25,6 +25,8 @@ namespace cdo.Models
         public string Fio_rod_zp { get; set; }
         public string diag { get; set; }
         public string status { get; set; }
+        public string inter { get; set; }
+        public DateTime data_ust_oborud { get; set; }
         public DateTime data_sprav { get; set; }
         public string prikaz { get; set; }
         public int klass { get; set; }
@@ -40,7 +42,7 @@ namespace cdo.Models
         public List<inter> internet { get; set; }
         public List<rem> remonti { get; set; }
         //public string status { get; set; }
-
+        public List<bvp> bvps { get; set; }
 
 
 
@@ -84,6 +86,7 @@ namespace cdo.Models
         public string diagn { get; set; }
         public string prik_o_zach_n { get; set; }
         public DateTime prik_o_zach_d { get; set; }
+
         public int id_tel { get; set; }
         public string tip_kompl { get; set; }
         public string status { get; set; }
@@ -121,15 +124,23 @@ namespace cdo.Models
         public string propis_p { get; set; }
         public string rogd_p { get; set; }
         public string inventar { get; set; }
-        public int id_prik_o_oborud { get; set; }
-        public DateTime data_ust_oborud { get; set; }
-        public int id_nom_dog_bvp { get; set; }
-        public DateTime srok_dog_bvp { get; set; }
-        public string akt_vozvr_oborud { get; set; }
+
         public string dop_sogl_bvp_n { get; set; }
         public DateTime dop_sogl_bvp_d { get; set; }
         public int id_dvij_dog_bvp { get; set; }
         public DateTime data_roj { get; set; }
+    }
+    public class bvp
+    {
+        public int id { get; set; }
+        public string prik_o_oborud { get; set; }
+        public DateTime data_ust_oborud { get; set; }
+        public string nom_dog_bvp { get; set; }
+        public DateTime srok_dog_bvp { get; set; }
+        public DateTime akt_vozvr_oborud { get; set; }
+        public DateTime prik_o_oborud_d { get; set; }
+        public DateTime nom_dog_bvp_d { get; set; }
+        public int id_uo { get; set; }
     }
     public class ist
     {

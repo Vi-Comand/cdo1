@@ -18,7 +18,7 @@ namespace cdo.Controllers
         {
 
 
-            var Email = HttpContext.User.Identity.Name;
+
             ListLK list = new ListLK();
             list.Listlk = (from main in db.Main
 
@@ -57,6 +57,8 @@ namespace cdo.Controllers
         }
         public IActionResult kartochka(int id)
         {
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
 
             CompositeModel model = new CompositeModel(db);
             main str = db.Main.Find(id);
@@ -69,28 +71,73 @@ namespace cdo.Controllers
             try { model.address_reg = db.Ist.Find(str.id_adr_reg).znach; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
             try { model.MO = str.id_mo; } catch { }
-            try { model.tip_kompl = str.tip_kompl; } catch { }
+
             try { model.Fio_rod = db.Ist.Find(str.id_fio_rod).znach; } catch { }
             try { model.Fio_rod_zp = db.Ist.Find(str.id_fio_rod_predst).znach; } catch { }
-            try { model.diag = str.diagn; } catch { }
-            try { model.data_sprav = Convert.ToDateTime(db.Ist.Find(str.id_srok_mse).znach); } catch { }
+
             try { model.prikaz = str.prik_o_zach_n; } catch { }
             try { model.klass = str.klass; } catch { }
-            try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
-            try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
+            try { model.status = str.status; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
-            try { model.tehot = db.To.Find(str.id_to); } catch { }
-            try { model.urot = db.Uo.Find(str.id_uo); } catch { }
-            try { model.prik_o_obrud = db.Ist.Find(model.urot.id_prik_o_oborud).znach; } catch { }
-            try { model.nom_dogov_bvp = db.Ist.Find(model.urot.id_nom_dog_bvp).znach; } catch { }
-            try { model.dvig_dogov_bvp = db.Ist.Find(model.urot.id_dvij_dog_bvp).znach; } catch { }
-            try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
-            try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
-            try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+            try { model.bvps = db.Bvp.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
+            try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
+
+            if (role == 2)
+            {
+                try { model.diag = str.diagn; } catch { }
+                try { model.data_sprav = Convert.ToDateTime(db.Ist.Find(str.id_srok_mse).znach); } catch { }
+                try { model.tip_kompl = str.tip_kompl; } catch { }
+                try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
+                try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
+                try { model.tehot.inter = db.To.Where(p => p.id == str.id_to).First().inter; } catch { }
+                //Достать паспортные только
+                try { model.urot = db.Uo.Find(str.id_uo); } catch { }
+            }
+            if (role == 3)
+            {
+
+                try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
+                try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
+                try { model.tehot.inter = db.To.Where(p => p.id == str.id_to).First().inter; } catch { }
+                try { model.tehot.kompl = db.To.Where(p => p.id == str.id_to).First().kompl; } catch { }
+                try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
+            }
+            if (role == 4)
+            {
+
+                try { model.tehot = db.To.Find(str.id_to); } catch { }
+                try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+                try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+            }
+            if (role == 5)
+            {
+                //4 поля для юр
+                try { model.tehot = db.To.Find(str.id_to); } catch { }
+
+                try { model.urot = db.Uo.Find(str.id_uo); } catch { }
+
+            }
+            if (role == 6)
+            {
+                //4 поля для бух
+                try { model.tehot = db.To.Find(str.id_to); } catch { }
+
+            }
+
+            //try { model.nom_dogov_bvp = db.Ist.Find(model.urot.id_nom_dog_bvp).znach; } catch { }
+            //try { model.dvig_dogov_bvp = db.Ist.Find(model.urot.id_dvij_dog_bvp).znach; } catch { }
+            //try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
+            //try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+            //try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
 
 
+            //try { model.tip_kompl = str.tip_kompl; } catch { }
 
 
+            //try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
+            //try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
+            //try { model.tehot = db.To.Find(str.id_to); } catch { }
+            //try { model.urot = db.Uo.Find(str.id_uo); } catch { }
 
             return View("ZayavEdit", model);
         }
