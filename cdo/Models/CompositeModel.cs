@@ -38,6 +38,9 @@ namespace cdo.Models
         public string dvig_dogov_bvp { get; set; }
         public to tehot { get; set; }
         public uo urot { get; set; }
+        public kurs kursadd { get; set; }
+        public rem remadd { get; set; }
+        public inter intadd { get; set; }
         public List<kurs> kursi { get; set; }
         public List<inter> internet { get; set; }
         public List<rem> remonti { get; set; }

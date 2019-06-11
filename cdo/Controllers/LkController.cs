@@ -161,5 +161,86 @@ namespace cdo.Controllers
 
             return View("ZayavEdit", model);
         }
+
+        public IActionResult Save_Kurs(CompositeModel compositeModel)
+        {
+            if (compositeModel.kursadd.kurs_do != null)
+            {
+                compositeModel.kursadd.id_main = compositeModel.id;
+                db.Entry(compositeModel.kursadd).State = EntityState.Added;
+                db.SaveChanges();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+        }
+
+        public IActionResult Save_Rem(CompositeModel compositeModel)
+        {
+            if (compositeModel.remadd.data_z_r != null)
+            {
+                compositeModel.remadd.id_to = compositeModel.tehot.id;
+                db.Entry(compositeModel.remadd).State = EntityState.Added;
+                db.SaveChanges();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+        }
+
+        public IActionResult Save_Int(CompositeModel compositeModel)
+        {
+            if (compositeModel.intadd.data_z_i != null)
+            {
+                compositeModel.intadd.id_to = compositeModel.tehot.id;
+                db.Entry(compositeModel.intadd).State = EntityState.Added;
+                db.SaveChanges();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+        }
+
+        public async Task<IActionResult> Del_Kurs(CompositeModel compositeModel)
+        {
+            var product = db.Kurs.Find(compositeModel.kursadd.id);
+            if (product != null)
+            {
+                db.Kurs.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
+        }
+
+        public async Task<IActionResult> Del_Rem(CompositeModel compositeModel)
+        {
+            var product = db.Rem.Find(compositeModel.remadd.Id);
+            if (product != null)
+            {
+                db.Rem.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
+        }
+
+        public async Task<IActionResult> Del_Int(CompositeModel compositeModel)
+        {
+            var product = db.Inter.Find(compositeModel.intadd.Id);
+            if (product != null)
+            {
+                db.Inter.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
+        }
+
+        public IActionResult Creat()
+        {
+            var Login = HttpContext.User.Identity.Name;
+            user user = db.User.Where(p => p.login == Login).First();
+            main Main = new main();
+            Main.data_izm = DateTime.Now;
+            if (Main.data_sozd == Convert.ToDateTime("0001-01-01 00:00:00"))
+            {
+                Main.data_sozd = DateTime.Now;
+            }
+            db.Entry(Main).State = EntityState.Added;
+            db.SaveChanges();
+            return Redirect("/Lk/kartochka?id=" + Main.id);
+        }
     }
 }

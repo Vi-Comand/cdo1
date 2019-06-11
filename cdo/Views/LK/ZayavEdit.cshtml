@@ -256,16 +256,17 @@
 
                     <table>
                         <tr>
-                            <td>Курсы дополнительного образования</td>
+                            <td colspan="2">Курсы дополнительного образования</td>
 
                         </tr>
                         <tr>
                             <td>
-                                @*  <input type="hidden" asp-for="kursi.id" value="@Model.kursi.id" />
-                                    <input type="text" asp-for="kursi.kurs_do" value="@Model.kursi.kurs_do" />*@
+
+                                <input type="text" asp-for="kursadd.kurs_do" />
+
                             </td>
                             <td>
-                                <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#obr" form="0"></button>
+                                <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" asp-controller="Lk" asp-action="Save_Kurs"></button>
                             </td>
                         </tr>
                         @if (Model.kursi != null)
@@ -279,7 +280,7 @@
                                         <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
                                     </td>
                                     <td>
-                                        <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del" value="@Model.kursi[i].id" form="0"><strong>Х</strong></button>
+                                        <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_Kurs" value="@Model.kursi[i].id" form="0"><strong>Х</strong></button>
                                     </td>
                                 </tr>
 
@@ -407,11 +408,10 @@
 
                     <table>
                         <tr>
-                            <td>
+                            <td style="margin:initial; display:contents">
                                 Ремонт оборудования
-                            </td>
-                            <td>
-                                <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#rem" form="0"></button>
+
+                                <button style="margin-left:auto; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#rem" form="0"></button>
                             </td>
                         </tr>
                     </table>
@@ -424,7 +424,7 @@
 
                                 <li>
                                     <a href="#rem_@row.Id" style="float: left;" data-toggle="tab">@row.data_v_r</a>
-                                    <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                    <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del_Rem" value="@row.Id" form="0"><strong>Х</strong></button>
                                 </li>
 
                             }
@@ -518,9 +518,8 @@
                         <tr>
                             <td>
                                 Проблемы с интернет соединением
-                            </td>
-                            <td>
-                                <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#int" form="0"></button>
+
+                                <button style="margin-left:auto; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#int" form="0"></button>
                             </td>
                         </tr>
                     </table>
@@ -533,7 +532,7 @@
 
                                 <li>
                                     <a href="#Int_@row.Id" style="float: left;" data-toggle="tab">@row.fio_prin_i</a>
-                                    <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.Id" form="0"><strong>Х</strong></button>
+                                    <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del_Int" value="@row.Id" form="0"><strong>Х</strong></button>
                                 </li>
 
                             }
@@ -980,69 +979,70 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="tehot.id" />
+                        <input type="hidden" asp-for="id" />
                         <table>
-                            @*<tr>
-                                    <td>Дата заявки на ремонт оборудования</td>
-                                    <td>
-                                        <input type="text" id="md_z_r" value="" asp-for="remonti[1].data_z_r" />
-                                        <script>
+                            <tr>
+                                <td>Дата заявки на ремонт оборудования</td>
+                                <td>
+                                    <input type="text" id="md_z_r" value="" asp-for="remadd.data_z_r" />
+                                    <script>
 
-                                            $(function () {
-                                                $('#md_z_r').daterangepicker({
-                                                    singleDatePicker: true,
-                                                    showDropdowns: true,
-                                                    "minDate": "01/01/2000", "maxDate": dataN,
+                                        $(function () {
+                                            $('#md_z_r').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/2000", "maxDate": dataN,
 
-                                                    autoApply: true,
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                                autoApply: true,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Причина неисправности</td>
-                                    <td>
-                                        <input type="text" value="" asp-for="remonti[1].prich_r" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ФИО специалиста принявшего заявку</td>
-                                    <td>
-                                        <input type="text" value="" asp-for="remonti[1].fio_prin_r" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Дата выполнения заявки</td>
-                                    <td>
-                                        <input type="text" id="md_v_r" value="" asp-for="remonti[1].data_v_r" />
-                                        <script>
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Причина неисправности</td>
+                                <td>
+                                    <input type="text" value="" asp-for="remadd.prich_r" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ФИО специалиста принявшего заявку</td>
+                                <td>
+                                    <input type="text" value="" asp-for="remadd.fio_prin_r" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата выполнения заявки</td>
+                                <td>
+                                    <input type="text" id="md_v_r" value="" asp-for="remadd.data_v_r" />
+                                    <script>
 
-                                            $(function () {
-                                                $('#md_v_r').daterangepicker({
-                                                    singleDatePicker: true,
-                                                    showDropdowns: true,
-                                                    "minDate": "01/01/2000", "maxDate": dataN,
+                                        $(function () {
+                                            $('#md_v_r').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/2000", "maxDate": dataN,
 
-                                                    autoApply: true,
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                                autoApply: true,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ФИО специалиста выполнившего заявку</td>
-                                    <td>
-                                        <input type="text" value="" asp-for="remonti[1].fio_vipol_r" />
-                                    </td>
-                                </tr>*@
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ФИО специалиста выполнившего заявку</td>
+                                <td>
+                                    <input type="text" value="" asp-for="remadd.fio_vipol_r" />
+                                </td>
+                            </tr>
 
 
                         </table>
@@ -1050,7 +1050,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="" asp-controller="User" asp-action="Save_Obr">Сохранить изменения</button>
+                        <button type="submit" class="" asp-controller="Lk" asp-action="Save_Rem">Сохранить изменения</button>
                     </div>
                 </form>
             </div>
@@ -1069,64 +1069,65 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="tehot.id" />
+                        <input type="hidden" asp-for="id" />
                         <table>
-                            @*<tr>
-                                    <td>Дата заявки на ремонт оборудования</td>
-                                    <td>
-                                        <input type="text" id="md_z_i" value="" asp-for="internet[1].data_z_i" />
-                                        <script>
+                            <tr>
+                                <td>Дата заявки на ремонт оборудования</td>
+                                <td>
+                                    <input type="text" id="md_z_i" value="" asp-for="intadd.data_z_i" />
+                                    <script>
 
-                                            $(function () {
-                                                $('#md_z_i').daterangepicker({
-                                                    singleDatePicker: true,
-                                                    showDropdowns: true,
-                                                    "minDate": "01/01/2000", "maxDate": dataN,
+                                        $(function () {
+                                            $('#md_z_i').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/2000", "maxDate": dataN,
 
-                                                    autoApply: true,
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                                autoApply: true,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
-                                    </td>
-                                </tr>
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <td>ФИО специалиста принявшего заявку</td>
-                                    <td>
-                                        <input type="text" value="" asp-for="internet[1].fio_prin_i" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Дата выполнения заявки</td>
-                                    <td>
-                                        <input type="text" id="md_v_i" value="" asp-for="internet[1].data_v_i" />
-                                        <script>
+                            <tr>
+                                <td>ФИО специалиста принявшего заявку</td>
+                                <td>
+                                    <input type="text" value="" asp-for="intadd.fio_prin_i" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата выполнения заявки</td>
+                                <td>
+                                    <input type="text" id="md_v_i" value="" asp-for="intadd.data_v_i" />
+                                    <script>
 
-                                            $(function () {
-                                                $('#md_v_i').daterangepicker({
-                                                    singleDatePicker: true,
-                                                    showDropdowns: true,
-                                                    "minDate": "01/01/2000", "maxDate": dataN,
+                                        $(function () {
+                                            $('#md_v_i').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/2000", "maxDate": dataN,
 
-                                                    autoApply: true,
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                                autoApply: true,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ФИО специалиста выполнившего заявку</td>
-                                    <td>
-                                        <input type="text" value="" asp-for="internet[1].fio_vipol_i" />
-                                    </td>
-                                </tr>*@
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ФИО специалиста выполнившего заявку</td>
+                                <td>
+                                    <input type="text" value="" asp-for="intadd.fio_vipol_i" />
+                                </td>
+                            </tr>
 
 
                         </table>
@@ -1134,12 +1135,116 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="" asp-controller="User" asp-action="Save_Obr">Сохранить изменения</button>
+                        <button type="submit" class="" asp-controller="Lk" asp-action="Save_Int">Сохранить изменения</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- Modal del_kurs-->
+    <div class="modal fade bs-example-modal-sm" id="Del_Kurs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить курс?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form asp-action="Del_Obr" asp-controller="User" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="id" />
+                        <input type="hidden" class="result_nauch" asp-for="kursadd.id" />
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="Lk" asp-action="Del_Kurs">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_nauch");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del_kurs-->
+    <div class="modal fade bs-example-modal-sm" id="Del_Rem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись о ремонте?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="id" />
+                        <input type="hidden" class="result_rem" asp-for="remadd.Id" />
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="Lk" asp-action="Del_Rem">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_rem");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del_kurs-->
+    <div class="modal fade bs-example-modal-sm" id="Del_Int" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить курс?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="id" />
+                        <input type="hidden" class="result_int" asp-for="intadd.Id" />
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="Lk" asp-action="Del_Int">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_int");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>
