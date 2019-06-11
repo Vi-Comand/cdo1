@@ -41,6 +41,7 @@ namespace cdo.Models
         public kurs kursadd { get; set; }
         public rem remadd { get; set; }
         public inter intadd { get; set; }
+        public bvp bvpadd { get; set; }
         public List<kurs> kursi { get; set; }
         public List<inter> internet { get; set; }
         public List<rem> remonti { get; set; }
@@ -126,7 +127,7 @@ namespace cdo.Models
         public string vidan_p { get; set; }
         public string propis_p { get; set; }
         public string rogd_p { get; set; }
-        public string inventar { get; set; }
+
 
         public string dop_sogl_bvp_n { get; set; }
         public DateTime dop_sogl_bvp_d { get; set; }

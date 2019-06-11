@@ -71,7 +71,7 @@ namespace cdo.Controllers
             try { model.address_reg = db.Ist.Find(str.id_adr_reg).znach; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
             try { model.MO = str.id_mo; } catch { }
-
+            try { model.diag = str.diagn; } catch { }
             try { model.Fio_rod = db.Ist.Find(str.id_fio_rod).znach; } catch { }
             try { model.Fio_rod_zp = db.Ist.Find(str.id_fio_rod_predst).znach; } catch { }
 
@@ -195,6 +195,17 @@ namespace cdo.Controllers
             return Redirect("/Lk/kartochka?id=" + compositeModel.id);
         }
 
+        public IActionResult Save_Bvp(CompositeModel compositeModel)
+        {
+            if (compositeModel.bvpadd.nom_dog_bvp_d != null)
+            {
+                compositeModel.bvpadd.id_uo = compositeModel.urot.id;
+                db.Entry(compositeModel.bvpadd).State = EntityState.Added;
+                db.SaveChanges();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+        }
+
         public async Task<IActionResult> Del_Kurs(CompositeModel compositeModel)
         {
             var product = db.Kurs.Find(compositeModel.kursadd.id);
@@ -223,6 +234,17 @@ namespace cdo.Controllers
             if (product != null)
             {
                 db.Inter.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
+        }
+
+        public async Task<IActionResult> Del_Bvp(CompositeModel compositeModel)
+        {
+            var product = db.Bvp.Find(compositeModel.bvpadd.id);
+            if (product != null)
+            {
+                db.Bvp.Remove(product);
                 await db.SaveChangesAsync();
             }
             return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());

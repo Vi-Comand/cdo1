@@ -5,6 +5,121 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Files\10\**" />
+    <Compile Remove="wwwroot\Files\11\**" />
+    <Compile Remove="wwwroot\Files\12\**" />
+    <Compile Remove="wwwroot\Files\13\**" />
+    <Compile Remove="wwwroot\Files\14\**" />
+    <Compile Remove="wwwroot\Files\16\**" />
+    <Compile Remove="wwwroot\Files\17\**" />
+    <Compile Remove="wwwroot\Files\18\**" />
+    <Compile Remove="wwwroot\Files\19\**" />
+    <Compile Remove="wwwroot\Files\1\**" />
+    <Compile Remove="wwwroot\Files\20\**" />
+    <Compile Remove="wwwroot\Files\21\**" />
+    <Compile Remove="wwwroot\Files\22\**" />
+    <Compile Remove="wwwroot\Files\23\**" />
+    <Compile Remove="wwwroot\Files\24\**" />
+    <Compile Remove="wwwroot\Files\25\**" />
+    <Compile Remove="wwwroot\Files\26\**" />
+    <Compile Remove="wwwroot\Files\27\**" />
+    <Compile Remove="wwwroot\Files\2\**" />
+    <Compile Remove="wwwroot\Files\3\**" />
+    <Compile Remove="wwwroot\Files\5\**" />
+    <Compile Remove="wwwroot\Files\62\**" />
+    <Compile Remove="wwwroot\Files\76\**" />
+    <Compile Remove="wwwroot\Files\78\**" />
+    <Compile Remove="wwwroot\Files\79\**" />
+    <Compile Remove="wwwroot\Files\7\**" />
+    <Compile Remove="wwwroot\Files\8\**" />
+    <Compile Remove="wwwroot\Files\9\**" />
+    <Content Remove="wwwroot\Files\10\**" />
+    <Content Remove="wwwroot\Files\11\**" />
+    <Content Remove="wwwroot\Files\12\**" />
+    <Content Remove="wwwroot\Files\13\**" />
+    <Content Remove="wwwroot\Files\14\**" />
+    <Content Remove="wwwroot\Files\16\**" />
+    <Content Remove="wwwroot\Files\17\**" />
+    <Content Remove="wwwroot\Files\18\**" />
+    <Content Remove="wwwroot\Files\19\**" />
+    <Content Remove="wwwroot\Files\1\**" />
+    <Content Remove="wwwroot\Files\20\**" />
+    <Content Remove="wwwroot\Files\21\**" />
+    <Content Remove="wwwroot\Files\22\**" />
+    <Content Remove="wwwroot\Files\23\**" />
+    <Content Remove="wwwroot\Files\24\**" />
+    <Content Remove="wwwroot\Files\25\**" />
+    <Content Remove="wwwroot\Files\26\**" />
+    <Content Remove="wwwroot\Files\27\**" />
+    <Content Remove="wwwroot\Files\2\**" />
+    <Content Remove="wwwroot\Files\3\**" />
+    <Content Remove="wwwroot\Files\5\**" />
+    <Content Remove="wwwroot\Files\62\**" />
+    <Content Remove="wwwroot\Files\76\**" />
+    <Content Remove="wwwroot\Files\78\**" />
+    <Content Remove="wwwroot\Files\79\**" />
+    <Content Remove="wwwroot\Files\7\**" />
+    <Content Remove="wwwroot\Files\8\**" />
+    <Content Remove="wwwroot\Files\9\**" />
+    <EmbeddedResource Remove="wwwroot\Files\10\**" />
+    <EmbeddedResource Remove="wwwroot\Files\11\**" />
+    <EmbeddedResource Remove="wwwroot\Files\12\**" />
+    <EmbeddedResource Remove="wwwroot\Files\13\**" />
+    <EmbeddedResource Remove="wwwroot\Files\14\**" />
+    <EmbeddedResource Remove="wwwroot\Files\16\**" />
+    <EmbeddedResource Remove="wwwroot\Files\17\**" />
+    <EmbeddedResource Remove="wwwroot\Files\18\**" />
+    <EmbeddedResource Remove="wwwroot\Files\19\**" />
+    <EmbeddedResource Remove="wwwroot\Files\1\**" />
+    <EmbeddedResource Remove="wwwroot\Files\20\**" />
+    <EmbeddedResource Remove="wwwroot\Files\21\**" />
+    <EmbeddedResource Remove="wwwroot\Files\22\**" />
+    <EmbeddedResource Remove="wwwroot\Files\23\**" />
+    <EmbeddedResource Remove="wwwroot\Files\24\**" />
+    <EmbeddedResource Remove="wwwroot\Files\25\**" />
+    <EmbeddedResource Remove="wwwroot\Files\26\**" />
+    <EmbeddedResource Remove="wwwroot\Files\27\**" />
+    <EmbeddedResource Remove="wwwroot\Files\2\**" />
+    <EmbeddedResource Remove="wwwroot\Files\3\**" />
+    <EmbeddedResource Remove="wwwroot\Files\5\**" />
+    <EmbeddedResource Remove="wwwroot\Files\62\**" />
+    <EmbeddedResource Remove="wwwroot\Files\76\**" />
+    <EmbeddedResource Remove="wwwroot\Files\78\**" />
+    <EmbeddedResource Remove="wwwroot\Files\79\**" />
+    <EmbeddedResource Remove="wwwroot\Files\7\**" />
+    <EmbeddedResource Remove="wwwroot\Files\8\**" />
+    <EmbeddedResource Remove="wwwroot\Files\9\**" />
+    <None Remove="wwwroot\Files\10\**" />
+    <None Remove="wwwroot\Files\11\**" />
+    <None Remove="wwwroot\Files\12\**" />
+    <None Remove="wwwroot\Files\13\**" />
+    <None Remove="wwwroot\Files\14\**" />
+    <None Remove="wwwroot\Files\16\**" />
+    <None Remove="wwwroot\Files\17\**" />
+    <None Remove="wwwroot\Files\18\**" />
+    <None Remove="wwwroot\Files\19\**" />
+    <None Remove="wwwroot\Files\1\**" />
+    <None Remove="wwwroot\Files\20\**" />
+    <None Remove="wwwroot\Files\21\**" />
+    <None Remove="wwwroot\Files\22\**" />
+    <None Remove="wwwroot\Files\23\**" />
+    <None Remove="wwwroot\Files\24\**" />
+    <None Remove="wwwroot\Files\25\**" />
+    <None Remove="wwwroot\Files\26\**" />
+    <None Remove="wwwroot\Files\27\**" />
+    <None Remove="wwwroot\Files\2\**" />
+    <None Remove="wwwroot\Files\3\**" />
+    <None Remove="wwwroot\Files\5\**" />
+    <None Remove="wwwroot\Files\62\**" />
+    <None Remove="wwwroot\Files\76\**" />
+    <None Remove="wwwroot\Files\78\**" />
+    <None Remove="wwwroot\Files\79\**" />
+    <None Remove="wwwroot\Files\7\**" />
+    <None Remove="wwwroot\Files\8\**" />
+    <None Remove="wwwroot\Files\9\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.4" />
@@ -12,7 +127,7 @@
 
   <ItemGroup>
     <Folder Include="Views\User\" />
-    <Folder Include="wwwroot\Files\18\" />
+    <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
   <ItemGroup>

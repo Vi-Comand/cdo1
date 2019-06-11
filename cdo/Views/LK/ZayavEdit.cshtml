@@ -262,7 +262,7 @@
                         <tr>
                             <td>
 
-                                <input type="text" asp-for="kursadd.kurs_do" />
+                                <input type="text" asp-for="kursadd.kurs_do" placeholder="Добавить курс" />
 
                             </td>
                             <td>
@@ -275,12 +275,12 @@
                             {
 
                                 <tr>
-                                    <td>
+                                    <td style="width: 90%;">
                                         <input type="hidden" asp-for="kursi[i].id" value="@Model.kursi[i].id" />
                                         <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
                                     </td>
-                                    <td>
-                                        <button class="button_del" style="float: left; top:0em; margin-right:12px; " data-toggle="modal" data-target="#Del_Kurs" value="@Model.kursi[i].id" form="0"><strong>Х</strong></button>
+                                    <td style="width: 20px;">
+                                        <button class="button_delq" style="margin:0; background: url(/assets/icon/icons8-delete.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#Del_Kurs" value="@Model.kursi[i].id" form="0"><strong></strong></button>
                                     </td>
                                 </tr>
 
@@ -408,10 +408,11 @@
 
                     <table>
                         <tr>
-                            <td style="margin:initial; display:contents">
+                            <td style="width: 90%;">
                                 Ремонт оборудования
-
-                                <button style="margin-left:auto; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#rem" form="0"></button>
+                            </td>
+                            <td style="width: 20px;">
+                                <button style="background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#rem" form="0"></button>
                             </td>
                         </tr>
                     </table>
@@ -439,8 +440,8 @@
                                 <div class="tab-pane fade " id="rem_@Model.remonti[i].Id">
                                     <table>
                                         <tr>
-                                            <td>Дата заявки на ремонт оборудования</td>
-                                            <td>
+                                            <td style="width:40%">Дата заявки на ремонт оборудования</td>
+                                            <td style="width:60%">
                                                 <input type="text" id="d_z_o_@i" asp-for="remonti[i].data_z_r" />
                                                 <script>
 
@@ -516,10 +517,11 @@
                     }
                     <table>
                         <tr>
-                            <td>
+                            <td style="width: 90%;">
                                 Проблемы с интернет соединением
-
-                                <button style="margin-left:auto; margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#int" form="0"></button>
+                            </td>
+                            <td style="width: 20px;">
+                                <button style="background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#int" form="0"></button>
                             </td>
                         </tr>
                     </table>
@@ -547,8 +549,8 @@
                                 <div class="tab-pane fade " id="Int_@Model.internet[i].Id">
                                     <table>
                                         <tr>
-                                            <td>Дата заявки на проблемы с интернет соединением</td>
-                                            <td>
+                                            <td style="width:40%">Дата заявки на проблемы с интернет соединением</td>
+                                            <td style="width:60%">
                                                 <input type="text" id="d_z_i_@i" asp-for="internet[i].data_z_i" />
                                                 <script>
 
@@ -647,8 +649,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Паспортные данные законного представителя</td>
+                                <td colspan="2">Паспортные данные законного представителя</td>
                             </tr>
+
                             <tr>
                                 <td>Номер</td>
                                 <td>
@@ -726,30 +729,36 @@
                             </tr>
 
                         </table>
+                        <table>
+                            <tr>
+                                <td style="width:100%">
+                                    Документы БВП
+                                </td>
+                                <td style="width:20px">
+                                    <button style=" background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#bvp" form="0"></button>
+                                </td>
+                            </tr>
+                        </table>
                         @if (Model.bvps != null)
                         {
                             <ul class="nav nav-tabs">
                                 @foreach (var row in Model.bvps)
                                 {
-
-
                                     <li>
-                                        <a href="#bvp_@row.id" style="float: left;" data-toggle="tab">@row.data_ust_oborud</a>
-                                        <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del" value="@row.id" form="0"><strong>Х</strong></button>
+                                        <a href="#Bvp_@row.id" style="float: left;" data-toggle="tab">@row.data_ust_oborud</a>
+                                        <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del_Bvp" value="@row.id" form="0"><strong>Х</strong></button>
                                     </li>
-
                                 }
                             </ul>
                             <div class="tab-content">
                                 @for (int i = 0; i < Model.bvps.Count; i++)
                                 {
 
-
-                                    <div class="tab-pane fade " id="Int_@Model.bvps[i].id">
+                                    <div class="tab-pane fade " id="Bvp_@Model.bvps[i].id">
                                         <table>
                                             <tr>
-                                                <td>Дата установки оборудования</td>
-                                                <td>
+                                                <td td style="width:40%">Дата установки оборудования</td>
+                                                <td td style="width:60%">
                                                     <input type="text" id="ud_u_o_@i" asp-for="bvps[i].data_ust_oborud" />
                                                     <script>
 
@@ -899,8 +908,8 @@
 
 
 
-        <input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены"
-               style=" background: url(/assets/icon/icons8-update.png) no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
+        @*<input type="submit" asp-controller="User" asp-action="Update1" value="Обновить" data-toggle="tooltip" data-placement="top" title="Будут подгруженны данные из АИС Сетевой город. Ваши данные будут заменены"
+            style=" background: url(/assets/icon/icons8-update.png) no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />*@
 
 
         <input type="submit" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
@@ -1141,6 +1150,164 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal bvp -->
+    <div class="modal fade bs-example-modal-lg" id="bvp" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Документы БВП</h4>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="id" />
+                        <input type="text" asp-for="urot.id" />
+                        <table>
+                            <tr>
+                                <td>Дата установки оборудования</td>
+                                <td>
+                                    <input type="text" id="mud_u_o_" asp-for="bvpadd.data_ust_oborud" />
+                                    <script>
+
+
+                                        $(function () {
+                                            $('#mud_u_o_').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>№ договора БВП</td>
+                                <td>
+                                    <input type="text" asp-for="bvpadd.nom_dog_bvp" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата договора БВП</td>
+                                <td>
+                                    <input type="text" id="mud_d_b_" asp-for="bvpadd.nom_dog_bvp_d" />
+                                    <script>
+
+
+                                        $(function () {
+                                            $('#mud_d_b_').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Срок действия  договора БВП</td>
+                                <td>
+                                    <input type="text" id="mu_s_b_" asp-for="bvpadd.srok_dog_bvp" />
+                                    <script>
+                                        $(function () {
+                                            $('#mu_s_b_').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Акт о расторжении</td>
+                                <td>
+                                    <input type="text" id="ma_v_b_" asp-for="bvpadd.akt_vozvr_oborud" />
+                                    <script>
+                                        $(function () {
+                                            $('#ma_v_b_').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Документ-основание договора бвп</td>
+                                <td>
+                                    <input type="text" asp-for="bvpadd.prik_o_oborud" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата документ-основание договора бвп</td>
+                                <td>
+                                    <input type="text" id="mp_o_b_" asp-for="bvpadd.prik_o_oborud_d" />
+                                    <script>
+                                        $(function () {
+                                            $('#mp_o_b_').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="" asp-controller="Lk" asp-action="Save_Bvp">Сохранить изменения</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal del_kurs-->
     <div class="modal fade bs-example-modal-sm" id="Del_Kurs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
