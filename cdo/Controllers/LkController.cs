@@ -244,10 +244,19 @@ namespace cdo.Controllers
             str.status = composit.status;
             str.tip_kompl = composit.tip_kompl;
             str.diagn = composit.diag;
-
+            str.id_mo = composit.MO;
             db.Entry(str).State = EntityState.Modified;
             db.SaveChanges();
-
+            if (composit.tehot != null)
+            {
+                db.Entry(composit.tehot).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            if (composit.urot != null)
+            {
+                db.Entry(composit.urot).State = EntityState.Modified;
+                db.SaveChanges();
+            }
             return Redirect("/Lk/Lk");
 
         }
