@@ -55,6 +55,196 @@ namespace cdo.Controllers
             //CompositeModel compositeModel=new CompositeModel(db);
             return View("obch", list);
         }
+        public IActionResult save(CompositeModel composit)
+        {
+            CompositeModel model = new CompositeModel();
+            main str = db.Main.Find(composit.id);
+            try { model.id = str.id; } catch { }
+            try { model.fam = db.Ist.Find(str.id_f).znach; } catch { }
+            try { model.ima = db.Ist.Find(str.id_i).znach; } catch { }
+            try { model.otch = db.Ist.Find(str.id_o).znach; } catch { }
+            try { model.address_proj = db.Ist.Find(str.id_adr_progiv).znach; } catch { }
+            try { model.address_reg = db.Ist.Find(str.id_adr_reg).znach; } catch { }
+            try { model.Fio_rod = db.Ist.Find(str.id_fio_rod).znach; } catch { }
+            try { model.Fio_rod_zp = db.Ist.Find(str.id_fio_rod_predst).znach; } catch { }
+            try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
+            try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
+            try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
+            try { model.data_sprav = Convert.ToDateTime(db.Ist.Find(str.id_srok_mse).znach); } catch { }
+            var login = HttpContext.User.Identity.Name;
+            int id_user = db.User.Where(p => p.login == login).First().id;
+            int role = db.User.Where(p => p.login == login).First().role;
+            if (composit.fam != model.fam)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "f";
+                pole.znach = composit.fam;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_f = pole.id;
+            }
+            if (composit.ima != model.ima)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "i";
+                pole.znach = composit.ima;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_i = pole.id;
+            }
+
+
+            if (composit.otch != model.otch)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "o";
+                pole.znach = composit.otch;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_o = pole.id;
+            }
+
+            if (composit.address_proj != model.address_proj)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "adrp";
+                pole.znach = composit.address_proj;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_adr_progiv = pole.id;
+            }
+
+            if (composit.address_reg != model.address_reg)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "adrr";
+                pole.znach = composit.address_reg;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_adr_reg = pole.id;
+            }
+
+            if (composit.tel != model.tel)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "tel";
+                pole.znach = composit.tel;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_tel = pole.id;
+            }
+            if (composit.Fio_rod != model.Fio_rod)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "fior";
+                pole.znach = composit.Fio_rod;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_fio_rod = pole.id;
+            }
+            if (composit.Fio_rod_zp != model.Fio_rod_zp)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "fiozp";
+                pole.znach = composit.Fio_rod_zp;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_fio_rod_predst = pole.id;
+            }
+
+            if (composit.data_sprav != model.data_sprav)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "srmse";
+                pole.znach = composit.data_sprav.ToString();
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_srok_mse = pole.id;
+            }
+
+            if (composit.soh_jit != model.soh_jit)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "sjit";
+                pole.znach = composit.soh_jit;
+                pole.role = role;
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_soh_jit = pole.id;
+            }
+
+            if (composit.soh_baz != model.soh_baz)
+            {
+
+                ist pole = new ist();
+                pole.id_main = composit.id;
+                pole.id_user = id_user;
+                pole.kluch = "sbaz";
+                pole.role = role;
+                pole.znach = composit.soh_baz;
+
+                db.Entry(pole).State = EntityState.Added;
+
+                db.SaveChanges();
+                str.id_soh_baz = pole.id;
+            }
+
+
+            db.Entry(str).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Redirect("/Lk/Lk");
+
+        }
         public IActionResult kartochka(int id)
         {
             var login = HttpContext.User.Identity.Name;
