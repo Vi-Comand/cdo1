@@ -238,6 +238,12 @@ namespace cdo.Controllers
                 str.id_soh_baz = pole.id;
             }
 
+            str.klass = composit.klass;
+            str.prik_o_zach_d = composit.prikaz_d;
+            str.prik_o_zach_n = composit.prikaz;
+            str.status = composit.status;
+            str.tip_kompl = composit.tip_kompl;
+            str.diagn = composit.diag;
 
             db.Entry(str).State = EntityState.Modified;
             db.SaveChanges();
@@ -442,10 +448,18 @@ namespace cdo.Controllers
 
         public IActionResult Creat()
         {
-            var Login = HttpContext.User.Identity.Name;
-            user user = db.User.Where(p => p.login == Login).First();
+            /*  var Login = HttpContext.User.Identity.Name;
+              user user = db.User.Where(p => p.login == Login).First();*/
+            to To = new to();
+            db.Entry(To).State = EntityState.Added;
+            uo Uo = new uo();
+            db.Entry(Uo).State = EntityState.Added;
+            db.SaveChanges();
+
             main Main = new main();
             Main.data_izm = DateTime.Now;
+            Main.id_to = To.id;
+            Main.id_uo = Uo.id;
             if (Main.data_sozd == Convert.ToDateTime("0001-01-01 00:00:00"))
             {
                 Main.data_sozd = DateTime.Now;

@@ -38,7 +38,7 @@
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Фамилия (ребенка)</td>
+                                <td>Фамилия (ребенка) <button style=" background: url(/assets/icon/info--7416313485.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#bvp" form="0"></button></td>
                                 <td>
                                     <input type="text" asp-for="fam" />
                                 </td>
@@ -173,14 +173,56 @@
                             </tr>
                             <tr class="pp">
                                 <td>Срок действия справки МСЭ</td>
+
                                 <td>
-                                    <input type="text" asp-for="data_sprav" />
+                                    <input type="text" asp-for="data_sprav" id="d_sp" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_sp').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>Приказ о зачислении</td>
                                 <td>
                                     <input type="text" asp-for="prikaz" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата приказа о зачислении</td>
+                                <td>
+                                    <input type="text" asp-for="prikaz_d" id="d_pr_z" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_pr_z').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
                                 </td>
                             </tr>
                             <tr>
@@ -307,7 +349,7 @@
                 <div class="panel-body">
                     <table>
                         <tr>
-                            <td style="width: 30%;">Наименование комплекта </td>
+                            <td style="width: 30%;">Наименование комплекта                 <input type="hidden" asp-for="tehot.id" /></td>
                             <td style="width: 70%;">
                                 <input type="text" asp-for="tehot.nazv_komp" />
                             </td>
@@ -638,7 +680,8 @@
 
                         <table>
                             <tr>
-                                <td style="width: 30%;">Информация о статусе обучающегося</td>
+
+                                <td style="width: 30%;">Информация о статусе обучающегося                <input type="hidden" asp-for="urot.id" /></td>
                                 <td style="width: 70%;">
                                     <select id="napr" asp-for="status" class="req">
                                         <option value="">Выберите статус</option>
