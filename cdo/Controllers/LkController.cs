@@ -282,7 +282,7 @@ namespace cdo.Controllers
             try { model.diag = str.diagn; } catch { }
             try { model.Fio_rod = db.Ist.Find(str.id_fio_rod).znach; } catch { }
             try { model.Fio_rod_zp = db.Ist.Find(str.id_fio_rod_predst).znach; } catch { }
-
+            try { model.data_sprav = Convert.ToDateTime(db.Ist.Find(str.id_srok_mse).znach); } catch { }
             try { model.prikaz = str.prik_o_zach_n; } catch { }
             try { model.prikaz_d = str.prik_o_zach_d; } catch { }
             try { model.klass = str.klass; } catch { }
