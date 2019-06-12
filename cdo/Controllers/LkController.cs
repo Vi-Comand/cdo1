@@ -245,6 +245,9 @@ namespace cdo.Controllers
             str.tip_kompl = composit.tip_kompl;
             str.diagn = composit.diag;
             str.id_mo = composit.MO;
+            str.data_rojd = composit.data_roj;
+
+
             db.Entry(str).State = EntityState.Modified;
             db.SaveChanges();
             if (composit.tehot != null)
@@ -281,6 +284,7 @@ namespace cdo.Controllers
             try { model.Fio_rod_zp = db.Ist.Find(str.id_fio_rod_predst).znach; } catch { }
 
             try { model.prikaz = str.prik_o_zach_n; } catch { }
+            try { model.prikaz_d = str.prik_o_zach_d; } catch { }
             try { model.klass = str.klass; } catch { }
             try { model.status = str.status; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }

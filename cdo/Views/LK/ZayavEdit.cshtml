@@ -761,7 +761,32 @@
                             <tr>
                                 <td>Доп. соглашение к договору БВП</td>
                                 <td>
-                                    <input type="text" asp-for="urot.dop_sogl_bvp_d" />
+                                    <input type="text" asp-for="urot.dop_sogl_bvp_n" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата доп. соглашение к договору БВП</td>
+                                <td>
+                                    <input type="text" asp-for="urot.dop_sogl_bvp_d" id="dd_v_p">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#dd_v_p').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1950",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
                                 </td>
                             </tr>
                             <tr>
