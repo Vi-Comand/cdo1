@@ -290,7 +290,7 @@ namespace cdo.Controllers
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
             try { model.bvps = db.Bvp.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
             try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
-
+            try { model.role = role; } catch { }
 
             if (role == 1)
             {

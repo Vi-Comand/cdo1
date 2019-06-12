@@ -40,7 +40,7 @@ namespace cdo.Models
         public to tehot { get; set; }
         public uo urot { get; set; }
         public kurs kursadd { get; set; }
-        public user userrole { get; set; }
+        public int role { get; set; }
         public rem remadd { get; set; }
         public inter intadd { get; set; }
         public bvp bvpadd { get; set; }
