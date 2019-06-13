@@ -96,6 +96,7 @@ namespace cdo.Controllers
                 pole.kluch = "f";
                 pole.znach = composit.fam;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -110,6 +111,7 @@ namespace cdo.Controllers
                 pole.kluch = "i";
                 pole.znach = composit.ima;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -126,6 +128,7 @@ namespace cdo.Controllers
                 pole.kluch = "o";
                 pole.znach = composit.otch;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -141,6 +144,7 @@ namespace cdo.Controllers
                 pole.kluch = "adrp";
                 pole.znach = composit.address_proj;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -156,6 +160,7 @@ namespace cdo.Controllers
                 pole.kluch = "adrr";
                 pole.znach = composit.address_reg;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -171,6 +176,7 @@ namespace cdo.Controllers
                 pole.kluch = "tel";
                 pole.znach = composit.tel;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -185,6 +191,7 @@ namespace cdo.Controllers
                 pole.kluch = "fior";
                 pole.znach = composit.Fio_rod;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -199,6 +206,7 @@ namespace cdo.Controllers
                 pole.kluch = "fiozp";
                 pole.znach = composit.Fio_rod_zp;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -214,6 +222,7 @@ namespace cdo.Controllers
                 pole.kluch = "srmse";
                 pole.znach = composit.data_sprav.ToString();
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -229,6 +238,7 @@ namespace cdo.Controllers
                 pole.kluch = "sjit";
                 pole.znach = composit.soh_jit;
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 db.Entry(pole).State = EntityState.Added;
 
                 db.SaveChanges();
@@ -243,6 +253,7 @@ namespace cdo.Controllers
                 pole.id_user = id_user;
                 pole.kluch = "sbaz";
                 pole.role = role;
+                pole.data_izm = DateTime.Now;
                 pole.znach = composit.soh_baz;
 
                 db.Entry(pole).State = EntityState.Added;
