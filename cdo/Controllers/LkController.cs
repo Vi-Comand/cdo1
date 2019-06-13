@@ -57,9 +57,16 @@ namespace cdo.Controllers
                            }).ToList();
 
             //CompositeModel compositeModel=new CompositeModel(db);
-            var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+            string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             ViewData["Message"] = remoteIpAddress;
-            return View("obch", list);
+            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+            {
+                return View("obch", list);
+            }
+            else
+            {
+                return View("dost");
+            }
         }
         public IActionResult save(CompositeModel composit)
         {
@@ -383,7 +390,18 @@ namespace cdo.Controllers
             //try { model.tehot = db.To.Find(str.id_to); } catch { }
             //try { model.urot = db.Uo.Find(str.id_uo); } catch { }
 
-            return View("ZayavEdit", model);
+            string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            ViewData["Message"] = remoteIpAddress;
+            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+            {
+                return View("ZayavEdit", model);
+
+            }
+            else
+            {
+                return View("dost");
+            }
+
         }
 
         public IActionResult Save_Kurs(CompositeModel compositeModel)

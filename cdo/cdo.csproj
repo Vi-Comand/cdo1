@@ -136,6 +136,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\LK\dost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\LK\ZayavEdit.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
