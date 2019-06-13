@@ -12,6 +12,7 @@ namespace cdo.Controllers
 {
     public class LkController : Controller
     {
+
         private DataContext db = new DataContext();
         [Authorize]
         public IActionResult Lk()
@@ -20,6 +21,8 @@ namespace cdo.Controllers
 
 
             ListLK list = new ListLK();
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
             list.Listlk = (from main in db.Main
 
                            join mo in db.Mo on main.id_mo equals mo.Id into mo
@@ -36,6 +39,7 @@ namespace cdo.Controllers
                            from a in add.DefaultIfEmpty()
                            join to in db.To on main.id_to equals to.id into to
                            from t in to.DefaultIfEmpty()
+
                            select new LK
                            {
                                id = main.id,
@@ -53,6 +57,8 @@ namespace cdo.Controllers
                            }).ToList();
 
             //CompositeModel compositeModel=new CompositeModel(db);
+            var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+            ViewData["Message"] = remoteIpAddress;
             return View("obch", list);
         }
         public IActionResult save(CompositeModel composit)
@@ -252,13 +258,21 @@ namespace cdo.Controllers
             db.SaveChanges();
             if (composit.tehot != null)
             {
-                db.Entry(composit.tehot).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.Entry(composit.tehot).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch { }
             }
             if (composit.urot != null)
             {
-                db.Entry(composit.urot).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.Entry(composit.urot).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch { }
             }
             return Redirect("/Lk/Lk");
 
@@ -318,7 +332,7 @@ namespace cdo.Controllers
                 try { model.tip_kompl = str.tip_kompl; } catch { }
                 try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
                 try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
-                try { model.tehot.inter = db.To.Where(p => p.id == str.id_to).First().inter; } catch { }
+                try { model.tehot = db.To.Find(str.id_to); } catch { }
                 //Достать паспортные только
                 try { model.urot = db.Uo.Find(str.id_uo); } catch { }
             }
@@ -327,8 +341,8 @@ namespace cdo.Controllers
 
                 try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
                 try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
-                try { model.tehot.inter = db.To.Where(p => p.id == str.id_to).First().inter; } catch { }
-                try { model.tehot.kompl = db.To.Where(p => p.id == str.id_to).First().kompl; } catch { }
+                try { model.tehot = db.To.Where(p => p.id == str.id_to).First(); } catch { }
+                try { model.urot = db.Uo.Find(str.id_uo); } catch { }
                 try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
             }
             if (role == 4)
@@ -337,6 +351,7 @@ namespace cdo.Controllers
                 try { model.tehot = db.To.Find(str.id_to); } catch { }
                 try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
                 try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+                try { model.urot = db.Uo.Find(str.id_uo); } catch { }
             }
             if (role == 5)
             {
@@ -350,7 +365,7 @@ namespace cdo.Controllers
             {
                 //4 поля для бух
                 try { model.tehot = db.To.Find(str.id_to); } catch { }
-
+                try { model.urot = db.Uo.Find(str.id_uo); } catch { }
             }
 
             //try { model.nom_dogov_bvp = db.Ist.Find(model.urot.id_nom_dog_bvp).znach; } catch { }
@@ -463,23 +478,33 @@ namespace cdo.Controllers
         {
             /*  var Login = HttpContext.User.Identity.Name;
               user user = db.User.Where(p => p.login == Login).First();*/
-            to To = new to();
-            db.Entry(To).State = EntityState.Added;
-            uo Uo = new uo();
-            db.Entry(Uo).State = EntityState.Added;
-            db.SaveChanges();
-
-            main Main = new main();
-            Main.data_izm = DateTime.Now;
-            Main.id_to = To.id;
-            Main.id_uo = Uo.id;
-            if (Main.data_sozd == Convert.ToDateTime("0001-01-01 00:00:00"))
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
+            if (role == 1 || role == 2)
             {
-                Main.data_sozd = DateTime.Now;
+                to To = new to();
+                db.Entry(To).State = EntityState.Added;
+                uo Uo = new uo();
+                db.Entry(Uo).State = EntityState.Added;
+                db.SaveChanges();
+
+                main Main = new main();
+                Main.data_izm = DateTime.Now;
+                Main.id_to = To.id;
+                Main.id_uo = Uo.id;
+                if (Main.data_sozd == Convert.ToDateTime("0001-01-01 00:00:00"))
+                {
+                    Main.data_sozd = DateTime.Now;
+                }
+                db.Entry(Main).State = EntityState.Added;
+                db.SaveChanges();
+
+                return Redirect("/Lk/kartochka?id=" + Main.id);
             }
-            db.Entry(Main).State = EntityState.Added;
-            db.SaveChanges();
-            return Redirect("/Lk/kartochka?id=" + Main.id);
+            else
+            {
+                return Redirect("/Lk/Lk");
+            }
         }
     }
 }
