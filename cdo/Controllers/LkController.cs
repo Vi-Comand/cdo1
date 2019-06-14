@@ -59,7 +59,7 @@ namespace cdo.Controllers
             //CompositeModel compositeModel=new CompositeModel(db);
             string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             ViewData["Message"] = remoteIpAddress;
-            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" /*|| remoteIpAddress == "::1"*/)
             {
                 return View("obch", list);
             }
@@ -403,7 +403,7 @@ namespace cdo.Controllers
 
             string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             ViewData["Message"] = remoteIpAddress;
-            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14"/* || remoteIpAddress == "::1"*/)
             {
                 return View("ZayavEdit", model);
 

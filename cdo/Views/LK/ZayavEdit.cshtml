@@ -165,12 +165,24 @@
                                     <input type="text" asp-for="Fio_rod_zp" />
                                 </td>
                             </tr>
+                            <tr>
+
+                                <td>Информация о статусе обучающегося</td>
+                                <td>
+                                    <select id="napr" asp-for="status" class="req">
+                                        <option value="">Выберите статус</option>
+                                        <option value='учащийся'>учащийся</option>
+                                        <option value='студент'>студент</option>
+                                        <option value='выбывший'>выбывший</option>
+                                    </select>
+                                </td>
+                            </tr>
                             @if (Model.role == 2 || Model.role == 1)
                             {
                                 <tr class="pp">
                                     <td>Диагноз</td>
                                     <td>
-                                        <input type="text" asp-for="diag" />
+                                        <textarea rows=" 3 " cols=" 60 " asp-for="diag"></textarea>
                                     </td>
                                 </tr>
 
@@ -184,8 +196,7 @@
                                                 $('#d_sp').daterangepicker({
                                                     singleDatePicker: true,
                                                     showDropdowns: true,
-                                                    "minDate": "01/01/1970",
-                                                    "maxDate": dataN,
+                                                    "minDate": "01/01/2000",
                                                     "autoApply": true,
                                                     "applyLabel": "Выбрать",
                                                     "cancelLabel": "Отменить",
@@ -317,7 +328,7 @@
 
                                 </td>
                                 <td>
-                                    <button style=" margin:0; background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" asp-controller="Lk" asp-action="Save_Kurs"></button>
+                                    <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" asp-controller="Lk" asp-action="Save_Kurs"></button>
                                 </td>
                             </tr>
                             @if (Model.kursi != null)
@@ -331,7 +342,7 @@
                                             <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
                                         </td>
                                         <td style="width: 20px;">
-                                            <button class="button_delq" style="margin:0; background: url(/assets/icon/icons8-del.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#Ds" value="@Model.kursi[i].id" form="0"><strong></strong></button>
+                                            <button class="button_delq" style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ds" value="@Model.kursi[i].id" form="0"><strong></strong></button>
                                         </td>
                                     </tr>
 
@@ -478,7 +489,7 @@
                                     Ремонт оборудования
                                 </td>
                                 <td style="width: 20px;">
-                                    <button style="background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#rem" form="0"></button>
+                                    <button style="background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#rem" form="0"></button>
                                 </td>
                             </tr>
                         </table>
@@ -587,7 +598,7 @@
                                     Проблемы с интернет соединением
                                 </td>
                                 <td style="width: 20px;">
-                                    <button style="background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#int" form="0"></button>
+                                    <button style="background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#int" form="0"></button>
                                 </td>
                             </tr>
                         </table>
@@ -703,28 +714,18 @@
                 </div>
                 <div id="collapseu" class="collapse">
                     <div class="panel-body">
-
+                        <input type="hidden" asp-for="urot.id" />
                         <table>
-                            <tr>
 
-                                <td style="width: 30%;">Информация о статусе обучающегося                <input type="hidden" asp-for="urot.id" /></td>
-                                <td style="width: 70%;">
-                                    <select id="napr" asp-for="status" class="req">
-                                        <option value="">Выберите статус</option>
-                                        <option value='учащийся'>учащийся</option>
-                                        <option value='студент'>студент</option>
-                                        <option value='выбывший'>выбывший</option>
-                                    </select>
-                                </td>
-                            </tr>
+
                             @if (Model.role == 5 || Model.role == 2 || Model.role == 1)
                             {
                                 <tr>
                                     <td colspan="2">Паспортные данные законного представителя</td>
                                 </tr>
                                 <tr>
-                                    <td>Номер</td>
-                                    <td>
+                                    <td style="width: 30%;">Номер</td>
+                                    <td style="width: 70%;">
                                         <input type="text" asp-for="urot.nom_p" />
                                     </td>
                                 </tr>
@@ -780,8 +781,8 @@
                                 </tr>
                             }
                             <tr>
-                                <td>Инвентарный номер оборудования</td>
-                                <td>
+                                <td style="width: 30%;">Инвентарный номер оборудования</td>
+                                <td style="width: 70%;">
                                     <input type="text" asp-for="tehot.nov_inv" />
                                 </td>
                             </tr>
@@ -832,7 +833,7 @@
                                     Документы БВП
                                 </td>
                                 <td style="width:20px">
-                                    <button style=" background: url(/assets/icon/icons8-add.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%;" data-toggle="modal" data-target="#bvp" form="0"></button>
+                                    <button style=" background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#bvp" ; form="0"></button>
                                 </td>
                             </tr>
                         </table>

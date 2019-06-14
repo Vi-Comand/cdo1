@@ -2718,9 +2718,9 @@ button {
     -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    background-color: #07ff7e33;
-    box-shadow: inset 0 0 0 3px rgba(189, 251, 242, 0.98);
-    color: rgba(189, 251, 242, 0.98) !important;
+    background-color: rgba(222, 215, 253, 0.36);
+    box-shadow: inset 0 0 0 3px #ded7fd;
+    color: #f8f9fa !important;
     border-radius: 5px;
     border: 0;
     cursor: pointer;
@@ -2735,7 +2735,7 @@ button {
     text-decoration: none;
     text-transform: uppercase;
     white-space: nowrap;
-    text-shadow: 1px 1px 5px #353c2e, 1px 1px 1px #fff9f9;
+    text-shadow: 1px 1px 5px #353c2e, 1px 1px 1px #5918f1;
 }
 
 .button {
