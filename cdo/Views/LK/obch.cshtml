@@ -11,7 +11,279 @@
 
     <form method="post" asp-controller="User" asp-action="Creat">
         <h3>@ViewData["Message"]</h3>
+
         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Добавить запись</button>
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                            Фильтры
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse0" class="collapse in ">
+                    <div class="panel-body">
+
+                        <table>
+                            <tr class="od">
+                                <td style="width: 30%;">№ ребенка</td>
+                                <td style="width: 70%;">
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Фамилия (ребенка)</td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Имя (ребенка)</td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Отчество (ребенка)</td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>МО</td>
+                                <td>
+                                    <select id="napr" class="req" asp-for="Listlk[1].MO">
+                                        <option value="">Выберите МО</option>
+                                        <option value='1'>Анапа</option>
+                                        <option value='2'>Армавир</option>
+                                        <option value='3'>Геленджик</option>
+                                        <option value='4'>Горячий Ключ</option>
+                                        <option value='5'>Ейск</option>
+                                        <option value='6'>Краснодар</option>
+                                        <option value='7'>Новороссийск</option>
+                                        <option value='8'>Сочи</option>
+                                        <option value='9'>Абинский</option>
+                                        <option value='10'>Апшеронский</option>
+                                        <option value='11'>Белоглинский</option>
+                                        <option value='12'>Белореченский</option>
+                                        <option value='13'>Брюховецкий</option>
+                                        <option value='14'>Выселковский</option>
+                                        <option value='15'>Гулькевичский</option>
+                                        <option value='16'>Динской</option>
+                                        <option value='17'>Кавказский</option>
+                                        <option value='18'>Калининский</option>
+                                        <option value='19'>Каневской</option>
+                                        <option value='20'>Кореновский</option>
+                                        <option value='21'>Красноармейский</option>
+                                        <option value='22'>Крыловский</option>
+                                        <option value='23'>Крымский</option>
+                                        <option value='24'>Курганинский</option>
+                                        <option value='25'>Кущевский</option>
+                                        <option value='26'>Лабинский</option>
+                                        <option value='27'>Ленинградский</option>
+                                        <option value='28'>Мостовский</option>
+                                        <option value='29'>Новокубанский</option>
+                                        <option value='30'>Новопокровский</option>
+                                        <option value='31'>Отрадненский</option>
+                                        <option value='32'>Павловский</option>
+                                        <option value='33'>Приморско-Ахтарский</option>
+                                        <option value='34'>Северский</option>
+                                        <option value='35'>Славянский</option>
+                                        <option value='36'>Староминский</option>
+                                        <option value='37'>Тбилисский</option>
+                                        <option value='38'>Темрюкский</option>
+                                        <option value='39'>Тимашевский</option>
+                                        <option value='40'>Тихорецкий</option>
+                                        <option value='41'>Туапсинский</option>
+                                        <option value='42'>Успенский</option>
+                                        <option value='43'>Усть-Лабинский</option>
+                                        <option value='44'>Щербиновский</option>
+                                    </select>
+
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Дата рождения </td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].data_roj" id="data_roj">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_roj').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <input type="text" asp-for="Listlk[1].data_roj" id="data_roj_do">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_roj_do').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+
+                            <tr class="od">
+                                <td>Адрес проживания</td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+
+                            <tr class="od">
+                                <td>Телефон </td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+
+                            <tr class="od">
+                                <td>ФИО родителя – законного представителя</td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+
+
+                            <tr class="pp">
+                                <td>Диагноз</td>
+                                <td>
+                                    <textarea rows=" 3 " cols=" 60 " asp-for="Listlk[1].MO"></textarea>
+                                </td>
+                            </tr>
+
+                            <tr class="pp">
+                                <td>Срок действия справки МСЭ</td>
+
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].data_roj" id="d_sp" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_sp').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/2000",
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <input type="text" asp-for="Listlk[1].data_roj" id="d_sp_do" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_sp_do').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/2000",
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+                            <tr class="od">
+                                <td>Приказ о зачислении</td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата приказа о зачислении</td>
+                                <td>
+                                    От<input type="text" asp-for="Listlk[1].data_roj" id="d_pr_z" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_pr_z').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+
+                                    До<input type="text" asp-for="Listlk[1].data_roj" id="d_pr_z_do" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_pr_z_do').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Тип комплекта</td>
+                                <td>
+                                    <input type="text" asp-for="Listlk[1].MO" />
+                                </td>
+                            </tr>
+
+                        </table>
+                        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Фильтровать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <table id="lk">
             <tr>

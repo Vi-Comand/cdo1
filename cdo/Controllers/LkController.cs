@@ -885,7 +885,7 @@ namespace cdo.Controllers
                 db.Entry(compositeModel.kursadd).State = EntityState.Added;
                 db.SaveChanges();
             }
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id + "#j_kurs");
         }
 
         public IActionResult Save_Rem(CompositeModel compositeModel)
@@ -896,7 +896,7 @@ namespace cdo.Controllers
                 db.Entry(compositeModel.remadd).State = EntityState.Added;
                 db.SaveChanges();
             }
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id + "#j_rem");
         }
 
         public IActionResult Save_Int(CompositeModel compositeModel)
@@ -907,7 +907,7 @@ namespace cdo.Controllers
                 db.Entry(compositeModel.intadd).State = EntityState.Added;
                 db.SaveChanges();
             }
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id + "#j_int");
         }
 
         public IActionResult Save_Bvp(CompositeModel compositeModel)
@@ -918,7 +918,7 @@ namespace cdo.Controllers
                 db.Entry(compositeModel.bvpadd).State = EntityState.Added;
                 db.SaveChanges();
             }
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id + "#j_bvp");
         }
         [Route("Lk/Del_Kurs")]
         public async Task<IActionResult> Del_Kurs(int id, int id_main)

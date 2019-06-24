@@ -1,5 +1,4 @@
-﻿
-@using System.Linq
+﻿@using System.Linq
 
 @model cdo.Models.CompositeModel
 
@@ -38,7 +37,10 @@
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Фамилия (ребенка)</td>
+                                <td>
+                                    <a href=""> Фамилия (ребенка)</a>
+                                    <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" form="0"></button>
+                                </td>
                                 <td>
                                     <input type="text" asp-for="fam" />
                                 </td>
@@ -254,89 +256,95 @@
                 </div>
             </div>
         </div>
-        @*      <script>
+        @*
+            <script>
+                var select = document.getElementById("dolg");
+                var val = select.value;
+                if (val == "УЧИТЕЛЬ") {
+                    $('#naprtr').show(); // показать
+                }
+                else {
+                    $('#naprtr').hide(); // показать
+                }
+                $('#dolg').change(function () {
                     var select = document.getElementById("dolg");
-                        var val = select.value;
-                        if (val == "УЧИТЕЛЬ") {
-                            $('#naprtr').show(); // показать
-                        }
-                        else {
-                            $('#naprtr').hide(); // показать
-                        }
-                        $('#dolg').change(function () {
-                            var select = document.getElementById("dolg");
-                            var val = select.value;
-                            if (val == "УЧИТЕЛЬ") {
-                                $('#naprtr').show(); // показать
-                            }
-                            else {
-                                $('#naprtr').hide(); // показать
-                            }
-                        })
+                    var val = select.value;
+                    if (val == "УЧИТЕЛЬ") {
+                        $('#naprtr').show(); // показать
+                    }
+                    else {
+                        $('#naprtr').hide(); // показать
+                    }
+                })
 
-                    </script>
-                @*if (Model.Zayavlen.status == "Заявление подлинное" && Model.Users.role == "3")
+            </script>
+            @*if (Model.Zayavlen.status == "Заявление подлинное" && Model.Users.role == "3")
             {*@
 
         @*  }*@
 
-    <div class="panel panel-default">
-        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-            <h4 class="panel-title" style="position: relative; padding:10px">
-                <a run data-toggle="collapse in" data-parent="#accordion" href="#collapseOne">
-                    Сектор учебновоспитательной работы (УВР)
-                </a>
-            </h4>
-        </div> 
-     
-    <div id="collapseOne" class="panel-collapse collapse in show">
-       
-            <div class="panel-body">
-                <table>
-                    <tr>
-                        <td style="width: 30%;">Класс обучения</td>
-                        <td style="width: 70%;">
-                            <input type="text" asp-for="klass" />
-                        </td>
-                    </tr>
-                    @if (Model.role == 3 || Model.role == 2 || Model.role == 1)
-                    {
-                        <tr id="j_kurs">
-                            <td>Школа по месту жительства</td>
-                            <td>
-                                <input type="text" class="req" asp-for="soh_jit" />
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                <h4 class="panel-title" style="position: relative; padding:10px">
+                    <a run data-toggle="collapse in" data-parent="#accordion" href="#collapseOne">
+                        Сектор учебновоспитательной работы (УВР)
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in
+            @if (Model.role == 3 )
+            {
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Базовая школа</td>
-                            <td>
-                                <input type="text" class="req" asp-for="soh_baz" />
-                            </td>
-                        </tr>
-                    }
-                </table>
-                @if (Model.role == 3 || Model.role == 1)
-                {
+
+                @Html.Raw(" show");
+                 }">
+
+                <div class="panel-body">
                     <table>
                         <tr>
-                            <td colspan="2">Курсы дополнительного образования</td>
-
-                        </tr>
-                        <tr>
-                            <td>
-
-                                <input type="text" asp-for="kursadd.kurs_do" placeholder="Добавить курс" />
-
-                            </td>
-                            <td>
-                                <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" asp-controller="Lk" asp-action="Save_Kurs"></button>
+                            <td style="width: 30%;">Класс обучения</td>
+                            <td style="width: 70%;">
+                                <input type="text" asp-for="klass" />
                             </td>
                         </tr>
-                        @if (Model.kursi != null)
+                        @if (Model.role == 3 || Model.role == 2 || Model.role == 1)
                         {
-                            for (int i = 0; i < Model.kursi.Count; i++)
+                            <tr id="j_kurs">
+                                <td>Школа по месту жительства</td>
+                                <td>
+                                    <input type="text" class="req" asp-for="soh_jit" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Базовая школа</td>
+                                <td>
+                                    <input type="text" class="req" asp-for="soh_baz" />
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    @if (Model.role == 3 || Model.role == 1)
+                    {
+                        <table>
+                            <tr>
+                                <td colspan="2">Курсы дополнительного образования</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <input type="text" asp-for="kursadd.kurs_do" placeholder="Добавить курс" />
+
+                                </td>
+                                <td>
+                                    <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" asp-controller="Lk" asp-action="Save_Kurs"></button>
+                                </td>
+                            </tr>
+                            @if (Model.kursi != null)
                             {
+                                for (int i = 0; i < Model.kursi.Count; i++)
+                                {
 
                                     <tr>
                                         <td style="width: 90%;">
@@ -350,13 +358,13 @@
                                         </td>
                                     </tr>
 
+                                }
                             }
-                        }
-                    </table>
-                }
+                        </table>
+                    }
+                </div>
             </div>
         </div>
-    </div>
 
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -369,7 +377,10 @@
                 </h4>
 
             </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
+            <div id="collapseTwo" class="panel-collapse collapse in  @if (Model.role == 4 )
+            {
+                @Html.Raw(" show");
+                 }">
                 <div class="panel-body">
                     <input type="hidden" asp-for="tehot.id" />
                     <table>
@@ -490,11 +501,11 @@
                                     <input type="text" asp-for="tehot.skype_l" />
                                 </td>
                             </tr>
-                            <tr>
+                            <tr id="j_rem">
                                 <td>
                                     Скайп ребенка пароль
                                 </td>
-                                <td>
+                                <td id="j_int">
                                     <input type="text" asp-for="tehot.skype_p" />
                                 </td>
                             </tr>
@@ -759,7 +770,12 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseu" class="collapse">
+                    <div id="collapseu" class="collapse in @if (Model.role == 5)
+            {
+
+
+                @Html.Raw(" show");
+                 }">
                         <div class="panel-body">
                             <input type="hidden" asp-for="urot.id" />
                             <table>
@@ -864,7 +880,7 @@
                                             </script>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr id="j_bvp">
                                         <td>Учет движения договора БВП</td>
                                         <td>
                                             <input type="text" asp-for="dvig_dogov_bvp" />
@@ -1060,7 +1076,8 @@
 
         <input type="submit" asp-controller="LK" asp-action="save" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
 
-        @*<script>
+        @*
+            <script>
                 $('document').ready(function () {
                     var elem = document.getElementsByClassName('pp');
                     for (var i = 0; i < elem.length; i = i) {
@@ -1555,6 +1572,30 @@
                         })
                     });
                 </script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal ist-->
+    <div class="modal fade bs-example-modal-sm" id="Ist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">История изменений</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="id" />
+                        <input type="hidden" class="result_int" asp-for="intadd.Id" />
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
 
             </div>
         </div>
