@@ -1,4 +1,4 @@
-﻿@model cdo.Models.ListLK
+﻿@model cdo.Models.ListLK1
 
 <!DOCTYPE html>
 
@@ -15,24 +15,21 @@
 
         <table id="lk">
             <tr>
-
-                <th> @Html.ActionLink("№", "Sort", "Lk", new { sortOrder = ViewBag.Nom }) </th>
-                <th> @Html.ActionLink("Инвентарный номер", "Sort", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("МО", "Sort", "Lk", new { sortOrder = ViewBag.Mo })</th>
-                <th> @Html.ActionLink("Фамилия", "Sort", "Lk", new { sortOrder = ViewBag.F })</th>
-                <th> @Html.ActionLink("Имя", "Sort", "Lk", new { sortOrder = ViewBag.I })</th>
-                <th> @Html.ActionLink("Отчество", "Sort", "Lk", new { sortOrder = ViewBag.O })</th>
-                <th> @Html.ActionLink("Дата рождения", "Sort", "Lk", new { sortOrder = ViewBag.DR })</th>
-                <th> @Html.ActionLink("Адрес проживания", "Sort", "Lk", new { sortOrder = ViewBag.Add_p })</th>
+                <th>№</th>
+                <th>Инвентарный номер</th>
+                <th>МО</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Дата рождения</th>
+                <th>Адрес проживания</th>
                 <th>Телефон</th>
                 <th>ФИО родителя ЗП</th>
-                <th> @Html.ActionLink("Диагноз", "Sort", "Lk", new { sortOrder = ViewBag.D })</th>
-                <th> @Html.ActionLink("МСЭ", "Sort", "Lk", new { sortOrder = ViewBag.MSE })</th>
-                <th> @Html.ActionLink("№ приказа", "Sort", "Lk", new { sortOrder = ViewBag.Nom_p })</th>
-                <th> @Html.ActionLink("Дата приказа", "Sort", "Lk", new { sortOrder = ViewBag.Data_p })</th>
-                <th> @Html.ActionLink("Класс", "Sort", "Lk", new { sortOrder = ViewBag.Klass })</th>
-                <th> @Html.ActionLink("Тип комплекта", "Sort", "Lk", new { sortOrder = ViewBag.Tip_kompl })</th>
-                <th> @Html.ActionLink("Статус", "Sort", "Lk", new { sortOrder = ViewBag.Status })</th>
+                <th>Класс</th>
+                <th>Базовая школа</th>
+                <th>Школа по месту жительства</th>
+                <th>Курсы</th>
+                <th>ФИО педагога</th>
                 <th colspan="2">Кнопки управления</th>
 
             </tr>
@@ -55,13 +52,32 @@
                     <td>@Model.Listlk[i].address_proj</td>
                     <td>@Model.Listlk[i].tel</td>
                     <td>@Model.Listlk[i].Fio_rod_zp</td>
-                    <td>@Model.Listlk[i].diagn</td>
-                    <td>@Model.Listlk[i].srok_mse</td>
-                    <td>@Model.Listlk[i].prikaz</td>
-                    <td>@Model.Listlk[i].prikazd</td>
                     <td>@Model.Listlk[i].klass</td>
-                    <td>@Model.Listlk[i].tip_kompl</td>
-                    <td>@Model.Listlk[i].status</td>
+                    <td>@Model.Listlk[i].sch_baz</td>
+                    <td>@Model.Listlk[i].sch_jit</td>
+
+
+
+                    <td>
+                        @for (int j = 0; j < Model.Listlk[i].kurs.Count; j++)
+                        {
+                            @if (j != 0)
+                            {
+                                @(",")
+                                @Model.Listlk[i].kurs[j].kurs_do
+
+                            }
+                            else
+                            {
+                                @Model.Listlk[i].kurs[j].kurs_do
+
+                            }
+
+
+                        }
+                    <td>@Model.Listlk[i].FIO_ped</td>
+
+
                     <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
 
                 </tr>

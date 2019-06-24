@@ -52,14 +52,35 @@ namespace cdo.Controllers
                     prf: KeyDerivationPrf.HMACSHA1,
                     iterationCount: 10000,
                     numBytesRequested: 256 / 8));
-
+                string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
                 user user = await db.User.FirstOrDefaultAsync(u => u.login == model.Email && u.pass == hashed);
                 if (user != null)
                 {
+                    auth_date pole = new auth_date();
+
+                    pole.login = user.login;
+                    pole.date = DateTime.Now;
+                    pole.autorizing = 1;
+                    pole.ip = remoteIpAddress;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+
                     await Authenticate(model.Email); // аутентификация
 
                     return RedirectToAction("Lk", "Lk", new { id = user.id });
+                }
+                else
+                {
+                    auth_date pole = new auth_date();
+                    pole.login = model.Email;
+                    pole.date = DateTime.Now;
+                    pole.autorizing = 0;
+                    pole.ip = remoteIpAddress;
+                    db.Entry(pole).State = EntityState.Added;
+                    db.SaveChanges();
+
                 }
 
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -112,8 +133,22 @@ namespace cdo.Controllers
 
                     await db.User.FirstOrDefaultAsync(u => u.login == model.Email);
                     user = await db.User.FirstOrDefaultAsync(u => u.login == model.Email);
+
+
+
+
+
+
+
+
                     return RedirectToAction("Lk", "Lk", new { id = user.id });
+
+
+
+
+
                 }
+
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
@@ -123,20 +158,52 @@ namespace cdo.Controllers
 
         private async Task Authenticate(string userName)
         {
-            // создаем один claim
-            var claims = new List<Claim>
+
+            //CompositeModel compositeModel=new CompositeModel(db);
+            string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+
+            ViewData["Message"] = remoteIpAddress;
+            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+            {
+
+
+
+
+
+                // создаем один claim
+                var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+                // создаем объект ClaimsIdentity
+                ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
+                // установка аутентификационных куки
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+            }
+
+
+
+
+
         }
+
+
 
         public async Task<IActionResult> Logout()
         {
+
+            string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            auth_date pole = new auth_date();
+
+            pole.login = HttpContext.User.Identity.Name;
+            pole.date = DateTime.Now;
+            pole.autorizing = 2;
+            pole.ip = remoteIpAddress;
+            db.Entry(pole).State = EntityState.Added;
+
+            db.SaveChanges();
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }

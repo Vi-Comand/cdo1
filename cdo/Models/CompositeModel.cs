@@ -92,7 +92,7 @@ namespace cdo.Models
         public string diagn { get; set; }
         public string prik_o_zach_n { get; set; }
         public DateTime prik_o_zach_d { get; set; }
-
+        public string FIO_ped { get; set; }
         public int id_tel { get; set; }
         public string tip_kompl { get; set; }
         public string status { get; set; }
@@ -108,7 +108,15 @@ namespace cdo.Models
 
     }
 
+    public class auth_date
+    {
+        public int id { get; set; }
+        public string login { get; set; }
+        public DateTime date { get; set; }
+        public int autorizing { get; set; }
+        public string ip { get; set; }
 
+    }
 
     public class user
     {
@@ -167,6 +175,7 @@ namespace cdo.Models
         public DateTime data_ust_o { get; set; }
         public string kompl { get; set; }
         public string inter { get; set; }
+        public DateTime date_inter { get; set; }
         public string skype_l { get; set; }
         public string skype_p { get; set; }
         public string star_inv { get; set; }
