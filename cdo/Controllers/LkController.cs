@@ -20,53 +20,170 @@ namespace cdo.Controllers
 
 
 
-            ListLK list = new ListLK();
+
             var login = HttpContext.User.Identity.Name;
             int role = db.User.Where(p => p.login == login).First().role;
-            list.Listlk = (from main in db.Main
-
-                           join mo in db.Mo on main.id_mo equals mo.Id into mo
-                           from m in mo.DefaultIfEmpty()
-                           join ist in db.Ist on main.id_f equals ist.id into ist
-                           from f in ist.DefaultIfEmpty()
-                           join im in db.Ist on main.id_i equals im.id into im
-                           from i in im.DefaultIfEmpty()
-                           join ot in db.Ist on main.id_o equals ot.id into ot
-                           from o in ot.DefaultIfEmpty()
-                           join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
-                           from r in rod.DefaultIfEmpty()
-                           join add in db.Ist on main.id_adr_progiv equals add.id into add
-                           from a in add.DefaultIfEmpty()
-                           join to in db.To on main.id_to equals to.id into to
-                           from t in to.DefaultIfEmpty()
-
-                           select new LK
-                           {
-                               id = main.id,
-                               MO = (m == null ? String.Empty : m.name),
-                               fam = f.znach,
-                               ima = i.znach,
-                               otch = o.znach,
-                               data_roj = main.data_rojd,
-                               address_proj = a.znach,
-                               Fio_rod_zp = r.znach,
-                               inventr = t.nov_inv,
-                               prikaz = main.prik_o_zach_n,
-                               status = main.status
-
-                           }).ToList();
-
-            //CompositeModel compositeModel=new CompositeModel(db);
-            string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-            ViewData["Message"] = remoteIpAddress;
-            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+            if (role == 2)
             {
+                ListLK list = new ListLK();
+                list.Listlk = (from main in db.Main
+
+                               join mo in db.Mo on main.id_mo equals mo.Id into mo
+                               from m in mo.DefaultIfEmpty()
+                               join ist in db.Ist on main.id_f equals ist.id into ist
+                               from f in ist.DefaultIfEmpty()
+                               join tel in db.Ist on main.id_tel equals tel.id into tel
+                               from te in tel.DefaultIfEmpty()
+                               join im in db.Ist on main.id_i equals im.id into im
+                               from i in im.DefaultIfEmpty()
+                               join ot in db.Ist on main.id_o equals ot.id into ot
+                               from o in ot.DefaultIfEmpty()
+                               join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                               from r in rod.DefaultIfEmpty()
+                               join add in db.Ist on main.id_adr_progiv equals add.id into add
+                               from a in add.DefaultIfEmpty()
+                               join to in db.To on main.id_to equals to.id into to
+                               from t in to.DefaultIfEmpty()
+                               join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                               from ms in mse.DefaultIfEmpty()
+
+                               select new LKPP
+                               {
+                                   id = main.id,
+                                   inventr = t.nov_inv,
+                                   MO = (m == null ? String.Empty : m.name),
+                                   fam = f.znach,
+                                   ima = i.znach,
+                                   otch = o.znach,
+                                   data_roj = main.data_rojd,
+                                   address_proj = a.znach,
+                                   tel = te.znach,
+                                   Fio_rod_zp = r.znach,
+                                   diagn = main.diagn,
+                                   prikazd = main.prik_o_zach_d,
+                                   prikaz = main.prik_o_zach_n,
+                                   srok_mse = ms.znach,
+                                   klass = main.klass,
+                                   tip_kompl = main.tip_kompl,
+                                   status = main.status
+
+                               }).ToList();
                 return View("obch", list);
+
+            }
+            if (role == 3)
+            {
+
+                ListLK1 list = new ListLK1();
+                list.Listlk = (from main in db.Main
+
+                               join mo in db.Mo on main.id_mo equals mo.Id into mo
+                               from m in mo.DefaultIfEmpty()
+                               join ist in db.Ist on main.id_f equals ist.id into ist
+                               from f in ist.DefaultIfEmpty()
+                               join tel in db.Ist on main.id_tel equals tel.id into tel
+                               from te in tel.DefaultIfEmpty()
+                               join im in db.Ist on main.id_i equals im.id into im
+                               from i in im.DefaultIfEmpty()
+                               join ot in db.Ist on main.id_o equals ot.id into ot
+                               from o in ot.DefaultIfEmpty()
+                               join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                               from r in rod.DefaultIfEmpty()
+                               join add in db.Ist on main.id_adr_progiv equals add.id into add
+                               from a in add.DefaultIfEmpty()
+                               join to in db.To on main.id_to equals to.id into to
+                               from t in to.DefaultIfEmpty()
+                               join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                               from ms in mse.DefaultIfEmpty()
+                               join s_j in db.Ist on main.id_soh_jit equals s_j.id into s_j
+                               from sj in s_j.DefaultIfEmpty()
+                               join s_b in db.Ist on main.id_soh_baz equals s_b.id into s_b
+                               from sb in s_b.DefaultIfEmpty()
+                               select new LKUVR
+                               {
+                                   id = main.id,
+                                   inventr = t.nov_inv,
+                                   MO = (m == null ? String.Empty : m.name),
+                                   fam = f.znach,
+                                   ima = i.znach,
+                                   otch = o.znach,
+                                   data_roj = main.data_rojd,
+                                   address_proj = a.znach,
+                                   tel = te.znach,
+                                   Fio_rod_zp = r.znach,
+                                   klass = main.klass,
+                                   sch_jit = sj.znach,
+                                   sch_baz = sb.znach,
+                                   kurs = db.Kurs.Where(x => x.id_main == main.id).ToList(),
+                                   FIO_ped = main.FIO_ped
+                               }).ToList();
+                return View("LKUVR", list);
+
             }
             else
             {
-                return View("dost");
+                ListLK list = new ListLK();
+                list.Listlk = (from main in db.Main
+
+                               join mo in db.Mo on main.id_mo equals mo.Id into mo
+                               from m in mo.DefaultIfEmpty()
+                               join ist in db.Ist on main.id_f equals ist.id into ist
+                               from f in ist.DefaultIfEmpty()
+                               join tel in db.Ist on main.id_tel equals tel.id into tel
+                               from te in tel.DefaultIfEmpty()
+                               join im in db.Ist on main.id_i equals im.id into im
+                               from i in im.DefaultIfEmpty()
+                               join ot in db.Ist on main.id_o equals ot.id into ot
+                               from o in ot.DefaultIfEmpty()
+                               join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                               from r in rod.DefaultIfEmpty()
+                               join add in db.Ist on main.id_adr_progiv equals add.id into add
+                               from a in add.DefaultIfEmpty()
+                               join to in db.To on main.id_to equals to.id into to
+                               from t in to.DefaultIfEmpty()
+                               join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                               from ms in mse.DefaultIfEmpty()
+
+                               select new LKPP
+                               {
+                                   id = main.id,
+                                   inventr = t.nov_inv,
+                                   MO = (m == null ? String.Empty : m.name),
+                                   fam = f.znach,
+                                   ima = i.znach,
+                                   otch = o.znach,
+                                   data_roj = main.data_rojd,
+                                   address_proj = a.znach,
+                                   tel = te.znach,
+                                   Fio_rod_zp = r.znach,
+                                   diagn = main.diagn,
+                                   prikazd = main.prik_o_zach_d,
+                                   prikaz = main.prik_o_zach_n,
+                                   srok_mse = ms.znach,
+                                   klass = main.klass,
+                                   tip_kompl = main.tip_kompl,
+                                   status = main.status
+
+                               }).ToList();
+                return View("obch", list);
+
             }
+
+
+            //CompositeModel compositeModel=new CompositeModel(db);
+            string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+
+            /* ViewData["Message"] = remoteIpAddress;
+       if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+           /*{
+              return View("obch", list);
+          }
+          else
+          {
+              return View("dost");
+          }*/
+            return View("obch");
+
         }
         public IActionResult save(CompositeModel composit)
         {
@@ -87,6 +204,8 @@ namespace cdo.Controllers
             var login = HttpContext.User.Identity.Name;
             int id_user = db.User.Where(p => p.login == login).First().id;
             int role = db.User.Where(p => p.login == login).First().role;
+
+
             if (composit.fam != model.fam)
             {
 
@@ -295,6 +414,347 @@ namespace cdo.Controllers
             return Redirect("/Lk/Lk");
 
         }
+        public async Task<IActionResult> Sort(SortState sortOrder)
+        {
+
+
+
+
+            ListLK model = new ListLK();
+            model.Listlk = (from main in db.Main
+
+                            join mo in db.Mo on main.id_mo equals mo.Id into mo
+                            from m in mo.DefaultIfEmpty()
+                            join ist in db.Ist on main.id_f equals ist.id into ist
+                            from f in ist.DefaultIfEmpty()
+                            join tel in db.Ist on main.id_tel equals tel.id into tel
+                            from te in tel.DefaultIfEmpty()
+                            join im in db.Ist on main.id_i equals im.id into im
+                            from i in im.DefaultIfEmpty()
+                            join ot in db.Ist on main.id_o equals ot.id into ot
+                            from o in ot.DefaultIfEmpty()
+                            join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                            from r in rod.DefaultIfEmpty()
+                            join add in db.Ist on main.id_adr_progiv equals add.id into add
+                            from a in add.DefaultIfEmpty()
+                            join to in db.To on main.id_to equals to.id into to
+                            from t in to.DefaultIfEmpty()
+                            join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                            from ms in mse.DefaultIfEmpty()
+
+                            select new LKPP
+                            {
+                                id = main.id,
+                                inventr = t.nov_inv,
+                                MO = (m == null ? String.Empty : m.name),
+                                fam = f.znach,
+                                ima = i.znach,
+                                otch = o.znach,
+                                data_roj = main.data_rojd,
+                                address_proj = a.znach,
+                                tel = te.znach,
+                                Fio_rod_zp = r.znach,
+                                diagn = main.diagn,
+                                prikazd = main.prik_o_zach_d,
+                                prikaz = main.prik_o_zach_n,
+                                srok_mse = ms.znach,
+                                klass = main.klass,
+                                tip_kompl = main.tip_kompl,
+                                status = main.status
+
+                            }).ToList();
+
+            ViewData["Nom"] = sortOrder == SortState.NomAsc ? SortState.NomDesc : SortState.NomAsc;
+            ViewData["In"] = sortOrder == SortState.InAsc ? SortState.InDesc : SortState.InAsc;
+            ViewData["Mo"] = sortOrder == SortState.MoAsc ? SortState.MoDesc : SortState.MoAsc;
+            ViewData["F"] = sortOrder == SortState.FAsc ? SortState.FDesc : SortState.FAsc;
+            ViewData["I"] = sortOrder == SortState.IAsc ? SortState.IDesc : SortState.IAsc;
+            ViewData["O"] = sortOrder == SortState.OAsc ? SortState.ODesc : SortState.OAsc;
+            ViewData["DR"] = sortOrder == SortState.DRAsc ? SortState.DRDesc : SortState.DRAsc;
+
+            ViewData["Add_p"] = sortOrder == SortState.Add_pAsc ? SortState.Add_pDesc : SortState.Add_pAsc;
+            ViewData["D"] = sortOrder == SortState.DAsc ? SortState.DDesc : SortState.DAsc;
+            ViewData["MSE"] = sortOrder == SortState.MSEAsc ? SortState.MSEDesc : SortState.MSEAsc;
+            ViewData["Nom_p"] = sortOrder == SortState.Nom_pAsc ? SortState.Nom_pDesc : SortState.Nom_pAsc;
+            ViewData["Data_p"] = sortOrder == SortState.Data_pAsc ? SortState.Data_pDesc : SortState.Data_pAsc;
+            ViewData["Klass"] = sortOrder == SortState.KlassAsc ? SortState.KlassDesc : SortState.KlassAsc;
+            ViewData["Tip_kompl"] = sortOrder == SortState.Tip_komplAsc ? SortState.Tip_komplDesc : SortState.Tip_komplAsc;
+            ViewData["Status"] = sortOrder == SortState.StatusAsc ? SortState.StatusDesc : SortState.StatusAsc;
+            switch (sortOrder)
+            {
+                /* case "1":
+                     listotv.ListOtvetstvn = query.OrderBy(s => s.Id).ToList();
+                     break;*/
+
+
+                case SortState.NomAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.NomDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+
+
+
+                case SortState.InAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.InDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.MoAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.MoDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.FAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.FDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.IAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.IDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.OAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.ODesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.DRAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.DRDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Add_pAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Add_pDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.DAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.DDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.MSEAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.MSEDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Nom_pAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Nom_pDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Data_pAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Data_pDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.KlassAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.KlassDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Tip_komplAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Tip_komplDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.StatusAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.StatusDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+
+
+            }
+            return View("obch", model);
+        }
+        public async Task<IActionResult> Sort1(SortState sortOrder)
+        {
+
+
+
+
+            ListLK model = new ListLK();
+            model.Listlk = (from main in db.Main
+
+                            join mo in db.Mo on main.id_mo equals mo.Id into mo
+                            from m in mo.DefaultIfEmpty()
+                            join ist in db.Ist on main.id_f equals ist.id into ist
+                            from f in ist.DefaultIfEmpty()
+                            join tel in db.Ist on main.id_tel equals tel.id into tel
+                            from te in tel.DefaultIfEmpty()
+                            join im in db.Ist on main.id_i equals im.id into im
+                            from i in im.DefaultIfEmpty()
+                            join ot in db.Ist on main.id_o equals ot.id into ot
+                            from o in ot.DefaultIfEmpty()
+                            join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                            from r in rod.DefaultIfEmpty()
+                            join add in db.Ist on main.id_adr_progiv equals add.id into add
+                            from a in add.DefaultIfEmpty()
+                            join to in db.To on main.id_to equals to.id into to
+                            from t in to.DefaultIfEmpty()
+                            join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                            from ms in mse.DefaultIfEmpty()
+
+                            select new LKPP
+                            {
+                                id = main.id,
+                                inventr = t.nov_inv,
+                                MO = (m == null ? String.Empty : m.name),
+                                fam = f.znach,
+                                ima = i.znach,
+                                otch = o.znach,
+                                data_roj = main.data_rojd,
+                                address_proj = a.znach,
+                                tel = te.znach,
+                                Fio_rod_zp = r.znach,
+                                diagn = main.diagn,
+                                prikazd = main.prik_o_zach_d,
+                                prikaz = main.prik_o_zach_n,
+                                srok_mse = ms.znach,
+                                klass = main.klass,
+                                tip_kompl = main.tip_kompl,
+                                status = main.status
+
+                            }).ToList();
+
+            ViewData["Nom"] = sortOrder == SortState.NomAsc ? SortState.NomDesc : SortState.NomAsc;
+            ViewData["In"] = sortOrder == SortState.InAsc ? SortState.InDesc : SortState.InAsc;
+            ViewData["Mo"] = sortOrder == SortState.MoAsc ? SortState.MoDesc : SortState.MoAsc;
+            ViewData["F"] = sortOrder == SortState.FAsc ? SortState.FDesc : SortState.FAsc;
+            ViewData["I"] = sortOrder == SortState.IAsc ? SortState.IDesc : SortState.IAsc;
+            ViewData["O"] = sortOrder == SortState.OAsc ? SortState.ODesc : SortState.OAsc;
+            ViewData["DR"] = sortOrder == SortState.DRAsc ? SortState.DRDesc : SortState.DRAsc;
+
+            ViewData["Add_p"] = sortOrder == SortState.Add_pAsc ? SortState.Add_pDesc : SortState.Add_pAsc;
+            ViewData["D"] = sortOrder == SortState.DAsc ? SortState.DDesc : SortState.DAsc;
+            ViewData["MSE"] = sortOrder == SortState.MSEAsc ? SortState.MSEDesc : SortState.MSEAsc;
+            ViewData["Nom_p"] = sortOrder == SortState.Nom_pAsc ? SortState.Nom_pDesc : SortState.Nom_pAsc;
+            ViewData["Data_p"] = sortOrder == SortState.Data_pAsc ? SortState.Data_pDesc : SortState.Data_pAsc;
+            ViewData["Klass"] = sortOrder == SortState.KlassAsc ? SortState.KlassDesc : SortState.KlassAsc;
+            ViewData["Tip_kompl"] = sortOrder == SortState.Tip_komplAsc ? SortState.Tip_komplDesc : SortState.Tip_komplAsc;
+            ViewData["Status"] = sortOrder == SortState.StatusAsc ? SortState.StatusDesc : SortState.StatusAsc;
+            switch (sortOrder)
+            {
+                /* case "1":
+                     listotv.ListOtvetstvn = query.OrderBy(s => s.Id).ToList();
+                     break;*/
+
+
+                case SortState.NomAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.NomDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+
+
+                case SortState.InAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.InDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.MoAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.MoDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.FAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.FDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.IAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.IDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.OAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.ODesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.DRAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.DRDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Add_pAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Add_pDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.DAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.DDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.MSEAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.MSEDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Nom_pAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Nom_pDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Data_pAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Data_pDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.KlassAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.KlassDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.Tip_komplAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.Tip_komplDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+                case SortState.StatusAsc:
+                    model.Listlk = model.Listlk.OrderBy(s => s.id).ToList();
+                    break;
+                case SortState.StatusDesc:
+                    model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
+                    break;
+
+
+            }
+            return View("obch", model);
+        }
         public IActionResult kartochka(int id)
         {
             var login = HttpContext.User.Identity.Name;
@@ -362,6 +822,8 @@ namespace cdo.Controllers
                 try { model.tehot = db.To.Where(p => p.id == str.id_to).First(); } catch { }
                 try { model.urot = db.Uo.Find(str.id_uo); } catch { }
                 try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
+                try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+                try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
             }
             if (role == 4)
             {
@@ -402,17 +864,17 @@ namespace cdo.Controllers
             //try { model.urot = db.Uo.Find(str.id_uo); } catch { }
 
             string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-            ViewData["Message"] = remoteIpAddress;
-            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
-            {
-                return View("ZayavEdit", model);
+            /* ViewData["Message"] = remoteIpAddress;
+             if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14"|| remoteIpAddress == "::1")
+             {
+                 return View("ZayavEdit", model);
 
-            }
-            else
-            {
-                return View("dost");
-            }
-
+             }
+             else
+             {
+                 return View("dost");
+             }*/
+            return View("ZayavEdit", model);
         }
 
         public IActionResult Save_Kurs(CompositeModel compositeModel)
@@ -423,7 +885,7 @@ namespace cdo.Controllers
                 db.Entry(compositeModel.kursadd).State = EntityState.Added;
                 db.SaveChanges();
             }
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id+ "#j_kurs");
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
         }
 
         public IActionResult Save_Rem(CompositeModel compositeModel)
@@ -458,18 +920,16 @@ namespace cdo.Controllers
             }
             return Redirect("/Lk/kartochka?id=" + compositeModel.id);
         }
-
-        public async Task<IActionResult> Del_Kurs(CompositeModel compositeModel)
+        [Route("Lk/Del_Kurs")]
+        public async Task<IActionResult> Del_Kurs(int id, int id_main)
         {
-            var product = db.Kurs.Find(compositeModel.kursadd.id);
+            var product = db.Kurs.Find(id);
             if (product != null)
             {
                 db.Kurs.Remove(product);
                 await db.SaveChangesAsync();
-
             }
-            
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString() + "#j_kurs");
+            return Redirect("/Lk/kartochka?id=" + id_main);
         }
 
         public async Task<IActionResult> Del_Rem(CompositeModel compositeModel)
