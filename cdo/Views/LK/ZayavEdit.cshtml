@@ -280,79 +280,81 @@
 
         @*  }*@
 
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                <h4 class="panel-title" style="position: relative; padding:10px">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Сектор учебновоспитательной работы (УВР)
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <table>
-                        <tr>
-                            <td style="width: 30%;">Класс обучения</td>
-                            <td style="width: 70%;">
-                                <input type="text" asp-for="klass" />
+    <div class="panel panel-default">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title" style="position: relative; padding:10px">
+                <a run data-toggle="collapse in" data-parent="#accordion" href="#collapseOne">
+                    Сектор учебновоспитательной работы (УВР)
+                </a>
+            </h4>
+        </div> 
+     
+    <div id="collapseOne" class="panel-collapse collapse in show">
+       
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <td style="width: 30%;">Класс обучения</td>
+                        <td style="width: 70%;">
+                            <input type="text" asp-for="klass" />
+                        </td>
+                    </tr>
+                    @if (Model.role == 3 || Model.role == 2 || Model.role == 1)
+                    {
+                        <tr id="j_kurs">
+                            <td>Школа по месту жительства</td>
+                            <td>
+                                <input type="text" class="req" asp-for="soh_jit" />
+
                             </td>
                         </tr>
-                        @if (Model.role == 3 || Model.role == 2 || Model.role == 1)
-                        {
-                            <tr>
-                                <td>Школа по месту жительства</td>
-                                <td>
-                                    <input type="text" class="req" asp-for="soh_jit" />
+                        <tr>
+                            <td>Базовая школа</td>
+                            <td>
+                                <input type="text" class="req" asp-for="soh_baz" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+                @if (Model.role == 3 || Model.role == 1)
+                {
+                    <table>
+                        <tr>
+                            <td colspan="2">Курсы дополнительного образования</td>
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Базовая школа</td>
-                                <td>
-                                    <input type="text" class="req" asp-for="soh_baz" />
-                                </td>
-                            </tr>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <input type="text" asp-for="kursadd.kurs_do" placeholder="Добавить курс" />
+
+                            </td>
+                            <td>
+                                <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" asp-controller="Lk" asp-action="Save_Kurs"></button>
+                            </td>
+                        </tr>
+                        @if (Model.kursi != null)
+                        {
+                            for (int i = 0; i < Model.kursi.Count; i++)
+                            {
+
+                                <tr>
+                                    <td style="width: 90%;">
+                                        <input type="hidden" asp-for="kursi[i].id" value="@Model.kursi[i].id" />
+                                        <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
+                                    </td>
+                                    <td style="width: 20px;">
+                                        <button class="button_delq" style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ds" value="@Model.kursi[i].id" form="0"><strong></strong></button>
+                                    </td>
+                                </tr>
+
+                            }
                         }
                     </table>
-                    @if (Model.role == 3 || Model.role == 1)
-                    {
-                        <table>
-                            <tr>
-                                <td colspan="2">Курсы дополнительного образования</td>
-
-                            </tr>
-                            <tr>
-                                <td>
-
-                                    <input type="text" asp-for="kursadd.kurs_do" placeholder="Добавить курс" />
-
-                                </td>
-                                <td>
-                                    <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" asp-controller="Lk" asp-action="Save_Kurs"></button>
-                                </td>
-                            </tr>
-                            @if (Model.kursi != null)
-                            {
-                                for (int i = 0; i < Model.kursi.Count; i++)
-                                {
-
-                                    <tr>
-                                        <td style="width: 90%;">
-                                            <input type="hidden" asp-for="kursi[i].id" value="@Model.kursi[i].id" />
-                                            <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
-                                        </td>
-                                        <td style="width: 20px;">
-                                            <button class="button_delq" style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ds" value="@Model.kursi[i].id" form="0"><strong></strong></button>
-                                        </td>
-                                    </tr>
-
-                                }
-                            }
-                        </table>
-                    }
-                </div>
+                }
             </div>
         </div>
+    </div>
 
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">

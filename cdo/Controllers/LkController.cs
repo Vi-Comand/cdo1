@@ -59,7 +59,7 @@ namespace cdo.Controllers
             //CompositeModel compositeModel=new CompositeModel(db);
             string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             ViewData["Message"] = remoteIpAddress;
-            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" /*|| remoteIpAddress == "::1"*/)
+            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
             {
                 return View("obch", list);
             }
@@ -403,7 +403,7 @@ namespace cdo.Controllers
 
             string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             ViewData["Message"] = remoteIpAddress;
-            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14"/* || remoteIpAddress == "::1"*/)
+            if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
             {
                 return View("ZayavEdit", model);
 
@@ -423,7 +423,7 @@ namespace cdo.Controllers
                 db.Entry(compositeModel.kursadd).State = EntityState.Added;
                 db.SaveChanges();
             }
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id);
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id+ "#j_kurs");
         }
 
         public IActionResult Save_Rem(CompositeModel compositeModel)
@@ -466,8 +466,10 @@ namespace cdo.Controllers
             {
                 db.Kurs.Remove(product);
                 await db.SaveChangesAsync();
+
             }
-            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
+            
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString() + "#j_kurs");
         }
 
         public async Task<IActionResult> Del_Rem(CompositeModel compositeModel)
