@@ -55,7 +55,7 @@ namespace cdo.Controllers
                                    fam = f.znach,
                                    ima = i.znach,
                                    otch = o.znach,
-                                   data_roj = main.data_rojd,
+                                   data_roj = main.data_rojd.Date,
                                    address_proj = a.znach,
                                    tel = te.znach,
                                    Fio_rod_zp = r.znach,
@@ -154,7 +154,7 @@ namespace cdo.Controllers
                                    fam = f.znach,
                                    ima = i.znach,
                                    otch = o.znach,
-                                   data_roj = main.data_rojd,
+                                   data_roj = main.data_rojd.Date,
                                    address_proj = a.znach,
                                    tel = te.znach,
                                    Fio_rod_zp = r.znach,
@@ -426,9 +426,9 @@ namespace cdo.Controllers
                 if (f2.ToString() == "01.01.0001 0:00:00")
                     f2 = DateTime.Now;
                 if (f3.ToString() == "01.01.0001 0:00:00")
-                    f3 = DateTime.Now;
+                    f3 = (DateTime.Now).AddYears(5);
                 if (f4.ToString() == "01.01.0001 0:00:00")
-                    f4 = DateTime.Now;
+                    f4 = (DateTime.Now).AddYears(5);
 
                 if (f1 != null)
                     filtr.Filt.Add_proj = f1;

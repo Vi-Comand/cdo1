@@ -334,7 +334,7 @@
 
                     <td>@Model.Listlk[i].ima</td>
                     <td>@Model.Listlk[i].otch</td>
-                    <td>@Model.Listlk[i].data_roj</td>
+                    <td>@Model.Listlk[i].data_roj.ToShortDateString()</td>
 
                     <td>@Model.Listlk[i].address_proj</td>
                     <td>@Model.Listlk[i].tel</td>
@@ -342,7 +342,7 @@
                     <td>@Model.Listlk[i].diagn</td>
                     <td>@Model.Listlk[i].srok_mse</td>
                     <td>@Model.Listlk[i].prikaz</td>
-                    <td>@Model.Listlk[i].prikazd</td>
+                    <td>@Model.Listlk[i].prikazd.ToShortDateString()</td>
                     <td>@Model.Listlk[i].klass</td>
                     <td>@Model.Listlk[i].tip_kompl</td>
                     @if (Model.Filt.Status == null)
@@ -350,7 +350,7 @@
                         <td>@Model.Listlk[i].status</td>
                     }
 
-                     <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
 
                 </tr>
             }
