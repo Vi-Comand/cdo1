@@ -40,46 +40,21 @@ namespace cdo.Models
         Tip_komplAsc,
         Tip_komplDesc,
         StatusAsc,
-        StatusDesc
-
-
-
-
-    }
-
-    public enum SortStateUVR
-    {
-        NomAsc,    // по имени по возрастанию
-        NomDesc,
-        InAsc,
-        InDesc,// по имени по убыванию
-        MoAsc,
-        MoDesc,
-        FAsc,
-        FDesc,
-        IAsc,
-        IDesc,
-        OAsc,
-        ODesc,
-        DRAsc,
-        DRDesc,
-
-        Add_pAsc,
-        Add_pDesc,
-
-        KlassAsc,
-        KlassDesc,
-        SBAsc,
-        SBDesc,
-        SPAsc,
-        SPDesc,
-        FIO_pedAsc,
-        FIO_pedDesc,
-
+        StatusDesc,
+        BSAsc,
+        BSDesc,
+        MSAsc,
+        MSDesc,
+        Fio_pedAsc,
+        Fio_pedDesc
 
 
 
     }
+
+
+
+
 
 
 

@@ -8,6 +8,7 @@ namespace cdo.Models
 {
     public class ListLK : PageModel
     {
+        public Filters Filt { get; set; }
         public List<LKPP> Listlk { get; set; }
 
 
@@ -15,6 +16,7 @@ namespace cdo.Models
     }
     public class ListLK1 : PageModel
     {
+        public Filters Filt { get; set; }
         public List<LKUVR> Listlk { get; set; }
 
 

@@ -10,6 +10,8 @@
 <body>
 
     <form method="post" asp-controller="User" asp-action="Creat">
+
+        <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vse">все</button><button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Uch">Учащиеся</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Stud">Студент</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vibivsh">Выбывший</button>
         <h3>@ViewData["Message"]</h3>
 
         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Добавить запись</button>
@@ -31,31 +33,31 @@
                             <tr class="od">
                                 <td style="width: 30%;">№ ребенка</td>
                                 <td style="width: 70%;">
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.Nom" />
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>Фамилия (ребенка)</td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.F" />
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>Имя (ребенка)</td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.I" />
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>Отчество (ребенка)</td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.O" />
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>МО</td>
                                 <td>
-                                    <select id="napr" class="req" asp-for="Listlk[1].MO">
+                                    <select id="napr" class="req" asp-for="Filt.MO">
                                         <option value="">Выберите МО</option>
                                         <option value='1'>Анапа</option>
                                         <option value='2'>Армавир</option>
@@ -108,7 +110,7 @@
                             <tr class="od">
                                 <td>Дата рождения </td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].data_roj" id="data_roj">
+                                    <input type="text" asp-for="Filt.DatNachDR" id="data_roj">
                                     <script>
                                         dataN = new Date();
                                         //alert(dataN);
@@ -128,14 +130,16 @@
                                             });
                                         });
                                     </script>
-                                    <input type="text" asp-for="Listlk[1].data_roj" id="data_roj_do">
+                                    <input type="text" asp-for="Filt.DatKoncDR" id="data_roj_do">
                                     <script>
+                                        var timeInMs = Date.now();
                                         dataN = new Date();
                                         //alert(dataN);
                                         $(function () {
                                             $('#data_roj_do').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
+                                                "startDate": timeInMs,
                                                 "minDate": "01/01/1970",
                                                 "maxDate": dataN,
                                                 "autoApply": true,
@@ -155,21 +159,21 @@
                             <tr class="od">
                                 <td>Адрес проживания</td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.Add_proj" />
                                 </td>
                             </tr>
 
                             <tr class="od">
                                 <td>Телефон </td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.Tel" />
                                 </td>
                             </tr>
 
                             <tr class="od">
                                 <td>ФИО родителя – законного представителя</td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.Fio_rod" />
                                 </td>
                             </tr>
 
@@ -177,7 +181,7 @@
                             <tr class="pp">
                                 <td>Диагноз</td>
                                 <td>
-                                    <textarea rows=" 3 " cols=" 60 " asp-for="Listlk[1].MO"></textarea>
+                                    <textarea rows=" 3 " cols=" 60 " asp-for="Filt.Diagn"></textarea>
                                 </td>
                             </tr>
 
@@ -185,7 +189,7 @@
                                 <td>Срок действия справки МСЭ</td>
 
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].data_roj" id="d_sp" />
+                                    <input type="text" asp-for="Filt.DatNachSD" id="d_sp" />
                                     <script>
                                         $(function () {
                                             $('#d_sp').daterangepicker({
@@ -202,12 +206,14 @@
                                             });
                                         });
                                     </script>
-                                    <input type="text" asp-for="Listlk[1].data_roj" id="d_sp_do" />
+                                    <input type="text" asp-for="Filt.DatKoncSD" id="d_sp_do" />
                                     <script>
+
                                         $(function () {
                                             $('#d_sp_do').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
+                                                "startDate": timeInMs,
                                                 "minDate": "01/01/2000",
                                                 "autoApply": true,
                                                 "applyLabel": "Выбрать",
@@ -225,13 +231,13 @@
                             <tr class="od">
                                 <td>Приказ о зачислении</td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.prikaz" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Дата приказа о зачислении</td>
                                 <td>
-                                    От<input type="text" asp-for="Listlk[1].data_roj" id="d_pr_z" />
+                                    От<input type="text" asp-for="Filt.DatNachP" id="d_pr_z" />
                                     <script>
                                         $(function () {
                                             $('#d_pr_z').daterangepicker({
@@ -250,13 +256,16 @@
                                         });
                                     </script>
 
-                                    До<input type="text" asp-for="Listlk[1].data_roj" id="d_pr_z_do" />
+                                    До<input type="text" asp-for="Filt.DatKoncP" id="d_pr_z_do" />
                                     <script>
+
                                         $(function () {
                                             $('#d_pr_z_do').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
+                                                "startDate": timeInMs,
                                                 "minDate": "01/01/1970",
+                                                "DefaultDate": dataN,
                                                 "maxDate": dataN,
                                                 "autoApply": true,
                                                 "applyLabel": "Выбрать",
@@ -274,12 +283,12 @@
                             <tr>
                                 <td>Тип комплекта</td>
                                 <td>
-                                    <input type="text" asp-for="Listlk[1].MO" />
+                                    <input type="text" asp-for="Filt.tip_kompl" />
                                 </td>
                             </tr>
 
                         </table>
-                        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Фильтровать</button>
+                        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sort">Фильтровать</button>
                     </div>
                 </div>
             </div>
@@ -288,23 +297,26 @@
         <table id="lk">
             <tr>
 
-                <th> @Html.ActionLink("№", "Sort", "Lk", new { sortOrder = ViewBag.Nom }) </th>
-                <th> @Html.ActionLink("Инвентарный номер", "Sort", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("МО", "Sort", "Lk", new { sortOrder = ViewBag.Mo })</th>
-                <th> @Html.ActionLink("Фамилия", "Sort", "Lk", new { sortOrder = ViewBag.F })</th>
-                <th> @Html.ActionLink("Имя", "Sort", "Lk", new { sortOrder = ViewBag.I })</th>
-                <th> @Html.ActionLink("Отчество", "Sort", "Lk", new { sortOrder = ViewBag.O })</th>
-                <th> @Html.ActionLink("Дата рождения", "Sort", "Lk", new { sortOrder = ViewBag.DR })</th>
-                <th> @Html.ActionLink("Адрес проживания", "Sort", "Lk", new { sortOrder = ViewBag.Add_p })</th>
+                <th> @Html.ActionLink("№", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Nom }) </th>
+                <th> @Html.ActionLink("Инвентарный номер", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.In })</th>
+                <th> @Html.ActionLink("МО", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Mo })</th>
+                <th> @Html.ActionLink("Фамилия", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.F })</th>
+                <th> @Html.ActionLink("Имя", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.I })</th>
+                <th> @Html.ActionLink("Отчество", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.O })</th>
+                <th> @Html.ActionLink("Дата рождения", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.DR })</th>
+                <th> @Html.ActionLink("Адрес проживания", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Add_p })</th>
                 <th>Телефон</th>
                 <th>ФИО родителя ЗП</th>
-                <th> @Html.ActionLink("Диагноз", "Sort", "Lk", new { sortOrder = ViewBag.D })</th>
-                <th> @Html.ActionLink("МСЭ", "Sort", "Lk", new { sortOrder = ViewBag.MSE })</th>
-                <th> @Html.ActionLink("№ приказа", "Sort", "Lk", new { sortOrder = ViewBag.Nom_p })</th>
-                <th> @Html.ActionLink("Дата приказа", "Sort", "Lk", new { sortOrder = ViewBag.Data_p })</th>
-                <th> @Html.ActionLink("Класс", "Sort", "Lk", new { sortOrder = ViewBag.Klass })</th>
-                <th> @Html.ActionLink("Тип комплекта", "Sort", "Lk", new { sortOrder = ViewBag.Tip_kompl })</th>
-                <th> @Html.ActionLink("Статус", "Sort", "Lk", new { sortOrder = ViewBag.Status })</th>
+                <th> @Html.ActionLink("Диагноз", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.D })</th>
+                <th> @Html.ActionLink("МСЭ", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.MSE })</th>
+                <th> @Html.ActionLink("№ приказа", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Nom_p })</th>
+                <th> @Html.ActionLink("Дата приказа", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Data_p })</th>
+                <th> @Html.ActionLink("Класс", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Klass })</th>
+                <th> @Html.ActionLink("Тип комплекта", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Tip_kompl })</th>
+                @if (Model.Filt.Status == null)
+                {
+                    <th> @Html.ActionLink("Статус", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Status })</th>
+                }
                 <th colspan="2">Кнопки управления</th>
 
             </tr>
@@ -333,8 +345,12 @@
                     <td>@Model.Listlk[i].prikazd</td>
                     <td>@Model.Listlk[i].klass</td>
                     <td>@Model.Listlk[i].tip_kompl</td>
-                    <td>@Model.Listlk[i].status</td>
-                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
+                    @if (Model.Filt.Status == null)
+                    {
+                        <td>@Model.Listlk[i].status</td>
+                    }
+
+                     <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
 
                 </tr>
             }
