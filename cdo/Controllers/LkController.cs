@@ -170,22 +170,22 @@ namespace cdo.Controllers
                 return View("obch", list);
 
             }
+            /*
 
+                        //CompositeModel compositeModel=new CompositeModel(db);
+                        string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
-            //CompositeModel compositeModel=new CompositeModel(db);
-            string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-
-            /* ViewData["Message"] = remoteIpAddress;
-       if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
-           /*{
-              return View("obch", list);
-          }
-          else
-          {
-              return View("dost");
-          }*/
-            return View("obch");
-
+                        /* ViewData["Message"] = remoteIpAddress;
+                   if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
+                       /*{
+                          return View("obch", list);
+                      }
+                      else
+                      {
+                          return View("dost");
+                      }
+                        return View("obch");
+                        */
         }
         public IActionResult save(CompositeModel composit)
         {

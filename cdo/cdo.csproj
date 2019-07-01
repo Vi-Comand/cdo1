@@ -142,6 +142,9 @@
     <Content Update="Views\LK\LKUVR.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\LK\SkladEdit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\LK\ZayavEdit.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
