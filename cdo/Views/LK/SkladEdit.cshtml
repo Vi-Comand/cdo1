@@ -1,0 +1,146 @@
+﻿@using System.Linq
+
+@model cdo.Models.CompositeModel
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+    <title>Комплект</title>
+</head>
+<body>
+
+    <form method="post" id="formId" name="MainForm" onsubmit="return Check()" asp-controller="User" asp-action="ZayavSaveEdit">
+
+
+        <div class="panel-body">
+
+            <table>
+
+
+                <tr>
+                    <td style="width: 30%;">Наименование комплекта</td>
+                    <td style="width: 70%;">
+                        <input type="text" asp-for="tehot.nazv_komp" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Старый инвентарный номер </td>
+                    <td>
+                        <input type="text" asp-for="tehot.star_inv" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Новый инвентарный номер </td>
+                    <td>
+                        <input type="text" asp-for="tehot.nov_inv" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Балансовая стоимость</td>
+                    <td>
+                        <input type="text" asp-for="tehot.stoim" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Дата ввода в эксплотацию</td>
+                    <td>
+                        <input type="text" asp-for="tehot.data_vv" id="d_vv_e" />
+                        <script>
+                            $(function () {
+                                $('#d_vv_e').daterangepicker({
+                                    singleDatePicker: true,
+                                    showDropdowns: true,
+                                    "minDate": "01/01/1970",
+                                    "maxDate": dataN,
+                                    "autoApply": true,
+                                    "applyLabel": "Выбрать",
+                                    "cancelLabel": "Отменить",
+                                    locale: {
+                                        format: 'DD.MM.YYYY',
+                                        "firstDay": 1
+                                    }
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Дата установки комплекта</td>
+                    <td>
+                        <input type="text" asp-for="tehot.data_ust_o" id="d_ust_o" />
+                        <script>
+                            $(function () {
+                                $('#d_ust_o').daterangepicker({
+                                    singleDatePicker: true,
+                                    showDropdowns: true,
+                                    "minDate": "01/01/1970",
+                                    "maxDate": dataN,
+                                    "autoApply": true,
+                                    "applyLabel": "Выбрать",
+                                    "cancelLabel": "Отменить",
+                                    locale: {
+                                        format: 'DD.MM.YYYY',
+                                        "firstDay": 1
+                                    }
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Статус</td>
+                    <td>
+                        <select id="napr" asp-for="status" class="req">
+                            <option value='1'>На складе</option>
+                            <option value='0'>У учащихся</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Привязан</td>
+                    <td><input type="text" asp-for="tehot0.stoim" /></td>
+                    <td> <input type="submit" asp-controller="LK" asp-action="save" value="Привязать" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" /></td>
+                </tr>
+                <tr>
+                    <td>Притензия</td>
+                    <td><input type="text" asp-for="tehot.stoim" /></td>
+                </tr>
+                <tr>
+                    <td>Примечание</td>
+                    <td><input type="text" asp-for="tehot.stoim" /></td>
+                </tr>
+                <tr>
+                    <td>Дата возврата комплекта</td>
+                    <td>
+                        <input type="text" asp-for="tehot.data_vozvr_kompl" id="d_v_k" />
+                        <script>
+                            $(function () {
+                                $('#d_v_k').daterangepicker({
+                                    singleDatePicker: true,
+                                    showDropdowns: true,
+                                    "minDate": "01/01/1980",
+                                    "maxDate": dataN,
+                                    "autoApply": true,
+                                    "applyLabel": "Выбрать",
+                                    "cancelLabel": "Отменить",
+                                    locale: {
+                                        format: 'DD.MM.YYYY',
+                                        "firstDay": 1
+                                    }
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+
+            </table>
+            <input type="submit" asp-controller="LK" asp-action="save" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
+        </div>
+    </form>
+</body>
+</html>
