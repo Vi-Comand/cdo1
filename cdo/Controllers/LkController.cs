@@ -990,6 +990,92 @@ namespace cdo.Controllers
             // Add user model
             return Json(query.ToArray());
         }
+        public IActionResult IstI(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "i"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+        public IActionResult IstO(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "o"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+
+
+        public IActionResult IstAddP(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "adrp"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+        public IActionResult IstTel(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "tel"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+
+        public IActionResult IstFioR(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "fior"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+
+        public IActionResult IstFioZP(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "fiozp"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+
+
+        public IActionResult IstSDmse(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "srmse"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+
+        public IActionResult IstSbaz(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "sbaz"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+        public IActionResult IstSjit(int id)
+        {
+            var query = from t in db.Ist
+                        where t.id_main == id && t.kluch == "sjit"
+                        select new { t.znach, t.data_izm };
+            // Add user model
+            return Json(query.ToArray());
+        }
+
+
+
+
+
+
+
         public IActionResult Uch()
         {
             string Status = "учащийся";
