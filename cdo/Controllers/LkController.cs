@@ -30,6 +30,8 @@ namespace cdo.Controllers
 
                                join mo in db.Mo on main.id_mo equals mo.Id into mo
                                from m in mo.DefaultIfEmpty()
+                               join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
+                               from inv in inven.DefaultIfEmpty()
                                join ist in db.Ist on main.id_f equals ist.id into ist
                                from f in ist.DefaultIfEmpty()
                                join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -50,7 +52,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = t.nov_inv,
+                                   inventr = inv.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -80,6 +82,8 @@ namespace cdo.Controllers
 
                                join mo in db.Mo on main.id_mo equals mo.Id into mo
                                from m in mo.DefaultIfEmpty()
+                               join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
+                               from inv in inven.DefaultIfEmpty()
                                join ist in db.Ist on main.id_f equals ist.id into ist
                                from f in ist.DefaultIfEmpty()
                                join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -103,7 +107,7 @@ namespace cdo.Controllers
                                select new LKUVR
                                {
                                    id = main.id,
-                                   inventr = t.nov_inv,
+                                   inventr = inv.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -129,6 +133,8 @@ namespace cdo.Controllers
 
                                join mo in db.Mo on main.id_mo equals mo.Id into mo
                                from m in mo.DefaultIfEmpty()
+                               join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
+                               from inv in inven.DefaultIfEmpty()
                                join ist in db.Ist on main.id_f equals ist.id into ist
                                from f in ist.DefaultIfEmpty()
                                join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -149,7 +155,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = t.nov_inv,
+                                   inventr = inv.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -167,25 +173,11 @@ namespace cdo.Controllers
                                    status = main.status
 
                                }).ToList();
+                list.Filt = new Filters();
                 return View("obch", list);
 
             }
-            /*
 
-                        //CompositeModel compositeModel=new CompositeModel(db);
-                        string remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-
-                        /* ViewData["Message"] = remoteIpAddress;
-                   if (remoteIpAddress == "193.242.149.177" || remoteIpAddress == "193.242.149.14" || remoteIpAddress == "::1")
-                       /*{
-                          return View("obch", list);
-                      }
-                      else
-                      {
-                          return View("dost");
-                      }
-                        return View("obch");
-                        */
         }
         public IActionResult save(CompositeModel composit)
         {
@@ -476,6 +468,8 @@ namespace cdo.Controllers
 
                          join mo in db.Mo on main.id_mo equals mo.Id into mo
                          from m in mo.DefaultIfEmpty()
+                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
+                         from inv in inven.DefaultIfEmpty()
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -496,7 +490,7 @@ namespace cdo.Controllers
                          select new LKPP
                          {
                              id = main.id,
-                             inventr = t.nov_inv,
+                             inventr = inv.nov_inv,
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -763,6 +757,8 @@ namespace cdo.Controllers
 
                          join mo in db.Mo on main.id_mo equals mo.Id into mo
                          from m in mo.DefaultIfEmpty()
+                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
+                         from inv in inven.DefaultIfEmpty()
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -786,7 +782,7 @@ namespace cdo.Controllers
                          select new LKUVR
                          {
                              id = main.id,
-                             inventr = t.nov_inv,
+                             inventr = inv.nov_inv,
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -1128,7 +1124,7 @@ namespace cdo.Controllers
             try { model.status = str.status; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
             try { model.bvps = db.Bvp.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
-            try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
+            //     try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
             try { model.role = role; } catch { }
 
             if (role == 1)

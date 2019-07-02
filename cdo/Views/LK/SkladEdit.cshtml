@@ -25,31 +25,31 @@
                 <tr>
                     <td style="width: 30%;">Наименование комплекта</td>
                     <td style="width: 70%;">
-                        <input type="text" asp-for="tehot.nazv_komp" />
+                        <input type="text" asp-for="tehot.id" />
                     </td>
                 </tr>
                 <tr>
                     <td>Старый инвентарный номер </td>
                     <td>
-                        <input type="text" asp-for="tehot.star_inv" />
+                        <input type="text" asp-for="tehot.id" />
                     </td>
                 </tr>
                 <tr>
                     <td>Новый инвентарный номер </td>
                     <td>
-                        <input type="text" asp-for="tehot.nov_inv" />
+                        <input type="text" asp-for="tehot.id" />
                     </td>
                 </tr>
                 <tr>
                     <td>Балансовая стоимость</td>
                     <td>
-                        <input type="text" asp-for="tehot.stoim" />
+                        <input type="text" asp-for="tehot.id" />
                     </td>
                 </tr>
                 <tr>
                     <td>Дата ввода в эксплотацию</td>
                     <td>
-                        <input type="text" asp-for="tehot.data_vv" id="d_vv_e" />
+                        <input type="text" asp-for="tehot.id" id="d_vv_e" />
                         <script>
                             $(function () {
                                 $('#d_vv_e').daterangepicker({
@@ -72,7 +72,7 @@
                 <tr>
                     <td>Дата установки комплекта</td>
                     <td>
-                        <input type="text" asp-for="tehot.data_ust_o" id="d_ust_o" />
+                        <input type="text" asp-for="tehot.id" id="d_ust_o" />
                         <script>
                             $(function () {
                                 $('#d_ust_o').daterangepicker({
@@ -103,21 +103,21 @@
                 </tr>
                 <tr>
                     <td>Привязан</td>
-                    <td><input type="text" asp-for="tehot0.stoim" /></td>
+                    <td><input type="text" asp-for="tehot.id" /></td>
                     <td> <input type="submit" asp-controller="LK" asp-action="save" value="Привязать" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" /></td>
                 </tr>
                 <tr>
                     <td>Притензия</td>
-                    <td><input type="text" asp-for="tehot.stoim" /></td>
+                    <td><input type="text" asp-for="tehot.id" /></td>
                 </tr>
                 <tr>
                     <td>Примечание</td>
-                    <td><input type="text" asp-for="tehot.stoim" /></td>
+                    <td><input type="text" asp-for="tehot.id" /></td>
                 </tr>
                 <tr>
                     <td>Дата возврата комплекта</td>
                     <td>
-                        <input type="text" asp-for="tehot.data_vozvr_kompl" id="d_v_k" />
+                        <input type="text" asp-for="tehot.id" id="d_v_k" />
                         <script>
                             $(function () {
                                 $('#d_v_k').daterangepicker({

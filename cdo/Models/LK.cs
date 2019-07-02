@@ -31,7 +31,7 @@ namespace cdo.Models
         public DateTime data_roj { get; set; }
         public string address_proj { get; set; }
         public string Fio_rod_zp { get; set; }
-        public string inventr { get; set; }
+        public int inventr { get; set; }
         public string prikaz { get; set; }
         public DateTime prikazd { get; set; }
         public int klass { get; set; }
@@ -53,7 +53,7 @@ namespace cdo.Models
         public DateTime data_roj { get; set; }
         public string address_proj { get; set; }
         public string Fio_rod_zp { get; set; }
-        public string inventr { get; set; }
+        public int inventr { get; set; }
         public int klass { get; set; }
         public string sch_baz { get; set; }
         public string sch_jit { get; set; }
