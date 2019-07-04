@@ -592,25 +592,25 @@
                             <tr>
                                 <td style="width: 30%;">Наименование комплекта</td>
                                 <td style="width: 70%;">
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.nazv_komp" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.id" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Старый инвентарный номер </td>
                                 <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.star_inv" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.id" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Новый инвентарный номер </td>
                                 <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.nov_inv" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.id" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Балансовая стоимость</td>
                                 <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.stoim" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.id" />
                                 </td>
                             </tr>
                         }
@@ -619,7 +619,7 @@
                             <tr>
                                 <td>Дата установки комплекта</td>
                                 <td>
-                                    <input type="text" asp-for="tehot.data_ust_o" id="d_ust_o" />
+                                    <input type="text" asp-for="tehot.id" id="d_ust_o" />
                                     <script>
                                         $(function () {
                                             $('#d_ust_o').daterangepicker({
@@ -716,7 +716,7 @@
                                 <tr>
                                     <td>Дата возврата комплекта</td>
                                     <td>
-                                        <input type="text" asp-for="tehot.data_vozvr_kompl" id="d_v_k" />
+                                        <input type="text" asp-for="tehot.id" id="d_v_k" />
                                         <script>
                                             $(function () {
                                                 $('#d_v_k').daterangepicker({
@@ -880,7 +880,6 @@
 
                                     <input type="hidden" asp-for="internet[i].Id" />
                                     <input type="hidden" asp-for="internet[i].fio_prin_i" />
-                                    <input type="hidden" asp-for="internet[i].fio_vipol_i" />
                                     <div class="tab-pane fade " id="Int_@Model.internet[i].Id">
                                         <table>
                                             <tr>
@@ -938,12 +937,7 @@
                                                     </script>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>ФИО специалиста выполнившего заявку</td>
-                                                <td>
-                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.internet[i].fio_vipol_i" asp-for="internet[i].fio_vipol_i" />
-                                                </td>
-                                            </tr>
+
                                         </table>
                                     </div>
 
@@ -1046,7 +1040,7 @@
                                 <tr>
                                     <td style="width: 30%;">Инвентарный номер оборудования</td>
                                     <td style="width: 70%;">
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="" asp-for="tehot.nov_inv" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="" asp-for="tehot.id" />
                                     </td>
                                 </tr>
                                 @if (Model.role == 5 || Model.role == 1)
@@ -1497,12 +1491,7 @@
                                     </script>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>ФИО специалиста выполнившего заявку</td>
-                                <td>
-                                    <input type="text" value="" asp-for="intadd.fio_vipol_i" />
-                                </td>
-                            </tr>
+
 
 
                         </table>
