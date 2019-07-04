@@ -49,7 +49,7 @@
                 <tr>
                     <td>Дата ввода в эксплотацию</td>
                     <td>
-                        <input type="text" asp-for="tehot.data_vv" id="d_vv_e" />
+                        <input type="text" asp-for="tehot.data_ust_o" id="d_vv_e" />
                         <script>
                             $(function () {
                                 $('#d_vv_e').daterangepicker({
@@ -103,7 +103,7 @@
                 </tr>
                 <tr>
                     <td>Привязан</td>
-                    <td><input type="text" asp-for="tehot0.stoim" /></td>
+                    <td><input type="text" asp-for="tehot.stoim" /></td>
                     <td> <input type="submit" asp-controller="LK" asp-action="save" value="Привязать" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" /></td>
                 </tr>
                 <tr>

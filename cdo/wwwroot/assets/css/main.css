@@ -2059,8 +2059,9 @@ textarea {
 }
 
 /*Checkboxes styles*/
+
 input[type="checkbox"] {
-    display: none;
+    /*display: none;*/
 }
 
     input[type="checkbox"] + label {

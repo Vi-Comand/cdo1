@@ -34,9 +34,10 @@
                                 <td style="width: 30%;">№ ребенка</td>
                                 <td style="width: 10%;"></td>
                                 <td style="width: 60%;">
-                                    <input type="text" asp-for="id" />
+                                    <input type="text" asp-for="id" readonly />
                                 </td>
                             </tr>
+
                             <tr class="od">
                                 <td>
                                     Фамилия (ребенка)
@@ -45,30 +46,56 @@
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="fam" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="fam" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.fam" asp-for="fam" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.fam" asp-for="fam" />
+                                    }
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>
                                     Имя (ребенка)
+                                </td>
+                                <td>
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="ima" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="ima" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.ima" asp-for="ima" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.ima" asp-for="ima" />
+                                    }
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>
                                     Отчество (ребенка)
+                                </td>
+                                <td>
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="otch" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="otch" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.otch" asp-for="otch" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.otch" asp-for="otch" />
+                                    }
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>МО</td>
+                                <td colspan="2">МО</td>
                                 <td>
+
                                     <select id="napr" class="req" asp-for="MO">
                                         <option value="">Выберите МО</option>
                                         <option value='1'>Анапа</option>
@@ -120,16 +147,28 @@
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Дата рождения </td>
+                                <td colspan="2">Дата рождения </td>
                                 <td>
-                                    <input type="text" asp-for="data_roj" id="data_roj">
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" asp-for="data_roj" readonly>
+                                    }
+                                    else
+                                    {
+                                        <input type="text" asp-for="data_roj" id="data_rojq">
+                                    }
                                     <script>
-                                        dataN = new Date();
+                                        /* dataq = new Date();
+                                         dataq = [dataq.getDate(), dataq.getMonth() + 1, dataq.getFullYear() + 10];
+
+                                         dataw = new Date();
+                                         dataw.setDate(dataw.getFullYear() + 20);*/
                                         //alert(dataN);
                                         $(function () {
-                                            $('#data_roj').daterangepicker({
+                                            $('#data_rojq').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
+
                                                 "minDate": "01/01/1970",
                                                 "maxDate": dataN,
                                                 "autoApply": true,
@@ -149,77 +188,137 @@
                             <tr class="od">
                                 <td>
                                     Адрес проживания
+                                </td>
+                                <td>
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="addp" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="address_proj" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" asp-for="address_proj" data-toggle="tooltip" data-placement="top" title="@Model.address_proj" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" asp-for="address_proj" data-toggle="tooltip" data-placement="top" title="@Model.address_proj" />
+                                    }
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>
                                     Адрес регистрации
+                                </td>
+                                <td>
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="addr" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="address_reg" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.address_reg" asp-for="address_reg" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.address_reg" asp-for="address_reg" />
+                                    }
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>
                                     Телефон
+                                </td>
+                                <td>
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="tel" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="tel" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.tel" asp-for="tel" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.tel" asp-for="tel" />
+                                    }
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>
                                     ФИО родителя
+                                </td>
+                                <td>
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="fior" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="Fio_rod" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.Fio_rod" asp-for="Fio_rod" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.Fio_rod" asp-for="Fio_rod" />
+                                    }
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>
                                     ФИО родителя – законного представителя
+                                </td>
+                                <td>
                                     <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="fiozp" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="Fio_rod_zp" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.Fio_rod_zp" asp-for="Fio_rod_zp" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.Fio_rod_zp" asp-for="Fio_rod_zp" />
+                                    }
                                 </td>
                             </tr>
                             <tr>
 
-                                <td>Информация о статусе обучающегося</td>
+                                <td colspan="2">Информация о статусе обучающегося</td>
                                 <td>
-                                    <select id="napr" asp-for="status" class="req">
-                                        <option value="">Выберите статус</option>
-                                        <option value='учащийся'>учащийся</option>
-                                        <option value='студент'>студент</option>
-                                        <option value='выбывший'>выбывший</option>
-                                    </select>
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" id="napr" asp-for="status" readonly>
+                                    }
+                                    else
+                                    {
+                                        <select id="napr" asp-for="status" class="req">
+                                            <option value="">Выберите статус</option>
+                                            <option value='учащийся'>учащийся</option>
+                                            <option value='студент'>студент</option>
+                                            <option value='выбывший'>выбывший</option>
+                                        </select>
+                                    }
                                 </td>
                             </tr>
                             @if (Model.role == 2 || Model.role == 1)
                             {
-                                <tr class="pp">
-                                    <td>Диагноз</td>
+                                <tr>
+                                    <td colspan="2">Диагноз</td>
                                     <td>
                                         <textarea rows=" 3 " cols=" 60 " asp-for="diag"></textarea>
                                     </td>
                                 </tr>
 
-                                <tr class="pp">
+                                <tr>
                                     <td>
                                         Срок действия справки МСЭ
-                                        <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="sdmse" form="0"></button>
                                     </td>
-
                                     <td>
-                                        <input type="text" asp-for="data_sprav" id="d_sp" />
+                                        <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data - toggle="modal" data-target="#Ist" id="sdmse" form="0"></button>
+                                    </td>
+                                    <td>
+                                        @if (Model.role != 2 && Model.role != 1)
+                                        {
+                                            <input type="text" asp-for="data_sprav" readonly />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" asp-for="data_sprav" id="d_sp" />
+                                        }
                                         <script>
                                             $(function () {
                                                 $('#d_sp').daterangepicker({
@@ -229,27 +328,41 @@
                                                     "autoApply": true,
                                                     "applyLabel": "Выбрать",
                                                     "cancelLabel": "Отменить",
-                                                    locale: {
+                                                    locale:
+                                                    {
                                                         format: 'DD.MM.YYYY',
                                                         "firstDay": 1
                                                     }
                                                 });
                                             });
                                         </script>
-
                                     </td>
                                 </tr>
                             }
-                            <tr class="od">
-                                <td>Приказ о зачислении</td>
+                            <tr>
+                                <td colspan="2">Приказ о зачислении</td>
                                 <td>
-                                    <input type="text" asp-for="prikaz" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.prikaz" asp-for="prikaz" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.prikaz" asp-for="prikaz" />
+                                    }
                                 </td>
                             </tr>
                             <tr>
-                                <td>Дата приказа о зачислении</td>
+                                <td colspan="2">Дата приказа о зачислении</td>
                                 <td>
-                                    <input type="text" asp-for="prikaz_d" id="d_pr_z" />
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" asp-for="prikaz_d" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" asp-for="prikaz_d" id="d_pr_z" />
+                                    }
                                     <script>
                                         $(function () {
                                             $('#d_pr_z').daterangepicker({
@@ -272,9 +385,16 @@
                             @if (Model.role == 4 || Model.role == 2 || Model.role == 1)
                             {
                                 <tr>
-                                    <td>Тип комплекта</td>
+                                    <td colspan="2">Тип комплекта</td>
                                     <td>
-                                        <input type="text" asp-for="tip_kompl" />
+                                        @if (Model.role != 4 && Model.role != 2 && Model.role != 1)
+                                        {
+                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.tip_kompl" asp-for="tip_kompl" readonly />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.tip_kompl" asp-for="tip_kompl" />
+                                        }
                                     </td>
                                 </tr>
                             }
@@ -329,7 +449,7 @@
                 <div class="panel-body">
                     <table>
                         <tr>
-                            <td style="width: 30%;">Класс обучения</td>
+                            <td colspan="2" style="width: 30%;">Класс обучения</td>
                             <td style="width: 70%;">
                                 <input type="text" asp-for="klass" />
                             </td>
@@ -339,20 +459,50 @@
                             <tr id="j_kurs">
                                 <td>
                                     Школа по месту жительства
-                                    <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="sbaz" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" class="req" asp-for="soh_jit" />
-
+                                    <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="sjit" form="0"></button>
+                                </td>
+                                <td>
+                                    @if (Model.role != 3 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.soh_jit" asp-for="soh_jit" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.soh_jit" asp-for="soh_jit" />
+                                    }
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     Базовая школа
-                                    <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="sjit" form="0"></button>
                                 </td>
                                 <td>
-                                    <input type="text" class="req" asp-for="soh_baz" />
+                                    <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="sbaz" form="0"></button>
+                                </td>
+                                <td>
+                                    @if (Model.role != 3 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.soh_baz" asp-for="soh_baz" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.soh_baz" asp-for="soh_baz" />
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">ФИО педагога</td>
+                                <td>
+                                    @if (Model.role != 3 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.FIO_ped" asp-for="FIO_ped" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.FIO_ped" asp-for="FIO_ped" />
+                                    }
                                 </td>
                             </tr>
                         }
@@ -371,32 +521,51 @@
 
                                 </td>
                                 <td>
-                                    <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" asp-controller="Lk" asp-action="Save_Kurs"></button>
+                                    <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" asp-controller="Lk" asp-action="Save_Kurs"></button>
                                 </td>
                             </tr>
-                            @if (Model.kursi != null)
-                            {
-                                for (int i = 0; i < Model.kursi.Count; i++)
-                                {
-
-                                    <tr>
-                                        <td style="width: 90%;">
-                                            <input type="hidden" asp-for="kursi[i].id" value="@Model.kursi[i].id" />
-                                            <input type="text" asp-for="kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
-                                        </td>
-
-                                        <td style="width: 20px;">
-                                            <input class="button_delq" style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ds" type="button" onclick="javascript:window.location='Del_Kurs?id=@Model.kursi[i].id&id_main=@Model.id'" />
-                                            <button class="button_delq" style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ds" value="@Model.kursi[i].id" form="0"><strong></strong></button>
-                                        </td>
-                                    </tr>
-
-                                }
-                            }
                         </table>
+                        @if (Model.kursi != null)
+                        {
+                            <ul class="nav nav-tabs">
+                                @foreach (var pp in Model.kurs_per)
+                                {
+                                    <li>
+                                        <a href="#kurs_@pp.id" style="float: left;" data-toggle="tab">@pp.period</a>
+                                    </li>
+                                }
+                            </ul>
+                            <div class="tab-content">
+                                @for (int j = 0; j < Model.kurs_per.Count; j++)
+                                {
+                                    <div class="tab-pane fade " id="kurs_@Model.kurs_per[j].id">
+                                        <table>
+                                            @for (int i = 0; i < Model.kursi.Count; i++)
+                                            {
+                                                if (Model.kurs_per[j].period == Model.kursi[i].period)
+                                                {
+                                                    <tr>
+                                                        <td style="width: 90%;">
+                                                            <input type="hidden" asp-for="kursi[i].id" value="@Model.kursi[i].id" />
+                                                            <input type="text" asp-for="kursi[i].kurs_do" data-toggle="tooltip" data-placement="top" title="@Model.kursi[i].kurs_do" value="@Model.kursi[i].kurs_do" />
+                                                        </td>
+                                                        <td style="width: 20px;">
+                                                            <input class="button_delq" style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ds" type="button" onclick="javascript:window.location='Del_Kurs?id=@Model.kursi[i].id&id_main=@Model.id'" />
+                                                            @*<button class="button_delq" style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ds" value="@Model.kursi[i].id" form="0"><strong></strong></button>*@
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        }
+
                     }
                 </div>
             </div>
+
         </div>
 
         <div class="panel panel-default">
@@ -423,25 +592,25 @@
                             <tr>
                                 <td style="width: 30%;">Наименование комплекта</td>
                                 <td style="width: 70%;">
-                                    <input type="text" asp-for="tehot.nazv_komp" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.nazv_komp" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Старый инвентарный номер </td>
                                 <td>
-                                    <input type="text" asp-for="tehot.star_inv" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.star_inv" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Новый инвентарный номер </td>
                                 <td>
-                                    <input type="text" asp-for="tehot.nov_inv" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.nov_inv" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Балансовая стоимость</td>
                                 <td>
-                                    <input type="text" asp-for="tehot.stoim" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.stoim" />
                                 </td>
                             </tr>
                         }
@@ -476,7 +645,7 @@
                             <tr>
                                 <td>Комплектование </td>
                                 <td>
-                                    <input type="text" asp-for="tehot.kompl" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.kompl" />
                                 </td>
                             </tr>
                         }
@@ -490,7 +659,7 @@
                                 <tr>
                                     <td>Подключения  Интернета</td>
                                     <td>
-                                        <input type="text" asp-for="tehot.inter" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.inter" />
                                     </td>
                                 </tr>
                             }
@@ -531,7 +700,7 @@
                                     Скайп ребенка логин
                                 </td>
                                 <td>
-                                    <input type="text" asp-for="tehot.skype_l" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_l" />
                                 </td>
                             </tr>
                             <tr id="j_rem">
@@ -539,7 +708,7 @@
                                     Скайп ребенка пароль
                                 </td>
                                 <td id="j_int">
-                                    <input type="text" asp-for="tehot.skype_p" />
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_p" />
                                 </td>
                             </tr>
                             @if (Model.role != 3)
@@ -578,7 +747,7 @@
                                     Ремонт оборудования
                                 </td>
                                 <td style="width: 20px;">
-                                    <button style="background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#rem" form="0"></button>
+                                    <button style="background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#rem" form="0"></button>
                                 </td>
                             </tr>
                         </table>
@@ -633,13 +802,13 @@
                                             <tr>
                                                 <td>Причина неисправности</td>
                                                 <td>
-                                                    <input type="text" asp-for="remonti[i].prich_r" />
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.remonti[i].prich_r" asp-for="remonti[i].prich_r" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ФИО специалиста принявшего заявку</td>
                                                 <td>
-                                                    <input type="text" asp-for="remonti[i].fio_prin_r" />
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.remonti[i].fio_prin_r" asp-for="remonti[i].fio_prin_r" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -668,7 +837,7 @@
                                             <tr>
                                                 <td>ФИО специалиста выполнившего заявку</td>
                                                 <td>
-                                                    <input type="text" asp-for="remonti[i].fio_vipol_r" />
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.remonti[i].fio_vipol_r" asp-for="remonti[i].fio_vipol_r" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -687,7 +856,7 @@
                                     Проблемы с интернет соединением
                                 </td>
                                 <td style="width: 20px;">
-                                    <button style="background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#int" form="0"></button>
+                                    <button style="background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#int" form="0"></button>
                                 </td>
                             </tr>
                         </table>
@@ -742,7 +911,7 @@
                                             <tr>
                                                 <td>ФИО специалиста принявшего заявку</td>
                                                 <td>
-                                                    <input type="text" asp-for="internet[i].fio_prin_i" />
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.internet[i].fio_prin_i" asp-for="internet[i].fio_prin_i" />
                                                 </td>
                                             </tr>
 
@@ -772,7 +941,7 @@
                                             <tr>
                                                 <td>ФИО специалиста выполнившего заявку</td>
                                                 <td>
-                                                    <input type="text" asp-for="internet[i].fio_vipol_i" />
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.internet[i].fio_vipol_i" asp-for="internet[i].fio_vipol_i" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -791,7 +960,7 @@
             </div>
         </div>
 
-        @if (Model.role == 5 || Model.role == 2 || Model.role == 1)
+        @if (Model.role == 6 || Model.role == 5 || Model.role == 2 || Model.role == 1)
         {
             <div class="panel-group" id="accordion">
 
@@ -820,19 +989,19 @@
                                 <tr>
                                     <td style="width: 30%;">Номер</td>
                                     <td style="width: 70%;">
-                                        <input type="text" asp-for="urot.nom_p" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Серия</td>
                                     <td>
-                                        <input type="text" asp-for="urot.ser_p" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Код подразделения</td>
                                     <td>
-                                        <input type="text" asp-for="urot.kod_p" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -863,21 +1032,21 @@
                                 <tr>
                                     <td>Паспорт выдан</td>
                                     <td>
-                                        <input type="text" asp-for="urot.vidan_p" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.vidan_p" asp-for="urot.vidan_p" />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>Место регистрации</td>
                                     <td>
-                                        <input type="text" asp-for="urot.propis_p" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.propis_p" asp-for="urot.propis_p" />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td style="width: 30%;">Инвентарный номер оборудования</td>
                                     <td style="width: 70%;">
-                                        <input type="text" asp-for="tehot.nov_inv" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="" asp-for="tehot.nov_inv" />
                                     </td>
                                 </tr>
                                 @if (Model.role == 5 || Model.role == 1)
@@ -885,7 +1054,7 @@
                                     <tr>
                                         <td>Доп. соглашение к договору БВП</td>
                                         <td>
-                                            <input type="text" asp-for="urot.dop_sogl_bvp_n" />
+                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.dop_sogl_bvp_n" asp-for="urot.dop_sogl_bvp_n" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -916,7 +1085,7 @@
                                     <tr id="j_bvp">
                                         <td>Учет движения договора БВП</td>
                                         <td>
-                                            <input type="text" asp-for="dvig_dogov_bvp" />
+                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dvig_dogov_bvp" asp-for="dvig_dogov_bvp" />
                                         </td>
                                     </tr>
                                 }
@@ -978,7 +1147,7 @@
                                                     <tr>
                                                         <td>№ договора БВП</td>
                                                         <td>
-                                                            <input type="text" asp-for="bvps[i].nom_dog_bvp" />
+                                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.bvps[i].nom_dog_bvp" asp-for="bvps[i].nom_dog_bvp" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1056,7 +1225,7 @@
                                                 <tr>
                                                     <td>Документ-основание договора бвп</td>
                                                     <td>
-                                                        <input type="text" asp-for="bvps[i].prik_o_oborud" />
+                                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.bvps[i].prik_o_oborud" asp-for="bvps[i].prik_o_oborud" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1122,6 +1291,7 @@
 
 
         <script>
+
 
             $('#formId [type="submit"]').click(function () {
                 // выбираем все невидимые обязательные поля
@@ -1611,8 +1781,8 @@
     </div>
 
     <!-- Modal ist-->
-    <div class="modal fade bs-example-modal-sm" id="Ist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
+    <div class="modal fade bs-example-modal-lg" id="Ist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">История изменений</h4>
@@ -1647,7 +1817,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">' + query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1679,7 +1849,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">'+ query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1709,7 +1879,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">' +query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1739,7 +1909,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">' +query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1769,7 +1939,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">'+ query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1799,7 +1969,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">' +query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1829,7 +1999,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">'+ query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1859,7 +2029,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">'+ query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1889,7 +2059,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">'+ query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1919,7 +2089,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">'+ query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
@@ -1949,7 +2119,7 @@
                                         };
                                         for (i = 0; i < query.length; i++) {
                                             var data = new Date(query[i].data_izm);
-                                            tableArr.push('<tr><td>' + query[i].znach + '</td><td>' +  data.toLocaleString("ru", options) + '</td></tr>');
+                                            tableArr.push('<tr><td style="width: 60%;">'+ query[i].znach + '</td><td style="width: 40%">' +  data.toLocaleString("ru", options) + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')

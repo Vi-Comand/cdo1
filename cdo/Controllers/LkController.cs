@@ -50,7 +50,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = t.nov_inv,
+
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -103,12 +103,12 @@ namespace cdo.Controllers
                                select new LKUVR
                                {
                                    id = main.id,
-                                   inventr = t.nov_inv,
+                                   /*  inventr = t.nov_inv,*/
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
                                    otch = o.znach,
-                                   data_roj = main.data_rojd,
+                                   data_roj = main.data_rojd.Date,
                                    address_proj = a.znach,
                                    tel = te.znach,
                                    Fio_rod_zp = r.znach,
@@ -149,7 +149,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = t.nov_inv,
+
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -167,6 +167,7 @@ namespace cdo.Controllers
                                    status = main.status
 
                                }).ToList();
+                list.Filt = new Filters();
                 return View("obch", list);
 
             }
@@ -391,7 +392,7 @@ namespace cdo.Controllers
             str.diagn = composit.diag;
             str.id_mo = composit.MO;
             str.data_rojd = composit.data_roj;
-
+            str.FIO_ped = composit.FIO_ped;
 
             db.Entry(str).State = EntityState.Modified;
             db.SaveChanges();
@@ -501,7 +502,7 @@ namespace cdo.Controllers
                              fam = f.znach,
                              ima = i.znach,
                              otch = o.znach,
-                             data_roj = main.data_rojd,
+                             data_roj = main.data_rojd.Date,
                              address_proj = a.znach,
                              tel = te.znach,
                              Fio_rod_zp = r.znach,
@@ -791,7 +792,7 @@ namespace cdo.Controllers
                              fam = f.znach,
                              ima = i.znach,
                              otch = o.znach,
-                             data_roj = main.data_rojd,
+                             data_roj = main.data_rojd.Date,
                              address_proj = a.znach,
                              tel = te.znach,
                              Fio_rod_zp = r.znach,
@@ -1113,7 +1114,7 @@ namespace cdo.Controllers
             try { model.fam = db.Ist.Find(str.id_f).znach; } catch { }
             try { model.ima = db.Ist.Find(str.id_i).znach; } catch { }
             try { model.otch = db.Ist.Find(str.id_o).znach; } catch { }
-            try { model.data_roj = str.data_rojd; } catch { }
+            try { model.data_roj = str.data_rojd.Date; } catch { }
             try { model.address_proj = db.Ist.Find(str.id_adr_progiv).znach; } catch { }
             try { model.address_reg = db.Ist.Find(str.id_adr_reg).znach; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
@@ -1130,12 +1131,18 @@ namespace cdo.Controllers
             try { model.bvps = db.Bvp.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
             try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
             try { model.role = role; } catch { }
-
+            try { model.FIO_ped = str.FIO_ped; } catch { }
             if (role == 1)
             {
 
                 try { model.dvig_dogov_bvp = db.Ist.Find(model.urot.id_dvij_dog_bvp).znach; } catch { }
-                try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
+                try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).OrderByDescending(p => p.period).ToList(); } catch { }
+                try
+                {
+                    model.kurs_per = db.Kurs.Where(p => p.id_main == str.id).OrderBy(p => p.period).GroupBy(p => p.period).Select(x => x.First()).ToList();
+
+                }
+                catch { }
                 try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
                 try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
 
@@ -1171,6 +1178,12 @@ namespace cdo.Controllers
                 try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
                 try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
                 try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+                try
+                {
+                    model.kurs_per = db.Kurs.Where(p => p.id_main == str.id).OrderBy(p => p.period).GroupBy(p => p.period).Select(x => x.First()).ToList();
+
+                }
+                catch { }
             }
             if (role == 4)
             {
@@ -1226,9 +1239,18 @@ namespace cdo.Controllers
 
         public IActionResult Save_Kurs(CompositeModel compositeModel)
         {
+            int ye = DateTime.Now.Year;
             if (compositeModel.kursadd.kurs_do != null)
             {
                 compositeModel.kursadd.id_main = compositeModel.id;
+                if (DateTime.Now.Month > 8)
+                {
+                    compositeModel.kursadd.period = ye.ToString() + "-" + (ye + 1).ToString();
+                }
+                else
+                {
+                    compositeModel.kursadd.period = (ye - 1).ToString() + "-" + ye.ToString();
+                }
                 db.Entry(compositeModel.kursadd).State = EntityState.Added;
                 db.SaveChanges();
             }
