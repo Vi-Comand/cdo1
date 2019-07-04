@@ -104,7 +104,7 @@ namespace cdo.Models
         public int id_uo { get; set; }
         public DateTime data_sozd { get; set; }
         public DateTime data_izm { get; set; }
-
+        public int id_sklad { get; set; }
 
 
     }
@@ -172,17 +172,13 @@ namespace cdo.Models
     public class to
     {
         public int id { get; set; }
-        public string nazv_komp { get; set; }
-        public DateTime data_ust_o { get; set; }
+
         public string kompl { get; set; }
         public string inter { get; set; }
         public DateTime date_inter { get; set; }
         public string skype_l { get; set; }
         public string skype_p { get; set; }
-        public string star_inv { get; set; }
-        public string nov_inv { get; set; }
-        public string stoim { get; set; }
-        public DateTime data_vozvr_kompl { get; set; }
+
 
     }
 
@@ -195,6 +191,25 @@ namespace cdo.Models
         public DateTime data_v_r { get; set; }
         public string fio_prin_r { get; set; }
         public string fio_vipol_r { get; set; }
+        public string status_r { get; set; }
+        public string prim_r { get; set; }
+        public int zamena { get; set; }
+        public int viezd { get; set; }
+    }
+
+    public class sklad_to
+    {
+        public int Id { get; set; }
+        public string nazv_komp { get; set; }
+        public DateTime data_ust_o { get; set; }
+        public int star_inv { get; set; }
+        public int nov_inv { get; set; }
+        public DateTime data_vozvr_kompl { get; set; }
+        public DateTime data_vvoda_kompl { get; set; }
+        public string status { get; set; }
+        public string pritenz { get; set; }
+        public string prim { get; set; }
+
     }
 
     public class inter
@@ -204,7 +219,8 @@ namespace cdo.Models
         public DateTime data_z_i { get; set; }
         public string fio_prin_i { get; set; }
         public DateTime data_v_i { get; set; }
-        public string fio_vipol_i { get; set; }
+        public string zayav_neisp_i { get; set; }
+        public string prim_i { get; set; }
     }
 
     public class kurs

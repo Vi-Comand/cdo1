@@ -1,0 +1,329 @@
+﻿@model cdo.Models.ListLK3
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lk-user</title>
+</head>
+
+<body>
+
+    <form method="post" asp-controller="User" asp-action="Creat">
+        <h3>@ViewData["Message"]</h3>
+
+
+        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Lk">Люди</button>
+        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sklad">Склад</button>
+        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Inter">Интернет</button>
+        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Rem">Ремонт</button>
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                            Фильтры
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse0" class="collapse in ">
+                    <div class="panel-body">
+
+                        <table>
+                            <tr class="od">
+                                <td style="width: 30%;">№</td>
+                                <td style="width: 70%;">
+                                    <input type="text" asp-for="Filt.Nom" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Название комплекта</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Nazv_kompl" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Инвентарный номер</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.nov_inv" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Старый инвентарный номер</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.star_inv" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+
+                            <tr class="od">
+                                <td>Дата установки </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.DatNachU" id="data_u">
+                                    <script>
+                                        dataN = new Date();
+
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_u').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <input type="text" asp-for="Filt.DatKoncU" id="data_uk">
+                                    <script>
+
+                                        var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 10));
+
+                                        dataN = new Date();
+                                        $(function () {
+                                            $('#data_uk').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeIs,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": timeIs,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Дата возврата</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.DatNachV" id="data_v">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_v').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <input type="text" asp-for="Filt.DatKoncV" id="data_vk">
+                                    <script>
+                                        var timeInMs = Date.now();
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_vk').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeIs,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": timeIs,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Дата ввода </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.DatNachVV" id="data_vv">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_vv').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <input type="text" asp-for="Filt.DatKoncVV" id="data_vvk">
+                                    <script>
+                                        var timeInMs = Date.now();
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_vvk').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeIs,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": timeIs,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <input type="checkbox" asp-for="Filt.prim">Примечание
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" asp-for="Filt.pret"><label for="Filt.pret">Претензия</label>
+                                    <span asp-validation-for="Filt.pret" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Статус</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Status" />
+                                </td>
+                            </tr>
+
+
+
+                        </table>
+                        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sklad">Фильтровать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <table id="lk">
+            <tr>
+                <th> @Html.ActionLink("№", "Sort1", "Lk", new { sortOrder = ViewBag.Nom }) </th>
+                <th> @Html.ActionLink("Название комплекта", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
+                <th> @Html.ActionLink("Инвентарный номер", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
+                <th> @Html.ActionLink("Старый инвентарный номер", "Sort1", "Lk", new { sortOrder = ViewBag.Mo })</th>
+                <th> @Html.ActionLink("Дата установки", "Sort1", "Lk", new { sortOrder = ViewBag.F })</th>
+                <th> @Html.ActionLink("Дата возврата", "Sort1", "Lk", new { sortOrder = ViewBag.I })</th>
+                <th> @Html.ActionLink("Дата ввода", "Sort1", "Lk", new { sortOrder = ViewBag.O })</th>
+                <th> @Html.ActionLink("Статус", "Sort1", "Lk", new { sortOrder = ViewBag.Add_p })</th>
+                <th>Претензия</th>
+                <th>Примечание</th>
+
+
+
+
+                <th colspan="2">Кнопки управления</th>
+
+            </tr>
+
+            @for (int i = 0; i < Model.Listlk.Count; i++)
+            {
+
+                <tr>
+
+
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].sklad.Id">@Model.Listlk[i].sklad.Id</a> </td>
+                    <td>@Model.Listlk[i].sklad.nazv_komp</td>
+                    <td>@Model.Listlk[i].sklad.nov_inv</td>
+                    <td>@Model.Listlk[i].sklad.star_inv</td>
+
+                    <td>@Model.Listlk[i].sklad.data_ust_o</td>
+                    <td>@Model.Listlk[i].sklad.data_vozvr_kompl</td>
+
+                    <td>@Model.Listlk[i].sklad.data_vvoda_kompl</td>
+                    <td>@Model.Listlk[i].sklad.status</td>
+
+
+                    <td>@Model.Listlk[i].sklad.pritenz</td>
+                    <td>@Model.Listlk[i].sklad.prim</td>
+                    <td>@Model.Listlk[i].id_main</td>
+
+
+
+
+
+                    @*<td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>*@
+
+                </tr>
+            }
+        </table>
+
+    </form>
+</body>
+
+
+
+</html>
+
+<script>
+
+    var VAL = "Заявление на рассмотрении";
+    var VAL2 = "Дубль";
+    var VAL3 = "Ошибочное заявление";
+    var VAL4 = "Отказано АК в приеме заявления";
+    var VAL5 = "Заявление подлинное";
+    $(function () {
+        $("#lk tr").each(function () {
+            var textValue = $(this).closest('tr').find('td:eq(4)').text();
+            //  alert(textValue);
+            if (textValue == VAL) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(91, 243, 145, 0.15)');
+            }
+            if (textValue == VAL2) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL3) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL4) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL5) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(24, 239, 24, 0.36)');
+            }
+        });
+    });
+
+</script>
