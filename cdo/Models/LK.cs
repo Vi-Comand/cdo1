@@ -21,6 +21,40 @@ namespace cdo.Models
 
 
     }
+    public class ListLK2 : PageModel
+    {
+        public Filters Filt { get; set; }
+        public List<LKTO> Listlk { get; set; }
+
+
+    }
+    public class ListLK3 : PageModel
+    {
+        public FilterSklad Filt { get; set; }
+        public List<LKSKlad> Listlk { get; set; }
+
+
+    }
+    public class ListLK4 : PageModel
+    {
+        public Filters Filt { get; set; }
+        public List<inter> Listlk { get; set; }
+
+
+    }
+    public class ListLK5 : PageModel
+    {
+        public Filters Filt { get; set; }
+        public List<rem> Listlk { get; set; }
+
+
+    }
+    public class LKSKlad
+    {
+        public sklad_to sklad { get; set; }
+        public int id_main { get; set; }
+    }
+
     public class LKPP
     {
         public int id { get; set; }
@@ -74,6 +108,22 @@ namespace cdo.Models
         public string akt { get; set; }
         public string dop_sogl { get; set; }
         public string status { get; set; }
+
+    }
+    public class LKTO
+    {
+        public int id { get; set; }
+        public string MO { get; set; }
+        public string fam { get; set; }
+        public string ima { get; set; }
+        public string otch { get; set; }
+        public int inventr { get; set; }
+        public string tel { get; set; }
+        public string nazv_kompl { get; set; }
+        public string address_proj { get; set; }
+        public string Fio_rod_zp { get; set; }
+
+
 
     }
 }

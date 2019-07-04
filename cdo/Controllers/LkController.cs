@@ -126,6 +126,52 @@ namespace cdo.Controllers
                 return View("LKUVR", list);
 
             }
+            if (role == 4)
+            {
+
+                ListLK2 list = new ListLK2();
+                list.Listlk = (from main in db.Main
+
+                               join mo in db.Mo on main.id_mo equals mo.Id into mo
+                               from m in mo.DefaultIfEmpty()
+                               join inve in db.Sklad_to on main.id_sklad equals inve.Id into inven
+                               from inv in inven.DefaultIfEmpty()
+                               join ist in db.Ist on main.id_f equals ist.id into ist
+                               from f in ist.DefaultIfEmpty()
+                               join tel in db.Ist on main.id_tel equals tel.id into tel
+                               from te in tel.DefaultIfEmpty()
+                               join im in db.Ist on main.id_i equals im.id into im
+                               from i in im.DefaultIfEmpty()
+                               join ot in db.Ist on main.id_o equals ot.id into ot
+                               from o in ot.DefaultIfEmpty()
+                               join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                               from r in rod.DefaultIfEmpty()
+                               join add in db.Ist on main.id_adr_progiv equals add.id into add
+                               from a in add.DefaultIfEmpty()
+                               join to in db.To on main.id_to equals to.id into to
+                               from t in to.DefaultIfEmpty()
+
+
+                               select new LKTO
+                               {
+                                   id = main.id,
+                                   inventr = (inv == null ? 0 : inv.nov_inv),
+                                   nazv_kompl = inv.nazv_komp,
+                                   MO = (m == null ? String.Empty : m.name),
+                                   fam = f.znach,
+                                   ima = i.znach,
+                                   otch = o.znach,
+
+                                   address_proj = a.znach,
+                                   tel = te.znach,
+                                   Fio_rod_zp = r.znach,
+
+
+                               }).ToList();
+                list.Filt = new Filters();
+                return View("LKTO", list);
+
+            }
             else
             {
                 ListLK list = new ListLK();
@@ -177,6 +223,120 @@ namespace cdo.Controllers
                 return View("obch", list);
 
             }
+
+        }
+        public IActionResult Rem()
+        {
+            ListLK5 list = new ListLK5();
+            list.Listlk = db.Rem.ToList();
+            list.Filt = new Filters();
+            return View("LKRem", list);
+
+        }
+        public IActionResult Inter()
+        {
+            ListLK4 list = new ListLK4();
+            list.Listlk = db.Inter.ToList();
+            list.Filt = new Filters();
+            return View("LKInter", list);
+
+        }
+        public IActionResult Sklad(ListLK3 list)
+        {
+
+
+
+            var query = (from sk in db.Sklad_to
+
+                         join ma in db.Main on sk.Id equals ma.id_sklad into mo
+                         from m in mo.DefaultIfEmpty()
+
+                         select new LKSKlad
+                         {
+                             sklad = sk,
+                             id_main = (m == null ? 0 : m.id)
+
+                         });
+
+            if (list == null)
+                list = new ListLK3();
+
+            if (list.Filt == null)
+                list.Filt = new FilterSklad();
+            else
+            {
+                if (list.Filt.DatKoncU.ToString() == "01.01.0001 0:00:00")
+                { list.Filt.DatKoncU = DateTime.Now.AddYears(10); }
+                if (list.Filt.DatKoncV.ToString() == "01.01.0001 0:00:00")
+                { list.Filt.DatKoncV = DateTime.Now.AddYears(10); }
+                if (list.Filt.DatKoncVV.ToString() == "01.01.0001 0:00:00")
+                { list.Filt.DatKoncVV = DateTime.Now.AddYears(10); }
+
+
+
+                if (list.Filt.Nom != 0)
+                {
+                    query = query.Where(p => p.sklad.Id == list.Filt.Nom);
+
+
+                }
+                if (list.Filt.Nazv_kompl != null)
+                {
+                    query = from t in query
+                            where t.sklad.nazv_komp.Contains(list.Filt.Nazv_kompl)
+                            select t;
+
+                }
+                if (list.Filt.nov_inv != 0)
+                {
+                    query = query.Where(p => p.sklad.nov_inv == list.Filt.nov_inv);
+
+
+                }
+                if (list.Filt.star_inv != 0)
+                {
+                    query = from t in query
+                            where t.sklad.star_inv == list.Filt.star_inv
+                            select t;
+
+                }
+                if (list.Filt.Status != null)
+                {
+                    query = from t in query
+                            where t.sklad.status == list.Filt.Status
+                            select t;
+
+                }
+                if (list.Filt.prim == true)
+                {
+                    query = from t in query
+                            where t.sklad.prim != "" && t.sklad.prim != null
+                            select t;
+
+                }
+                if (list.Filt.pret == true)
+                {
+                    query = from t in query
+                            where t.sklad.pritenz != "" && t.sklad.pritenz != null
+                            select t;
+
+                }
+                if (list.Filt.DatNachU != null || list.Filt.DatKoncU != null)
+                    query = query.Where(p => p.sklad.data_ust_o >= list.Filt.DatNachU && p.sklad.data_ust_o <= list.Filt.DatKoncU);
+
+
+                if (list.Filt.DatNachV != null || list.Filt.DatKoncV != null)
+                    query = query.Where(p => p.sklad.data_vozvr_kompl >= list.Filt.DatNachV && p.sklad.data_vozvr_kompl <= list.Filt.DatKoncV);
+
+                if (list.Filt.DatNachVV != null || list.Filt.DatKoncVV != null)
+                    query = query.Where(p => p.sklad.data_vvoda_kompl >= list.Filt.DatNachVV && p.sklad.data_vvoda_kompl <= list.Filt.DatKoncVV);
+
+
+            }
+
+
+            list.Listlk = query.ToList();
+            return View("LKSklad", list);
 
         }
         public IActionResult save(CompositeModel composit)

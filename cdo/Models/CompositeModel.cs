@@ -203,8 +203,8 @@ namespace cdo.Models
         public DateTime data_ust_o { get; set; }
         public int star_inv { get; set; }
         public int nov_inv { get; set; }
-        public DateTime data_vovzvr_kompl { get; set; }
-        public DateTime data_vovoda_kompl { get; set; }
+        public DateTime data_vozvr_kompl { get; set; }
+        public DateTime data_vvoda_kompl { get; set; }
         public string status { get; set; }
         public string pritenz { get; set; }
         public string prim { get; set; }
@@ -219,7 +219,7 @@ namespace cdo.Models
         public string fio_prin_i { get; set; }
         public DateTime data_v_i { get; set; }
         public string zayav_neisp_i { get; set; }
-        public string prim { get; set; }
+        public string prim_i { get; set; }
     }
 
     public class kurs

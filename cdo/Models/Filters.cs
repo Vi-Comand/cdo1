@@ -33,5 +33,25 @@ namespace cdo.Models
         public string Fio_ped { get; set; }
         public string Status { get; set; }
     }
+    public class FilterSklad
+    {
+        public int Nom { get; set; }
+        public string Nazv_kompl { get; set; }
+        public int nov_inv { get; set; }
+        public int star_inv { get; set; }
+
+        public DateTime DatNachU { get; set; }
+        public DateTime DatKoncU { get; set; }
+
+        public DateTime DatNachV { get; set; }
+        public DateTime DatKoncV { get; set; }
+
+        public DateTime DatNachVV { get; set; }
+        public DateTime DatKoncVV { get; set; }
+        public bool prim { get; set; }
+        public bool pret { get; set; }
+        public string Status { get; set; }
+
+    }
 
 }
