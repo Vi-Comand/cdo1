@@ -1952,7 +1952,7 @@ label {
     display: block;
     font-size: 0.9em;
     font-weight: 600;
-    margin: 0 0 1em 0;
+    margin: 0.3em 0 0.3em 0;
 }
 
 input[type="text"],
@@ -2059,6 +2059,7 @@ textarea {
 }
 
 /*Checkboxes styles*/
+
 input[type="checkbox"] {
     /*display: none;*/
 }

@@ -45,11 +45,13 @@ namespace cdo.Models
         public inter intadd { get; set; }
         public bvp bvpadd { get; set; }
         public List<kurs> kursi { get; set; }
+        public List<kurs> kurs_per { get; set; }
         public List<inter> internet { get; set; }
         public List<rem> remonti { get; set; }
+        public sklad_to sklad { get; set; }
         //public string status { get; set; }
         public List<bvp> bvps { get; set; }
-
+        public string FIO_ped { get; set; }
 
 
 
@@ -203,6 +205,7 @@ namespace cdo.Models
         public DateTime data_ust_o { get; set; }
         public int star_inv { get; set; }
         public int nov_inv { get; set; }
+        public string stoim { get; set; }
         public DateTime data_vozvr_kompl { get; set; }
         public DateTime data_vvoda_kompl { get; set; }
         public string status { get; set; }
@@ -227,6 +230,7 @@ namespace cdo.Models
         public int id { get; set; }
         public int id_main { get; set; }
         public string kurs_do { get; set; }
+        public string period { get; set; }
     }
 
 

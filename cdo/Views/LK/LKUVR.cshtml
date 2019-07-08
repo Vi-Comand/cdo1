@@ -250,7 +250,7 @@
 
                     <td>@Model.Listlk[i].ima</td>
                     <td>@Model.Listlk[i].otch</td>
-                    <td>@Model.Listlk[i].data_roj</td>
+                    <td>@Model.Listlk[i].data_roj.ToShortDateString()</td>
 
                     <td>@Model.Listlk[i].address_proj</td>
                     <td>@Model.Listlk[i].tel</td>
@@ -266,7 +266,7 @@
                         {
                             @if (j != 0)
                             {
-                                @(",")
+                                @(", ")
                                 @Model.Listlk[i].kurs[j].kurs_do
 
                             }
