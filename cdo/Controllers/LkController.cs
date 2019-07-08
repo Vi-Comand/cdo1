@@ -225,19 +225,156 @@ namespace cdo.Controllers
             }
 
         }
-        public IActionResult Rem()
+        public IActionResult Rem(ListLK5 list)
         {
-            ListLK5 list = new ListLK5();
-            list.Listlk = db.Rem.ToList();
-            list.Filt = new Filters();
+
+            var query = (from remon in db.Rem
+
+                         join ma in db.Main on remon.id_to equals ma.id_to into mo
+                         from m in mo.DefaultIfEmpty()
+
+                         select new LKRem
+                         {
+                             rem = remon,
+                             id_main = (m == null ? 0 : m.id)
+
+                         });
+            if (list == null)
+                list = new ListLK5();
+
+            if (list.Filt == null)
+                list.Filt = new FilterRem();
+            else
+            {
+                if (list.Filt.DatKoncZ.ToString() == "01.01.0001 0:00:00")
+                { list.Filt.DatKoncZ = DateTime.Now.AddYears(10); }
+                if (list.Filt.DatKoncV.ToString() == "01.01.0001 0:00:00")
+                { list.Filt.DatKoncV = DateTime.Now.AddYears(10); }
+
+
+
+                if (list.Filt.Nom != 0)
+                {
+                    query = query.Where(p => p.rem.Id == list.Filt.Nom);
+
+
+                }
+
+                if (list.Filt.prim == true)
+                {
+                    query = from t in query
+                            where t.rem.prim_r != "" && t.rem.prim_r != null
+                            select t;
+
+                }
+                if (list.Filt.neisp == true)
+                {
+                    query = from t in query
+                            where t.rem.prich_r != "" && t.rem.prich_r != null
+                            select t;
+
+                }
+                if (list.Filt.zamena == true)
+                {
+                    query = from t in query
+                            where t.rem.zamena != 0
+                            select t;
+
+                }
+                if (list.Filt.viezd == true)
+                {
+                    query = from t in query
+                            where t.rem.viezd != 0
+                            select t;
+
+                }
+                if (list.Filt.DatNachZ != null || list.Filt.DatKoncZ != null)
+                    query = query.Where(p => p.rem.data_z_r >= list.Filt.DatNachZ && p.rem.data_z_r <= list.Filt.DatKoncZ);
+
+
+                if (list.Filt.DatNachV != null || list.Filt.DatKoncV != null)
+                    query = query.Where(p => p.rem.data_v_r >= list.Filt.DatNachV && p.rem.data_v_r <= list.Filt.DatKoncV);
+
+
+            }
+
+
+
+            list.Listlk = query.ToList();
             return View("LKRem", list);
 
         }
-        public IActionResult Inter()
+        public IActionResult Inter(ListLK4 list)
         {
-            ListLK4 list = new ListLK4();
-            list.Listlk = db.Inter.ToList();
-            list.Filt = new Filters();
+
+
+
+
+
+            var query = (from inter in db.Inter
+
+                         join ma in db.Main on inter.id_to equals ma.id_to into mo
+                         from m in mo.DefaultIfEmpty()
+
+                         select new LKInter
+                         {
+                             internet = inter,
+                             id_main = (m == null ? 0 : m.id)
+
+                         });
+
+
+
+
+            if (list == null)
+                list = new ListLK4();
+
+            if (list.Filt == null)
+                list.Filt = new FilterInter();
+            else
+            {
+                if (list.Filt.DatKoncZ.ToString() == "01.01.0001 0:00:00")
+                { list.Filt.DatKoncZ = DateTime.Now.AddYears(10); }
+                if (list.Filt.DatKoncV.ToString() == "01.01.0001 0:00:00")
+                { list.Filt.DatKoncV = DateTime.Now.AddYears(10); }
+
+
+
+                if (list.Filt.Nom != 0)
+                {
+                    query = query.Where(p => p.internet.Id == list.Filt.Nom);
+
+
+                }
+
+                if (list.Filt.prim == true)
+                {
+                    query = from t in query
+                            where t.internet.prim_i != "" && t.internet.prim_i != null
+                            select t;
+
+                }
+                if (list.Filt.neisp == true)
+                {
+                    query = from t in query
+                            where t.internet.zayav_neisp_i != "" && t.internet.zayav_neisp_i != null
+                            select t;
+
+                }
+                if (list.Filt.DatNachZ != null || list.Filt.DatKoncZ != null)
+                    query = query.Where(p => p.internet.data_z_i >= list.Filt.DatNachZ && p.internet.data_z_i <= list.Filt.DatKoncZ);
+
+
+                if (list.Filt.DatNachV != null || list.Filt.DatKoncV != null)
+                    query = query.Where(p => p.internet.data_v_i >= list.Filt.DatNachV && p.internet.data_v_i <= list.Filt.DatKoncV);
+
+
+            }
+
+
+
+            list.Listlk = query.ToList();
+
             return View("LKInter", list);
 
         }
