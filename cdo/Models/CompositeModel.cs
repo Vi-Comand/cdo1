@@ -27,7 +27,7 @@ namespace cdo.Models
         public string status { get; set; }
         public string inter { get; set; }
         public DateTime data_ust_oborud { get; set; }
-        public DateTime data_sprav { get; set; }
+        public string data_sprav { get; set; }
         public string prikaz { get; set; }
         public DateTime prikaz_d { get; set; }
         public int klass { get; set; }

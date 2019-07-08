@@ -30,8 +30,6 @@ namespace cdo.Controllers
 
                                join mo in db.Mo on main.id_mo equals mo.Id into mo
                                from m in mo.DefaultIfEmpty()
-                               join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
-                               from inv in inven.DefaultIfEmpty()
                                join ist in db.Ist on main.id_f equals ist.id into ist
                                from f in ist.DefaultIfEmpty()
                                join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -52,7 +50,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = inv.nov_inv,
+
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -120,7 +118,8 @@ namespace cdo.Controllers
                                    sch_jit = sj.znach,
                                    sch_baz = sb.znach,
                                    kurs = db.Kurs.Where(x => x.id_main == main.id).ToList(),
-                                   FIO_ped = main.FIO_ped
+                                   FIO_ped = main.FIO_ped,
+                                   status = main.status
                                }).ToList();
                 list.Filt = new Filters();
                 return View("LKUVR", list);
@@ -165,6 +164,7 @@ namespace cdo.Controllers
                                    address_proj = a.znach,
                                    tel = te.znach,
                                    Fio_rod_zp = r.znach,
+                                   tip_kompl = main.tip_kompl
 
 
                                }).ToList();
@@ -354,216 +354,249 @@ namespace cdo.Controllers
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
             try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
             try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
-            try { model.data_sprav = Convert.ToDateTime(db.Ist.Find(str.id_srok_mse).znach); } catch { }
+            try { model.data_sprav = db.Ist.Find(str.id_srok_mse).znach; } catch { }
             var login = HttpContext.User.Identity.Name;
             int id_user = db.User.Where(p => p.login == login).First().id;
             int role = db.User.Where(p => p.login == login).First().role;
 
-
-            if (composit.fam != model.fam)
+            if (role == 1 || role == 2)
             {
+                if (composit.fam != model.fam)
+                {
 
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "f";
-                pole.znach = composit.fam;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "f";
+                    pole.znach = composit.fam;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
 
-                db.SaveChanges();
-                str.id_f = pole.id;
+                    db.SaveChanges();
+                    str.id_f = pole.id;
+                }
+                if (composit.ima != model.ima)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "i";
+                    pole.znach = composit.ima;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_i = pole.id;
+                }
+
+
+                if (composit.otch != model.otch)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "o";
+                    pole.znach = composit.otch;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_o = pole.id;
+                }
+
+                if (composit.address_proj != model.address_proj)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "adrp";
+                    pole.znach = composit.address_proj;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_adr_progiv = pole.id;
+                }
+
+                if (composit.address_reg != model.address_reg)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "adrr";
+                    pole.znach = composit.address_reg;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_adr_reg = pole.id;
+                }
+
+                if (composit.tel != model.tel)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "tel";
+                    pole.znach = composit.tel;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_tel = pole.id;
+                }
+                if (composit.Fio_rod != model.Fio_rod)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "fior";
+                    pole.znach = composit.Fio_rod;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_fio_rod = pole.id;
+                }
+                if (composit.Fio_rod_zp != model.Fio_rod_zp)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "fiozp";
+                    pole.znach = composit.Fio_rod_zp;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_fio_rod_predst = pole.id;
+                }
+
+                if (composit.data_sprav != model.data_sprav)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "srmse";
+                    pole.znach = composit.data_sprav;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_srok_mse = pole.id;
+                }
+                str.prik_o_zach_d = composit.prikaz_d;
+                str.prik_o_zach_n = composit.prikaz;
+                str.status = composit.status;
+                str.tip_kompl = composit.tip_kompl;
+                str.diagn = composit.diag;
+                str.id_mo = composit.MO;
+                str.data_rojd = composit.data_roj;
             }
-            if (composit.ima != model.ima)
+            if (role == 1 || role == 3)
             {
+                if (composit.soh_jit != model.soh_jit)
+                {
 
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "i";
-                pole.znach = composit.ima;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "sjit";
+                    pole.znach = composit.soh_jit;
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    db.Entry(pole).State = EntityState.Added;
 
-                db.SaveChanges();
-                str.id_i = pole.id;
+                    db.SaveChanges();
+                    str.id_soh_jit = pole.id;
+                }
+
+                if (composit.soh_baz != model.soh_baz)
+                {
+
+                    ist pole = new ist();
+                    pole.id_main = composit.id;
+                    pole.id_user = id_user;
+                    pole.kluch = "sbaz";
+                    pole.role = role;
+                    pole.data_izm = DateTime.Now;
+                    pole.znach = composit.soh_baz;
+
+                    db.Entry(pole).State = EntityState.Added;
+
+                    db.SaveChanges();
+                    str.id_soh_baz = pole.id;
+                }
+                str.klass = composit.klass;
+                str.FIO_ped = composit.FIO_ped;
             }
 
 
-            if (composit.otch != model.otch)
-            {
 
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "o";
-                pole.znach = composit.otch;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
 
-                db.SaveChanges();
-                str.id_o = pole.id;
-            }
 
-            if (composit.address_proj != model.address_proj)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "adrp";
-                pole.znach = composit.address_proj;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_adr_progiv = pole.id;
-            }
-
-            if (composit.address_reg != model.address_reg)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "adrr";
-                pole.znach = composit.address_reg;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_adr_reg = pole.id;
-            }
-
-            if (composit.tel != model.tel)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "tel";
-                pole.znach = composit.tel;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_tel = pole.id;
-            }
-            if (composit.Fio_rod != model.Fio_rod)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "fior";
-                pole.znach = composit.Fio_rod;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_fio_rod = pole.id;
-            }
-            if (composit.Fio_rod_zp != model.Fio_rod_zp)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "fiozp";
-                pole.znach = composit.Fio_rod_zp;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_fio_rod_predst = pole.id;
-            }
-
-            if (composit.data_sprav != model.data_sprav)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "srmse";
-                pole.znach = composit.data_sprav.ToString();
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_srok_mse = pole.id;
-            }
-
-            if (composit.soh_jit != model.soh_jit)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "sjit";
-                pole.znach = composit.soh_jit;
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_soh_jit = pole.id;
-            }
-
-            if (composit.soh_baz != model.soh_baz)
-            {
-
-                ist pole = new ist();
-                pole.id_main = composit.id;
-                pole.id_user = id_user;
-                pole.kluch = "sbaz";
-                pole.role = role;
-                pole.data_izm = DateTime.Now;
-                pole.znach = composit.soh_baz;
-
-                db.Entry(pole).State = EntityState.Added;
-
-                db.SaveChanges();
-                str.id_soh_baz = pole.id;
-            }
-
-            str.klass = composit.klass;
-            str.prik_o_zach_d = composit.prikaz_d;
-            str.prik_o_zach_n = composit.prikaz;
-            str.status = composit.status;
-            str.tip_kompl = composit.tip_kompl;
-            str.diagn = composit.diag;
-            str.id_mo = composit.MO;
-            str.data_rojd = composit.data_roj;
-            str.FIO_ped = composit.FIO_ped;
 
             db.Entry(str).State = EntityState.Modified;
             db.SaveChanges();
-            if (composit.tehot != null)
+            if (role == 1 || role == 4)
             {
-                try
+                if (composit.tehot != null)
                 {
-                    db.Entry(composit.tehot).State = EntityState.Modified;
-                    db.SaveChanges();
+                    try
+                    {
+                        db.Entry(composit.tehot).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    catch { }
                 }
-                catch { }
+                if (composit.remonti != null)
+                {
+                    try
+                    {
+                        db.Entry(composit.remonti).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    catch { }
+                }
+                if (composit.inter != null)
+                {
+                    try
+                    {
+                        db.Entry(composit.inter).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    catch { }
+                }
+
             }
-            if (composit.urot != null)
+            if (role == 1 || role == 5)
             {
-                try
+                if (composit.urot != null)
                 {
-                    db.Entry(composit.urot).State = EntityState.Modified;
-                    db.SaveChanges();
+                    try
+                    {
+                        db.Entry(composit.urot).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    catch { }
                 }
-                catch { }
             }
             return Redirect("/Lk/Lk");
 
@@ -628,8 +661,7 @@ namespace cdo.Controllers
 
                          join mo in db.Mo on main.id_mo equals mo.Id into mo
                          from m in mo.DefaultIfEmpty()
-                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
-                         from inv in inven.DefaultIfEmpty()
+
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -650,7 +682,7 @@ namespace cdo.Controllers
                          select new LKPP
                          {
                              id = main.id,
-                             inventr = inv.nov_inv,
+
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -876,7 +908,8 @@ namespace cdo.Controllers
             if (filtr.Filt == null)
             {
                 filtr.Filt = new Filters();
-
+                if (f2.ToString() == "01.01.0001 0:00:00")
+                    f2 = DateTime.Now;
                 if (f1 != null)
                     filtr.Filt.Add_proj = f1;
                 if (f2 != null)
@@ -917,8 +950,7 @@ namespace cdo.Controllers
 
                          join mo in db.Mo on main.id_mo equals mo.Id into mo
                          from m in mo.DefaultIfEmpty()
-                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inven
-                         from inv in inven.DefaultIfEmpty()
+
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -942,7 +974,7 @@ namespace cdo.Controllers
                          select new LKUVR
                          {
                              id = main.id,
-                             inventr = inv.nov_inv,
+
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -1277,7 +1309,7 @@ namespace cdo.Controllers
             try { model.diag = str.diagn; } catch { }
             try { model.Fio_rod = db.Ist.Find(str.id_fio_rod).znach; } catch { }
             try { model.Fio_rod_zp = db.Ist.Find(str.id_fio_rod_predst).znach; } catch { }
-            try { model.data_sprav = Convert.ToDateTime(db.Ist.Find(str.id_srok_mse).znach); } catch { }
+            try { model.data_sprav = db.Ist.Find(str.id_srok_mse).znach.Replace(" 0:00:00", ""); } catch { }
             try { model.sklad = db.Sklad_to.Find(str.id_sklad); } catch { }
             try { model.prikaz = str.prik_o_zach_n; } catch { }
             try { model.prikaz_d = str.prik_o_zach_d; } catch { }
@@ -1316,7 +1348,7 @@ namespace cdo.Controllers
             if (role == 2)
             {
                 try { model.diag = str.diagn; } catch { }
-                try { model.data_sprav = Convert.ToDateTime(db.Ist.Find(str.id_srok_mse).znach); } catch { }
+                try { model.data_sprav = db.Ist.Find(str.id_srok_mse).znach.Replace(" 0:00:00", ""); } catch { }
                 try { model.tip_kompl = str.tip_kompl; } catch { }
                 try { model.soh_jit = db.Ist.Find(str.id_soh_jit).znach; } catch { }
                 try { model.soh_baz = db.Ist.Find(str.id_soh_baz).znach; } catch { }
@@ -1343,7 +1375,7 @@ namespace cdo.Controllers
             }
             if (role == 4)
             {
-
+                try { model.tip_kompl = str.tip_kompl; } catch { }
                 try { model.tehot = db.To.Find(str.id_to); } catch { }
                 try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
                 try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
