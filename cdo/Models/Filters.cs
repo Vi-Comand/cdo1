@@ -53,5 +53,41 @@ namespace cdo.Models
         public string Status { get; set; }
 
     }
+    public class FilterInter
+    {
+        public int Nom { get; set; }
+        public string FIO_prin { get; set; }
+
+
+        public DateTime DatNachZ { get; set; }
+        public DateTime DatKoncZ { get; set; }
+
+        public DateTime DatNachV { get; set; }
+        public DateTime DatKoncV { get; set; }
+
+
+        public bool prim { get; set; }
+        public bool neisp { get; set; }
+
+    }
+    public class FilterRem
+    {
+        public int Nom { get; set; }
+        public string FIO_prin { get; set; }
+        public string FIO_vipol { get; set; }
+        public string Status { get; set; }
+        public DateTime DatNachZ { get; set; }
+        public DateTime DatKoncZ { get; set; }
+
+        public DateTime DatNachV { get; set; }
+        public DateTime DatKoncV { get; set; }
+
+
+        public bool prim { get; set; }
+        public bool neisp { get; set; }
+        public bool zamena { get; set; }
+        public bool viezd { get; set; }
+
+    }
 
 }

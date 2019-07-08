@@ -37,17 +37,28 @@ namespace cdo.Models
     }
     public class ListLK4 : PageModel
     {
-        public Filters Filt { get; set; }
-        public List<inter> Listlk { get; set; }
+        public FilterInter Filt { get; set; }
+        public List<LKInter> Listlk { get; set; }
 
 
     }
     public class ListLK5 : PageModel
     {
-        public Filters Filt { get; set; }
-        public List<rem> Listlk { get; set; }
+        public FilterRem Filt { get; set; }
+        public List<LKRem> Listlk { get; set; }
 
 
+    }
+
+    public class LKInter
+    {
+        public inter internet { get; set; }
+        public int id_main { get; set; }
+    }
+    public class LKRem
+    {
+        public rem rem { get; set; }
+        public int id_main { get; set; }
     }
     public class LKSKlad
     {
