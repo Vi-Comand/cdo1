@@ -1346,6 +1346,58 @@ namespace cdo.Controllers
             // Add user model
             return Json(query.ToArray());
         }
+        public IActionResult SpisokToSkald()
+        {
+
+            var query = (from main in db.Main.Where(p => p.id_sklad == 0)
+
+                         join mo in db.Mo on main.id_mo equals mo.Id into mo
+                         from m in mo.DefaultIfEmpty()
+
+                         join ist in db.Ist on main.id_f equals ist.id into ist
+                         from f in ist.DefaultIfEmpty()
+                         join tel in db.Ist on main.id_tel equals tel.id into tel
+                         from te in tel.DefaultIfEmpty()
+                         join im in db.Ist on main.id_i equals im.id into im
+                         from i in im.DefaultIfEmpty()
+                         join ot in db.Ist on main.id_o equals ot.id into ot
+                         from o in ot.DefaultIfEmpty()
+                         join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                         from r in rod.DefaultIfEmpty()
+                         join add in db.Ist on main.id_adr_progiv equals add.id into add
+                         from a in add.DefaultIfEmpty()
+
+
+                         select new LKPP
+                         {
+                             id = main.id,
+
+                             MO = (m == null ? String.Empty : m.name),
+                             fam = f.znach,
+                             ima = i.znach,
+                             otch = o.znach,
+
+                             address_proj = a.znach,
+                             tel = te.znach,
+                             Fio_rod_zp = r.znach,
+                             status = main.status
+
+                         });
+
+
+            return Json(query.ToArray());
+        }
+        public IActionResult SvyazSkladToUser(int id, int id_s)
+        {
+            main str = db.Main.Find(id);
+            str.id_sklad = id_s;
+            db.Entry(str).State = EntityState.Modified;
+            db.SaveChanges();
+            // Add user model
+
+            return RedirectToAction("Sklad");
+        }
+
         public IActionResult IstO(int id)
         {
             var query = from t in db.Ist
