@@ -1397,7 +1397,29 @@ namespace cdo.Controllers
 
             return RedirectToAction("Sklad");
         }
+        public IActionResult NewKompl()
+        {
+            sklad_to str = new sklad_to();
+            db.Sklad_to.Add(str);
+            db.Entry(str).State = EntityState.Added;
 
+            db.SaveChanges();
+            // Add user model
+            sklad sklad = new sklad();
+            sklad.sk = str;
+
+            return View("SkladEdit", sklad);
+        }
+        public IActionResult SvyazSkladToUserDelete(int id)
+        {
+            main str = db.Main.Find(id);
+            str.id_sklad = 0;
+            db.Entry(str).State = EntityState.Modified;
+            db.SaveChanges();
+            // Add user model
+
+            return RedirectToAction("Sklad");
+        }
         public IActionResult IstO(int id)
         {
             var query = from t in db.Ist

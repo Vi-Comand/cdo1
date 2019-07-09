@@ -78,6 +78,11 @@ namespace cdo.Models
 
 
     }
+    public class sklad : PageModel
+    {
+        public sklad_to sk { get; set; }
+        public int id_main { get; set; }
+    }
     public class main
     {
         public int id { get; set; }
