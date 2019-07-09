@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace cdo.Models
 {
@@ -104,7 +104,7 @@ namespace cdo.Models
         public string sch_jit { get; set; }
         public List<kurs> kurs { get; set; }
         public string FIO_ped { get; set; }
-
+        public string status { get; set; }
 
     }
     public class LKUO
@@ -133,7 +133,7 @@ namespace cdo.Models
         public string nazv_kompl { get; set; }
         public string address_proj { get; set; }
         public string Fio_rod_zp { get; set; }
-
+        public string tip_kompl { get; set; }
 
 
     }
