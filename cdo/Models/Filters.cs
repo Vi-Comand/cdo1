@@ -19,7 +19,7 @@ namespace cdo.Models
         public DateTime DatKoncDR { get; set; }
         public string Add_proj { get; set; }
         public string Tel { get; set; }
-        public string Fio_rod { get; set; }
+        public string Fio_rod_zp { get; set; }
         public string Diagn { get; set; }
         public DateTime DatNachSD { get; set; }
         public DateTime DatKoncSD { get; set; }

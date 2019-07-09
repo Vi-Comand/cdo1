@@ -194,8 +194,8 @@ namespace cdo.Models
         public string fio_vipol_r { get; set; }
         public string status_r { get; set; }
         public string prim_r { get; set; }
-        public int zamena { get; set; }
-        public int viezd { get; set; }
+        public bool zamena { get; set; }
+        public bool viezd { get; set; }
     }
 
     public class sklad_to

@@ -210,14 +210,19 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="checkbox" asp-for="Filt.pret"><label for="Filt.pret">Претензия</label>
-                                    <span asp-validation-for="Filt.pret" />
+                                    <label>
+                                        <input type="checkbox" asp-for="Filt.pret">Претензия
+                                    </label>
                                 </td>
                             </tr>
                             <tr class="od">
                                 <td>Статус</td>
                                 <td>
-                                    <input type="text" asp-for="Filt.Status" />
+                                    <select id="st" asp-for="Filt.Status" class="req">
+                                        <option value="">Выберите статус</option>
+                                        <option value='на складе'>на складе</option>
+                                        <option value='назначен'>назначен</option>
+                                    </select>
                                 </td>
                             </tr>
 

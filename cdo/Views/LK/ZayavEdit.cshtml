@@ -312,7 +312,7 @@
                                         <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" id="sdmse" form="0"></button>
                                     </td>
                                     <td>
-                                        @if (Model.role != 3 && Model.role != 1)
+                                        @if (Model.role != 2 && Model.role != 1)
                                         {
                                             <input type="text" asp-for="data_sprav" readonly />
                                         }
@@ -924,20 +924,20 @@
                                             <tr>
                                                 <td>Статус</td>
                                                 <td>
-                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.remonti[i].fio_vipol_r" asp-for="remonti[i].fio_vipol_r" />
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.remonti[i].status_r" asp-for="remonti[i].status_r" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Примечания</td>
                                                 <td>
-                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.remonti[i].fio_vipol_r" asp-for="remonti[i].fio_vipol_r" />
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.remonti[i].prim_r" asp-for="remonti[i].prim_r" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Нужна замена</td>
                                                 <td>
                                                     <label>
-                                                        <input type="checkbox" />Нужна замена
+                                                        <input type="checkbox" asp-for="remonti[i].zamena" />Нужна замена
                                                     </label>
                                                 </td>
                                             </tr>
@@ -945,7 +945,7 @@
                                                 <td>Нужен выезд</td>
                                                 <td>
                                                     <label>
-                                                        <input type="checkbox" />Нужен выезд
+                                                        <input type="checkbox" asp-for="remonti[i].viezd" />Нужен выезд
                                                     </label>
                                                 </td>
                                             </tr>
@@ -1025,7 +1025,12 @@
                                                     <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.internet[i].fio_prin_i" asp-for="internet[i].fio_prin_i" />
                                                 </td>
                                             </tr>
-
+                                            <tr>
+                                                <td>Заявленная неисправность</td>
+                                                <td>
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.internet[i].zayav_neisp_i" asp-for="internet[i].zayav_neisp_i" />
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>Дата выполнения заявки</td>
                                                 <td>
@@ -1047,6 +1052,12 @@
                                                                         });
                                                                     });
                                                     </script>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Примечание</td>
+                                                <td>
+                                                    <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.internet[i].prim_i" asp-for="internet[i].prim_i" />
                                                 </td>
                                             </tr>
 
@@ -1462,6 +1473,8 @@
                         <input type="hidden" asp-for="tehot.id" />
                         <input type="hidden" asp-for="id" />
                         <table>
+
+
                             <tr>
                                 <td>Дата заявки на ремонт оборудования</td>
                                 <td>
@@ -1469,14 +1482,20 @@
                                     <script>
 
                                         $(function () {
+
                                             $('#md_z_r').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                "minDate": "01/01/2000", "maxDate": dataN,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "timePicker": true,
+                                                "timePicker24Hour": true,
 
-                                                autoApply: true,
+
                                                 locale: {
-                                                    format: 'DD.MM.YYYY',
+                                                    format: 'DD.MM.YYYY H:mm',
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
                                                     "firstDay": 1
                                                 }
                                             });
@@ -1503,17 +1522,29 @@
                                     <script>
 
                                         $(function () {
+
                                             $('#md_v_r').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                "minDate": "01/01/2000", "maxDate": dataN,
-
-                                                autoApply: true,
+                                                timePicker24Hour: false,
+                                                "minDate": "01/01/2000",
+                                                autoUpdateInput: false,
                                                 locale: {
                                                     format: 'DD.MM.YYYY',
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Очистить",
                                                     "firstDay": 1
                                                 }
                                             });
+
+                                            $('#md_v_i').on('apply.daterangepicker', function (ev, picker) {
+                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+                                            });
+
+                                            $('#md_v_i').on('cancel.daterangepicker', function (ev, picker) {
+                                                $(this).val('');
+                                            });
+
                                         });
                                     </script>
                                 </td>
@@ -1524,7 +1555,34 @@
                                     <input type="text" value="" asp-for="remadd.fio_vipol_r" />
                                 </td>
                             </tr>
-
+                            <tr>
+                                <td>Статус</td>
+                                <td>
+                                    <input type="text" asp-for="remadd.status_r" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Примечания</td>
+                                <td>
+                                    <input type="text" asp-for="remadd.prim_r" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Нужна замена</td>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" asp-for="remadd.zamena" />Нужна замена
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Нужен выезд</td>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" asp-for="remadd.viezd" />Нужен выезд
+                                    </label>
+                                </td>
+                            </tr>
 
                         </table>
 
@@ -1559,14 +1617,20 @@
                                     <script>
 
                                         $(function () {
+
                                             $('#md_z_i').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                "minDate": "01/01/2000", "maxDate": dataN,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "timePicker": true,
+                                                "timePicker24Hour": true,
 
-                                                autoApply: true,
+
                                                 locale: {
-                                                    format: 'DD.MM.YYYY',
+                                                    format: 'DD.MM.YYYY H:mm',
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
                                                     "firstDay": 1
                                                 }
                                             });
@@ -1582,28 +1646,51 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Заявленная неисправность</td>
+                                <td>
+                                    <input type="text" asp-for="intadd.zayav_neisp_i" />
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Дата выполнения заявки</td>
                                 <td>
                                     <input type="text" id="md_v_i" value="" asp-for="intadd.data_v_i" />
                                     <script>
 
                                         $(function () {
+
                                             $('#md_v_i').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                "minDate": "01/01/2000", "maxDate": dataN,
-
-                                                autoApply: true,
+                                                timePicker24Hour: false,
+                                                "minDate": "01/01/2000",
+                                                autoUpdateInput: false,
                                                 locale: {
                                                     format: 'DD.MM.YYYY',
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Очистить",
                                                     "firstDay": 1
                                                 }
                                             });
+
+                                            $('#md_v_i').on('apply.daterangepicker', function (ev, picker) {
+                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+                                            });
+
+                                            $('#md_v_i').on('cancel.daterangepicker', function (ev, picker) {
+                                                $(this).val('');
+                                            });
+
                                         });
                                     </script>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <td>Примечание</td>
+                                <td>
+                                    <input type="text" asp-for="intadd.prim_i" />
+                                </td>
+                            </tr>
 
 
                         </table>
@@ -1630,7 +1717,7 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" asp-for="id" />
-                        <input type="text" asp-for="urot.id" />
+                        <input type="hidden" asp-for="urot.id" />
                         <table>
                             <tr>
                                 <td>Дата установки оборудования</td>
@@ -1851,7 +1938,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить курс?</h4>
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись о интернете?</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <form method="post" enctype="multipart/form-data">

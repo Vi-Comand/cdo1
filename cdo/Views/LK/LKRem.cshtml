@@ -157,26 +157,24 @@
                             </tr>
 
                             <tr>
-                                <td>
-                                    <input type="checkbox" asp-for="Filt.prim">Примечание
+                                <td colspan="2">
+                                    <label><input type="checkbox" asp-for="Filt.prim">Примечание</label>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <input type="checkbox" asp-for="Filt.neisp"><label for="Filt.pret">Неисправность</label>
-                                    <span asp-validation-for="Filt.neisp" />
+                                <td colspan="2">
+                                    <label><input type="checkbox" asp-for="Filt.neisp">Неисправность</label>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>
-                                    <input type="checkbox" asp-for="Filt.zamena">Замена
+                                <td colspan="2">
+                                    <label><input type="checkbox" asp-for="Filt.zamena">Замена</label>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <input type="checkbox" asp-for="Filt.viezd"><label for="Filt.pret">Выезд</label>
-                                    <span asp-validation-for="Filt.viezd" />
+                                <td colspan="2">
+                                    <label><input type="checkbox" asp-for="Filt.viezd">Выезд</label>
                                 </td>
                             </tr>
 
@@ -216,7 +214,7 @@
                 <tr>
 
 
-                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].rem.Id">@Model.Listlk[i].rem.Id</a> </td>
+                    <td>@Model.Listlk[i].rem.Id </td>
                     <td>@Model.Listlk[i].rem.data_z_r</td>
                     <td>@Model.Listlk[i].rem.prich_r</td>
                     <td>@Model.Listlk[i].rem.data_v_r</td>

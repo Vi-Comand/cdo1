@@ -277,14 +277,14 @@ namespace cdo.Controllers
                 if (list.Filt.zamena == true)
                 {
                     query = from t in query
-                            where t.rem.zamena != 0
+                            where t.rem.zamena != false
                             select t;
 
                 }
                 if (list.Filt.viezd == true)
                 {
                     query = from t in query
-                            where t.rem.viezd != 0
+                            where t.rem.viezd != false
                             select t;
 
                 }
@@ -347,19 +347,26 @@ namespace cdo.Controllers
 
                 }
 
+                if (list.Filt.FIO_prin != null)
+                {
+                    query = from t in query
+                            where t.internet.Contains(list.Filt.FIO_prin)
+                            select t;
+
+                }
+
                 if (list.Filt.prim == true)
                 {
                     query = from t in query
                             where t.internet.prim_i != "" && t.internet.prim_i != null
                             select t;
-
                 }
+
                 if (list.Filt.neisp == true)
                 {
                     query = from t in query
                             where t.internet.zayav_neisp_i != "" && t.internet.zayav_neisp_i != null
                             select t;
-
                 }
                 if (list.Filt.DatNachZ != null || list.Filt.DatKoncZ != null)
                     query = query.Where(p => p.internet.data_z_i >= list.Filt.DatNachZ && p.internet.data_z_i <= list.Filt.DatKoncZ);
@@ -774,7 +781,7 @@ namespace cdo.Controllers
                     filtr.Filt.I = f10;
                 filtr.Filt.MO = f11;
                 if (f12 != null)
-                    filtr.Filt.Fio_rod = f12;
+                    filtr.Filt.Fio_rod_zp = f12;
                 filtr.Filt.Nom = f13;
                 if (f14 != null)
                     filtr.Filt.O = f14;
@@ -869,6 +876,14 @@ namespace cdo.Controllers
             {
                 query = from t in query
                         where t.otch.Contains(filtr.Filt.O)
+                        select t;
+
+            }
+
+            if (filtr.Filt.Fio_rod_zp != null)
+            {
+                query = from t in query
+                        where t.Fio_rod_zp.Contains(filtr.Filt.Fio_rod_zp)
                         select t;
 
             }
@@ -1063,7 +1078,7 @@ namespace cdo.Controllers
                     filtr.Filt.I = f10;
                 filtr.Filt.MO = f11;
                 if (f12 != null)
-                    filtr.Filt.Fio_rod = f12;
+                    filtr.Filt.Fio_rod_zp = f12;
                 filtr.Filt.Nom = f13;
                 if (f14 != null)
                     filtr.Filt.O = f14;
@@ -1151,6 +1166,14 @@ namespace cdo.Controllers
             {
                 query = from t in query
                         where t.otch.Contains(filtr.Filt.O)
+                        select t;
+
+            }
+
+            if (filtr.Filt.Fio_rod_zp != null)
+            {
+                query = from t in query
+                        where t.Fio_rod_zp.Contains(filtr.Filt.Fio_rod_zp)
                         select t;
 
             }
