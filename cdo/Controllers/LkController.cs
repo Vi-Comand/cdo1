@@ -955,17 +955,25 @@ namespace cdo.Controllers
                 {
                     try
                     {
-                        db.Entry(composit.remonti).State = EntityState.Modified;
-                        db.SaveChanges();
+                        foreach (rem row in composit.remonti)
+                        {
+                            db.Entry(row).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+
                     }
                     catch { }
                 }
-                if (composit.inter != null)
+                if (composit.internet != null)
                 {
                     try
                     {
-                        db.Entry(composit.inter).State = EntityState.Modified;
-                        db.SaveChanges();
+                        foreach (inter row in composit.internet)
+                        {
+                            db.Entry(row).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+
                     }
                     catch { }
                 }
@@ -2497,7 +2505,7 @@ namespace cdo.Controllers
                 try { model.tehot = db.To.Where(p => p.id == str.id_to).First(); } catch { }
                 try { model.urot = db.Uo.Find(str.id_uo); } catch { }
                 try { model.kursi = db.Kurs.Where(p => p.id_main == str.id).ToList(); } catch { }
-                try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
+                //  try { model.remonti = db.Rem.Where(p => p.id_to == str.id_to).ToList(); } catch { }
                 try { model.internet = db.Inter.Where(p => p.id_to == str.id_to).ToList(); } catch { }
                 try
                 {
