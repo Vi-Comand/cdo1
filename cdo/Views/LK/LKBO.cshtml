@@ -14,7 +14,6 @@
         <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vse">все</button><button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Uch">Учащиеся</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Stud">Студент</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vibivsh">Выбывший</button>
         <h3>@ViewData["Message"]</h3>
 
-        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Добавить запись</button>
 
         <div class="panel-group" id="accordion">
 
@@ -309,7 +308,7 @@
                     <th> @Html.ActionLink("Тип комплекта", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Tip_kompl })</th>
                     @if (Model.Filt.Status == null)
                     {
-                        <th> @Html.ActionLink("Статус", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Status })</th>
+                    <th> @Html.ActionLink("Статус", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Status })</th>
                     }
                     <th colspan="2">Кнопки управления</th>
 
@@ -318,35 +317,35 @@
                 @for (int i = 0; i < Model.Listlk.Count; i++)
                 {
 
-                    <tr>
+                <tr>
 
 
-                        <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">@Model.Listlk[i].id</a> </td>
-                        <td>@Model.Listlk[i].inventr</td>
-                        <td>@Model.Listlk[i].MO</td>
-                        <td>@Model.Listlk[i].fam</td>
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">@Model.Listlk[i].id</a> </td>
+                    <td>@Model.Listlk[i].inventr</td>
+                    <td>@Model.Listlk[i].MO</td>
+                    <td>@Model.Listlk[i].fam</td>
 
-                        <td>@Model.Listlk[i].ima</td>
-                        <td>@Model.Listlk[i].otch</td>
-                        <td>@Model.Listlk[i].data_roj.ToShortDateString()</td>
+                    <td>@Model.Listlk[i].ima</td>
+                    <td>@Model.Listlk[i].otch</td>
+                    <td>@Model.Listlk[i].data_roj.ToShortDateString()</td>
 
-                        <td>@Model.Listlk[i].address_proj</td>
-                        <td>@Model.Listlk[i].tel</td>
-                        <td>@Model.Listlk[i].Fio_rod_zp</td>
-                        <td>@Model.Listlk[i].diagn</td>
-                        <td>@Model.Listlk[i].srok_mse</td>
-                        <td>@Model.Listlk[i].prikaz</td>
-                        <td>@Model.Listlk[i].prikazd.ToShortDateString()</td>
-                        <td>@Model.Listlk[i].klass</td>
-                        <td>@Model.Listlk[i].tip_kompl</td>
-                        @if (Model.Filt.Status == null)
+                    <td>@Model.Listlk[i].address_proj</td>
+                    <td>@Model.Listlk[i].tel</td>
+                    <td>@Model.Listlk[i].Fio_rod_zp</td>
+                    <td>@Model.Listlk[i].diagn</td>
+                    <td>@Model.Listlk[i].srok_mse</td>
+                    <td>@Model.Listlk[i].prikaz</td>
+                    <td>@Model.Listlk[i].prikazd.ToShortDateString()</td>
+                    <td>@Model.Listlk[i].klass</td>
+                    <td>@Model.Listlk[i].tip_kompl</td>
+                    @if (Model.Filt.Status == null)
                         {
-                            <td>@Model.Listlk[i].status</td>
+                    <td>@Model.Listlk[i].status</td>
                         }
 
-                        <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
 
-                    </tr>
+                </tr>
                 }
             </table>
         </div>
