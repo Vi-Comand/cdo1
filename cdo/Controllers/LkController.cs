@@ -272,7 +272,7 @@ namespace cdo.Controllers
                                }).ToList();
                 list.Filt = new Filters();
                 ViewBag.rl = role;
-                return View("LKTO", list);
+                return View("LKBO", list);
 
             }
             else
