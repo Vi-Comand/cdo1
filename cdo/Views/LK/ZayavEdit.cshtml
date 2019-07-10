@@ -937,6 +937,7 @@
                                                 <td>Нужна замена</td>
                                                 <td>
                                                     <label>
+                                                        <input type="hidden" asp-for="remonti[i].id_to" />
                                                         <input type="checkbox" asp-for="remonti[i].zamena" />Нужна замена
                                                     </label>
                                                 </td>
@@ -1057,6 +1058,7 @@
                                             <tr>
                                                 <td>Примечание</td>
                                                 <td>
+                                                    <input type="hidden" asp-for="@Model.internet[i].id_to" />
                                                     <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.internet[i].prim_i" asp-for="internet[i].prim_i" />
                                                 </td>
                                             </tr>

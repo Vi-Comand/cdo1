@@ -23,7 +23,7 @@ namespace cdo.Models
     }
     public class ListLK2 : PageModel
     {
-        public Filters Filt { get; set; }
+        public FilterLKTO Filt { get; set; }
         public List<LKTO> Listlk { get; set; }
 
 
