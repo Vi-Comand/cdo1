@@ -25,6 +25,7 @@
                 <tr>
                     <td style="width: 30%;">Наименование комплекта</td>
                     <td style="width: 70%;">
+                        <input type="hidden" asp-for="sk.Id" />
                         <input type="text" asp-for="sk.nazv_komp" />
                     </td>
                 </tr>
@@ -51,6 +52,7 @@
                     <td>
                         <input type="text" asp-for="sk.data_vvoda_kompl" id="d_vv_e" />
                         <script>
+                            dataN = new Date();
                             $(function () {
                                 $('#d_vv_e').daterangepicker({
                                     singleDatePicker: true,
@@ -92,19 +94,31 @@
                         </script>
                     </td>
                 </tr>
+                @*<tr>
+                        <td>Статус</td>
+                        <td>
+                            <select id="napr" asp-for="sk.status" class="req">
+                                <option value='1'>На складе</option>
+                                <option value='0'>У учащихся</option>
+                            </select>
+                        </td>
+                    </tr>*@
                 <tr>
-                    <td>Статус</td>
-                    <td>
-                        <select id="napr" asp-for="sk.status" class="req">
-                            <option value='1'>На складе</option>
-                            <option value='0'>У учащихся</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Привязан</td>
-                    <td><input type="text" asp-for="id_main" /></td>
-                    <td> <input type="submit" asp-controller="LK" asp-action="save" value="Привязать" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" /></td>
+                    <td>Привязан <input type="hidden" asp-for="id_main" /></td>
+
+                    @if (Model.id_main == 0)
+                    {
+                        <td>
+                            <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" class="button_del1" id="spisok" value="@Model.sk.Id" form="0"></button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.id_main">Открыть</a>
+                            <button style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" asp-action="SvyazSkladToUserDelete1" asp-route-id="@Model.id_main"></button>
+                        </td>
+                    }
                 </tr>
                 <tr>
                     <td>Претензия</td>
@@ -139,8 +153,68 @@
                 </tr>
 
             </table>
-            <input type="submit" asp-controller="LK" asp-action="save" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
+            <input type="submit" asp-controller="LK" asp-action="SaveKompl" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
         </div>
     </form>
+    <!-- Modal ist-->
+    <div class="modal fade bs-example-modal-lg" id="Ist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Привязать ребенка</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+
+
+                        <table id="stat"></table>
+                        <script>
+
+                            $(".button_del1").click(function () { // задаем функцию при нажатиии на элемент <button>
+
+
+
+                                $.ajax({
+                                    url: '/Lk/SpisokToSkald/',
+                                    type: "POST",
+                                    dataType: "json",
+                                    success: function (query) {
+                                        var tableArr = ['<table>'];
+
+                                        for (i = 0; i < query.length; i++) {
+
+                                            tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser1?id=' + query[i].id + '&id_s=' + res + '">Привязать</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
+                                        }
+                                        tableArr.push('</table>');
+                                        document.getElementById('stat').innerHTML = tableArr.join('\n')
+                                    }
+                                });
+
+                            });
+                            var res;
+                            window.addEventListener("DOMContentLoaded", function () {
+                                var but = document.querySelectorAll(".button_del1");
+
+                                [].forEach.call(but, function (item) {
+                                    item.addEventListener("click", function () {
+                                        res = item.value
+                                    })
+                                })
+                            });
+
+
+                        </script>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>

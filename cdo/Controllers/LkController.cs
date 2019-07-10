@@ -169,6 +169,7 @@ namespace cdo.Controllers
 
                                }).ToList();
                 list.Filt = new Filters();
+                ViewBag.rl = role;
                 return View("LKTO", list);
 
             }
@@ -227,7 +228,8 @@ namespace cdo.Controllers
         }
         public IActionResult Rem(ListLK5 list)
         {
-
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
             var query = (from remon in db.Rem
 
                          join ma in db.Main on remon.id_to equals ma.id_to into mo
@@ -299,7 +301,7 @@ namespace cdo.Controllers
             }
 
 
-
+            ViewBag.rl = role;
             list.Listlk = query.ToList();
             return View("LKRem", list);
 
@@ -307,7 +309,8 @@ namespace cdo.Controllers
         public IActionResult Inter(ListLK4 list)
         {
 
-
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
 
 
 
@@ -347,13 +350,13 @@ namespace cdo.Controllers
 
                 }
 
-                if (list.Filt.FIO_prin != null)
-                {
-                    query = from t in query
-                            where t.internet.Contains(list.Filt.FIO_prin)
-                            select t;
+                /*  if (list.Filt.FIO_prin != null)
+                  {
+                      query = from t in query
+                              where t.internet.Contains(list.Filt.FIO_prin)
+                              select t;
 
-                }
+                  }*/
 
                 if (list.Filt.prim == true)
                 {
@@ -381,13 +384,14 @@ namespace cdo.Controllers
 
 
             list.Listlk = query.ToList();
-
+            ViewBag.rl = role;
             return View("LKInter", list);
 
         }
         public IActionResult Sklad(ListLK3 list)
         {
-
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
 
 
             var query = (from sk in db.Sklad_to
@@ -478,7 +482,7 @@ namespace cdo.Controllers
 
             }
 
-
+            ViewBag.rl = role;
             list.Listlk = query.ToList();
             return View("LKSklad", list);
 
@@ -1394,9 +1398,32 @@ namespace cdo.Controllers
             db.Entry(str).State = EntityState.Modified;
             db.SaveChanges();
             // Add user model
+            sklad_to ss = db.Sklad_to.Find(id_s);
+            ss.status = "Назначен";
 
+            db.Entry(ss).State = EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("Sklad");
         }
+
+        public IActionResult SvyazSkladToUser1(int id, int id_s)
+        {
+            main str = db.Main.Find(id);
+            str.id_sklad = id_s;
+
+            db.Entry(str).State = EntityState.Modified;
+            db.SaveChanges();
+
+            sklad_to ss = db.Sklad_to.Find(id_s);
+            ss.status = "Назначен";
+
+            db.Entry(ss).State = EntityState.Modified;
+            db.SaveChanges();
+            // Add user model
+
+            return RedirectToAction("KartochKompl", new { id = id_s });
+        }
+
         public IActionResult NewKompl()
         {
             sklad_to str = new sklad_to();
@@ -1410,15 +1437,67 @@ namespace cdo.Controllers
 
             return View("SkladEdit", sklad);
         }
-        public IActionResult SvyazSkladToUserDelete(int id)
+
+        public IActionResult SaveKompl(sklad composit)
+        {
+            sklad_to str = db.Sklad_to.Find(composit.sk.Id);
+            str.nazv_komp = composit.sk.nazv_komp;
+            str.data_ust_o = composit.sk.data_ust_o;
+            str.star_inv = composit.sk.star_inv;
+            str.nov_inv = composit.sk.nov_inv;
+            str.stoim = composit.sk.stoim;
+            str.data_vozvr_kompl = composit.sk.data_vozvr_kompl;
+            str.data_vvoda_kompl = composit.sk.data_vvoda_kompl;
+            str.status = composit.sk.status;
+            str.pritenz = composit.sk.pritenz;
+            str.prim = composit.sk.prim;
+            db.Entry(str).State = EntityState.Modified;
+            db.SaveChanges();
+            return Redirect("/Lk/Sklad");
+        }
+
+        public IActionResult KartochKompl(int id)
+        {
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
+            sklad model = new sklad();
+            sklad_to str = db.Sklad_to.Find(id);
+
+            model.sk = str;
+            try { model.id_main = db.Main.Where(p => p.id_sklad == id).First().id; } catch { }
+            ViewBag.rl = role;
+            return View("SkladEdit", model);
+        }
+
+        public IActionResult SvyazSkladToUserDelete(int id, int id_s)
         {
             main str = db.Main.Find(id);
+            id_s = str.id_sklad;
             str.id_sklad = 0;
             db.Entry(str).State = EntityState.Modified;
             db.SaveChanges();
             // Add user model
+            sklad_to ss = db.Sklad_to.Find(id_s);
+            ss.status = "На складе";
 
+            db.Entry(ss).State = EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("Sklad");
+        }
+        public IActionResult SvyazSkladToUserDelete1(int id, int id_s)
+        {
+            main str = db.Main.Find(id);
+            id_s = str.id_sklad;
+            str.id_sklad = 0;
+            db.Entry(str).State = EntityState.Modified;
+            db.SaveChanges();
+            // Add user model
+            sklad_to ss = db.Sklad_to.Find(id_s);
+            ss.status = "На складе";
+
+            db.Entry(ss).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("KartochKompl", new { id = id_s });
         }
         public IActionResult IstO(int id)
         {
@@ -1656,6 +1735,7 @@ namespace cdo.Controllers
              {
                  return View("dost");
              }*/
+            ViewBag.rl = role;
             return View("ZayavEdit", model);
         }
 

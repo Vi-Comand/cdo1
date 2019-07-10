@@ -14,10 +14,6 @@
         <h3>@ViewData["Message"]</h3>
 
 
-        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Lk">Люди</button>
-        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sklad">Склад</button>
-        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Inter">Интернет</button>
-        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Rem">Ремонт</button>
         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="NewKompl">Новый комплект</button>
         <div class="panel-group" id="accordion">
 
@@ -250,55 +246,44 @@
                 <th> @Html.ActionLink("Статус", "Sort1", "Lk", new { sortOrder = ViewBag.Add_p })</th>
                 <th>Претензия</th>
                 <th>Примечание</th>
-
-
-
-
-                <th colspan="2">Кнопки управления</th>
-
+                <th>Привязать-отвязать</th>
+                <th>Открыть</th>
             </tr>
 
             @for (int i = 0; i < Model.Listlk.Count; i++)
             {
 
                 <tr>
-
-
-                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].sklad.Id">@Model.Listlk[i].sklad.Id</a> </td>
+                    <td><a asp-controller="Lk" asp-action="KartochKompl" asp-route-id="@Model.Listlk[i].sklad.Id">@Model.Listlk[i].sklad.Id</a> </td>
                     <td>@Model.Listlk[i].sklad.nazv_komp</td>
                     <td>@Model.Listlk[i].sklad.nov_inv</td>
                     <td>@Model.Listlk[i].sklad.star_inv</td>
-
                     <td>@Model.Listlk[i].sklad.data_ust_o</td>
                     <td>@Model.Listlk[i].sklad.data_vozvr_kompl</td>
-
                     <td>@Model.Listlk[i].sklad.data_vvoda_kompl</td>
                     <td>@Model.Listlk[i].sklad.status</td>
-
-
                     <td>@Model.Listlk[i].sklad.pritenz</td>
                     <td>@Model.Listlk[i].sklad.prim</td>
                     @if (Model.Listlk[i].id_main == 0)
                     {
-                        <td>@Model.Listlk[i].id_main</td>
+                        <td>
+                            <button style=" margin:0; background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" class="button_del1" id="spisok" value="@Model.Listlk[i].sklad.Id" form="0"></button>
+                        </td>
                     }
                     else
                     {
                         <td>
-                            <button asp-action="SvyazSkladToUserDelete" asp-route-id="@Model.Listlk[i].id_main"></button>
+                            <button style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" asp-action="SvyazSkladToUserDelete" asp-route-id="@Model.Listlk[i].id_main"></button>
                         </td>
                     }
                     <td>
-                        <button style="background: url(/assets/icon/info--7416313485.png) no-repeat 19.5px 18px; background-size: 45%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#Ist" class="button_del1" id="spisok" value="@Model.Listlk[i].sklad.Id" form="0"></button>
+                        @if (Model.Listlk[i].id_main != 0)
+                        {
+                            <a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">Открыть</a>
+                        }
                     </td>
 
-                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">Открыть</a> </td>
 
-
-
-
-
-                    @*<td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>*@
 
                 </tr>
             }
@@ -374,7 +359,7 @@
 
                                     for (i = 0; i < query.length; i++) {
 
-                                        tableArr.push('<tr><td style="width: 60%;">' + '<a href="/LK/SvyazSkladToUser?id=' + query[i].id + '&id_s=' + res + '">текст ссылки</a>' + query[i].id + '</td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + '</td><td style="width: 40%">' + query[i].ima + '</td><td style="width: 40%">' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td style="width: 40%">' + query[i].status + '</td></tr>');
+                                        tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser?id=' + query[i].id + '&id_s=' + res + '">Привязать</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
                                     }
                                     tableArr.push('</table>');
                                     document.getElementById('stat').innerHTML = tableArr.join('\n')
