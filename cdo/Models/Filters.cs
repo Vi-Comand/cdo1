@@ -90,4 +90,23 @@ namespace cdo.Models
 
     }
 
+    public class FilterLKTO
+    {
+        public int Nom { get; set; }
+        public string F { get; set; }
+        public string I { get; set; }
+        public string O { get; set; }
+        public int MO { get; set; }
+
+
+        public string Add_proj { get; set; }
+        public string Tel { get; set; }
+        public string Fio_rod_zp { get; set; }
+
+
+        public string nazv_kompl { get; set; }
+        public int inv { get; set; }
+
+
+    }
 }

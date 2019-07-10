@@ -1,0 +1,394 @@
+﻿@model cdo.Models.ListLK
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lk-user</title>
+</head>
+<body>
+
+    <form method="post" asp-controller="User" asp-action="Creat">
+
+        <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vse">все</button><button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Uch">Учащиеся</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Stud">Студент</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vibivsh">Выбывший</button>
+        <h3>@ViewData["Message"]</h3>
+
+        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Добавить запись</button>
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                    <h4 class="panel-title" style="position: relative; padding:10px">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                            Фильтры
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse0" class="collapse in ">
+                    <div class="panel-body">
+
+                        <table>
+                            <tr class="od">
+                                <td style="width: 30%;">№ ребенка</td>
+                                <td style="width: 70%;">
+                                    <input type="text" asp-for="Filt.Nom" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Фамилия (ребенка)</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.F" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Имя (ребенка)</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.I" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Отчество (ребенка)</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.O" />
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>МО</td>
+                                <td>
+                                    <select id="napr" class="req" asp-for="Filt.MO">
+                                        <option value="">Выберите МО</option>
+                                        <option value='1'>Анапа</option>
+                                        <option value='2'>Армавир</option>
+                                        <option value='3'>Геленджик</option>
+                                        <option value='4'>Горячий Ключ</option>
+                                        <option value='5'>Ейск</option>
+                                        <option value='6'>Краснодар</option>
+                                        <option value='7'>Новороссийск</option>
+                                        <option value='8'>Сочи</option>
+                                        <option value='9'>Абинский</option>
+                                        <option value='10'>Апшеронский</option>
+                                        <option value='11'>Белоглинский</option>
+                                        <option value='12'>Белореченский</option>
+                                        <option value='13'>Брюховецкий</option>
+                                        <option value='14'>Выселковский</option>
+                                        <option value='15'>Гулькевичский</option>
+                                        <option value='16'>Динской</option>
+                                        <option value='17'>Кавказский</option>
+                                        <option value='18'>Калининский</option>
+                                        <option value='19'>Каневской</option>
+                                        <option value='20'>Кореновский</option>
+                                        <option value='21'>Красноармейский</option>
+                                        <option value='22'>Крыловский</option>
+                                        <option value='23'>Крымский</option>
+                                        <option value='24'>Курганинский</option>
+                                        <option value='25'>Кущевский</option>
+                                        <option value='26'>Лабинский</option>
+                                        <option value='27'>Ленинградский</option>
+                                        <option value='28'>Мостовский</option>
+                                        <option value='29'>Новокубанский</option>
+                                        <option value='30'>Новопокровский</option>
+                                        <option value='31'>Отрадненский</option>
+                                        <option value='32'>Павловский</option>
+                                        <option value='33'>Приморско-Ахтарский</option>
+                                        <option value='34'>Северский</option>
+                                        <option value='35'>Славянский</option>
+                                        <option value='36'>Староминский</option>
+                                        <option value='37'>Тбилисский</option>
+                                        <option value='38'>Темрюкский</option>
+                                        <option value='39'>Тимашевский</option>
+                                        <option value='40'>Тихорецкий</option>
+                                        <option value='41'>Туапсинский</option>
+                                        <option value='42'>Успенский</option>
+                                        <option value='43'>Усть-Лабинский</option>
+                                        <option value='44'>Щербиновский</option>
+                                    </select>
+
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Дата рождения </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.DatNachDR" id="data_roj">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_roj').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <input type="text" asp-for="Filt.DatKoncDR" id="data_roj_do">
+                                    <script>
+                                        var timeInMs = Date.now();
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_roj_do').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeInMs,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+
+                            <tr class="od">
+                                <td>Адрес проживания</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Add_proj" />
+                                </td>
+                            </tr>
+
+                            <tr class="od">
+                                <td>Телефон </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Tel" />
+                                </td>
+                            </tr>
+
+                            <tr class="od">
+                                <td>ФИО родителя – законного представителя</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Fio_rod_zp" />
+                                </td>
+                            </tr>
+
+
+
+
+                            <tr class="pp">
+                                <td>Срок действия справки МСЭ</td>
+
+                                <td>
+                                    <input type="text" asp-for="Filt.DatNachSD" id="d_sp" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_sp').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/2000",
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    <input type="text" asp-for="Filt.DatKoncSD" id="d_sp_do" />
+                                    <script>
+                                        var timeIsq = new Date(new Date().setFullYear(new Date().getFullYear() + 10));
+                                        $(function () {
+                                            $('#d_sp_do').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeIsq,
+                                                "minDate": "01/01/2000",
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+                            <tr class="od">
+                                <td>Приказ о зачислении</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.prikaz" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата приказа о зачислении</td>
+                                <td>
+                                    От<input type="text" asp-for="Filt.DatNachP" id="d_pr_z" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_pr_z').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+
+                                    До<input type="text" asp-for="Filt.DatKoncP" id="d_pr_z_do" />
+                                    <script>
+
+                                        $(function () {
+                                            $('#d_pr_z_do').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeInMs,
+                                                "minDate": "01/01/1970",
+                                                "DefaultDate": dataN,
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Тип комплекта</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.tip_kompl" />
+                                </td>
+                            </tr>
+
+                        </table>
+                        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sort">Фильтровать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="overflow: auto;" class="prettyprint linenums prettyprinted">
+            <table id="lk">
+                <tr>
+
+                    <th> @Html.ActionLink("№", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Nom }) </th>
+                    <th> @Html.ActionLink("Инвентарный номер", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.In })</th>
+                    <th> @Html.ActionLink("МО", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Mo })</th>
+                    <th> @Html.ActionLink("Фамилия", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.F })</th>
+                    <th> @Html.ActionLink("Имя", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.I })</th>
+                    <th> @Html.ActionLink("Отчество", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.O })</th>
+                    <th> @Html.ActionLink("Дата рождения", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.DR })</th>
+                    <th> @Html.ActionLink("Адрес проживания", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Add_p })</th>
+                    <th>Телефон</th>
+                    <th>ФИО родителя ЗП</th>
+                    <th> @Html.ActionLink("МСЭ", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.MSE })</th>
+                    <th> @Html.ActionLink("№ приказа", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Nom_p })</th>
+                    <th> @Html.ActionLink("Дата приказа", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Data_p })</th>
+                    <th> @Html.ActionLink("Класс", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Klass })</th>
+                    <th> @Html.ActionLink("Тип комплекта", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Tip_kompl })</th>
+                    @if (Model.Filt.Status == null)
+                    {
+                        <th> @Html.ActionLink("Статус", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Status })</th>
+                    }
+                    <th colspan="2">Кнопки управления</th>
+
+                </tr>
+
+                @for (int i = 0; i < Model.Listlk.Count; i++)
+                {
+
+                    <tr>
+
+
+                        <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">@Model.Listlk[i].id</a> </td>
+                        <td>@Model.Listlk[i].inventr</td>
+                        <td>@Model.Listlk[i].MO</td>
+                        <td>@Model.Listlk[i].fam</td>
+
+                        <td>@Model.Listlk[i].ima</td>
+                        <td>@Model.Listlk[i].otch</td>
+                        <td>@Model.Listlk[i].data_roj.ToShortDateString()</td>
+
+                        <td>@Model.Listlk[i].address_proj</td>
+                        <td>@Model.Listlk[i].tel</td>
+                        <td>@Model.Listlk[i].Fio_rod_zp</td>
+                        <td>@Model.Listlk[i].diagn</td>
+                        <td>@Model.Listlk[i].srok_mse</td>
+                        <td>@Model.Listlk[i].prikaz</td>
+                        <td>@Model.Listlk[i].prikazd.ToShortDateString()</td>
+                        <td>@Model.Listlk[i].klass</td>
+                        <td>@Model.Listlk[i].tip_kompl</td>
+                        @if (Model.Filt.Status == null)
+                        {
+                            <td>@Model.Listlk[i].status</td>
+                        }
+
+                        <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </form>
+</body>
+
+
+
+</html>
+
+<script>
+
+    var VAL = "Заявление на рассмотрении";
+    var VAL2 = "Дубль";
+    var VAL3 = "Ошибочное заявление";
+    var VAL4 = "Отказано АК в приеме заявления";
+    var VAL5 = "Заявление подлинное";
+    $(function () {
+        $("#lk tr").each(function () {
+            var textValue = $(this).closest('tr').find('td:eq(4)').text();
+            //  alert(textValue);
+            if (textValue == VAL) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(91, 243, 145, 0.15)');
+            }
+            if (textValue == VAL2) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL3) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL4) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL5) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(24, 239, 24, 0.36)');
+            }
+        });
+    });
+
+</script>
