@@ -30,6 +30,8 @@ namespace cdo.Controllers
 
                                join mo in db.Mo on main.id_mo equals mo.Id into mo
                                from m in mo.DefaultIfEmpty()
+                               join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
+                               from inven in inv.DefaultIfEmpty()
                                join ist in db.Ist on main.id_f equals ist.id into ist
                                from f in ist.DefaultIfEmpty()
                                join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -50,7 +52,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-
+                                   inventr = inven.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -105,7 +107,7 @@ namespace cdo.Controllers
                                select new LKUVR
                                {
                                    id = main.id,
-                                   /*  inventr = t.nov_inv,*/
+                                   inventr = inv.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -202,7 +204,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-
+                                   inventr = inv.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -253,7 +255,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-
+                                   inventr = inv.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -305,7 +307,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-
+                                   inventr = inv.nov_inv,
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -1062,6 +1064,8 @@ namespace cdo.Controllers
 
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
+                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
+                         from inven in inv.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
                          from te in tel.DefaultIfEmpty()
                          join im in db.Ist on main.id_i equals im.id into im
@@ -1080,7 +1084,7 @@ namespace cdo.Controllers
                          select new LKPP
                          {
                              id = main.id,
-
+                             inventr = inven.nov_inv,
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -1978,7 +1982,8 @@ namespace cdo.Controllers
 
                          join mo in db.Mo on main.id_mo equals mo.Id into mo
                          from m in mo.DefaultIfEmpty()
-
+                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
+                         from inven in inv.DefaultIfEmpty()
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -2002,7 +2007,7 @@ namespace cdo.Controllers
                          select new LKUVR
                          {
                              id = main.id,
-
+                             inventr = inven.nov_inv,
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -2229,7 +2234,8 @@ namespace cdo.Controllers
 
                          join mo in db.Mo on main.id_mo equals mo.Id into mo
                          from m in mo.DefaultIfEmpty()
-
+                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
+                         from inven in inv.DefaultIfEmpty()
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -2247,7 +2253,7 @@ namespace cdo.Controllers
                          select new LKPP
                          {
                              id = main.id,
-
+                             inventr = inven.nov_inv,
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
