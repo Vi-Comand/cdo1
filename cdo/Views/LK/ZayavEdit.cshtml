@@ -368,7 +368,7 @@
                                 </tr>
                             }
                             <tr>
-                                <td colspan="2">Приказ о зачислении</td>
+                                <td colspan="2">Номер приказа о зачислении</td>
                                 <td>
                                     @if (Model.role != 2 && Model.role != 1)
                                     {
@@ -462,7 +462,7 @@
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                 <h4 class="panel-title" style="position: relative; padding:10px">
                     <a run data-toggle="collapse in" data-parent="#accordion" href="#collapseOne">
-                        Сектор учебновоспитательной работы (УВР)
+                        Сектор учебно-воспитательной работы (УВР)
                     </a>
                 </h4>
             </div>
@@ -479,7 +479,14 @@
                         <tr>
                             <td colspan="2" style="width: 30%;">Класс обучения</td>
                             <td style="width: 70%;">
-                                <input type="text" asp-for="klass" />
+                                @if (Model.role != 3 && Model.role != 1)
+                                {
+                                    <input type="text" asp-for="klass" readonly />
+                                }
+                                else
+                                {
+                                    <input type="text" asp-for="klass" />
+                                }
                             </td>
                         </tr>
                         @if (Model.role == 3 || Model.role == 2 || Model.role == 1)
@@ -618,136 +625,148 @@
 
                         @if (Model.role == 6 || Model.role == 5 || Model.role == 4 || Model.role == 1)
                         {
-                            <tr>
-                                <td style="width: 30%;">Наименование комплекта</td>
-                                <td style="width: 70%;">
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.nazv_komp" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 30%;">Статус комплекта</td>
-                                <td>
-                                    @if (Model.role != 4 && Model.role != 1)
-                                    {
-                                        <input type="text" id="st" asp-for="tehot.id" readonly>
-                                    }
-                                    else
-                                    {
-                                        <select id="st" asp-for="sklad.status" class="req">
-                                            <option value="">Выберите статус</option>
-                                            <option value='на складе'>на складе</option>
-                                            <option value='назначен'>назначен</option>
-                                        </select>
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Старый инвентарный номер </td>
-                                <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.star_inv" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Новый инвентарный номер </td>
-                                <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.nov_inv" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Балансовая стоимость</td>
-                                <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.stoim" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Претензия</td>
-                                <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.pritenz" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Примечание</td>
-                                <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.prim" />
-                                </td>
-                            </tr>
-                        }
-                        @if (Model.role == 4 || Model.role == 6 || Model.role == 5 || Model.role == 1)
-                        {
-                            <tr>
-                                <td>Дата ввода в эксплуатацию</td>
-                                <td>
-                                    <input type="text" asp-for="sklad.data_vvoda_kompl" id="d_vv_e" />
-                                    <script>
-                                        dataN = new Date();
-                                        $(function () {
-                                            $('#d_vv_e').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "minDate": "01/01/1970",
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
+                            if (Model.sklad != null)
+                            {
+                                <tr>
+                                    <td style="width: 30%;">Наименование комплекта</td>
+                                    <td style="width: 70%;">
+                                        <a asp-controller="Lk" asp-action="KartochKompl" asp-route-id="@Model.sklad.Id">@Model.sklad.nazv_komp</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30%;">Статус комплекта</td>
+                                    <td>
+                                        @if (Model.role != 4 && Model.role != 1)
+                                        {
+                                            <input type="text" id="st" asp-for="sklad.status" readonly>
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="st" asp-for="sklad.status" readonly>
+                                            @*<select id="st" asp-for="sklad.status" class="req" >
+                                                    <option value="">Выберите статус</option>
+                                                    <option value='на складе'>на складе</option>
+                                                    <option value='назначен'>назначен</option>
+                                                </select>*@
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Старый инвентарный номер </td>
+                                    <td>
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.star_inv" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Новый инвентарный номер </td>
+                                    <td>
+
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.nov_inv" readonly />
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Балансовая стоимость</td>
+                                    <td>
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.stoim" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Претензия</td>
+                                    <td>
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.pritenz" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Примечание</td>
+                                    <td>
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.prim" readonly />
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>Дата ввода в эксплуатацию</td>
+                                    <td>
+                                        <input type="text" asp-for="sklad.data_vvoda_kompl" id="d_vv_e1" readonly />
+                                        <script>
+                                            dataN = new Date();
+                                            $(function () {
+                                                $('#d_vv_e').daterangepicker({
+                                                    singleDatePicker: true,
+                                                    showDropdowns: true,
+                                                    "minDate": "01/01/1970",
+                                                    "maxDate": dataN,
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    locale: {
+                                                        format: 'DD.MM.YYYY',
+                                                        "firstDay": 1
+                                                    }
+                                                });
                                             });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Дата установки комплекта</td>
-                                <td>
-                                    <input type="text" asp-for="sklad.data_ust_o" id="d_ust_o" />
-                                    <script>
-                                        $(function () {
-                                            $('#d_ust_o').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "minDate": "01/01/1970",
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
+                                        </script>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Дата установки комплекта</td>
+                                    <td>
+                                        <input type="text" asp-for="sklad.data_ust_o" id="d_ust_o1" readonly />
+                                        <script>
+                                            $(function () {
+                                                $('#d_ust_o').daterangepicker({
+                                                    singleDatePicker: true,
+                                                    showDropdowns: true,
+                                                    "minDate": "01/01/1970",
+                                                    "maxDate": dataN,
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    locale: {
+                                                        format: 'DD.MM.YYYY',
+                                                        "firstDay": 1
+                                                    }
+                                                });
                                             });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
+                                        </script>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>Дата возврата комплекта</td>
-                                <td>
-                                    <input type="text" asp-for="sklad.data_vozvr_kompl" id="d_vv_k" />
-                                    <script>
-                                        $(function () {
-                                            $('#d_vv_k').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "minDate": "01/01/1980",
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
+                                <tr>
+                                    <td>Дата возврата комплекта</td>
+                                    <td>
+                                        <input type="text" asp-for="sklad.data_vozvr_kompl" id="d_vv_k1" readonly />
+                                        <script>
+                                            $(function () {
+                                                $('#d_vv_k').daterangepicker({
+                                                    singleDatePicker: true,
+                                                    showDropdowns: true,
+                                                    "minDate": "01/01/1980",
+                                                    "maxDate": dataN,
+                                                    "autoApply": true,
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Отменить",
+                                                    locale: {
+                                                        format: 'DD.MM.YYYY',
+                                                        "firstDay": 1
+                                                    }
+                                                });
                                             });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
+                                        </script>
+                                    </td>
+                                </tr>
 
 
 
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="2">Комплект не назначен</td>
+                                </tr>
+                            }
                         }
                         @if (Model.role == 4 || Model.role == 3 || Model.role == 1)
                         {
@@ -763,67 +782,92 @@
 
 
 
-                            @if (Model.role != 3)
-                            {
-                                <tr>
-                                    <td>Провайдер</td>
-                                    <td>
+
+                            <tr>
+                                <td>Провайдер</td>
+                                <td>
+                                    @if (Model.role != 4 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.inter" readonly />
+                                    }
+                                    else
+                                    {
                                         <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.inter" />
-                                    </td>
-                                </tr>
-                            }
-                            else
-                            {
-                                <tr>
-                                    <td>Дата подключения интернета</td>
-                                    <td>
+                                    }
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Дата подключения интернета</td>
+                                <td>
+                                    @if (Model.role != 4 && Model.role != 1)
+                                    {
+                                        <input type="text" asp-for="tehot.date_inter" id="date_inter1" readonly />
+                                    }
+                                    else
+                                    {
                                         <input type="text" asp-for="tehot.date_inter" id="date_inter" />
+                                    }
 
-
-                                        <script>
-                                            $(function () {
-                                                $('#date_inter').daterangepicker({
-                                                    singleDatePicker: true,
-                                                    showDropdowns: true,
-                                                    "minDate": "01/01/1970",
-                                                    "maxDate": dataN,
-                                                    "autoApply": true,
-                                                    "applyLabel": "Выбрать",
-                                                    "cancelLabel": "Отменить",
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
+                                    <script>
+                                        $(function () {
+                                            $('#date_inter').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
                                             });
-                                        </script>
+                                        });
+                                    </script>
 
 
 
 
-                                    </td>
-                                </tr>
-                            }
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td>
-                                    Скайп ребенка логин
+                                    Skype логин
                                 </td>
                                 <td>
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_l" />
+                                    @if (Model.role != 4 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_l" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_l" />
+                                    }
                                 </td>
                             </tr>
                             <tr id="j_rem">
                                 <td>
-                                    Скайп ребенка пароль
+
+                                    Skype пароль
                                 </td>
                                 <td id="j_int">
-                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_p" />
+                                    @if (Model.role != 4 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_p" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" asp-for="tehot.skype_p" />
+                                    }
                                 </td>
                             </tr>
 
                         }
                     </table>
-                    @if (Model.role == 4 || Model.role == 3 || Model.role == 1 || Model.role == 2)
+                    @if (Model.role == 4 || Model.role == 1)
                     {
                         <table>
                             <tr>
@@ -934,7 +978,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Нужна замена</td>
+                                                <td>Замена</td>
                                                 <td>
                                                     <label>
                                                         <input type="hidden" asp-for="remonti[i].id_to" />
@@ -943,7 +987,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Нужен выезд</td>
+                                                <td>Выезд</td>
                                                 <td>
                                                     <label>
                                                         <input type="checkbox" asp-for="remonti[i].viezd" />Нужен выезд
@@ -1162,12 +1206,12 @@
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td style="width: 30%;">Инвентарный номер оборудования</td>
-                                    <td style="width: 70%;">
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="" asp-for="tehot.id" />
-                                    </td>
-                                </tr>
+                                @*<tr>
+                                        <td style="width: 30%;">Инвентарный номер оборудования</td>
+                                        <td style="width: 70%;">
+                                            <input type="text" data-toggle="tooltip" data-placement="top" title="" asp-for="tehot.id" />
+                                        </td>
+                                    </tr>*@
                                 @if (Model.role == 5 || Model.role == 1)
                                 {
                                     <tr>
@@ -1201,12 +1245,12 @@
                                             </script>
                                         </td>
                                     </tr>
-                                    <tr id="j_bvp">
-                                        <td>Учет движения договора БВП</td>
-                                        <td>
-                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dvig_dogov_bvp" asp-for="dvig_dogov_bvp" />
-                                        </td>
-                                    </tr>
+                                    @*<tr id="j_bvp">
+                                            <td>Учет движения договора БВП</td>
+                                            <td>
+                                                <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dvig_dogov_bvp" asp-for="dvig_dogov_bvp" />
+                                            </td>
+                                        </tr>*@
                                 }
                             </table>
                             <table>
@@ -1215,7 +1259,10 @@
                                         Документы БВП
                                     </td>
                                     <td style="width:20px">
-                                        <button style=" background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#bvp" ; form="0"></button>
+                                        @if (Model.role == 5)
+                                        {
+                                            <button style=" background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#bvp" ; form="0"></button>
+                                        }
                                     </td>
                                 </tr>
                             </table>
@@ -1570,7 +1617,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Нужна замена</td>
+                                <td>Замена</td>
                                 <td>
                                     <label>
                                         <input type="checkbox" asp-for="remadd.zamena" />Нужна замена
@@ -1578,7 +1625,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Нужен выезд</td>
+                                <td>Выезд</td>
                                 <td>
                                     <label>
                                         <input type="checkbox" asp-for="remadd.viezd" />Нужен выезд
@@ -1613,7 +1660,7 @@
                         <input type="hidden" asp-for="id" />
                         <table>
                             <tr>
-                                <td>Дата заявки на ремонт оборудования</td>
+                                <td>Дата заявки на проблемы с интернет соединением</td>
                                 <td>
                                     <input type="text" id="md_z_i" value="" asp-for="intadd.data_z_i" />
                                     <script>

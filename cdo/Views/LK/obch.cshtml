@@ -11,11 +11,9 @@
 
     <form method="post" asp-controller="User" asp-action="Creat">
 
-        <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vse">все</button><button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Uch">Учащиеся</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Stud">Студент</button> <button type="submit" style="margin:5px;" value="1" asp-controller="Lk" asp-action="Vibivsh">Выбывший</button>
-        <h3>@ViewData["Message"]</h3>
-
-        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Добавить запись</button>
-
+        <div>
+            <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Creat">Добавить запись</button>
+        </div>
         <div class="panel-group" id="accordion">
 
             <div class="panel panel-default">
@@ -288,10 +286,21 @@
                             </tr>
 
                         </table>
+
                         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sort">Фильтровать</button>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="btn-group btn-group-lg align-center">
+
+            <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == null){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27);"); }" value="1" asp-controller="Lk" asp-action="Vse">все</button>
+
+
+            <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == "учащийся"){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27)"); } " value="1" asp-controller="Lk" asp-action="Uch">Учащиеся</button>
+
+            <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == "студент"){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27)"); }" value="1" asp-controller="Lk" asp-action="Stud">Студент</button>
+            <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == "выбывший"){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27)"); }" value="1" asp-controller="Lk" asp-action="Vibivsh">Выбывший</button>
         </div>
         <div style="overflow: auto;" class="prettyprint linenums prettyprinted">
             <table id="lk">

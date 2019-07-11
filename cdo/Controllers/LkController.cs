@@ -168,6 +168,7 @@ namespace cdo.Controllers
 
 
                                }).ToList();
+                ViewBag.rl = role;
                 list.Filt = new FilterLKTO();
                 return View("LKTO", list);
 
@@ -1917,7 +1918,7 @@ namespace cdo.Controllers
 
             }
             model.Filt = filtr.Filt;
-            return View("LKUO", model);
+            return View("LKBO", model);
         }
 
 
@@ -2459,6 +2460,8 @@ namespace cdo.Controllers
                 return RedirectToAction("Sort", "Lk", new { status = Status });
             if (role == 5)
                 return RedirectToAction("LKUr", "Lk", new { status = Status });
+            if (role == 6)
+                return RedirectToAction("LKBuch", "Lk", new { status = Status });
             else
                 return View("index");
         }
