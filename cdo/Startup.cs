@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text;
+
 
 namespace cdo
 {
@@ -28,7 +30,7 @@ namespace cdo
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
                  .AddJsonFile("appsettings.json");
             var configuration = builder.Build();
-
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             services.AddDbContext<DataContext>(options => options.UseMySql(configuration["ConnectionStrings:DefaultConnection"]));
 
             services.Configure<CookiePolicyOptions>(options =>

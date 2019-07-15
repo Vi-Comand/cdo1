@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace cdo.Controllers
 {
@@ -15,6 +18,142 @@ namespace cdo.Controllers
 
         private DataContext db = new DataContext();
         [Authorize]
+        public async Task<IActionResult> Vgr_LKPP()
+        {
+
+
+
+
+
+
+
+            // query data from database  
+            await Task.Yield();
+
+            var stream = new MemoryStream();
+
+
+
+            ListLK list = new ListLK();
+            list.Listlk = (from main in db.Main
+
+                           join mo in db.Mo on main.id_mo equals mo.Id into mo
+                           from m in mo.DefaultIfEmpty()
+                           join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
+                           from inven in inv.DefaultIfEmpty()
+                           join ist in db.Ist on main.id_f equals ist.id into ist
+                           from f in ist.DefaultIfEmpty()
+                           join tel in db.Ist on main.id_tel equals tel.id into tel
+                           from te in tel.DefaultIfEmpty()
+                           join im in db.Ist on main.id_i equals im.id into im
+                           from i in im.DefaultIfEmpty()
+                           join ot in db.Ist on main.id_o equals ot.id into ot
+                           from o in ot.DefaultIfEmpty()
+                           join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                           from r in rod.DefaultIfEmpty()
+                           join add in db.Ist on main.id_adr_progiv equals add.id into add
+                           from a in add.DefaultIfEmpty()
+                           join to in db.To on main.id_to equals to.id into to
+                           from t in to.DefaultIfEmpty()
+                           join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                           from ms in mse.DefaultIfEmpty()
+
+                           select new LKPP
+                           {
+                               id = main.id,
+                               inventr = inven.nov_inv,
+                               MO = (m == null ? String.Empty : m.name),
+                               fam = f.znach,
+                               ima = i.znach,
+                               otch = o.znach,
+                               data_roj = main.data_rojd.Date,
+                               address_proj = a.znach,
+                               tel = te.znach,
+                               Fio_rod_zp = r.znach,
+                               diagn = main.diagn,
+                               prikazd = main.prik_o_zach_d,
+                               prikaz = main.prik_o_zach_n,
+                               srok_mse = ms.znach,
+                               klass = main.klass,
+                               tip_kompl = main.tip_kompl,
+                               status = main.status
+
+                           }).ToList();
+
+
+
+
+            using (var package = new ExcelPackage(stream))
+            {
+
+                var workSheet = package.Workbook.Worksheets.Add("Sheet1");
+                workSheet.Cells.LoadFromCollection(list.Listlk, true);
+                workSheet.Column(7).Style.Numberformat.Format = "dd.mm.yyyy";
+                workSheet.Column(12).Style.Numberformat.Format = "dd.mm.yyyy";
+                workSheet.Column(14).Style.Numberformat.Format = "dd.mm.yyyy";
+                workSheet.Cells[1, 1].Value = "№";
+                workSheet.Cells[1, 2].Value = "Инвентарный номер";
+                workSheet.Cells[1, 3].Value = "МО";
+                workSheet.Cells[1, 4].Value = "Фамилия";
+                workSheet.Cells[1, 5].Value = "Имя";
+                workSheet.Cells[1, 6].Value = "Отчество";
+                workSheet.Cells[1, 7].Value = "Дата рождения";
+                workSheet.Cells[1, 8].Value = "Адрес проживания";
+                workSheet.Cells[1, 9].Value = "Телефон";
+                workSheet.Cells[1, 10].Value = "ФИО законного представителя";
+                workSheet.Cells[1, 11].Value = "Диагноз";
+                workSheet.Cells[1, 12].Value = "Дата приказа";
+                workSheet.Cells[1, 11].Value = "Номер приказа";
+                workSheet.Cells[1, 11].Value = "Дата МСЭ";
+                workSheet.Cells[1, 11].Value = "Класс";
+                workSheet.Cells[1, 11].Value = "Тип комплекта";
+                workSheet.Cells[1, 11].Value = "Статус";
+
+                package.Save();
+            }
+            stream.Position = 0;
+            string excelName = $"UserList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+
+            //return File(stream, "application/octet-stream", excelName);  
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+
+        }
+        public async Task<IActionResult> ExportExcelAsync()
+        {
+
+            await Task.Yield();
+
+            var stream = new MemoryStream();
+            List<sklad_to> list = db.Sklad_to.ToList();
+            using (var package = new ExcelPackage(stream))
+            {
+
+                var workSheet = package.Workbook.Worksheets.Add("Sheet1");
+                workSheet.Cells.LoadFromCollection(list, true);
+                workSheet.Column(3).Style.Numberformat.Format = "dd.mm.yyyy";
+                workSheet.Column(7).Style.Numberformat.Format = "dd.mm.yyyy";
+                workSheet.Column(8).Style.Numberformat.Format = "dd.mm.yyyy";
+                workSheet.Cells[1, 1].Value = "№";
+                workSheet.Cells[1, 2].Value = "Название комплекта";
+                workSheet.Cells[1, 3].Value = "Дата установки оборудования";
+                workSheet.Cells[1, 4].Value = "Старый инвентарник";
+                workSheet.Cells[1, 5].Value = "Новый инвентарник";
+                workSheet.Cells[1, 6].Value = "Стоимость";
+                workSheet.Cells[1, 7].Value = "Дата возврата комплекта";
+                workSheet.Cells[1, 8].Value = "Дата ввода комплекта";
+                workSheet.Cells[1, 9].Value = "Статус";
+                workSheet.Cells[1, 10].Value = "Претензия";
+                workSheet.Cells[1, 11].Value = "Примечание";
+
+                package.Save();
+            }
+            stream.Position = 0;
+            string excelName = $"UserList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+
+            //return File(stream, "application/octet-stream", excelName);  
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+
+        }
         public IActionResult Lk()
         {
 
