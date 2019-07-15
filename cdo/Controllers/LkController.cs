@@ -103,11 +103,11 @@ namespace cdo.Controllers
                 workSheet.Cells[1, 10].Value = "ФИО законного представителя";
                 workSheet.Cells[1, 11].Value = "Диагноз";
                 workSheet.Cells[1, 12].Value = "Дата приказа";
-                workSheet.Cells[1, 11].Value = "Номер приказа";
-                workSheet.Cells[1, 11].Value = "Дата МСЭ";
-                workSheet.Cells[1, 11].Value = "Класс";
-                workSheet.Cells[1, 11].Value = "Тип комплекта";
-                workSheet.Cells[1, 11].Value = "Статус";
+                workSheet.Cells[1, 13].Value = "Номер приказа";
+                workSheet.Cells[1, 14].Value = "Дата МСЭ";
+                workSheet.Cells[1, 15].Value = "Класс";
+                workSheet.Cells[1, 16].Value = "Тип комплекта";
+                workSheet.Cells[1, 17].Value = "Статус";
 
                 package.Save();
             }
