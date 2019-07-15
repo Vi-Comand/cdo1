@@ -69,21 +69,21 @@ namespace cdo.Models
     public class LKPP
     {
         public int id { get; set; }
+        public int inventr { get; set; }
         public string MO { get; set; }
         public string fam { get; set; }
         public string ima { get; set; }
         public string otch { get; set; }
         public DateTime data_roj { get; set; }
         public string address_proj { get; set; }
-        public string Fio_rod_zp { get; set; }
-        public int inventr { get; set; }
-        public string prikaz { get; set; }
-        public DateTime prikazd { get; set; }
-        public int klass { get; set; }
-        public string diagn { get; set; }
-        public string srok_mse { get; set; }
-        public string tip_kompl { get; set; }
         public string tel { get; set; }
+        public string Fio_rod_zp { get; set; }
+        public string diagn { get; set; }
+        public DateTime prikazd { get; set; }
+        public string prikaz { get; set; }
+        public string srok_mse { get; set; }
+        public int klass { get; set; }
+        public string tip_kompl { get; set; }
         public string status { get; set; }
 
     }

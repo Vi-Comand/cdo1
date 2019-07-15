@@ -61,7 +61,7 @@ namespace cdo.Controllers
                            select new LKPP
                            {
                                id = main.id,
-                               inventr = inven.nov_inv,
+                               inventr = (inven == null ? 0 : inven.nov_inv),
                                MO = (m == null ? String.Empty : m.name),
                                fam = f.znach,
                                ima = i.znach,
