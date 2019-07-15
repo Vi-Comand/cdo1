@@ -32,14 +32,12 @@
 
                         <table>
                             <tr class="od">
-                                <td style="width: 30%;">№</td>
-                                <td style="width: 70%;">
+                                <td style="width: 15%;">№ ребенка</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.Nom" />
                                 </td>
-                            </tr>
-                            <tr class="od">
-                                <td>Название комплекта</td>
-                                <td>
+                                <td style="width: 15%;">Название комплекта</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.Nazv_kompl" />
                                 </td>
                             </tr>
@@ -48,15 +46,29 @@
                                 <td>
                                     <input type="text" asp-for="Filt.nov_inv" />
                                 </td>
-                            </tr>
-                            <tr class="od">
                                 <td>Старый инвентарный номер</td>
                                 <td>
                                     <input type="text" asp-for="Filt.star_inv" />
                                 </td>
                             </tr>
-                            <tr class="od">
-
+                            <tr>
+                                <td>Статус</td>
+                                <td>
+                                    <select id="st" asp-for="Filt.Status" class="req">
+                                        <option value="">Выберите статус</option>
+                                        <option value='на складе'>на складе</option>
+                                        <option value='назначен'>назначен</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <label><input type="checkbox" asp-for="Filt.prim">Примечание </label>
+                                </td>
+                                <td>
+                                    <label><input type="checkbox" asp-for="Filt.pret">Претензия</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="max-width:700px">
                             <tr class="od">
                                 <td>Дата установки </td>
                                 <td>
@@ -81,6 +93,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td>
                                     <input type="text" asp-for="Filt.DatKoncU" id="data_uk">
                                     <script>
 
@@ -129,6 +143,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td>
                                     <input type="text" asp-for="Filt.DatKoncV" id="data_vk">
                                     <script>
                                         var timeInMs = Date.now();
@@ -176,6 +192,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td>
                                     <input type="text" asp-for="Filt.DatKoncVV" id="data_vvk">
                                     <script>
                                         var timeInMs = Date.now();
@@ -201,28 +219,7 @@
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td>
-                                    <input type="checkbox" asp-for="Filt.prim">Примечание
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>
-                                        <input type="checkbox" asp-for="Filt.pret">Претензия
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="od">
-                                <td>Статус</td>
-                                <td>
-                                    <select id="st" asp-for="Filt.Status" class="req">
-                                        <option value="">Выберите статус</option>
-                                        <option value='на складе'>на складе</option>
-                                        <option value='назначен'>назначен</option>
-                                    </select>
-                                </td>
-                            </tr>
+
 
 
 
@@ -238,17 +235,17 @@
 
         <table id="lk">
             <tr>
-                <th> @Html.ActionLink("№", "Sort1", "Lk", new { sortOrder = ViewBag.Nom }) </th>
-                <th> @Html.ActionLink("Название комплекта", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("Инвентарный номер", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("Старый инвентарный номер", "Sort1", "Lk", new { sortOrder = ViewBag.Mo })</th>
-                <th> @Html.ActionLink("Дата установки", "Sort1", "Lk", new { sortOrder = ViewBag.F })</th>
-                <th> @Html.ActionLink("Дата возврата", "Sort1", "Lk", new { sortOrder = ViewBag.I })</th>
-                <th> @Html.ActionLink("Дата ввода", "Sort1", "Lk", new { sortOrder = ViewBag.O })</th>
-                <th> @Html.ActionLink("Статус", "Sort1", "Lk", new { sortOrder = ViewBag.Add_p })</th>
+                <th>№</th>
+                <th>Название комплекта</th>
+                <th>Инвентарный номер</th>
+                <th>Старый инвентарный номер</th>
+                <th>Дата установки</th>
+                <th>Дата возврата</th>
+                <th>Дата ввода</th>
+                <th>Статус</th>
                 <th>Претензия</th>
                 <th>Примечание</th>
-                <th>Привязать-отвязать</th>
+                <th>Закрепить-отвязать</th>
                 <th>Открыть</th>
             </tr>
 
@@ -260,9 +257,9 @@
                     <td>@Model.Listlk[i].sklad.nazv_komp</td>
                     <td>@Model.Listlk[i].sklad.nov_inv</td>
                     <td>@Model.Listlk[i].sklad.star_inv</td>
-                    <td>@Model.Listlk[i].sklad.data_ust_o</td>
-                    <td>@Model.Listlk[i].sklad.data_vozvr_kompl</td>
-                    <td>@Model.Listlk[i].sklad.data_vvoda_kompl</td>
+                    <td>@Model.Listlk[i].sklad.data_ust_o.ToShortDateString()</td>
+                    <td>@Model.Listlk[i].sklad.data_vozvr_kompl.ToShortDateString()</td>
+                    <td>@Model.Listlk[i].sklad.data_vvoda_kompl.ToShortDateString()</td>
                     <td>@Model.Listlk[i].sklad.status</td>
                     <td>@Model.Listlk[i].sklad.pritenz</td>
                     <td>@Model.Listlk[i].sklad.prim</td>
@@ -338,7 +335,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">История изменений</h4>
+                <h4 class="modal-title" id="myModalLabel">Закрепить ребенка</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <form method="post" enctype="multipart/form-data">
@@ -349,25 +346,21 @@
                     <script>
 
                         $(".button_del1").click(function () { // задаем функцию при нажатиии на элемент <button>
-
-
-
+                            alert("dsf");
                             $.ajax({
                                 url: '/Lk/SpisokToSkald/',
                                 type: "POST",
                                 dataType: "json",
                                 success: function (query) {
                                     var tableArr = ['<table>'];
-
+                                    alert("dsf");
                                     for (i = 0; i < query.length; i++) {
-
-                                        tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser?id=' + query[i].id + '&id_s=' + res + '">Привязать</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
+                                        tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser?id=' + query[i].id + '&id_s=' + res + '">Закрепить</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
                                     }
                                     tableArr.push('</table>');
                                     document.getElementById('stat').innerHTML = tableArr.join('\n')
                                 }
                             });
-
                         });
                         var res;
                         window.addEventListener("DOMContentLoaded", function () {

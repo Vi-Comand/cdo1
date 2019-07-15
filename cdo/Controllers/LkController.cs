@@ -191,7 +191,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = inven.nov_inv,
+                                   inventr = (inven == null ? 0 : inven.nov_inv),
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -246,7 +246,7 @@ namespace cdo.Controllers
                                select new LKUVR
                                {
                                    id = main.id,
-                                   inventr = inv.nov_inv,
+                                   inventr = (inv == null ? 0 : inv.nov_inv),
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -394,7 +394,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = inv.nov_inv,
+                                   inventr = (inv == null ? 0 : inv.nov_inv),
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -446,7 +446,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = inv.nov_inv,
+                                   inventr = (inv == null ? 0 : inv.nov_inv),
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -472,7 +472,8 @@ namespace cdo.Controllers
         }
         public IActionResult LKTech(ListLK2 list)
         {
-
+            var login = HttpContext.User.Identity.Name;
+            int role = db.User.Where(p => p.login == login).First().role;
             if (list == null)
                 list = new ListLK2();
 
@@ -592,6 +593,7 @@ namespace cdo.Controllers
                 }
 
             }
+            ViewBag.rl = role;
             list.Listlk = query.ToList();
             return View("LKTO", list);
         }
@@ -1223,7 +1225,7 @@ namespace cdo.Controllers
                          select new LKPP
                          {
                              id = main.id,
-                             inventr = inven.nov_inv,
+                             inventr = (inven == null ? 0 : inven.nov_inv),
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -1246,8 +1248,10 @@ namespace cdo.Controllers
             if (filtr.Filt.Status != null)
             {
                 query = query.Where(p => p.status == filtr.Filt.Status);
-
-
+            }
+            if (filtr.Filt.inv != 0)
+            {
+                query = query.Where(p => p.inventr == filtr.Filt.inv);
             }
             if (filtr.Filt.Nom != 0)
             {
@@ -1358,8 +1362,6 @@ namespace cdo.Controllers
                 case SortState.NomDesc:
                     model.Listlk = model.Listlk.OrderByDescending(s => s.id).ToList();
                     break;
-
-
 
                 case SortState.InAsc:
                     model.Listlk = model.Listlk.OrderBy(s => s.inventr).ToList();
@@ -2146,7 +2148,7 @@ namespace cdo.Controllers
                          select new LKUVR
                          {
                              id = main.id,
-                             inventr = inven.nov_inv,
+                             inventr = (inven == null ? 0 : inven.nov_inv),
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,
@@ -2166,6 +2168,11 @@ namespace cdo.Controllers
             {
                 query = query.Where(p => p.id == filtr.Filt.Nom);
 
+
+            }
+            if (filtr.Filt.inv != 0)
+            {
+                query = query.Where(p => p.inventr == filtr.Filt.inv);
 
             }
             if (filtr.Filt.F != null)
@@ -2373,8 +2380,7 @@ namespace cdo.Controllers
 
                          join mo in db.Mo on main.id_mo equals mo.Id into mo
                          from m in mo.DefaultIfEmpty()
-                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
-                         from inven in inv.DefaultIfEmpty()
+
                          join ist in db.Ist on main.id_f equals ist.id into ist
                          from f in ist.DefaultIfEmpty()
                          join tel in db.Ist on main.id_tel equals tel.id into tel
@@ -2392,7 +2398,6 @@ namespace cdo.Controllers
                          select new LKPP
                          {
                              id = main.id,
-                             inventr = inven.nov_inv,
                              MO = (m == null ? String.Empty : m.name),
                              fam = f.znach,
                              ima = i.znach,

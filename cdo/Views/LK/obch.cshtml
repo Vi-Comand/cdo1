@@ -29,21 +29,24 @@
                     <div class="panel-body">
 
                         <table>
+
                             <tr class="od">
-                                <td style="width: 30%;">№ ребенка</td>
-                                <td style="width: 70%;">
+                                <td style="width: 15%;">№ ребенка</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.Nom" />
                                 </td>
-                            </tr>
-                            <tr class="od">
-                                <td>Фамилия (ребенка)</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.F" />
+                                <td style="width: 15%;">Инвентарный номер</td>
+                                <td style="width: 35%;">
+                                    <input type="text" asp-for="Filt.inv">
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Имя (ребенка)</td>
-                                <td>
+                                <td style="width: 15%;">Фамилия (ребенка)</td>
+                                <td style="width: 35%;">
+                                    <input type="text" asp-for="Filt.F" />
+                                </td>
+                                <td style="width: 15%;">Имя (ребенка)</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.I" />
                                 </td>
                             </tr>
@@ -52,10 +55,14 @@
                                 <td>
                                     <input type="text" asp-for="Filt.O" />
                                 </td>
+                                <td>Телефон </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Tel" />
+                                </td>
                             </tr>
                             <tr class="od">
-                                <td>МО</td>
-                                <td>
+                                <td style="width: 15%;">МО</td>
+                                <td style="width: 35%;">
                                     <select id="napr" class="req" asp-for="Filt.MO">
                                         <option value="">Выберите МО</option>
                                         <option value='1'>Анапа</option>
@@ -103,12 +110,85 @@
                                         <option value='43'>Усть-Лабинский</option>
                                         <option value='44'>Щербиновский</option>
                                     </select>
-
+                                </td>
+                                <td>Адрес проживания</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Add_proj" />
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Дата рождения </td>
+                                <td>ФИО родителя – законного представителя</td>
                                 <td>
+                                    <input type="text" asp-for="Filt.Fio_rod_zp" />
+                                </td>
+
+                                <td>Диагноз</td>
+                                <td>
+                                    <textarea rows="1" cols="60 " asp-for="Filt.Diagn"></textarea>
+                                </td>
+                            </tr>
+                            <tr class="od">
+                                <td>Номер приказа о зачислении</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.prikaz" />
+                                </td>
+                                <td>Тип комплекта</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.tip_kompl" />
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="max-width:700px">
+                            <tr>
+                                <td>Дата приказа о зачислении</td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
+                                    <input type="text" asp-for="Filt.DatNachP" id="d_pr_z" />
+                                    <script>
+                                        $(function () {
+                                            $('#d_pr_z').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
+                                    <input type="text" asp-for="Filt.DatKoncP" id="d_pr_z_do" />
+                                    <script>
+
+                                        $(function () {
+                                            $('#d_pr_z_do').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeInMs,
+                                                "minDate": "01/01/1970",
+                                                "DefaultDate": dataN,
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+
+                            <tr class="od">
+                                <td>Дата рождения </td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
                                     <input type="text" asp-for="Filt.DatNachDR" id="data_roj">
                                     <script>
                                         dataN = new Date();
@@ -129,6 +209,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
                                     <input type="text" asp-for="Filt.DatKoncDR" id="data_roj_do">
                                     <script>
                                         var timeInMs = Date.now();
@@ -153,41 +235,10 @@
                                     </script>
                                 </td>
                             </tr>
-
-
-                            <tr class="od">
-                                <td>Адрес проживания</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Add_proj" />
-                                </td>
-                            </tr>
-
-                            <tr class="od">
-                                <td>Телефон </td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Tel" />
-                                </td>
-                            </tr>
-
-                            <tr class="od">
-                                <td>ФИО родителя – законного представителя</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Fio_rod_zp" />
-                                </td>
-                            </tr>
-
-
-                            <tr class="pp">
-                                <td>Диагноз</td>
-                                <td>
-                                    <textarea rows=" 3 " cols=" 60 " asp-for="Filt.Diagn"></textarea>
-                                </td>
-                            </tr>
-
                             <tr class="pp">
                                 <td>Срок действия справки МСЭ</td>
 
-                                <td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
                                     <input type="text" asp-for="Filt.DatNachSD" id="d_sp" />
                                     <script>
                                         $(function () {
@@ -205,6 +256,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
                                     <input type="text" asp-for="Filt.DatKoncSD" id="d_sp_do" />
                                     <script>
                                         var timeIsq = new Date(new Date().setFullYear(new Date().getFullYear() + 10));
@@ -226,66 +279,6 @@
                                     </script>
                                 </td>
                             </tr>
-
-                            <tr class="od">
-                                <td>Приказ о зачислении</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.prikaz" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Дата приказа о зачислении</td>
-                                <td>
-                                    От<input type="text" asp-for="Filt.DatNachP" id="d_pr_z" />
-                                    <script>
-                                        $(function () {
-                                            $('#d_pr_z').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "minDate": "01/01/1970",
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-
-                                    До<input type="text" asp-for="Filt.DatKoncP" id="d_pr_z_do" />
-                                    <script>
-
-                                        $(function () {
-                                            $('#d_pr_z_do').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "startDate": timeInMs,
-                                                "minDate": "01/01/1970",
-                                                "DefaultDate": dataN,
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Тип комплекта</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.tip_kompl" />
-                                </td>
-                            </tr>
-
                         </table>
 
                         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sort">Фильтровать</button>

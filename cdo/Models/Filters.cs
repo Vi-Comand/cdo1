@@ -32,6 +32,7 @@ namespace cdo.Models
         public string MS { get; set; }
         public string Fio_ped { get; set; }
         public string Status { get; set; }
+        public int inv { get; set; }
     }
     public class FilterSklad
     {

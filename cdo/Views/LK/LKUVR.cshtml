@@ -29,20 +29,22 @@
 
                         <table>
                             <tr class="od">
-                                <td style="width: 30%;">№ ребенка</td>
-                                <td style="width: 70%;">
+                                <td style="width: 15%;">№ ребенка</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.Nom" />
                                 </td>
-                            </tr>
-                            <tr class="od">
-                                <td>Фамилия (ребенка)</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.F" />
+                                <td style="width: 15%;">Инвентарный номер</td>
+                                <td style="width: 35%;">
+                                    <input type="text" asp-for="Filt.inv">
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Имя (ребенка)</td>
-                                <td>
+                                <td style="width: 15%;">Фамилия (ребенка)</td>
+                                <td style="width: 35%;">
+                                    <input type="text" asp-for="Filt.F" />
+                                </td>
+                                <td style="width: 15%;">Имя (ребенка)</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.I" />
                                 </td>
                             </tr>
@@ -51,10 +53,14 @@
                                 <td>
                                     <input type="text" asp-for="Filt.O" />
                                 </td>
+                                <td>Телефон </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Tel" />
+                                </td>
                             </tr>
                             <tr class="od">
-                                <td>МО</td>
-                                <td>
+                                <td style="width: 15%;">МО</td>
+                                <td style="width: 35%;">
                                     <select id="napr" class="req" asp-for="Filt.MO">
                                         <option value="">Выберите МО</option>
                                         <option value='1'>Анапа</option>
@@ -102,12 +108,52 @@
                                         <option value='43'>Усть-Лабинский</option>
                                         <option value='44'>Щербиновский</option>
                                     </select>
-
+                                </td>
+                                <td>Адрес проживания</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Add_proj" />
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Дата рождения </td>
+                                <td>ФИО родителя – законного представителя</td>
                                 <td>
+                                    <input type="text" asp-for="Filt.Fio_rod_zp" />
+                                </td>
+                                <td>Курсы</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Fio_rod_zp" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Базовая школа</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.BS" />
+                                </td>
+
+                                <td>Школа по месту жительства</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.MS" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Класс</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Klass" />
+                                </td>
+                                <td>ФИО педагога</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Fio_ped" />
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table style="max-width:700px">
+
+
+                            <tr class="od">
+                                <td>Дата рождения </td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
                                     <input type="text" asp-for="Filt.DatNachDR" id="data_roj">
                                     <script>
                                         dataN = new Date();
@@ -128,6 +174,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td style="min-width:140px; max-width:200px; width:200px;">
                                     <input type="text" asp-for="Filt.DatKoncDR" id="data_roj_do">
                                     <script>
                                         var timeInMs = Date.now();
@@ -152,56 +200,6 @@
                                     </script>
                                 </td>
                             </tr>
-
-
-                            <tr class="od">
-                                <td>Адрес проживания</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Add_proj" />
-                                </td>
-                            </tr>
-
-                            <tr class="od">
-                                <td>Телефон </td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Tel" />
-                                </td>
-                            </tr>
-
-                            <tr class="od">
-                                <td>ФИО родителя – законного представителя</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Fio_rod_zp" />
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>Класс</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Klass" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Базовая школа</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.BS" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Школа по месту жительства</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.MS" />
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>ФИО педагога</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Fio_ped" />
-                                </td>
-                            </tr>
-
                         </table>
                         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sort1">Фильтровать</button>
                     </div>
