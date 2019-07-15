@@ -28,21 +28,24 @@
                     <div class="panel-body">
 
                         <table>
+
                             <tr class="od">
-                                <td style="width: 30%;">№ ребенка</td>
-                                <td style="width: 70%;">
+                                <td style="width: 15%;">№ ребенка</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.Nom" />
                                 </td>
-                            </tr>
-                            <tr class="od">
-                                <td>Фамилия (ребенка)</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.F" />
+                                <td style="width: 15%;">Инвентарный номер</td>
+                                <td style="width: 35%;">
+                                    <input type="text" asp-for="Filt.inv">
                                 </td>
                             </tr>
                             <tr class="od">
-                                <td>Имя (ребенка)</td>
-                                <td>
+                                <td style="width: 15%;">Фамилия (ребенка)</td>
+                                <td style="width: 35%;">
+                                    <input type="text" asp-for="Filt.F" />
+                                </td>
+                                <td style="width: 15%;">Имя (ребенка)</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.I" />
                                 </td>
                             </tr>
@@ -51,10 +54,14 @@
                                 <td>
                                     <input type="text" asp-for="Filt.O" />
                                 </td>
+                                <td>Телефон </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.Tel" />
+                                </td>
                             </tr>
                             <tr class="od">
-                                <td>МО</td>
-                                <td>
+                                <td style="width: 15%;">МО</td>
+                                <td style="width: 35%;">
                                     <select id="napr" class="req" asp-for="Filt.MO">
                                         <option value="">Выберите МО</option>
                                         <option value='1'>Анапа</option>
@@ -102,51 +109,26 @@
                                         <option value='43'>Усть-Лабинский</option>
                                         <option value='44'>Щербиновский</option>
                                     </select>
-
                                 </td>
-                            </tr>
-                            <tr class="od">
-                                <td>Инвентарниый номер</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.inv" id="data_roj">
-
-                                </td>
-                            </tr>
-
-
-                            <tr class="od">
                                 <td>Адрес проживания</td>
                                 <td>
                                     <input type="text" asp-for="Filt.Add_proj" />
                                 </td>
                             </tr>
-
-                            <tr class="od">
-                                <td>Телефон </td>
-                                <td>
-                                    <input type="text" asp-for="Filt.Tel" />
-                                </td>
-                            </tr>
-
                             <tr class="od">
                                 <td>ФИО родителя – законного представителя</td>
                                 <td>
                                     <input type="text" asp-for="Filt.Fio_rod_zp" />
                                 </td>
-                            </tr>
-
-
-                            <tr>
                                 <td>Название комплекта</td>
                                 <td>
                                     <input type="text" asp-for="Filt.nazv_kompl" />
                                 </td>
                             </tr>
 
-
-
                         </table>
-                        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="LKUr">Фильтровать</button>
+
+                        <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="LKTech">Фильтровать</button>
                     </div>
                 </div>
             </div>
@@ -157,14 +139,14 @@
 
         <table id="lk">
             <tr>
-                <th> @Html.ActionLink("№", "Sort1", "Lk", new { sortOrder = ViewBag.Nom }) </th>
-                <th> @Html.ActionLink("Название комплекта", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("Инвентарный номер", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("МО", "Sort1", "Lk", new { sortOrder = ViewBag.Mo })</th>
-                <th> @Html.ActionLink("Фамилия", "Sort1", "Lk", new { sortOrder = ViewBag.F })</th>
-                <th> @Html.ActionLink("Имя", "Sort1", "Lk", new { sortOrder = ViewBag.I })</th>
-                <th> @Html.ActionLink("Отчество", "Sort1", "Lk", new { sortOrder = ViewBag.O })</th>
-                <th> @Html.ActionLink("Адрес проживания", "Sort1", "Lk", new { sortOrder = ViewBag.Add_p })</th>
+                <th>№</th>
+                <th>Название комплекта</th>
+                <th>Инвентарный номер</th>
+                <th>МО</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Адрес проживания</th>
                 <th>Телефон</th>
                 <th>ФИО родителя ЗП</th>
 

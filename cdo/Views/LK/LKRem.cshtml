@@ -30,9 +30,13 @@
 
                         <table>
                             <tr class="od">
-                                <td style="width: 30%;">№</td>
-                                <td style="width: 70%;">
+                                <td style="width: 15%;">№ заявки</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.Nom" />
+                                </td>
+                                <td style="width: 15%;">Статус</td>
+                                <td style="width: 35%;">
+                                    <input type="text" asp-for="Filt.Status" />
                                 </td>
                             </tr>
                             <tr class="od">
@@ -40,19 +44,31 @@
                                 <td>
                                     <input type="text" asp-for="Filt.FIO_prin" />
                                 </td>
-                            </tr>
-                            <tr class="od">
+
                                 <td>ФИО выполневшего</td>
                                 <td>
                                     <input type="text" asp-for="Filt.FIO_vipol" />
                                 </td>
                             </tr>
-                            <tr class="od">
-                                <td>Статус</td>
+                            <tr>
                                 <td>
-                                    <input type="text" asp-for="Filt.Status" />
+                                    <label><input type="checkbox" asp-for="Filt.prim">Примечание</label>
+                                </td>
+
+                                <td>
+                                    <label><input type="checkbox" asp-for="Filt.neisp">Неисправность</label>
+                                </td>
+
+                                <td>
+                                    <label><input type="checkbox" asp-for="Filt.zamena">Замена</label>
+                                </td>
+
+                                <td>
+                                    <label><input type="checkbox" asp-for="Filt.viezd">Выезд</label>
                                 </td>
                             </tr>
+                        </table>
+                        <table style="max-width:700px">
                             <tr class="od">
                                 <td>Дата заявления </td>
                                 <td>
@@ -77,6 +93,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td>
                                     <input type="text" asp-for="Filt.DatKoncZ" id="data_zk">
                                     <script>
 
@@ -126,6 +144,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td>
                                     <input type="text" asp-for="Filt.DatKoncV" id="data_vk">
                                     <script>
 
@@ -152,27 +172,7 @@
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td colspan="2">
-                                    <label><input type="checkbox" asp-for="Filt.prim">Примечание</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <label><input type="checkbox" asp-for="Filt.neisp">Неисправность</label>
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td colspan="2">
-                                    <label><input type="checkbox" asp-for="Filt.zamena">Замена</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <label><input type="checkbox" asp-for="Filt.viezd">Выезд</label>
-                                </td>
-                            </tr>
 
                         </table>
                         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Rem">Фильтровать</button>
@@ -181,70 +181,49 @@
             </div>
         </div>
 
-
-
-
         <table id="lk">
             <tr>
-                <th> @Html.ActionLink("№", "Sort1", "Lk", new { sortOrder = ViewBag.Nom }) </th>
-                <th> @Html.ActionLink("Дата заявки", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("Причина", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("Дата выполнения", "Sort1", "Lk", new { sortOrder = ViewBag.Mo })</th>
-                <th> @Html.ActionLink("ФИО принявшего", "Sort1", "Lk", new { sortOrder = ViewBag.F })</th>
-                <th> @Html.ActionLink("ФИО Выполневшего", "Sort1", "Lk", new { sortOrder = ViewBag.I })</th>
-                <th> @Html.ActionLink("Статус", "Sort1", "Lk", new { sortOrder = ViewBag.O })</th>
-                <th> @Html.ActionLink("Примечание", "Sort1", "Lk", new { sortOrder = ViewBag.Add_p })</th>
+                <th>№ заявки</th>
+                <th>Дата заявки</th>
+                <th>Причина</th>
+                <th>Дата выполнения</th>
+                <th>ФИО принявшего</th>
+                <th>ФИО выполневшего</th>
+                <th>Статус</th>
+                <th>Примечание</th>
                 <th>Замена </th>
                 <th>Выезд</th>
-
-
-
-
-
-
+                <th>Кнопки управления</th>
             </tr>
 
             @for (int i = 0; i < Model.Listlk.Count; i++)
             {
-
                 <tr>
-
-
                     <td>@Model.Listlk[i].rem.Id </td>
                     <td>@Model.Listlk[i].rem.data_z_r</td>
                     <td>@Model.Listlk[i].rem.prich_r</td>
                     <td>@Model.Listlk[i].rem.data_v_r</td>
-
                     <td>@Model.Listlk[i].rem.fio_prin_r</td>
                     <td>@Model.Listlk[i].rem.fio_vipol_r</td>
-
                     <td>@Model.Listlk[i].rem.status_r</td>
                     <td>@Model.Listlk[i].rem.prim_r</td>
-
-
-                    <td>@Model.Listlk[i].rem.zamena</td>
-                    <td>@Model.Listlk[i].rem.viezd</td>
-
-
-
-
-
+                    <td>
+                        @if (Model.Listlk[i].rem.zamena == true)
+                        {@Html.Raw("Замена");
+                    }
+                    </td>
+                    <td>
+                        @if (Model.Listlk[i].rem.viezd == true)
+                        {@Html.Raw("Выезд");
+                    }
+                    </td>
                     <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">Открыть</a> </td>
-
-
-
-
-                    @*<td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>*@
-
                 </tr>
             }
         </table>
 
     </form>
 </body>
-
-
-
 </html>
 
 <script>

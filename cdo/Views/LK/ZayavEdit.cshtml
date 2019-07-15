@@ -666,7 +666,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Балансовая стоимость</td>
+                                    <td>Балансовая стоимость (руб.)</td>
                                     <td>
                                         <input type="text" data-toggle="tooltip" data-placement="top" asp-for="sklad.stoim" readonly />
                                     </td>
@@ -1150,15 +1150,15 @@
                                     <td colspan="2">Паспортные данные законного представителя</td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 30%;">Номер</td>
+                                    <td style="width: 30%;">Серия</td>
                                     <td style="width: 70%;">
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Серия</td>
+                                    <td>Номер</td>
                                     <td>
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" />
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -1193,14 +1193,14 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Паспорт выдан</td>
+                                    <td>Кем выдан</td>
                                     <td>
                                         <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.vidan_p" asp-for="urot.vidan_p" />
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td>Место регистрации</td>
+                                    <td>Место жительства</td>
                                     <td>
                                         <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.propis_p" asp-for="urot.propis_p" />
                                     </td>
@@ -1365,7 +1365,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Акт о расторжении</td>
+                                                        <td>Дата акта о расторжении</td>
                                                         <td>
                                                             <input type="text" id="a_v_b_@i" asp-for="bvps[i].akt_vozvr_oborud" />
                                                             <script>
@@ -1389,13 +1389,13 @@
                                                     </tr>
                                                 }
                                                 <tr>
-                                                    <td>Документ-основание договора бвп</td>
+                                                    <td>Документ-основание договора БВП</td>
                                                     <td>
                                                         <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.bvps[i].prik_o_oborud" asp-for="bvps[i].prik_o_oborud" />
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Дата документ-основание договора бвп</td>
+                                                    <td>Дата документ-основание договора БВП</td>
                                                     <td>
                                                         <input type="text" id="p_o_b_@i" asp-for="bvps[i].prik_o_oborud_d" />
                                                         <script>
@@ -1871,13 +1871,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Документ-основание договора бвп</td>
+                                <td>Документ-основание договора БВП</td>
                                 <td>
                                     <input type="text" asp-for="bvpadd.prik_o_oborud" />
                                 </td>
                             </tr>
                             <tr>
-                                <td>Дата документ-основание договора бвп</td>
+                                <td>Дата документ-основание договора БВП</td>
                                 <td>
                                     <input type="text" id="mp_o_b_" asp-for="bvpadd.prik_o_oborud_d" />
                                     <script>

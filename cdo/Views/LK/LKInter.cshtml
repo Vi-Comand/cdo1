@@ -31,18 +31,28 @@
 
                         <table>
                             <tr class="od">
-                                <td style="width: 30%;">№</td>
-                                <td style="width: 70%;">
+                                <td style="width: 15%;">№ заявки</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.Nom" />
                                 </td>
-                            </tr>
-                            <tr class="od">
-                                <td>ФИО</td>
-                                <td>
+
+                                <td style="width: 15%;">ФИО</td>
+                                <td style="width: 35%;">
                                     <input type="text" asp-for="Filt.FIO_prin" />
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label><input type="checkbox" asp-for="Filt.prim">Примечание</label>
+                                </td>
 
+                                <td colspan="2">
+                                    <label><input type="checkbox" asp-for="Filt.neisp">Заявлена неисправность</label>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="max-width:700px">
                             <tr class="od">
                                 <td>Дата заявления </td>
                                 <td>
@@ -67,6 +77,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td>
                                     <input type="text" asp-for="Filt.DatKoncZ" id="data_zk">
                                     <script>
 
@@ -116,6 +128,8 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                                <td>
                                     <input type="text" asp-for="Filt.DatKoncV" id="data_vk">
                                     <script>
 
@@ -142,17 +156,7 @@
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td colspan="2">
-                                    <label><input type="checkbox" asp-for="Filt.prim">Примечание</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <label><input type="checkbox" asp-for="Filt.neisp">Заявленная неисправность</label>
 
-                                </td>
-                            </tr>
 
                         </table>
                         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Inter">Фильтровать</button>
@@ -166,12 +170,12 @@
 
         <table id="lk">
             <tr>
-                <th> @Html.ActionLink("№", "Sort1", "Lk", new { sortOrder = ViewBag.Nom }) </th>
-                <th> @Html.ActionLink("Дата заявки", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("Фио принявшего", "Sort1", "Lk", new { sortOrder = ViewBag.In })</th>
-                <th> @Html.ActionLink("Дата выполнения", "Sort1", "Lk", new { sortOrder = ViewBag.Mo })</th>
-                <th> @Html.ActionLink("Неисправность", "Sort1", "Lk", new { sortOrder = ViewBag.F })</th>
-                <th> @Html.ActionLink("Примечание", "Sort1", "Lk", new { sortOrder = ViewBag.I })</th>
+                <th> № заявки</th>
+                <th> Дата заявки</th>
+                <th> ФИО принявшего</th>
+                <th> Дата выполнения</th>
+                <th> Неисправность</th>
+                <th> Примечание</th>
 
 
 

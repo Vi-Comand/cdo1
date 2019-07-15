@@ -42,13 +42,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Балансовая стоимость</td>
+                    <td>Балансовая стоимость (руб.)</td>
                     <td>
                         <input type="text" asp-for="sk.stoim" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Дата ввода в эксплотацию</td>
+                    <td>Дата ввода в эксплуатацию</td>
                     <td>
                         <input type="text" asp-for="sk.data_vvoda_kompl" id="d_vv_e" />
                         <script>
@@ -104,7 +104,7 @@
                         </td>
                     </tr>*@
                 <tr>
-                    <td>Привязан <input type="hidden" asp-for="id_main" /></td>
+                    <td>Закреплен <input type="hidden" asp-for="id_main" /></td>
 
                     @if (Model.id_main == 0)
                     {
@@ -161,7 +161,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Привязать ребенка</h4>
+                    <h4 class="modal-title" id="myModalLabel">Закрепить ребенка</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <form method="post" enctype="multipart/form-data">
@@ -184,7 +184,7 @@
 
                                         for (i = 0; i < query.length; i++) {
 
-                                            tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser1?id=' + query[i].id + '&id_s=' + res + '">Привязать</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
+                                            tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser1?id=' + query[i].id + '&id_s=' + res + '">Закрепить</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
