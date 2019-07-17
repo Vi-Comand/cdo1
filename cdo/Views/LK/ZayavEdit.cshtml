@@ -739,20 +739,31 @@
                                     <td>
                                         <input type="text" asp-for="sklad.data_vozvr_kompl" id="d_vv_k1" readonly />
                                         <script>
+
                                             $(function () {
+
                                                 $('#d_vv_k').daterangepicker({
                                                     singleDatePicker: true,
                                                     showDropdowns: true,
-                                                    "minDate": "01/01/1980",
-                                                    "maxDate": dataN,
-                                                    "autoApply": true,
-                                                    "applyLabel": "Выбрать",
-                                                    "cancelLabel": "Отменить",
+                                                    timePicker24Hour: false,
+                                                    "minDate": "01.01.2000",
+                                                    autoUpdateInput: false,
                                                     locale: {
                                                         format: 'DD.MM.YYYY',
+                                                        "applyLabel": "Выбрать",
+                                                        "cancelLabel": "Очистить",
                                                         "firstDay": 1
                                                     }
                                                 });
+
+                                                $('#d_vv_k1').on('apply.daterangepicker', function (ev, picker) {
+                                                    $(this).val(picker.endDate.format('DD.MM.YYYY'));
+                                                });
+
+                                                $('#d_vv_k1').on('cancel.daterangepicker', function (ev, picker) {
+                                                    $(this).val('');
+                                                });
+
                                             });
                                         </script>
                                     </td>
@@ -947,21 +958,32 @@
                                                 <td>
                                                     <input type="text" id="d_z_v_@i" asp-for="remonti[i].data_v_r" />
                                                     <script>
-                                                                     $(function() {
-                                                                         $('#d_z_v_@i').daterangepicker({
-                                                                             singleDatePicker: true,
-                                                                             showDropdowns: true,
-                                                                             "minDate": "01/01/1970",
-                                                                             "maxDate": dataN,
-                                                                             "autoApply": true,
-                                                                             "applyLabel": "Выбрать",
-                                                                             "cancelLabel": "Отменить",
-                                                                             locale: {
-                                                                                 format: 'DD.MM.YYYY',
-                                                                                 "firstDay": 1
-                                                                             }
-                                                                         });
-                                                                     });
+
+                                                        $(function () {
+
+                                                            $('#d_z_v_@i').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                showDropdowns: true,
+                                                                timePicker24Hour: false,
+                                                                "minDate": "01.01.2000",
+                                                                autoUpdateInput: false,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "applyLabel": "Выбрать",
+                                                                    "cancelLabel": "Очистить",
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+
+                                                            $('#d_z_v_@i').on('apply.daterangepicker', function (ev, picker) {
+                                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+                                                            });
+
+                                                            $('#d_z_v_@i').on('cancel.daterangepicker', function (ev, picker) {
+                                                                $(this).val('');
+                                                            });
+
+                                                        });
                                                     </script>
                                                 </td>
                                             </tr>
@@ -1081,21 +1103,32 @@
                                                 <td>
                                                     <input type="text" id="d_z_vi_@i" asp-for="internet[i].data_v_i" />
                                                     <script>
-                                                                    $(function() {
-                                                                        $('#d_z_vi_@i').daterangepicker({
-                                                                            singleDatePicker: true,
-                                                                            showDropdowns: true,
-                                                                            "minDate": "01/01/1970",
-                                                                            "maxDate": dataN,
-                                                                            "autoApply": true,
-                                                                            "applyLabel": "Выбрать",
-                                                                            "cancelLabel": "Отменить",
-                                                                            locale: {
-                                                                                format: 'DD.MM.YYYY',
-                                                                                "firstDay": 1
-                                                                            }
-                                                                        });
-                                                                    });
+
+                                                        $(function () {
+
+                                                            $('#d_z_vi_@i').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                showDropdowns: true,
+                                                                timePicker24Hour: false,
+                                                                "minDate": "01.01.2000",
+                                                                autoUpdateInput: false,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "applyLabel": "Выбрать",
+                                                                    "cancelLabel": "Очистить",
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+
+                                                            $('#d_z_vi_@i').on('apply.daterangepicker', function (ev, picker) {
+                                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+                                                            });
+
+                                                            $('#d_z_vi_@i').on('cancel.daterangepicker', function (ev, picker) {
+                                                                $(this).val('');
+                                                            });
+
+                                                        });
                                                     </script>
                                                 </td>
                                             </tr>

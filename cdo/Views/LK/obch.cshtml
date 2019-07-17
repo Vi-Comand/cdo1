@@ -299,7 +299,7 @@
         <div style="overflow: auto;" class="prettyprint linenums prettyprinted">
             <table id="lk">
                 <tr>
-
+                    <th>№ п/п</th>
                     <th> @Html.ActionLink("№", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Nom }) </th>
                     <th> @Html.ActionLink("Инвентарный номер", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.In })</th>
                     <th> @Html.ActionLink("МО", "Sort", "Lk", new { f1 = Model.Filt.Add_proj, f2 = Model.Filt.DatKoncDR, f3 = Model.Filt.DatKoncP, f4 = Model.Filt.DatKoncSD, f5 = Model.Filt.DatNachDR, f6 = Model.Filt.DatNachP, f7 = Model.Filt.DatNachSD, f8 = Model.Filt.Diagn, f9 = Model.Filt.F, f10 = Model.Filt.I, f11 = Model.Filt.MO, f12 = Model.Filt.Fio_rod_zp, f13 = Model.Filt.Nom, f14 = Model.Filt.O, f15 = Model.Filt.prikaz, f16 = Model.Filt.Tel, f17 = Model.Filt.tip_kompl, sortOrder = ViewBag.Mo })</th>
@@ -329,7 +329,7 @@
 
                     <tr>
 
-
+                        <td>@(i + 1)</td>
                         <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">@Model.Listlk[i].id</a> </td>
                         <td>@Model.Listlk[i].inventr</td>
                         <td>@Model.Listlk[i].MO</td>
@@ -353,7 +353,7 @@
                             <td>@Model.Listlk[i].status</td>
                         }
 
-                        <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
+                        <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> <a asp-controller="Lk" asp-action="Del_Main" asp-route-id="@Model.Listlk[i].id">Удалить</a></td>
 
                     </tr>
                 }
