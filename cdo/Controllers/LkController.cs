@@ -1101,13 +1101,20 @@ namespace cdo.Controllers
                     db.SaveChanges();
                     str.id_srok_mse = pole.id;
                 }
-                str.prik_o_zach_d = composit.prikaz_d;
-                str.prik_o_zach_n = composit.prikaz;
-                str.status = composit.status;
-                str.tip_kompl = composit.tip_kompl;
-                str.diagn = composit.diag;
-                str.id_mo = composit.MO;
-                str.data_rojd = composit.data_roj;
+                if (str.prik_o_zach_d != composit.prikaz_d)
+                    str.prik_o_zach_d = composit.prikaz_d;
+                if (str.prik_o_zach_n != composit.prikaz)
+                    str.prik_o_zach_n = composit.prikaz;
+                if (str.status != composit.status)
+                    str.status = composit.status;
+                if (str.tip_kompl != composit.tip_kompl)
+                    str.tip_kompl = composit.tip_kompl;
+                if (str.diagn != composit.diag)
+                    str.diagn = composit.diag;
+                if (str.id_mo != composit.MO)
+                    str.id_mo = composit.MO;
+                if (str.data_rojd != composit.data_roj)
+                    str.data_rojd = composit.data_roj;
             }
             if (role == 1 || role == 3)
             {
@@ -1143,40 +1150,56 @@ namespace cdo.Controllers
                     db.SaveChanges();
                     str.id_soh_baz = pole.id;
                 }
-                str.klass = composit.klass;
-                str.FIO_ped = composit.FIO_ped;
+                if (str.klass != composit.klass)
+                    str.klass = composit.klass;
+                if (str.FIO_ped != composit.FIO_ped)
+                    str.FIO_ped = composit.FIO_ped;
             }
 
 
+            bool modif = false;
 
 
 
-
-            db.Entry(str).State = EntityState.Modified;
-            db.SaveChanges();
             if (role == 1 || role == 4)
             {
                 if (composit.tehot != null)
                 {
                     try
                     {
-                        db.Entry(composit.tehot).State = EntityState.Modified;
-                        db.SaveChanges();
+                        to row = composit.tehot;
+                        to prov = db.To.Find(row.id);
+                        if (row.inter != prov.inter || row.kompl != prov.kompl || row.skype_l != prov.skype_l || row.skype_p != prov.skype_p || row.date_inter != prov.date_inter)
+                        {
+
+                            db.Entry(prov).State = EntityState.Detached;
+                            db.Entry(row).State = EntityState.Modified;
+
+                            db.SaveChanges();
+                            modif = true;
+                        }
                     }
                     catch { }
                 }
                 if (composit.remonti != null)
                 {
-                    try
-                    {
-                        foreach (rem row in composit.remonti)
-                        {
-                            db.Entry(row).State = EntityState.Modified;
-                            db.SaveChanges();
-                        }
 
+                    foreach (rem row in composit.remonti)
+                    {
+                        rem prov = db.Rem.Find(row.Id);
+                        if (row.id_to != prov.id_to || row.prich_r != prov.prich_r || row.prim_r != prov.prim_r || row.status_r != prov.status_r || row.viezd != prov.viezd || row.zamena != prov.zamena || row.data_v_r != prov.data_v_r || row.data_z_r != prov.data_z_r || row.fio_prin_r != prov.fio_prin_r || row.fio_vipol_r != prov.fio_vipol_r)
+                        {
+
+                            db.Entry(prov).State = EntityState.Detached;
+                            db.Entry(row).State = EntityState.Modified;
+
+                            db.SaveChanges();
+                            modif = true;
+                        }
                     }
-                    catch { }
+
+
+
                 }
                 if (composit.internet != null)
                 {
@@ -1184,8 +1207,19 @@ namespace cdo.Controllers
                     {
                         foreach (inter row in composit.internet)
                         {
-                            db.Entry(row).State = EntityState.Modified;
-                            db.SaveChanges();
+
+
+                            inter prov = db.Inter.Find(row.Id);
+                            if (row.id_to != prov.id_to || row.zayav_neisp_i != prov.zayav_neisp_i || row.prim_i != prov.prim_i || row.data_v_i != prov.data_v_i || row.data_z_i != prov.data_z_i || row.fio_prin_i != prov.fio_prin_i)
+                            {
+
+                                db.Entry(prov).State = EntityState.Detached;
+
+
+                                db.Entry(row).State = EntityState.Modified;
+                                db.SaveChanges();
+                                modif = true;
+                            }
                         }
 
                     }
@@ -1199,12 +1233,37 @@ namespace cdo.Controllers
                 {
                     try
                     {
-                        db.Entry(composit.urot).State = EntityState.Modified;
-                        db.SaveChanges();
+
+                        uo row = composit.urot;
+                        uo prov = db.Uo.Find(row.id);
+                        if (row.id_dvij_dog_bvp != prov.id_dvij_dog_bvp || row.kod_p != prov.kod_p || row.nom_p != prov.nom_p || row.propis_p != prov.propis_p || row.rogd_p != prov.rogd_p || row.ser_p != prov.ser_p || row.vidan_p != prov.vidan_p || row.data_p != prov.data_p || row.data_roj != prov.data_roj || row.dop_sogl_bvp_d != prov.dop_sogl_bvp_d || row.dop_sogl_bvp_n != prov.dop_sogl_bvp_n)
+                        {
+
+                            db.Entry(prov).State = EntityState.Detached;
+                            db.Entry(row).State = EntityState.Modified;
+                            db.SaveChanges();
+                            modif = true;
+                        }
                     }
                     catch { }
                 }
             }
+
+            if (modif)
+            {
+                str.data_izm = DateTime.Now;
+            }
+
+
+            if (db.Entry(str).State == EntityState.Modified)
+            {
+                str.data_izm = DateTime.Now;
+                db.Entry(str).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+
+
             return Redirect("/Lk/Lk");
 
         }
@@ -2870,6 +2929,8 @@ namespace cdo.Controllers
             int ye = DateTime.Now.Year;
             if (compositeModel.kursadd.kurs_do != null)
             {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
                 compositeModel.kursadd.id_main = compositeModel.id;
                 if (DateTime.Now.Month > 8)
                 {
@@ -2879,6 +2940,7 @@ namespace cdo.Controllers
                 {
                     compositeModel.kursadd.period = (ye - 1).ToString() + "-" + ye.ToString();
                 }
+                db.Entry(mai).State = EntityState.Modified;
                 db.Entry(compositeModel.kursadd).State = EntityState.Added;
                 db.SaveChanges();
             }
@@ -2889,7 +2951,11 @@ namespace cdo.Controllers
         {
             if (compositeModel.remadd.data_z_r != null)
             {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
                 compositeModel.remadd.id_to = compositeModel.tehot.id;
+
+                db.Entry(mai).State = EntityState.Modified;
                 db.Entry(compositeModel.remadd).State = EntityState.Added;
                 db.SaveChanges();
             }
@@ -2900,7 +2966,10 @@ namespace cdo.Controllers
         {
             if (compositeModel.intadd.data_z_i != null)
             {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
                 compositeModel.intadd.id_to = compositeModel.tehot.id;
+                db.Entry(mai).State = EntityState.Modified;
                 db.Entry(compositeModel.intadd).State = EntityState.Added;
                 db.SaveChanges();
             }
@@ -2911,7 +2980,10 @@ namespace cdo.Controllers
         {
             if (compositeModel.bvpadd.nom_dog_bvp_d != null)
             {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
                 compositeModel.bvpadd.id_uo = compositeModel.urot.id;
+                db.Entry(mai).State = EntityState.Modified;
                 db.Entry(compositeModel.bvpadd).State = EntityState.Added;
                 db.SaveChanges();
             }
@@ -2923,6 +2995,9 @@ namespace cdo.Controllers
             var product = db.Kurs.Find(id);
             if (product != null)
             {
+                main mai = db.Main.Find(id_main);
+                mai.data_izm = DateTime.Now;
+                db.Entry(mai).State = EntityState.Modified;
                 db.Kurs.Remove(product);
                 await db.SaveChangesAsync();
             }
@@ -2934,7 +3009,11 @@ namespace cdo.Controllers
             var product = db.Rem.Find(compositeModel.remadd.Id);
             if (product != null)
             {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
                 db.Rem.Remove(product);
+                db.Entry(mai).State = EntityState.Modified;
+
                 await db.SaveChangesAsync();
             }
             return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
@@ -2945,7 +3024,10 @@ namespace cdo.Controllers
             var product = db.Inter.Find(compositeModel.intadd.Id);
             if (product != null)
             {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
                 db.Inter.Remove(product);
+                db.Entry(mai).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
             return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
@@ -2956,7 +3038,10 @@ namespace cdo.Controllers
             var product = db.Bvp.Find(compositeModel.bvpadd.id);
             if (product != null)
             {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
                 db.Bvp.Remove(product);
+                db.Entry(mai).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
             return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
