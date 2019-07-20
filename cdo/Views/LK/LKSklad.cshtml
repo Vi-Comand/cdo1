@@ -120,55 +120,7 @@
                                     </script>
                                 </td>
                             </tr>
-                            <tr class="od">
-                                <td>Дата возврата</td>
-                                <td>
-                                    <input type="text" asp-for="Filt.DatNachV" id="data_v">
-                                    <script>
-                                        dataN = new Date();
-                                        //alert(dataN);
-                                        $(function () {
-                                            $('#data_v').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "minDate": "01/01/1970",
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                                <td>
-                                    <input type="text" asp-for="Filt.DatKoncV" id="data_vk">
-                                    <script>
-                                        var timeInMs = Date.now();
-                                        dataN = new Date();
-                                        //alert(dataN);
-                                        $(function () {
-                                            $('#data_vk').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "startDate": timeIs,
-                                                "minDate": "01/01/1970",
-                                                "maxDate": timeIs,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
+
                             <tr class="od">
                                 <td>Дата ввода </td>
                                 <td>
@@ -218,7 +170,55 @@
                                     </script>
                                 </td>
                             </tr>
-
+                            <tr class="od">
+                                <td>Дата возврата</td>
+                                <td>
+                                    <input type="text" asp-for="Filt.DatNachV" id="data_v">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_v').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/0001",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                                <td>
+                                    <input type="text" asp-for="Filt.DatKoncV" id="data_vk">
+                                    <script>
+                                        var timeInMs = Date.now();
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#data_vk').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "startDate": timeIs,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": timeIs,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
 
 
 
@@ -240,8 +240,8 @@
                 <th>Инвентарный номер</th>
                 <th>Старый инвентарный номер</th>
                 <th>Дата установки</th>
-                <th>Дата возврата</th>
                 <th>Дата ввода</th>
+                <th>Дата возврата</th>
                 <th>Статус</th>
                 <th>Претензия</th>
                 <th>Примечание</th>
@@ -258,8 +258,12 @@
                     <td>@Model.Listlk[i].sklad.nov_inv</td>
                     <td>@Model.Listlk[i].sklad.star_inv</td>
                     <td>@Model.Listlk[i].sklad.data_ust_o.ToShortDateString()</td>
-                    <td>@Model.Listlk[i].sklad.data_vozvr_kompl.ToShortDateString()</td>
                     <td>@Model.Listlk[i].sklad.data_vvoda_kompl.ToShortDateString()</td>
+                    <td>
+                        @if (Model.Listlk[i].sklad.data_vozvr_kompl.ToShortDateString() != "01.01.0001")
+                        {@Model.Listlk[i].sklad.data_vozvr_kompl.ToShortDateString();
+                    }
+                    </td>
                     <td>@Model.Listlk[i].sklad.status</td>
                     <td>@Model.Listlk[i].sklad.pritenz</td>
                     <td>@Model.Listlk[i].sklad.prim</td>
@@ -346,14 +350,14 @@
                     <script>
 
                         $(".button_del1").click(function () { // задаем функцию при нажатиии на элемент <button>
-                            alert("dsf");
+
                             $.ajax({
                                 url: '/Lk/SpisokToSkald/',
                                 type: "POST",
                                 dataType: "json",
                                 success: function (query) {
                                     var tableArr = ['<table>'];
-                                    alert("dsf");
+
                                     for (i = 0; i < query.length; i++) {
                                         tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser?id=' + query[i].id + '&id_s=' + res + '">Закрепить</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
                                     }

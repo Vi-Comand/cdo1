@@ -132,7 +132,7 @@
                                             $('#data_v').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                "minDate": "01/01/1970",
+                                                "minDate": "01/01/0001",
                                                 "maxDate": dataN,
                                                 "autoApply": true,
                                                 "applyLabel": "Выбрать",
@@ -202,24 +202,27 @@
                     <td>@Model.Listlk[i].rem.Id </td>
                     <td>@Model.Listlk[i].rem.data_z_r</td>
                     <td>@Model.Listlk[i].rem.prich_r</td>
-                    <td>@Model.Listlk[i].rem.data_v_r</td>
-                    <td>@Model.Listlk[i].rem.fio_prin_r</td>
-                    <td>@Model.Listlk[i].rem.fio_vipol_r</td>
-                    <td>@Model.Listlk[i].rem.status_r</td>
-                    <td>@Model.Listlk[i].rem.prim_r</td>
                     <td>
-                        @if (Model.Listlk[i].rem.zamena == true)
-                        {@Html.Raw("Замена");
-                    }
-                    </td>
-                    <td>
-                        @if (Model.Listlk[i].rem.viezd == true)
-                        {@Html.Raw("Выезд");
-                    }
-                    </td>
-                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">Открыть</a> </td>
-                </tr>
-            }
+                        @if (Model.Listlk[i].rem.data_v_r.ToShortDateString() != "01.01.0001")
+                        {@Model.Listlk[i].rem.data_v_r.ToShortDateString()}
+                </td>
+                <td>@Model.Listlk[i].rem.fio_prin_r</td>
+                <td>@Model.Listlk[i].rem.fio_vipol_r</td>
+                <td>@Model.Listlk[i].rem.status_r</td>
+                <td>@Model.Listlk[i].rem.prim_r</td>
+                <td>
+                    @if (Model.Listlk[i].rem.zamena == true)
+                    {@Html.Raw("Замена");
+                }
+                </td>
+                <td>
+                    @if (Model.Listlk[i].rem.viezd == true)
+                    {@Html.Raw("Выезд");
+                }
+                </td>
+                <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">Открыть</a> </td>
+            </tr>
+        }
         </table>
 
     </form>

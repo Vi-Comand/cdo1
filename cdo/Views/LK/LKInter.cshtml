@@ -194,7 +194,8 @@
                     <td><a asp-controller="Lk" asp-action="" asp-route-id="@Model.Listlk[i].internet.Id">@Model.Listlk[i].internet.Id</a> </td>
                     <td>@Model.Listlk[i].internet.data_z_i</td>
                     <td>@Model.Listlk[i].internet.fio_prin_i</td>
-                    <td>@Model.Listlk[i].internet.data_v_i</td>
+                    <td>@if (Model.Listlk[i].internet.data_v_i.ToShortDateString() != "01.01.0001")
+                    {@Model.Listlk[i].internet.data_v_i.ToShortDateString()}</td>
 
                     <td>@Model.Listlk[i].internet.zayav_neisp_i</td>
                     <td>@Model.Listlk[i].internet.prim_i</td>

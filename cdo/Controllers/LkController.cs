@@ -219,10 +219,6 @@ namespace cdo.Controllers
 
         public IActionResult Lk()
         {
-
-
-
-
             var login = HttpContext.User.Identity.Name;
             int role = db.User.Where(p => p.login == login).First().role;
             if (role == 2)
@@ -406,7 +402,7 @@ namespace cdo.Controllers
                                select new LKPP
                                {
                                    id = main.id,
-                                   inventr = inv.nov_inv,
+                                   inventr = (inv == null ? 0 : inv.nov_inv),
                                    MO = (m == null ? String.Empty : m.name),
                                    fam = f.znach,
                                    ima = i.znach,
@@ -707,6 +703,13 @@ namespace cdo.Controllers
                 {
                     query = from t in query
                             where t.rem.fio_vipol_r.Contains(list.Filt.FIO_vipol)
+                            select t;
+
+                }
+                if (list.Filt.Status != null)
+                {
+                    query = from t in query
+                            where t.rem.status_r.Contains(list.Filt.Status)
                             select t;
 
                 }
@@ -1691,8 +1694,8 @@ namespace cdo.Controllers
 
             }
 
-            if (filtr.Filt.DatNachSD != null || filtr.Filt.DatKoncSD != null)
-                query = query.Where(p => Convert.ToDateTime(p.srok_mse) >= filtr.Filt.DatNachSD && Convert.ToDateTime(p.srok_mse) <= filtr.Filt.DatKoncSD);
+            /* if (filtr.Filt.DatNachSD != null || filtr.Filt.DatKoncSD != null)
+                 query = query.Where(p => Convert.ToDateTime(p.srok_mse) >= filtr.Filt.DatNachSD && Convert.ToDateTime(p.srok_mse) <= filtr.Filt.DatKoncSD);*/
             if (filtr.Filt.prikaz != null)
             {
                 query = from t in query
@@ -1992,8 +1995,8 @@ namespace cdo.Controllers
 
             }
 
-            if (filtr.Filt.DatNachSD != null || filtr.Filt.DatKoncSD != null)
-                query = query.Where(p => Convert.ToDateTime(p.srok_mse) >= filtr.Filt.DatNachSD && Convert.ToDateTime(p.srok_mse) <= filtr.Filt.DatKoncSD);
+            /*    if (filtr.Filt.DatNachSD != null || filtr.Filt.DatKoncSD != null)
+                    query = query.Where(p => Convert.ToDateTime(p.srok_mse) >= filtr.Filt.DatNachSD && Convert.ToDateTime(p.srok_mse) <= filtr.Filt.DatKoncSD);*/
             if (filtr.Filt.prikaz != null)
             {
                 query = from t in query
@@ -2957,6 +2960,26 @@ namespace cdo.Controllers
                 await db.SaveChangesAsync();
             }
             return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
+        }
+
+        public async Task<IActionResult> Del_Main(int id)
+        {
+            var product = db.Main.Find(id);
+
+            if (product != null)
+            {
+                var to = product.id_to;
+                var uo = product.id_uo;
+
+                db.Main.Remove(product);
+
+                await db.SaveChangesAsync();
+                db.To.Remove(db.To.Find(to));
+                await db.SaveChangesAsync();
+                db.Uo.Remove(db.Uo.Find(uo));
+                await db.SaveChangesAsync();
+            }
+            return Redirect("/Lk/lk");
         }
 
         public IActionResult Creat()

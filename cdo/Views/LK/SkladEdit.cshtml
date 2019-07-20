@@ -133,20 +133,31 @@
                     <td>
                         <input type="text" asp-for="sk.data_vozvr_kompl" id="d_v_k" />
                         <script>
+
                             $(function () {
+
                                 $('#d_v_k').daterangepicker({
                                     singleDatePicker: true,
                                     showDropdowns: true,
-                                    "minDate": "01/01/1980",
-                                    "maxDate": dataN,
-                                    "autoApply": true,
-                                    "applyLabel": "Выбрать",
-                                    "cancelLabel": "Отменить",
+                                    timePicker24Hour: false,
+                                    "minDate": "01.01.2000",
+                                    autoUpdateInput: false,
                                     locale: {
                                         format: 'DD.MM.YYYY',
+                                        "applyLabel": "Выбрать",
+                                        "cancelLabel": "Очистить",
                                         "firstDay": 1
                                     }
                                 });
+
+                                $('#d_v_k').on('apply.daterangepicker', function (ev, picker) {
+                                    $(this).val(picker.endDate.format('DD.MM.YYYY'));
+                                });
+
+                                $('#d_v_k').on('cancel.daterangepicker', function (ev, picker) {
+                                    $(this).val('');
+                                });
+
                             });
                         </script>
                     </td>
@@ -173,8 +184,6 @@
 
                             $(".button_del1").click(function () { // задаем функцию при нажатиии на элемент <button>
 
-
-
                                 $.ajax({
                                     url: '/Lk/SpisokToSkald/',
                                     type: "POST",
@@ -183,14 +192,12 @@
                                         var tableArr = ['<table>'];
 
                                         for (i = 0; i < query.length; i++) {
-
                                             tableArr.push('<tr><td>' + '<a href="/LK/SvyazSkladToUser1?id=' + query[i].id + '&id_s=' + res + '">Закрепить</a></td><td style="width: 40%">' + query[i].mo + '</td><td style="width: 40%">' + query[i].fam + ' ' + query[i].ima + ' ' + query[i].otch + '</td><td style="width: 40%">' + query[i].address_proj + '</td><td style="width: 40%">' + query[i].tel + '</td><td style="width: 40%">' + query[i].fio_rod_zp + '</td><td>' + query[i].status + '</td></tr>');
                                         }
                                         tableArr.push('</table>');
                                         document.getElementById('stat').innerHTML = tableArr.join('\n')
                                     }
                                 });
-
                             });
                             var res;
                             window.addEventListener("DOMContentLoaded", function () {
