@@ -1,0 +1,206 @@
+﻿@model cdo.Models.ListLK6
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lk-user</title>
+</head>
+<body>
+
+    <form method="post" asp-controller="User" asp-action="Creat">
+
+
+        <table>
+            <tr>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.F">Фамилия</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.I">Имя</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.O">Отчество</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.add_p">Адрес проживания</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.add_r">Адрес регистрации</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.Tel">Телефон</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.Fio_rod">ФИО родителя</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.Fio_rod_zp">ФИО законного представителя</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.sb">Школа базовая</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.sj">Школа по месту жительства</label>
+                </td>
+                <td>
+                    <label><input type="checkbox" asp-for="Filt.mse">МСЭ</label>
+                </td>
+                <td>Дата</td>
+                <td style="min-width:140px; max-width:200px; width:200px;">
+                    <input type="text" asp-for="Filt.DataN" id="d_pr_z" />
+                    <script>
+                        $(function () {
+                            $('#d_pr_z').daterangepicker({
+                                singleDatePicker: true,
+                                showDropdowns: true,
+                                "minDate": "01/01/1970",
+                                "maxDate": dataN,
+                                "autoApply": true,
+                                "applyLabel": "Выбрать",
+                                "cancelLabel": "Отменить",
+                                locale: {
+                                    format: 'DD.MM.YYYY',
+                                    "firstDay": 1
+                                }
+                            });
+                        });
+                    </script>
+                </td>
+                <td style="min-width:140px; max-width:200px; width:200px;">
+                    <input type="text" asp-for="Filt.DataK" id="d_pr_z_do" />
+                    <script>
+                        var timeInMs = Date.now();
+                        var dataN = new Date();
+                        $(function () {
+                            $('#d_pr_z_do').daterangepicker({
+                                singleDatePicker: true,
+                                showDropdowns: true,
+                                "startDate": timeInMs,
+                                "minDate": "01/01/1970",
+                                "DefaultDate": dataN,
+                                "maxDate": dataN,
+                                "autoApply": true,
+                                "applyLabel": "Выбрать",
+                                "cancelLabel": "Отменить",
+                                locale: {
+                                    format: 'DD.MM.YYYY',
+                                    "firstDay": 1
+                                }
+                            });
+                        });
+                    </script>
+                </td>
+                <td>
+                    <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="LKIstor">Фильтр</button>
+                </td>
+
+            </tr>
+        </table>
+
+
+        <div style="overflow: auto;" class="prettyprint linenums prettyprinted">
+            <table id="lk">
+                <tr>
+
+                    <th> № </th>
+                    <th> Инвентарный номер</th>
+                    <th> МО </th>
+                    <th> Фамилия </th>
+                    <th> Имя</th>
+                    <th> Отчество)</th>
+                    <th> Дата рождения </th>
+                    <th> Адрес проживания</th>
+                    <th>Телефон</th>
+                    <th>ФИО родителя ЗП</th>
+                    <th> Диагноз </th>
+                    <th> МСЭ</th>
+                    <th> № приказа</th>
+                    <th> Дата приказа </th>
+                    <th> Класс </th>
+                    <th> Тип комплекта</th>
+                    <th> Статус</th>
+
+                    <th colspan="2">Кнопки управления</th>
+
+                </tr>
+                @if (Model.Listlk != null)
+                {
+                    @for (int i = 0; i < Model.Listlk.Count; i++)
+                    {
+
+                        <tr>
+
+
+                            <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">@Model.Listlk[i].id</a> </td>
+                            <td>@Model.Listlk[i].inventr</td>
+                            <td>@Model.Listlk[i].MO</td>
+                            <td>@Model.Listlk[i].fam</td>
+
+                            <td>@Model.Listlk[i].ima</td>
+                            <td>@Model.Listlk[i].otch</td>
+                            <td>@Model.Listlk[i].data_roj.ToShortDateString()</td>
+
+                            <td>@Model.Listlk[i].address_proj</td>
+                            <td>@Model.Listlk[i].tel</td>
+                            <td>@Model.Listlk[i].Fio_rod_zp</td>
+                            <td>@Model.Listlk[i].diagn</td>
+                            <td>@Model.Listlk[i].srok_mse</td>
+                            <td>@Model.Listlk[i].prikaz</td>
+                            <td>@Model.Listlk[i].prikazd.ToShortDateString()</td>
+                            <td>@Model.Listlk[i].klass</td>
+                            <td>@Model.Listlk[i].tip_kompl</td>
+
+                            <td>@Model.Listlk[i].status</td>
+
+
+                            <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id">Открыть</a> </td>
+
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </form>
+</body>
+
+
+
+</html>
+
+<script>
+
+    var VAL = "Заявление на рассмотрении";
+    var VAL2 = "Дубль";
+    var VAL3 = "Ошибочное заявление";
+    var VAL4 = "Отказано АК в приеме заявления";
+    var VAL5 = "Заявление подлинное";
+    $(function () {
+        $("#lk tr").each(function () {
+            var textValue = $(this).closest('tr').find('td:eq(4)').text();
+            //  alert(textValue);
+            if (textValue == VAL) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(91, 243, 145, 0.15)');
+            }
+            if (textValue == VAL2) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL3) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL4) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(255, 0, 0, 0.24)');
+            }
+            if (textValue == VAL5) {
+                // add css class or any manipulation to your dom.
+                $(this).closest('tr').find('td').css('background-color', 'rgba(24, 239, 24, 0.36)');
+            }
+        });
+    });
+
+</script>

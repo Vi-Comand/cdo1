@@ -34,6 +34,41 @@ namespace cdo.Models
         public string Status { get; set; }
         public int inv { get; set; }
     }
+
+
+
+
+
+    public class FilterIst
+    {
+
+        public bool F { get; set; }
+        public bool I { get; set; }
+        public bool O { get; set; }
+
+
+        public bool add_p { get; set; }
+        public bool add_r { get; set; }
+        public bool Tel { get; set; }
+        public bool Fio_rod_zp { get; set; }
+        public bool Fio_rod { get; set; }
+        public bool sb { get; set; }
+        public bool sj { get; set; }
+
+        public bool mse { get; set; }
+
+        public DateTime DataN { get; set; }
+        public DateTime DataK { get; set; }
+
+    }
+
+    public class FI
+    {
+        public int id { get; set; }
+    }
+
+
+
     public class FilterSklad
     {
         public int Nom { get; set; }

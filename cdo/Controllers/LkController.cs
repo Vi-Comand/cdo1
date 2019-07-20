@@ -154,6 +154,69 @@ namespace cdo.Controllers
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
 
         }
+
+        public ActionResult LKIstor(ListLK6 list)
+        {
+
+            var query = from t in db.Ist
+                        where list.Filt.DataN <= t.data_izm && list.Filt.DataK >= t.data_izm
+                        select t;
+
+
+            int[] mas = (from t in query
+                         where (list.Filt.F != false ? t.kluch == "f" : t.kluch == "") || (list.Filt.I != false ? t.kluch == "i" : t.kluch == "") || (list.Filt.O != false ? t.kluch == "o" : t.kluch == "") || (list.Filt.sb != false ? t.kluch == "sbaz" : t.kluch == "") || (list.Filt.sj != false ? t.kluch == "sjit" : t.kluch == "") || (list.Filt.Tel != false ? t.kluch == "tel" : t.kluch == "") || (list.Filt.mse != false ? t.kluch == "srmse" : t.kluch == "") || (list.Filt.Fio_rod != false ? t.kluch == "fior" : t.kluch == "") || (list.Filt.Fio_rod_zp != false ? t.kluch == "fiozp" : t.kluch == "") || (list.Filt.add_p != false ? t.kluch == "adrp" : t.kluch == "") || (list.Filt.add_r != false ? t.kluch == "adrr" : t.kluch == "")
+                         select t.id_main).ToArray();
+            list.Listlk = (from main in db.Main.Where(p => mas.Distinct().Contains(p.id))
+
+                           join mo in db.Mo on main.id_mo equals mo.Id into mo
+                           from m in mo.DefaultIfEmpty()
+                           join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
+                           from inven in inv.DefaultIfEmpty()
+                           join ist in db.Ist on main.id_f equals ist.id into ist
+                           from f in ist.DefaultIfEmpty()
+                           join tel in db.Ist on main.id_tel equals tel.id into tel
+                           from te in tel.DefaultIfEmpty()
+                           join im in db.Ist on main.id_i equals im.id into im
+                           from i in im.DefaultIfEmpty()
+                           join ot in db.Ist on main.id_o equals ot.id into ot
+                           from o in ot.DefaultIfEmpty()
+                           join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                           from r in rod.DefaultIfEmpty()
+                           join add in db.Ist on main.id_adr_progiv equals add.id into add
+                           from a in add.DefaultIfEmpty()
+                           join to in db.To on main.id_to equals to.id into to
+                           from t in to.DefaultIfEmpty()
+                           join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                           from ms in mse.DefaultIfEmpty()
+
+                           select new LKPP
+                           {
+                               id = main.id,
+                               inventr = (inven == null ? 0 : inven.nov_inv),
+                               MO = (m == null ? String.Empty : m.name),
+                               fam = f.znach,
+                               ima = i.znach,
+                               otch = o.znach,
+                               data_roj = main.data_rojd.Date,
+                               address_proj = a.znach,
+                               tel = te.znach,
+                               Fio_rod_zp = r.znach,
+                               diagn = main.diagn,
+                               prikazd = main.prik_o_zach_d,
+                               prikaz = main.prik_o_zach_n,
+                               srok_mse = ms.znach,
+                               klass = main.klass,
+                               tip_kompl = main.tip_kompl,
+                               status = main.status
+
+                           }).ToList();
+
+            return View("Istor", list);
+        }
+
+
+
+
         public IActionResult Lk()
         {
 
