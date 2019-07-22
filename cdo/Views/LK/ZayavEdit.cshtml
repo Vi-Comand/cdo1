@@ -276,6 +276,108 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td colspan="3">Паспортные данные законного представителя</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30%;" colspan="2">Серия</td>
+                                <td style="width: 70%;">
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" />
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Номер</td>
+                                <td>
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" />
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Код подразделения</td>
+                                <td>
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p" />
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Дата выдачи</td>
+                                <td>
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" asp-for="urot.data_p" id="d_v_pe" readonly>
+                                    }
+                                    else
+                                    {
+                                        <input type="text" asp-for="urot.data_p" id="d_v_p">
+                                    }
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#d_v_p').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1950",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Кем выдан</td>
+                                <td>
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.vidan_p" asp-for="urot.vidan_p" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.vidan_p" asp-for="urot.vidan_p" />
+                                    }
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">Место жительства</td>
+                                <td>
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.propis_p" asp-for="urot.propis_p" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.propis_p" asp-for="urot.propis_p" />
+                                    }
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
 
                                 <td colspan="2">Информация о статусе обучающегося</td>
                                 <td>
@@ -1179,65 +1281,7 @@
                             <table>
 
 
-                                <tr>
-                                    <td colspan="2">Паспортные данные законного представителя</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 30%;">Серия</td>
-                                    <td style="width: 70%;">
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Номер</td>
-                                    <td>
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Код подразделения</td>
-                                    <td>
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Дата выдачи</td>
-                                    <td>
-                                        <input type="text" asp-for="urot.data_p" id="d_v_p">
-                                        <script>
-                                            dataN = new Date();
-                                            //alert(dataN);
-                                            $(function () {
-                                                $('#d_v_p').daterangepicker({
-                                                    singleDatePicker: true,
-                                                    showDropdowns: true,
-                                                    "minDate": "01/01/1950",
-                                                    "maxDate": dataN,
-                                                    "autoApply": true,
-                                                    "applyLabel": "Выбрать",
-                                                    "cancelLabel": "Отменить",
-                                                    locale: {
-                                                        format: 'DD.MM.YYYY',
-                                                        "firstDay": 1
-                                                    }
-                                                });
-                                            });
-                                        </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Кем выдан</td>
-                                    <td>
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.vidan_p" asp-for="urot.vidan_p" />
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td>Место жительства</td>
-                                    <td>
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.propis_p" asp-for="urot.propis_p" />
-                                    </td>
-                                </tr>
 
                                 @*<tr>
                                         <td style="width: 30%;">Инвентарный номер оборудования</td>
@@ -1278,12 +1322,12 @@
                                             </script>
                                         </td>
                                     </tr>
-                                    @*<tr id="j_bvp">
-                                            <td>Учет движения договора БВП</td>
-                                            <td>
-                                                <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dvig_dogov_bvp" asp-for="dvig_dogov_bvp" />
-                                            </td>
-                                        </tr>*@
+                                    <tr id="j_bvp">
+                                        <td>Примечание</td>
+                                        <td>
+                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dvig_dogov_bvp" asp-for="dvig_dogov_bvp" />
+                                        </td>
+                                    </tr>
                                 }
                             </table>
                             <table>
@@ -1448,6 +1492,12 @@
                                                                         });
                                                                     });
                                                         </script>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Дополнительное оборудование</td>
+                                                    <td>
+                                                        <input type="text" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1930,6 +1980,12 @@
                                             });
                                         });
                                     </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дополнительное оборудование</td>
+                                <td>
+                                    <input type="text" />
                                 </td>
                             </tr>
                         </table>
