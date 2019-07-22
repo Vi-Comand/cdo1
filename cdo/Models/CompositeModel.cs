@@ -148,7 +148,7 @@ namespace cdo.Models
 
         public string dop_sogl_bvp_n { get; set; }
         public DateTime dop_sogl_bvp_d { get; set; }
-        public int id_dvij_dog_bvp { get; set; }
+        public string id_dvij_dog_bvp { get; set; }
         public DateTime data_roj { get; set; }
     }
     public class bvp
@@ -162,6 +162,7 @@ namespace cdo.Models
         public DateTime prik_o_oborud_d { get; set; }
         public DateTime nom_dog_bvp_d { get; set; }
         public int id_uo { get; set; }
+        public string dop_obor { get; set; }
     }
     public class ist
     {

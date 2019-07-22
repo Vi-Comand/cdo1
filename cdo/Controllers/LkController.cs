@@ -957,7 +957,7 @@ namespace cdo.Controllers
             var login = HttpContext.User.Identity.Name;
             int id_user = db.User.Where(p => p.login == login).First().id;
             int role = db.User.Where(p => p.login == login).First().role;
-
+            bool modif = false;
             if (role == 1 || role == 2)
             {
                 if (composit.fam != model.fam)
@@ -1115,6 +1115,26 @@ namespace cdo.Controllers
                     str.id_mo = composit.MO;
                 if (str.data_rojd != composit.data_roj)
                     str.data_rojd = composit.data_roj;
+                if (composit.urot != null && role == 2)
+
+                    try
+                    {
+
+                        uo row = composit.urot;
+                        uo prov = db.Uo.Find(row.id);
+                        if (row.id_dvij_dog_bvp != prov.id_dvij_dog_bvp || row.kod_p != prov.kod_p || row.nom_p != prov.nom_p || row.propis_p != prov.propis_p || row.rogd_p != prov.rogd_p || row.ser_p != prov.ser_p || row.vidan_p != prov.vidan_p || row.data_p != prov.data_p || row.data_roj != prov.data_roj || row.dop_sogl_bvp_d != prov.dop_sogl_bvp_d || row.dop_sogl_bvp_n != prov.dop_sogl_bvp_n)
+                        {
+                            row.id_dvij_dog_bvp = prov.id_dvij_dog_bvp;
+                            row.dop_sogl_bvp_d = prov.dop_sogl_bvp_d;
+                            row.dop_sogl_bvp_n = prov.dop_sogl_bvp_n;
+
+                            db.Entry(prov).State = EntityState.Detached;
+                            db.Entry(row).State = EntityState.Modified;
+                            db.SaveChanges();
+                            modif = true;
+                        }
+                    }
+                    catch { }
             }
             if (role == 1 || role == 3)
             {
@@ -1157,7 +1177,7 @@ namespace cdo.Controllers
             }
 
 
-            bool modif = false;
+
 
 
 
@@ -1246,6 +1266,26 @@ namespace cdo.Controllers
                         }
                     }
                     catch { }
+                }
+                if (composit.bvps != null)
+                {
+
+                    foreach (bvp row in composit.bvps)
+                    {
+                        bvp prov = db.Bvp.Find(row.id);
+                        if (row.prik_o_oborud != prov.prik_o_oborud || row.prik_o_oborud_d != prov.prik_o_oborud_d || row.data_ust_oborud != prov.data_ust_oborud || row.nom_dog_bvp != prov.nom_dog_bvp || row.nom_dog_bvp_d != prov.nom_dog_bvp_d || row.srok_dog_bvp != prov.srok_dog_bvp || row.akt_vozvr_oborud != prov.akt_vozvr_oborud || row.dop_obor != prov.dop_obor)
+                        {
+
+                            db.Entry(prov).State = EntityState.Detached;
+                            db.Entry(row).State = EntityState.Modified;
+
+                            db.SaveChanges();
+                            modif = true;
+                        }
+                    }
+
+
+
                 }
             }
 

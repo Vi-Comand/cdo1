@@ -376,7 +376,7 @@
                                     }
                                 </td>
                             </tr>
-                            <tr></tr>
+                            <tr><td></td></tr>
                             <tr>
 
                                 <td colspan="2">Информация о статусе обучающегося</td>
@@ -1325,7 +1325,7 @@
                                     <tr id="j_bvp">
                                         <td>Примечание</td>
                                         <td>
-                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dvig_dogov_bvp" asp-for="dvig_dogov_bvp" />
+                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dvig_dogov_bvp" asp-for="urot.id_dvij_dog_bvp" />
                                         </td>
                                     </tr>
                                 }
@@ -1363,6 +1363,8 @@
                                                 <tr>
                                                     <td td style="width:40%">Дата установки оборудования</td>
                                                     <td td style="width:60%">
+                                                        <input type="hidden" asp-for="bvps[i].id" />
+                                                        <input type="hidden" asp-for="bvps[i].id_uo" />
                                                         <input type="text" id="ud_u_o_@i" asp-for="bvps[i].data_ust_oborud" />
                                                         <script>
 
@@ -1423,12 +1425,13 @@
                                                         <td>
                                                             <input type="text" id="u_s_b_@i" asp-for="bvps[i].srok_dog_bvp" />
                                                             <script>
+                                                                var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 10));
                                                                     $(function() {
                                                                         $('#u_s_b_@i').daterangepicker({
                                                                             singleDatePicker: true,
                                                                             showDropdowns: true,
                                                                             "minDate": "01/01/1970",
-                                                                            "maxDate": dataN,
+                                                                            "maxDate": timeIs,
                                                                             "autoApply": true,
                                                                             "applyLabel": "Выбрать",
                                                                             "cancelLabel": "Отменить",
@@ -1497,7 +1500,7 @@
                                                 <tr>
                                                     <td>Дополнительное оборудование</td>
                                                     <td>
-                                                        <input type="text" />
+                                                        <input type="text" asp-for="bvps[i].dop_obor" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1985,7 +1988,7 @@
                             <tr>
                                 <td>Дополнительное оборудование</td>
                                 <td>
-                                    <input type="text" />
+                                    <input type="text" asp-for="bvpadd.dop_obor" />
                                 </td>
                             </tr>
                         </table>
