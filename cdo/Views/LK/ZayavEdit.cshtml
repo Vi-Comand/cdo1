@@ -275,108 +275,21 @@
                                     }
                                 </td>
                             </tr>
+
                             <tr>
-                                <td colspan="3">Паспортные данные законного представителя</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 30%;" colspan="2">Серия</td>
+                                <td style="width: 30%;" colspan="2">Паспортные данные законного представителя</td>
                                 <td style="width: 70%;">
-                                    @if (Model.role != 2 && Model.role != 1)
+                                    @if (Model.role != 5 && Model.role != 2 && Model.role != 1)
                                     {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" readonly />
+                                        <textarea rows=" 2 " cols=" 60 " data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p" readonly></textarea>
                                     }
                                     else
                                     {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.ser_p" asp-for="urot.ser_p" />
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Номер</td>
-                                <td>
-                                    @if (Model.role != 2 && Model.role != 1)
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" readonly />
-                                    }
-                                    else
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.nom_p" asp-for="urot.nom_p" />
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Код подразделения</td>
-                                <td>
-                                    @if (Model.role != 2 && Model.role != 1)
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p" readonly />
-                                    }
-                                    else
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p" />
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Дата выдачи</td>
-                                <td>
-                                    @if (Model.role != 2 && Model.role != 1)
-                                    {
-                                        <input type="text" asp-for="urot.data_p" id="d_v_pe" readonly>
-                                    }
-                                    else
-                                    {
-                                        <input type="text" asp-for="urot.data_p" id="d_v_p">
-                                    }
-                                    <script>
-                                        dataN = new Date();
-                                        //alert(dataN);
-                                        $(function () {
-                                            $('#d_v_p').daterangepicker({
-                                                singleDatePicker: true,
-                                                showDropdowns: true,
-                                                "minDate": "01/01/1950",
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
-                                                locale: {
-                                                    format: 'DD.MM.YYYY',
-                                                    "firstDay": 1
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Кем выдан</td>
-                                <td>
-                                    @if (Model.role != 2 && Model.role != 1)
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.vidan_p" asp-for="urot.vidan_p" readonly />
-                                    }
-                                    else
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.vidan_p" asp-for="urot.vidan_p" />
+                                        <textarea rows=" 2 " cols=" 60 " data-toggle="tooltip" data-placement="top" title="@Model.urot.kod_p" asp-for="urot.kod_p"></textarea>
                                     }
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td colspan="2">Место жительства</td>
-                                <td>
-                                    @if (Model.role != 2 && Model.role != 1)
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.propis_p" asp-for="urot.propis_p" readonly />
-                                    }
-                                    else
-                                    {
-                                        <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.propis_p" asp-for="urot.propis_p" />
-                                    }
-                                </td>
-                            </tr>
-                            <tr><td></td></tr>
                             <tr>
 
                                 <td colspan="2">Информация о статусе обучающегося</td>
@@ -716,7 +629,7 @@
                 </h4>
 
             </div>
-            <div id="collapseTwo" class="panel-collapse collapse in  @if (Model.role == 4)
+            <div id="collapseTwo" class="panel-collapse collapse in  @if (Model.role == 4 || Model.role == 7)
             {
                 @Html.Raw(" show");
             }">
@@ -725,7 +638,7 @@
                     <table>
 
 
-                        @if (Model.role == 6 || Model.role == 5 || Model.role == 4 || Model.role == 1)
+                        @if (Model.role == 6 || Model.role == 5 || Model.role == 4 || Model.role == 1 || Model.role == 7)
                         {
                             if (Model.sklad != null)
                             {
@@ -881,7 +794,7 @@
                                 </tr>
                             }
                         }
-                        @if (Model.role == 4 || Model.role == 3 || Model.role == 1)
+                        @if (Model.role == 4 || Model.role == 3 || Model.role == 1 || Model.role == 7)
                         {
                             <tr>
                                 <td>Комплектование </td>
@@ -890,7 +803,7 @@
                                 </td>
                             </tr>
                         }
-                        @if (Model.role == 4 || Model.role == 3 || Model.role == 2 || Model.role == 1)
+                        @if (Model.role == 4 || Model.role == 3 || Model.role == 2 || Model.role == 1 || Model.role == 7)
                         {
 
 
@@ -980,7 +893,7 @@
 
                         }
                     </table>
-                    @if (Model.role == 4 || Model.role == 1)
+                    @if (Model.role == 4 || Model.role == 1 || Model.role == 7)
                     {
                         <table>
                             <tr>
@@ -1079,6 +992,7 @@
 
                                                             $('#d_z_v_@i').on('apply.daterangepicker', function (ev, picker) {
                                                                 $(this).val(picker.endDate.format('DD.MM.YYYY'));
+
                                                             });
 
                                                             $('#d_z_v_@i').on('cancel.daterangepicker', function (ev, picker) {
@@ -1672,11 +1586,11 @@
                                                 }
                                             });
 
-                                            $('#md_v_i').on('apply.daterangepicker', function (ev, picker) {
+                                            $('#md_v_r').on('apply.daterangepicker', function (ev, picker) {
                                                 $(this).val(picker.endDate.format('DD.MM.YYYY'));
                                             });
 
-                                            $('#md_v_i').on('cancel.daterangepicker', function (ev, picker) {
+                                            $('#md_v_r').on('cancel.daterangepicker', function (ev, picker) {
                                                 $(this).val('');
                                             });
 

@@ -186,6 +186,10 @@
                 <th>№ заявки</th>
                 <th>Дата заявки</th>
                 <th>Причина</th>
+                <th>ФИО ребенка</th>
+                <th>ФИО зп</th>
+                <th>МО</th>
+                <th>Адрес</th>
                 <th>Дата выполнения</th>
                 <th>ФИО принявшего</th>
                 <th>ФИО выполневшего</th>
@@ -199,30 +203,34 @@
             @for (int i = 0; i < Model.Listlk.Count; i++)
             {
                 <tr>
-                    <td>@Model.Listlk[i].rem.Id </td>
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">@Model.Listlk[i].rem.Id</a></td>
                     <td>@Model.Listlk[i].rem.data_z_r</td>
                     <td>@Model.Listlk[i].rem.prich_r</td>
+                    <td>@Model.Listlk[i].fam @Model.Listlk[i].ima @Model.Listlk[i].otch</td>
+                    <td>@Model.Listlk[i].Fio_rod_zp</td>
+                    <td>@Model.Listlk[i].MO</td>
+                    <td>@Model.Listlk[i].address_proj</td>
                     <td>
                         @if (Model.Listlk[i].rem.data_v_r.ToShortDateString() != "01.01.0001")
                         {@Model.Listlk[i].rem.data_v_r.ToShortDateString()}
-                </td>
-                <td>@Model.Listlk[i].rem.fio_prin_r</td>
-                <td>@Model.Listlk[i].rem.fio_vipol_r</td>
-                <td>@Model.Listlk[i].rem.status_r</td>
-                <td>@Model.Listlk[i].rem.prim_r</td>
-                <td>
-                    @if (Model.Listlk[i].rem.zamena == true)
-                    {@Html.Raw("Замена");
-                }
-                </td>
-                <td>
-                    @if (Model.Listlk[i].rem.viezd == true)
-                    {@Html.Raw("Выезд");
-                }
-                </td>
-                <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">Открыть</a> </td>
-            </tr>
-        }
+                    </td>
+                    <td>@Model.Listlk[i].rem.fio_prin_r</td>
+                    <td>@Model.Listlk[i].rem.fio_vipol_r</td>
+                    <td>@Model.Listlk[i].rem.status_r</td>
+                    <td>@Model.Listlk[i].rem.prim_r</td>
+                    <td>
+                        @if (Model.Listlk[i].rem.zamena == true)
+                        {@Html.Raw("Замена");
+                    }
+                    </td>
+                    <td>
+                        @if (Model.Listlk[i].rem.viezd == true)
+                        {@Html.Raw("Выезд");
+                    }
+                    </td>
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">Открыть</a> </td>
+                </tr>
+            }
         </table>
 
     </form>

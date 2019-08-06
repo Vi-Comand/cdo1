@@ -57,7 +57,7 @@
                             <form method="post" class="navbar" style="margin:initial; display:contents">
                                 @*<button type="submit" class="button_nav" style="margin:5px;" asp-controller="Home" asp-action="Index">Главная</button>*@
                                 <br />
-                                @if (ViewBag.rl != 4)
+                                @if (ViewBag.rl != 4 && ViewBag.rl != 7)
                                 {
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-controller="lk" asp-action="lk">Личный кабинет</button>
                                     <br />
@@ -65,7 +65,10 @@
                                 else
                                 {
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Lk">Люди</button>
-                                    <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sklad">Склад</button>
+                                    if (ViewBag.rl == 4)
+                                    {
+                                        <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sklad">Склад</button>
+                                    }
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Inter">Интернет</button>
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Rem">Ремонт</button>
                                 }

@@ -61,7 +61,7 @@ namespace cdo.Controllers
                            select new LKPP
                            {
                                id = main.id,
-                               inventr = (inven == null ? 0 : inven.nov_inv),
+                               inventr = inven == null ? 0 : inven.nov_inv,
                                MO = (m == null ? String.Empty : m.name),
                                fam = f.znach,
                                ima = i.znach,
@@ -216,7 +216,7 @@ namespace cdo.Controllers
 
 
 
-
+        [Authorize]
         public IActionResult Lk()
         {
             var login = HttpContext.User.Identity.Name;
@@ -325,7 +325,7 @@ namespace cdo.Controllers
                 return View("LKUVR", list);
 
             }
-            if (role == 4)
+            if (role == 4 || role == 7)
             {
 
                 ListLK2 list = new ListLK2();
@@ -664,11 +664,28 @@ namespace cdo.Controllers
 
                          join ma in db.Main on remon.id_to equals ma.id_to into mo
                          from m in mo.DefaultIfEmpty()
-
+                         join moo in db.Mo on m.id_mo equals moo.Id into moo
+                         from mm in moo.DefaultIfEmpty()
+                         join ist in db.Ist on m.id_f equals ist.id into ist
+                         from f in ist.DefaultIfEmpty()
+                         join im in db.Ist on m.id_i equals im.id into im
+                         from i in im.DefaultIfEmpty()
+                         join ot in db.Ist on m.id_o equals ot.id into ot
+                         from o in ot.DefaultIfEmpty()
+                         join rod in db.Ist on m.id_fio_rod_predst equals rod.id into rod
+                         from r in rod.DefaultIfEmpty()
+                         join add in db.Ist on m.id_adr_progiv equals add.id into add
+                         from a in add.DefaultIfEmpty()
                          select new LKRem
                          {
                              rem = remon,
-                             id_main = (m == null ? 0 : m.id)
+                             id_main = (m == null ? 0 : m.id),
+                             fam = f.znach,
+                             ima = i.znach,
+                             otch = o.znach,
+                             Fio_rod_zp = r.znach,
+                             MO = mm.name,
+                             address_proj = a.znach,
 
                          });
             if (list == null)
@@ -754,6 +771,7 @@ namespace cdo.Controllers
 
             ViewBag.rl = role;
             list.Listlk = query.ToList();
+            list.Listlk = list.Listlk.OrderByDescending(s => s.rem.data_z_r).ToList();
             return View("LKRem", list);
 
         }
@@ -769,13 +787,34 @@ namespace cdo.Controllers
 
                          join ma in db.Main on inter.id_to equals ma.id_to into mo
                          from m in mo.DefaultIfEmpty()
-
+                         join moo in db.Mo on m.id_mo equals moo.Id into moo
+                         from mm in moo.DefaultIfEmpty()
+                         join ist in db.Ist on m.id_f equals ist.id into ist
+                         from f in ist.DefaultIfEmpty()
+                         join im in db.Ist on m.id_i equals im.id into im
+                         from i in im.DefaultIfEmpty()
+                         join ot in db.Ist on m.id_o equals ot.id into ot
+                         from o in ot.DefaultIfEmpty()
+                         join rod in db.Ist on m.id_fio_rod_predst equals rod.id into rod
+                         from r in rod.DefaultIfEmpty()
+                         join add in db.Ist on m.id_adr_progiv equals add.id into add
+                         from a in add.DefaultIfEmpty()
                          select new LKInter
                          {
                              internet = inter,
-                             id_main = (m == null ? 0 : m.id)
+                             id_main = (m == null ? 0 : m.id),
+                             fam = f.znach,
+                             ima = i.znach,
+                             otch = o.znach,
+                             Fio_rod_zp = r.znach,
+                             MO = mm.name,
+                             address_proj = a.znach,
 
                          });
+
+
+
+
 
 
 
@@ -835,6 +874,7 @@ namespace cdo.Controllers
 
 
             list.Listlk = query.ToList();
+            list.Listlk = list.Listlk.OrderByDescending(s => s.internet.data_z_i).ToList();
             ViewBag.rl = role;
             return View("LKInter", list);
 
@@ -1181,25 +1221,28 @@ namespace cdo.Controllers
 
 
 
-            if (role == 1 || role == 4)
+            if (role == 1 || role == 4 || role == 7)
             {
-                if (composit.tehot != null)
+                if (role == 1 || role == 4)
                 {
-                    try
+                    if (composit.tehot != null)
                     {
-                        to row = composit.tehot;
-                        to prov = db.To.Find(row.id);
-                        if (row.inter != prov.inter || row.kompl != prov.kompl || row.skype_l != prov.skype_l || row.skype_p != prov.skype_p || row.date_inter != prov.date_inter)
+                        try
                         {
+                            to row = composit.tehot;
+                            to prov = db.To.Find(row.id);
+                            if (row.inter != prov.inter || row.kompl != prov.kompl || row.skype_l != prov.skype_l || row.skype_p != prov.skype_p || row.date_inter != prov.date_inter)
+                            {
 
-                            db.Entry(prov).State = EntityState.Detached;
-                            db.Entry(row).State = EntityState.Modified;
+                                db.Entry(prov).State = EntityState.Detached;
+                                db.Entry(row).State = EntityState.Modified;
 
-                            db.SaveChanges();
-                            modif = true;
+                                db.SaveChanges();
+                                modif = true;
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                 }
                 if (composit.remonti != null)
                 {
@@ -2538,6 +2581,26 @@ namespace cdo.Controllers
             // Add user model
             return Json(query.ToArray());
         }
+        public IActionResult SpisokPrivyaz(int id_komp)
+        {
+
+            var query = (from ist_kom in db.Ist_Kompl.Where(p => p.id_kompl == id_komp)
+
+
+
+
+                         select new ist_kompl
+                         {
+                             id_kompl = ist_kom.id_kompl,
+                             id_main = ist_kom.id_main,
+                             data_p = ist_kom.data_p
+
+                         });
+
+
+            return Json(query.ToArray());
+        }
+
         public IActionResult SpisokToSkald()
         {
 
@@ -2589,6 +2652,13 @@ namespace cdo.Controllers
             ss.status = "Назначен";
 
             db.Entry(ss).State = EntityState.Modified;
+            db.SaveChanges();
+
+            ist_kompl istk = new ist_kompl();
+            istk.id_kompl = id_s;
+            istk.id_main = id;
+            istk.data_p = DateTime.Now;
+            db.Ist_Kompl.Add(istk);
             db.SaveChanges();
             return RedirectToAction("Sklad");
         }
@@ -2911,7 +2981,7 @@ namespace cdo.Controllers
                 }
                 catch { }
             }
-            if (role == 4)
+            if (role == 4 || role == 7)
             {
                 try { model.tip_kompl = str.tip_kompl; } catch { }
                 try { model.tehot = db.To.Find(str.id_to); } catch { }

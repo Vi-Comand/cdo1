@@ -209,8 +209,8 @@ namespace cdo.Models
         public int Id { get; set; }
         public string nazv_komp { get; set; }
         public DateTime data_ust_o { get; set; }
-        public int star_inv { get; set; }
-        public int nov_inv { get; set; }
+        public long star_inv { get; set; }
+        public long nov_inv { get; set; }
         public string stoim { get; set; }
         public DateTime data_vozvr_kompl { get; set; }
         public DateTime data_vvoda_kompl { get; set; }
@@ -245,8 +245,13 @@ namespace cdo.Models
     {
         public int Id { get; set; }
         public string name { get; set; }
-
-
     }
 
+    public class ist_kompl
+    {
+        public int id { get; set; }
+        public int id_kompl { get; set; }
+        public int id_main { get; set; }
+        public DateTime data_p { get; set; }
+    }
 }

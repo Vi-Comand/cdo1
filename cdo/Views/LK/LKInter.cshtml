@@ -172,6 +172,10 @@
             <tr>
                 <th> № заявки</th>
                 <th> Дата заявки</th>
+                <th>ФИО ребенка</th>
+                <th>ФИО зп</th>
+                <th>МО</th>
+                <th>Адрес</th>
                 <th> ФИО принявшего</th>
                 <th> Дата выполнения</th>
                 <th> Неисправность</th>
@@ -191,11 +195,17 @@
                 <tr>
 
 
-                    <td><a asp-controller="Lk" asp-action="" asp-route-id="@Model.Listlk[i].internet.Id">@Model.Listlk[i].internet.Id</a> </td>
+                    <td><a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.Listlk[i].id_main">@Model.Listlk[i].internet.Id</a> </td>
                     <td>@Model.Listlk[i].internet.data_z_i</td>
+                    <td>@Model.Listlk[i].fam @Model.Listlk[i].ima @Model.Listlk[i].otch</td>
+                    <td>@Model.Listlk[i].Fio_rod_zp</td>
+                    <td>@Model.Listlk[i].MO</td>
+                    <td>@Model.Listlk[i].address_proj</td>
                     <td>@Model.Listlk[i].internet.fio_prin_i</td>
-                    <td>@if (Model.Listlk[i].internet.data_v_i.ToShortDateString() != "01.01.0001")
-                    {@Model.Listlk[i].internet.data_v_i.ToShortDateString()}</td>
+                    <td>
+                        @if (Model.Listlk[i].internet.data_v_i.ToShortDateString() != "01.01.0001")
+                        {@Model.Listlk[i].internet.data_v_i.ToShortDateString()}
+                    </td>
 
                     <td>@Model.Listlk[i].internet.zayav_neisp_i</td>
                     <td>@Model.Listlk[i].internet.prim_i</td>
