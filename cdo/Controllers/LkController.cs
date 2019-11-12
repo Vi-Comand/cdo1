@@ -72,6 +72,7 @@ namespace cdo.Controllers
                                Fio_rod_zp = r.znach,
                                diagn = main.diagn,
                                prikazd = main.prik_o_zach_d,
+                               prikaz_iskl_d = main.prik_o_iskl_d,
                                prikaz = main.prik_o_zach_n,
                                srok_mse = ms.znach,
                                klass = main.klass,
@@ -203,6 +204,7 @@ namespace cdo.Controllers
                                Fio_rod_zp = r.znach,
                                diagn = main.diagn,
                                prikazd = main.prik_o_zach_d,
+                               prikaz_iskl_d = main.prik_o_iskl_d,
                                prikaz = main.prik_o_zach_n,
                                srok_mse = ms.znach,
                                klass = main.klass,
@@ -261,6 +263,7 @@ namespace cdo.Controllers
                                    Fio_rod_zp = r.znach,
                                    diagn = main.diagn,
                                    prikazd = main.prik_o_zach_d,
+                                   prikaz_iskl_d = main.prik_o_iskl_d,
                                    prikaz = main.prik_o_zach_n,
                                    srok_mse = ms.znach,
                                    klass = main.klass,
@@ -411,7 +414,7 @@ namespace cdo.Controllers
                                    address_proj = a.znach,
                                    tel = te.znach,
                                    Fio_rod_zp = r.znach,
-
+                                   prikaz_iskl_d = main.prik_o_iskl_d,
                                    prikazd = main.prik_o_zach_d,
                                    prikaz = main.prik_o_zach_n,
                                    srok_mse = ms.znach,
@@ -462,7 +465,7 @@ namespace cdo.Controllers
                                    address_proj = a.znach,
                                    tel = te.znach,
                                    Fio_rod_zp = r.znach,
-
+                                   prikaz_iskl_d = main.prik_o_iskl_d,
                                    prikazd = main.prik_o_zach_d,
                                    prikaz = main.prik_o_zach_n,
                                    srok_mse = ms.znach,
@@ -516,6 +519,7 @@ namespace cdo.Controllers
                                    Fio_rod_zp = r.znach,
                                    diagn = main.diagn,
                                    prikazd = main.prik_o_zach_d,
+                                   prikaz_iskl_d = main.prik_o_iskl_d,
                                    prikaz = main.prik_o_zach_n,
                                    srok_mse = ms.znach,
                                    klass = main.klass,
@@ -524,6 +528,7 @@ namespace cdo.Controllers
 
                                }).ToList();
                 list.Filt = new Filters();
+                ViewBag.rl = role;
                 return View("obch", list);
 
             }
@@ -1143,6 +1148,8 @@ namespace cdo.Controllers
                 }
                 if (str.prik_o_zach_d != composit.prikaz_d)
                     str.prik_o_zach_d = composit.prikaz_d;
+                if (str.prik_o_iskl_d != composit.prikaz_iskl_d)
+                    str.prik_o_iskl_d = composit.prikaz_iskl_d;
                 if (str.prik_o_zach_n != composit.prikaz)
                     str.prik_o_zach_n = composit.prikaz;
                 if (str.status != composit.status)
@@ -1316,7 +1323,7 @@ namespace cdo.Controllers
                     foreach (bvp row in composit.bvps)
                     {
                         bvp prov = db.Bvp.Find(row.id);
-                        if (row.prik_o_oborud != prov.prik_o_oborud || row.prik_o_oborud_d != prov.prik_o_oborud_d || row.data_ust_oborud != prov.data_ust_oborud || row.nom_dog_bvp != prov.nom_dog_bvp || row.nom_dog_bvp_d != prov.nom_dog_bvp_d || row.srok_dog_bvp != prov.srok_dog_bvp || row.akt_vozvr_oborud != prov.akt_vozvr_oborud || row.dop_obor != prov.dop_obor)
+                        if (row.prik_o_oborud != prov.prik_o_oborud || row.prik_o_oborud_d != prov.prik_o_oborud_d || row.data_ust_oborud != prov.data_ust_oborud || row.nom_dog_bvp != prov.nom_dog_bvp || row.nom_dog_bvp_d != prov.nom_dog_bvp_d || row.srok_dog_bvp != prov.srok_dog_bvp || row.akt_vozvr_oborud != prov.akt_vozvr_oborud || row.dop_obor != prov.dop_obor || row.data_u_dop_o != prov.data_u_dop_o || row.data_v_dop_o != prov.data_v_dop_o)
                         {
 
                             db.Entry(prov).State = EntityState.Detached;
@@ -1326,9 +1333,21 @@ namespace cdo.Controllers
                             modif = true;
                         }
                     }
+                }
+                if (composit.dop_Dogs != null)
+                {
 
-
-
+                    foreach (dop_dog row in composit.dop_Dogs)
+                    {
+                        dop_dog prov = db.Dop_Dog.Find(row.id);
+                        if (row.dop_sogl_bvp_n != prov.dop_sogl_bvp_n || row.dop_sogl_bvp_d != prov.dop_sogl_bvp_d || row.soderg != prov.soderg)
+                        {
+                            db.Entry(prov).State = EntityState.Detached;
+                            db.Entry(row).State = EntityState.Modified;
+                            db.SaveChanges();
+                            modif = true;
+                        }
+                    }
                 }
             }
 
@@ -1346,8 +1365,8 @@ namespace cdo.Controllers
             }
 
 
-
-            return Redirect("/Lk/Lk");
+            //return Redirect("/Lk/kartochka?id=" + str.id  + "#j_rem");
+            return Redirect("/Lk/Lk" + "#id_" + str.id);
 
         }
         public async Task<IActionResult> Sort(SortState sortOrder, ListLK filtr, string status, string f1, DateTime f2, DateTime f3, DateTime f4, DateTime f5, DateTime f6, DateTime f7, string f8, string f9, string f10, int f11, string f12, int f13, string f14, string f15, string f16, string f17)
@@ -1444,6 +1463,7 @@ namespace cdo.Controllers
                              Fio_rod_zp = r.znach,
                              diagn = main.diagn,
                              prikazd = main.prik_o_zach_d,
+                             prikaz_iskl_d = main.prik_o_iskl_d,
                              prikaz = main.prik_o_zach_n,
                              srok_mse = ms.znach,
                              klass = main.klass,
@@ -1765,7 +1785,7 @@ namespace cdo.Controllers
                              address_proj = a.znach,
                              tel = te.znach,
                              Fio_rod_zp = r.znach,
-
+                             prikaz_iskl_d = main.prik_o_iskl_d,
                              prikazd = main.prik_o_zach_d,
                              prikaz = main.prik_o_zach_n,
                              srok_mse = ms.znach,
@@ -2066,7 +2086,7 @@ namespace cdo.Controllers
                              address_proj = a.znach,
                              tel = te.znach,
                              Fio_rod_zp = r.znach,
-
+                             prikaz_iskl_d = main.prik_o_iskl_d,
                              prikazd = main.prik_o_zach_d,
                              prikaz = main.prik_o_zach_n,
                              srok_mse = ms.znach,
@@ -2921,10 +2941,12 @@ namespace cdo.Controllers
             try { model.sklad = db.Sklad_to.Find(str.id_sklad); } catch { }
             try { model.prikaz = str.prik_o_zach_n; } catch { }
             try { model.prikaz_d = str.prik_o_zach_d; } catch { }
+            try { model.prikaz_iskl_d = str.prik_o_iskl_d; } catch { }
             try { model.klass = str.klass; } catch { }
             try { model.status = str.status; } catch { }
             try { model.tel = db.Ist.Find(str.id_tel).znach; } catch { }
             try { model.bvps = db.Bvp.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
+            try { model.dop_Dogs = db.Dop_Dog.Where(p => p.id_uo == str.id_uo).ToList(); } catch { }
             //     try { model.data_ust_oborud = db.To.Where(p => p.id == str.id_to).First().data_ust_o; } catch { }
             try { model.role = role; } catch { }
             try { model.FIO_ped = str.FIO_ped; } catch { }
@@ -3099,6 +3121,21 @@ namespace cdo.Controllers
             }
             return Redirect("/Lk/kartochka?id=" + compositeModel.id + "#j_bvp");
         }
+
+        public IActionResult Save_Dop(CompositeModel compositeModel)
+        {
+            if (compositeModel.dopadd.dop_sogl_bvp_n != null)
+            {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
+                compositeModel.dopadd.id_uo = compositeModel.urot.id;
+                db.Entry(mai).State = EntityState.Modified;
+                db.Entry(compositeModel.dopadd).State = EntityState.Added;
+                db.SaveChanges();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id + "#j_bvp");
+        }
+
         [Route("Lk/Del_Kurs")]
         public async Task<IActionResult> Del_Kurs(int id, int id_main)
         {
@@ -3157,6 +3194,19 @@ namespace cdo.Controllers
             return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
         }
 
+        public async Task<IActionResult> Del_Dop(CompositeModel compositeModel)
+        {
+            var product = db.Dop_Dog.Find(compositeModel.dopadd.id);
+            if (product != null)
+            {
+                main mai = db.Main.Find(compositeModel.id);
+                mai.data_izm = DateTime.Now;
+                db.Dop_Dog.Remove(product);
+                db.Entry(mai).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+            return Redirect("/Lk/kartochka?id=" + compositeModel.id.ToString());
+        }
         public async Task<IActionResult> Del_Main(int id)
         {
             var product = db.Main.Find(id);

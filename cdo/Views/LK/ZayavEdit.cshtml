@@ -425,6 +425,36 @@
                                     </script>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2">Дата приказа о исключении</td>
+                                <td>
+                                    @if (Model.role != 2 && Model.role != 1)
+                                    {
+                                        <input type="text" asp-for="prikaz_iskl_d" readonly />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" asp-for="prikaz_iskl_d" id="d_pr_iskl" />
+                                    }
+                                    <script>
+                                        $(function () {
+                                            $('#d_pr_iskl').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1970",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
                             @if (Model.role == 4 || Model.role == 2 || Model.role == 1)
                             {
                                 <tr>
@@ -1205,37 +1235,7 @@
                                     </tr>*@
                                 @if (Model.role == 5 || Model.role == 1)
                                 {
-                                    <tr>
-                                        <td>Доп. соглашение к договору БВП</td>
-                                        <td>
-                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.urot.dop_sogl_bvp_n" asp-for="urot.dop_sogl_bvp_n" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Дата доп. соглашение к договору БВП</td>
-                                        <td>
-                                            <input type="text" asp-for="urot.dop_sogl_bvp_d" id="dd_v_p">
-                                            <script>
-                                                dataN = new Date();
-                                                //alert(dataN);
-                                                $(function () {
-                                                    $('#dd_v_p').daterangepicker({
-                                                        singleDatePicker: true,
-                                                        showDropdowns: true,
-                                                        "minDate": "01/01/1950",
-                                                        "maxDate": dataN,
-                                                        "autoApply": true,
-                                                        "applyLabel": "Выбрать",
-                                                        "cancelLabel": "Отменить",
-                                                        locale: {
-                                                            format: 'DD.MM.YYYY',
-                                                            "firstDay": 1
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                        </td>
-                                    </tr>
+
                                     <tr id="j_bvp">
                                         <td>Примечание</td>
                                         <td>
@@ -1339,7 +1339,7 @@
                                                         <td>
                                                             <input type="text" id="u_s_b_@i" asp-for="bvps[i].srok_dog_bvp" />
                                                             <script>
-                                                                var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 10));
+                                                                var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 20));
                                                                     $(function() {
                                                                         $('#u_s_b_@i').daterangepicker({
                                                                             singleDatePicker: true,
@@ -1363,21 +1363,32 @@
                                                         <td>
                                                             <input type="text" id="a_v_b_@i" asp-for="bvps[i].akt_vozvr_oborud" />
                                                             <script>
-                                                                    $(function() {
-                                                                        $('#a_v_b_@i').daterangepicker({
-                                                                            singleDatePicker: true,
-                                                                            showDropdowns: true,
-                                                                            "minDate": "01/01/1970",
-                                                                            "maxDate": dataN,
-                                                                            "autoApply": true,
-                                                                            "applyLabel": "Выбрать",
-                                                                            "cancelLabel": "Отменить",
-                                                                            locale: {
-                                                                                format: 'DD.MM.YYYY',
-                                                                                "firstDay": 1
-                                                                            }
-                                                                        });
-                                                                    });
+                                                                   $(function () {
+
+                                                                       $('#a_v_b_@i').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                showDropdowns: true,
+                                                                timePicker24Hour: false,
+                                                                "minDate": "01.01.2000",
+                                                                autoUpdateInput: false,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "applyLabel": "Выбрать",
+                                                                    "cancelLabel": "Очистить",
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+
+                                                                       $('#a_v_b_@i').on('apply.daterangepicker', function (ev, picker) {
+                                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+
+                                                            });
+
+                                                                       $('#a_v_b_@i').on('cancel.daterangepicker', function (ev, picker) {
+                                                                $(this).val('');
+                                                            });
+
+                                                        });
                                                             </script>
                                                         </td>
                                                     </tr>
@@ -1417,6 +1428,78 @@
                                                         <input type="text" asp-for="bvps[i].dop_obor" />
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Дата установки доп. оборудования</td>
+                                                    <td>
+                                                        <input type="text" id="d_u_d_o_@i" asp-for="bvps[i].data_u_dop_o" />
+                                                        <script>
+                                                                var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 20));
+
+
+                                                             $(function () {
+
+                                                                 $('#d_u_d_o_@i').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                showDropdowns: true,
+                                                                timePicker24Hour: false,
+                                                                "minDate": "01.01.2000",
+                                                                autoUpdateInput: false,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "applyLabel": "Выбрать",
+                                                                    "cancelLabel": "Очистить",
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+
+                                                                 $('#d_u_d_o_@i').on('apply.daterangepicker', function (ev, picker) {
+                                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+
+                                                            });
+
+                                                                 $('#d_u_d_o_@i').on('cancel.daterangepicker', function (ev, picker) {
+                                                                $(this).val('');
+                                                            });
+
+                                                        });
+                                                        </script>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Дата возврата доп. оборудования</td>
+                                                    <td>
+                                                        <input type="text" id="d_v_d_o_@i" asp-for="bvps[i].data_v_dop_o" />
+                                                        <script>
+                                                                var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 20));
+                                                                    $(function () {
+
+                                                                 $('#d_v_d_o_@i').daterangepicker({
+                                                                singleDatePicker: true,
+                                                                showDropdowns: true,
+                                                                timePicker24Hour: false,
+                                                                "minDate": "01.01.2000",
+                                                                autoUpdateInput: false,
+                                                                locale: {
+                                                                    format: 'DD.MM.YYYY',
+                                                                    "applyLabel": "Выбрать",
+                                                                    "cancelLabel": "Очистить",
+                                                                    "firstDay": 1
+                                                                }
+                                                            });
+
+                                                                 $('#d_v_d_o_@i').on('apply.daterangepicker', function (ev, picker) {
+                                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+
+                                                            });
+
+                                                                 $('#d_v_d_o_@i').on('cancel.daterangepicker', function (ev, picker) {
+                                                                $(this).val('');
+                                                            });
+
+                                                        });
+                                                        </script>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </div>
 
@@ -1427,6 +1510,95 @@
 
                                 </div>
                             }
+                            @if (Model.role == 5 || Model.role == 1)
+                            {
+                                <table>
+                                    <tr>
+                                        <td style="width:100%">
+                                            Дополнительные соглашения
+                                        </td>
+                                        <td style="width:20px">
+
+                                            <button style=" background: url(/assets/icon/icons8-pl.png) no-repeat 11.5px 2px rgba(222, 215, 253, 0.3); background-size: 65%; box-shadow:inset 0 0 0 0px" data-toggle="modal" data-target="#dop" ; form="0"></button>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                @if (Model.dop_Dogs != null)
+                                {
+
+                                    <ul class="nav nav-tabs">
+                                        @foreach (var row in Model.dop_Dogs)
+                                        {
+                                            <li>
+                                                <a href="#Dop_@row.id" style="float: left;" data-toggle="tab">@row.dop_sogl_bvp_n</a>
+                                                <button class="button_del" style="float: left; top: 0em; margin-right: 12px;" data-toggle="modal" data-target="#Del_Dop" value="@row.id" form="0"><strong>Х</strong></button>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <div class="tab-content">
+                                        @for (int i = 0; i < Model.dop_Dogs.Count; i++)
+                                        {
+                                            <input type="hidden" asp-for="dop_Dogs[i].id" />
+                                            <input type="hidden" asp-for="dop_Dogs[i].id_uo" />
+                                            <div class="tab-pane fade " id="Dop_@Model.dop_Dogs[i].id">
+                                                <table>
+
+
+                                                    <tr>
+                                                        <td>Номер доп. соглашения к договору БВП</td>
+                                                        <td>
+                                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dop_Dogs[i].dop_sogl_bvp_n" asp-for="dop_Dogs[i].dop_sogl_bvp_n" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Дата доп. соглашения к договору БВП</td>
+                                                        <td>
+                                                            <input type="text" asp-for="dop_Dogs[i].dop_sogl_bvp_d" id="dd_v_p_@i">
+                                                            <script>
+                                                                dataN = new Date();
+                                                                //alert(dataN);
+                                                                $(function () {
+                                                                    $('#dd_v_p_@i').daterangepicker({
+                                                                        singleDatePicker: true,
+                                                                        showDropdowns: true,
+                                                                        "minDate": "01/01/1950",
+                                                                        "maxDate": dataN,
+                                                                        "autoApply": true,
+                                                                        "applyLabel": "Выбрать",
+                                                                        "cancelLabel": "Отменить",
+                                                                        locale: {
+                                                                            format: 'DD.MM.YYYY',
+                                                                            "firstDay": 1
+                                                                        }
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Содержание договора</td>
+                                                        <td>
+                                                            <input type="text" data-toggle="tooltip" data-placement="top" title="@Model.dop_Dogs[i].soderg" asp-for="dop_Dogs[i].soderg" />
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+                                        }
+
+
+
+
+
+                                    </div>
+                                }
+                            }
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -1754,6 +1926,70 @@
         </div>
     </div>
 
+
+    <!-- Modal dop -->
+    <div class="modal fade bs-example-modal-lg" id="dop" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Дополнительные документы БВП</h4>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="id" />
+                        <input type="hidden" asp-for="urot.id" />
+                        <table>
+                            <tr>
+                                <td>Номер доп. соглашения к договору БВП</td>
+                                <td>
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="dopadd.dop_sogl_bvp_n" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата доп. соглашения к договору БВП</td>
+                                <td>
+                                    <input type="text" asp-for="dopadd.dop_sogl_bvp_d" id="mdd_v_p">
+                                    <script>
+                                        dataN = new Date();
+                                        //alert(dataN);
+                                        $(function () {
+                                            $('#mdd_v_p').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                "minDate": "01/01/1950",
+                                                "maxDate": dataN,
+                                                "autoApply": true,
+                                                "applyLabel": "Выбрать",
+                                                "cancelLabel": "Отменить",
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "firstDay": 1
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Содержание договора</td>
+                                <td>
+                                    <input type="text" data-toggle="tooltip" data-placement="top" asp-for="dopadd.soderg" />
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="" asp-controller="Lk" asp-action="Save_Dop">Сохранить изменения</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal bvp -->
     <div class="modal fade bs-example-modal-lg" id="bvp" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -1829,12 +2065,13 @@
                                 <td>
                                     <input type="text" id="mu_s_b_" asp-for="bvpadd.srok_dog_bvp" />
                                     <script>
+                                        var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 20));
                                         $(function () {
                                             $('#mu_s_b_').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
                                                 "minDate": "01/01/1970",
-                                                "maxDate": dataN,
+                                                "maxDate": timeIs,
                                                 "autoApply": true,
                                                 "applyLabel": "Выбрать",
                                                 "cancelLabel": "Отменить",
@@ -1853,19 +2090,30 @@
                                     <input type="text" id="ma_v_b_" asp-for="bvpadd.akt_vozvr_oborud" />
                                     <script>
                                         $(function () {
+
                                             $('#ma_v_b_').daterangepicker({
                                                 singleDatePicker: true,
                                                 showDropdowns: true,
-                                                "minDate": "01/01/1970",
-                                                "maxDate": dataN,
-                                                "autoApply": true,
-                                                "applyLabel": "Выбрать",
-                                                "cancelLabel": "Отменить",
+                                                timePicker24Hour: false,
+                                                "minDate": "01.01.2000",
+                                                autoUpdateInput: false,
                                                 locale: {
                                                     format: 'DD.MM.YYYY',
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Очистить",
                                                     "firstDay": 1
                                                 }
                                             });
+
+                                            $('#ma_v_b_').on('apply.daterangepicker', function (ev, picker) {
+                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+
+                                            });
+
+                                            $('#ma_v_b_').on('cancel.daterangepicker', function (ev, picker) {
+                                                $(this).val('');
+                                            });
+
                                         });
                                     </script>
                                 </td>
@@ -1903,6 +2151,76 @@
                                 <td>Дополнительное оборудование</td>
                                 <td>
                                     <input type="text" asp-for="bvpadd.dop_obor" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата установки доп. оборудования</td>
+                                <td>
+                                    <input type="text" id="d_u_d_o_" asp-for="bvpadd.data_u_dop_o" />
+                                    <script>
+                                        var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 20));
+                                        $(function () {
+
+                                            $('#d_u_d_o_').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                timePicker24Hour: false,
+                                                "minDate": "01.01.2000",
+                                                autoUpdateInput: false,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Очистить",
+                                                    "firstDay": 1
+                                                }
+                                            });
+
+                                            $('#d_u_d_o_').on('apply.daterangepicker', function (ev, picker) {
+                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+
+                                            });
+
+                                            $('#d_u_d_o_').on('cancel.daterangepicker', function (ev, picker) {
+                                                $(this).val('');
+                                            });
+
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата возврата доп. оборудования</td>
+                                <td>
+                                    <input type="text" id="d_v_d_o_" asp-for="bvpadd.data_v_dop_o" />
+                                    <script>
+                                        var timeIs = new Date(new Date().setFullYear(new Date().getFullYear() + 20));
+                                        $(function () {
+
+                                            $('#d_v_d_o_').daterangepicker({
+                                                singleDatePicker: true,
+                                                showDropdowns: true,
+                                                timePicker24Hour: false,
+                                                "minDate": "01.01.2000",
+                                                autoUpdateInput: false,
+                                                locale: {
+                                                    format: 'DD.MM.YYYY',
+                                                    "applyLabel": "Выбрать",
+                                                    "cancelLabel": "Очистить",
+                                                    "firstDay": 1
+                                                }
+                                            });
+
+                                            $('#d_v_d_o_').on('apply.daterangepicker', function (ev, picker) {
+                                                $(this).val(picker.endDate.format('DD.MM.YYYY'));
+
+                                            });
+
+                                            $('#d_v_d_o_').on('cancel.daterangepicker', function (ev, picker) {
+                                                $(this).val('');
+                                            });
+
+                                        });
+                                    </script>
                                 </td>
                             </tr>
                         </table>
@@ -1953,7 +2271,7 @@
         </div>
     </div>
 
-    <!-- Modal del_kurs-->
+    <!-- Modal del_rem-->
     <div class="modal fade bs-example-modal-sm" id="Del_Rem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -1988,7 +2306,77 @@
         </div>
     </div>
 
-    <!-- Modal del_kurs-->
+    <!-- Modal del_bvp-->
+    <div class="modal fade bs-example-modal-sm" id="Del_Bvp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись БВП?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="id" />
+                        <input type="hidden" class="result_bvp" asp-for="bvpadd.id" />
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="Lk" asp-action="Del_Bvp">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_bvp");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del_dop-->
+    <div class="modal fade bs-example-modal-sm" id="Del_Dop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Выдействительно хотите удалить запись доп. соглашения?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="text" asp-for="id" />
+                        <input type="text" class="result_dop" asp-for="dopadd.id" />
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" style="background-color: #ffb4bb; box-shadow: inset 0 0 0 3px #ff0000" class="" asp-controller="Lk" asp-action="Del_Dop">Удалить запись</button>
+                    </div>
+                </form>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+                        var but = document.querySelectorAll(".button_del"),
+                            res = document.querySelector(".result_dop");
+                        [].forEach.call(but, function (item) {
+                            item.addEventListener("click", function () {
+                                res.value = item.value
+                            })
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del_int-->
     <div class="modal fade bs-example-modal-sm" id="Del_Int" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">

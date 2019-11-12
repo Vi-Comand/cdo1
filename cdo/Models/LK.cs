@@ -101,6 +101,7 @@ namespace cdo.Models
         public string Fio_rod_zp { get; set; }
         public string diagn { get; set; }
         public DateTime prikazd { get; set; }
+        public DateTime prikaz_iskl_d { get; set; }
         public string prikaz { get; set; }
         public string srok_mse { get; set; }
         public int klass { get; set; }

@@ -30,6 +30,7 @@ namespace cdo.Models
         public string data_sprav { get; set; }
         public string prikaz { get; set; }
         public DateTime prikaz_d { get; set; }
+        public DateTime prikaz_iskl_d { get; set; }
         public int klass { get; set; }
         public string soh_jit { get; set; }
         public string soh_baz { get; set; }
@@ -44,6 +45,7 @@ namespace cdo.Models
         public rem remadd { get; set; }
         public inter intadd { get; set; }
         public bvp bvpadd { get; set; }
+        public dop_dog dopadd { get; set; }
         public List<kurs> kursi { get; set; }
         public List<kurs> kurs_per { get; set; }
         public List<inter> internet { get; set; }
@@ -51,6 +53,7 @@ namespace cdo.Models
         public sklad_to sklad { get; set; }
         //public string status { get; set; }
         public List<bvp> bvps { get; set; }
+        public List<dop_dog> dop_Dogs { get; set; }
         public string FIO_ped { get; set; }
 
 
@@ -99,6 +102,7 @@ namespace cdo.Models
         public string diagn { get; set; }
         public string prik_o_zach_n { get; set; }
         public DateTime prik_o_zach_d { get; set; }
+        public DateTime prik_o_iskl_d { get; set; }
         public string FIO_ped { get; set; }
         public int id_tel { get; set; }
         public string tip_kompl { get; set; }
@@ -163,6 +167,16 @@ namespace cdo.Models
         public DateTime nom_dog_bvp_d { get; set; }
         public int id_uo { get; set; }
         public string dop_obor { get; set; }
+        public DateTime data_u_dop_o { get; set; }
+        public DateTime data_v_dop_o { get; set; }
+    }
+    public class dop_dog
+    {
+        public int id { get; set; }
+        public int id_uo { get; set; }
+        public string dop_sogl_bvp_n { get; set; }
+        public DateTime dop_sogl_bvp_d { get; set; }
+        public string soderg { get; set; }
     }
     public class ist
     {

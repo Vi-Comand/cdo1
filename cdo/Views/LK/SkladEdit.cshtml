@@ -116,7 +116,10 @@
                     {
                         <td>
                             <a asp-controller="Lk" asp-action="kartochka" asp-route-id="@Model.id_main">Открыть</a>
-                            <button style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" asp-action="SvyazSkladToUserDelete1" asp-route-id="@Model.id_main"></button>
+                            @if (ViewBag.rl == 4)
+                            {
+                                <button style="margin:0; background: url(/assets/icon/icons8-de.png) no-repeat 11.5px 2px ; background-size: 65%; box-shadow:inset 0 0 0 0px" asp-action="SvyazSkladToUserDelete1" asp-route-id="@Model.id_main"></button>
+                            }
                         </td>
                     }
                 </tr>
@@ -164,7 +167,10 @@
                 </tr>
 
             </table>
-            <input type="submit" asp-controller="LK" asp-action="SaveKompl" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
+            @if (ViewBag.rl == 4)
+            {
+                <input type="submit" asp-controller="LK" asp-action="SaveKompl" value="Сохранить" style=" background: url('/assets/icon/icons8-save.png')  no-repeat 5px 10px rgba(222, 215, 253, 0.3); background-size: 20%;" />
+            }
         </div>
     </form>
     <!-- Modal ist-->

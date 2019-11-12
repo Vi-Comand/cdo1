@@ -39,6 +39,7 @@ namespace cdo.Models
         public DbSet<inter> Inter { get; set; }
         public DbSet<kurs> Kurs { get; set; }
         public DbSet<bvp> Bvp { get; set; }
+        public DbSet<dop_dog> Dop_Dog { get; set; }
         public DbSet<auth_date> auth_date { get; set; }
         public DbSet<sklad_to> Sklad_to { get; set; }
         public DbSet<ist_kompl> Ist_Kompl { get; set; }

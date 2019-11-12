@@ -60,20 +60,25 @@
                                 @if (ViewBag.rl != 4 && ViewBag.rl != 7)
                                 {
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-controller="lk" asp-action="lk">Личный кабинет</button>
+                                    if (ViewBag.rl == 1)
+                                    {
+                                        <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sklad">Склад</button>
+                                    }
                                     <br />
                                 }
                                 else
                                 {
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Lk">Люди</button>
-                                    if (ViewBag.rl == 4)
+                                    if (ViewBag.rl == 4 || ViewBag.rl == 1)
                                     {
                                         <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sklad">Склад</button>
                                     }
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Inter">Интернет</button>
                                     <button type="submit" class="button_nav" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Rem">Ремонт</button>
                                 }
+
                                 @*<button type="submit" class="button_nav" style="margin:5px;" asp-controller="Home" asp-action="Info">Информация</button>*@
-                                <br />
+
 
                                 @*<ul class="nav navbar-nav ml  align-items-xl-center">
 
