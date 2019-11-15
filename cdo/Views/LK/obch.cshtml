@@ -30,6 +30,9 @@
                 <div id="collapse0" class="collapse in ">
                     <div class="panel-body">
 
+
+                        <input type="hidden" asp-for="Filt.Status" value="@Model.Filt.Status" />
+
                         <table>
 
                             <tr class="od">
@@ -279,8 +282,12 @@
                                             });
                                         });
                                     </script>
+
                                 </td>
                             </tr>
+
+
+
                         </table>
 
                         <button type="submit" style="margin:5px;" asp-area="" asp-controller="Lk" asp-action="Sort">Фильтровать</button>
@@ -293,7 +300,8 @@
             <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == null){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27);"); }" value="1" asp-controller="Lk" asp-action="Vse">все</button>
 
 
-            <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == "учащийся"){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27)"); } " value="1" asp-controller="Lk" asp-action="Uch">Учащиеся</button>
+            <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == "учащийся")
+            {@Html.Raw("background-color: rgba(213, 110, 255, 0.27)"); } " value="1" asp-controller="Lk" asp-action="Uch">Учащиеся</button>
 
             <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == "студент"){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27)"); }" value="1" asp-controller="Lk" asp-action="Stud">Студент</button>
             <button class="btn btn-lg" type="submit" style="margin:5px; @if (Model.Filt.Status == "выбывший"){ @Html.Raw("background-color: rgba(213, 110, 255, 0.27)"); }" value="1" asp-controller="Lk" asp-action="Vibivsh">Выбывший</button>
