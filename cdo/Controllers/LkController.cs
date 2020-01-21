@@ -1426,48 +1426,48 @@ namespace cdo.Controllers
             //{ filtr.Filt.Status = null; }
 
             ListLK model = new ListLK();
-var query = (from main in (filtr.Filt.MO != 0 ? db.Main.Where(x => x.id_mo == filtr.Filt.MO) : db.Main)
+            var query = (from main in (filtr.Filt.MO != 0 ? db.Main.Where(x => x.id_mo == filtr.Filt.MO) : db.Main)
 
-             join mo in db.Mo on main.id_mo equals mo.Id into mo
-             from m in mo.DefaultIfEmpty()
+                         join mo in db.Mo on main.id_mo equals mo.Id into mo
+                         from m in mo.DefaultIfEmpty()
 
-             join ist in db.Ist on main.id_f equals ist.id into ist
-             from f in ist.DefaultIfEmpty()
-             join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
-             from inven in inv.DefaultIfEmpty()
-             join tel in db.Ist on main.id_tel equals tel.id into tel
-             from te in tel.DefaultIfEmpty()
-             join im in db.Ist on main.id_i equals im.id into im
-             from i in im.DefaultIfEmpty()
-             join ot in db.Ist on main.id_o equals ot.id into ot
-             from o in ot.DefaultIfEmpty()
-             join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
-             from r in rod.DefaultIfEmpty()
-             join add in db.Ist on main.id_adr_progiv equals add.id into add
-             from a in add.DefaultIfEmpty()
-             join to in db.To on main.id_to equals to.id into to
-             from t in to.DefaultIfEmpty()
-             join mse in db.Ist on main.id_srok_mse equals mse.id into mse
-             from ms in mse.DefaultIfEmpty()
+                         join ist in db.Ist on main.id_f equals ist.id into ist
+                         from f in ist.DefaultIfEmpty()
+                         join inv in db.Sklad_to on main.id_sklad equals inv.Id into inv
+                         from inven in inv.DefaultIfEmpty()
+                         join tel in db.Ist on main.id_tel equals tel.id into tel
+                         from te in tel.DefaultIfEmpty()
+                         join im in db.Ist on main.id_i equals im.id into im
+                         from i in im.DefaultIfEmpty()
+                         join ot in db.Ist on main.id_o equals ot.id into ot
+                         from o in ot.DefaultIfEmpty()
+                         join rod in db.Ist on main.id_fio_rod_predst equals rod.id into rod
+                         from r in rod.DefaultIfEmpty()
+                         join add in db.Ist on main.id_adr_progiv equals add.id into add
+                         from a in add.DefaultIfEmpty()
+                         join to in db.To on main.id_to equals to.id into to
+                         from t in to.DefaultIfEmpty()
+                         join mse in db.Ist on main.id_srok_mse equals mse.id into mse
+                         from ms in mse.DefaultIfEmpty()
 
-             select new LKPP
-             {
-                 id = main.id,
-                 inventr = (inven == null ? 0 : inven.nov_inv),
-                 MO = (m == null ? String.Empty : m.name),
-                 fam = f.znach,
-                 ima = i.znach,
-                 otch = o.znach,
-                 data_roj = main.data_rojd.Date,
-                 address_proj = a.znach,
-                 tel = te.znach,
-                 Fio_rod_zp = r.znach,
-                 diagn = main.diagn,
-                 prikazd = main.prik_o_zach_d,
-                 prikaz_iskl_d = main.prik_o_iskl_d,
-                 prikaz = main.prik_o_zach_n,
-                 srok_mse = ms.znach,
-                 klass = main.klass,
+                         select new LKPP
+                         {
+                             id = main.id,
+                             inventr = (inven == null ? 0 : inven.nov_inv),
+                             MO = (m == null ? String.Empty : m.name),
+                             fam = f.znach,
+                             ima = i.znach,
+                             otch = o.znach,
+                             data_roj = main.data_rojd.Date,
+                             address_proj = a.znach,
+                             tel = te.znach,
+                             Fio_rod_zp = r.znach,
+                             diagn = main.diagn,
+                            prikazd = main.prik_o_zach_d,
+                             prikaz_iskl_d = main.prik_o_iskl_d,
+                             prikaz = main.prik_o_zach_n,
+                             srok_mse = ms==null? "01.01.2000 0:00:00": ms.znach,
+                klass = main.klass,
                  tip_kompl = main.tip_kompl,
                  status = main.status
 
@@ -1517,7 +1517,8 @@ var query = (from main in (filtr.Filt.MO != 0 ? db.Main.Where(x => x.id_mo == fi
                         select t;
 
             }
-
+            if (filtr.Filt.DatKoncDR == Convert.ToDateTime("01.01.0001 0:00:00"))
+                filtr.Filt.DatKoncDR = DateTime.Now;
             if (filtr.Filt.DatNachDR != null || filtr.Filt.DatKoncDR != null)
                 query = query.Where(p => p.data_roj >= filtr.Filt.DatNachDR && p.data_roj <= filtr.Filt.DatKoncDR);
 
@@ -2262,6 +2263,7 @@ model.Listlk = query.ToList();
 
 
 
+      
 
 
         public IActionResult Uch(SortState sortOrder, ListLK filtr, string status, string f1, DateTime f2, DateTime f3, DateTime f4, DateTime f5, DateTime f6, DateTime f7, string f8, string f9, string f10, int f11, string f12, int f13, string f14, string f15, string f16, string f17,string f18)
